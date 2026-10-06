@@ -3,7 +3,7 @@ import React from 'react';
 import classNames from 'classnames';
 import {defineMessages, FormattedMessage, injectIntl, intlShape} from 'react-intl';
 
-import Waveform from '../waveform/waveform.jsx';
+import Waveform from '../waveform/pm-sound-wave.jsx'; // PMDESKTOP_STAGE_PATCH: coloured waveform (section 20)
 import Label from '../forms/label.jsx';
 import Input from '../forms/input.jsx';
 
@@ -275,9 +275,8 @@ const SoundEditor = props => (
         <div className={styles.row}>
             <div className={styles.waveformContainer}>
                 <Waveform
-                    data={props.chunkLevels}
-                    height={160}
-                    width={600}
+                    sampleRate={props.sampleRate}
+                    samples={props.samples}
                 />
                 <AudioSelector
                     playhead={props.playhead}

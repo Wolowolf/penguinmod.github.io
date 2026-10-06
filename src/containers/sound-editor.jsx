@@ -707,6 +707,7 @@ class SoundEditor extends React.Component {
                 duration={this.props.duration}
                 size={this.props.size}
                 sampleRate={this.props.sampleRate}
+                samples={this.props.samples} // PMDESKTOP_STAGE_PATCH: for the coloured waveform (section 20)
                 dataFormat={this.props.dataFormat}
                 canPaste={this.state.copyBuffer !== null}
                 canRedo={this.redoStack.length > 0}
