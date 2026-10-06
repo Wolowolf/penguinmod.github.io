@@ -11,7 +11,7 @@ import GreenFlagOverlay from '../../containers/green-flag-overlay.jsx';
 import Question from '../../containers/question.jsx';
 import MicIndicator from '../mic-indicator/mic-indicator.jsx';
 import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants.js';
-import {getStageDimensions, getMinWidth} from '../../lib/screen-utils.js';
+import {getStageDimensions, getMinWidth, MIN_STAGE_COLUMN_WIDTH} from '../../lib/screen-utils.js';
 import styles from './stage.css';
 
 const StageComponent = props => {
@@ -26,6 +26,7 @@ const StageComponent = props => {
         colorInfo,
         micIndicator,
         question,
+        stageBoxWidth,
         stageSize,
         useEditorDragStyle,
         onDeactivateColorPicker,
@@ -34,8 +35,13 @@ const StageComponent = props => {
         ...boxProps
     } = props;
 
-    const stageDimensions = getStageDimensions(stageSize, customStageSize, isFullScreen);
-    const minWidth = getMinWidth(stageSize);
+    // Player-only mode keeps its normal size; the editor uses the fixed-size box
+    const boxWidth = isPlayerOnly ? null : stageBoxWidth;
+    const stageDimensions = getStageDimensions(stageSize, customStageSize, isFullScreen, boxWidth);
+    // In the editor the column hugs the stage, but never gets narrower than the sprite panel can shrink
+    const minWidth = boxWidth ?
+        Math.max(Math.ceil(stageDimensions.width), MIN_STAGE_COLUMN_WIDTH) :
+        getMinWidth(stageSize, boxWidth);
     const transformStyle = stageDimensions.width < minWidth && !isFullScreen ? {
         transform: `translateX(${(minWidth - stageDimensions.width) / 2}px)`
     } : {};
@@ -165,6 +171,7 @@ StageComponent.propTypes = {
     onDoubleClick: PropTypes.func,
     onQuestionAnswered: PropTypes.func,
     question: PropTypes.string,
+    stageBoxWidth: PropTypes.number,
     stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
     useEditorDragStyle: PropTypes.bool
 };
