@@ -388,3 +388,8 @@ $fade-out-distance: 15px;
     /* if the user-specified background color can't be understood by the browser, default to white */
     background-color: white;
 }
+
+/* desktop patch: lets the stage resize handle be positioned against the stage column */
+.stage-and-target-wrapper {
+    position: relative;
+}
