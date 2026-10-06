@@ -11,12 +11,9 @@ import VM from 'scratch-vm';
 
 import Box from '../box/box.jsx';
 import Button from '../button/button.jsx';
-import CommunityButton from './community-button.jsx';
-import ShareButton from './share-button.jsx';
 import { ComingSoonTooltip } from '../coming-soon/coming-soon.jsx';
 import Divider from '../divider/divider.jsx';
 import LanguageSelector from '../../containers/language-selector.jsx';
-import ProjectWatcher from '../../containers/project-watcher.jsx';
 import MenuBarMenu from './menu-bar-menu.jsx';
 import { MenuItem, MenuSection } from '../menu/menu.jsx';
 import ProjectTitleInput from './project-title-input.jsx';
@@ -27,8 +24,6 @@ import TurboMode from '../../containers/turbo-mode.jsx';
 import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 
 import FramerateChanger from '../../containers/tw-framerate-changer.jsx';
-import ChangeUsername from '../../containers/tw-change-username.jsx';
-import CloudVariablesToggler from '../../containers/tw-cloud-toggler.jsx';
 import TWSaveStatus from './tw-save-status.jsx';
 
 import { openTipsLibrary, openSettingsModal, openRestorePointModal } from '../../reducers/modals';
@@ -71,10 +66,8 @@ import collectMetadata from '../../lib/collect-metadata';
 
 import styles from './menu-bar.css';
 
-import remixIcon from './icon--remix.svg';
 import dropdownCaret from './dropdown-caret.svg';
 import languageIcon from '../language-selector/language-icon.svg';
-import aboutIcon from './icon--about.svg';
 import errorIcon from './tw-error.svg';
 import themeIcon from './tw-moon.svg';
 
@@ -82,7 +75,6 @@ import scratchLogo from './scratch-logo.svg';
 
 import sharedMessages from '../../lib/shared-messages';
 
-import SeeInsideButton from './tw-see-inside.jsx';
 import { notScratchDesktop } from '../../lib/isScratchDesktop.js';
 
 import { downloadLogs } from '../../lib/pm-log-capture.js';
@@ -162,53 +154,17 @@ MenuItemTooltip.propTypes = {
     isRtl: PropTypes.bool
 };
 
-const AboutButton = props => (
-    <Button
-        className={classNames(styles.menuBarItem, styles.hoverable)}
-        iconClassName={styles.aboutIcon}
-        iconSrc={aboutIcon}
-        onClick={props.onClick}
-    />
-);
-
-AboutButton.propTypes = {
-    onClick: PropTypes.func.isRequired
-};
-
-// Unlike <MenuItem href="">, this uses an actual <a>
-const MenuItemLink = props => (
-    <a
-        href={props.href}
-        // _blank is safe because of noopener
-        // eslint-disable-next-line react/jsx-no-target-blank
-        target="_blank"
-        rel="noopener noreferrer"
-        className={styles.menuItemLink}
-    >
-        <MenuItem>{props.children}</MenuItem>
-    </a>
-);
-
-MenuItemLink.propTypes = {
-    children: PropTypes.node.isRequired,
-    href: PropTypes.string.isRequired
-};
-
 class MenuBar extends React.Component {
     constructor(props) {
         super(props);
         bindAll(this, [
-            'handleClickSeeInside',
             'handleClickNew',
             'handleClickNewWindow',
-            'handleClickRemix',
             'handleClickSave',
             'handleClickSaveAsCopy',
             'handleClickPackager',
             'handleClickRestorePoints',
-            'handleClickSeeCommunity',
             'handleClickDownloadLogs',
-            'handleClickShare',
             'handleKeyPress',
             'handleLanguageMouseUp',
             'handleRestoreOption',
@@ -241,10 +197,6 @@ class MenuBar extends React.Component {
         this.props.onClickNewWindow();
         this.props.onRequestCloseFile();
     }
-    handleClickRemix() {
-        this.props.onClickRemix();
-        this.props.onRequestCloseFile();
-    }
     handleClickSave() {
         this.props.onClickSave();
         this.props.onRequestCloseFile();
@@ -260,27 +212,6 @@ class MenuBar extends React.Component {
     handleClickRestorePoints() {
         this.props.onClickRestorePoints();
         this.props.onRequestCloseFile();
-    }
-    handleClickSeeCommunity(waitForUpdate) {
-        if (this.props.shouldSaveBeforeTransition()) {
-            this.props.autoUpdateProject(); // save before transitioning to project page
-            waitForUpdate(true); // queue the transition to project page
-        } else {
-            waitForUpdate(false); // immediately transition to project page
-        }
-    }
-    handleClickShare(waitForUpdate) {
-        if (!this.props.isShared) {
-            if (this.props.canShare) { // save before transitioning to project page
-                this.props.onShare();
-            }
-            if (this.props.canSave) { // save before transitioning to project page
-                this.props.autoUpdateProject();
-                waitForUpdate(true); // queue the transition to project page
-            } else {
-                waitForUpdate(false); // immediately transition to project page
-            }
-        }
     }
     handleRestoreOption(restoreFun) {
         return () => {
@@ -369,60 +300,6 @@ class MenuBar extends React.Component {
             }
         }
     }
-    handleClickSeeInside() {
-        this.props.onClickSeeInside();
-    }
-    buildAboutMenu(onClickAbout) {
-        if (!onClickAbout) {
-            // hide the button
-            return null;
-        }
-        if (typeof onClickAbout === 'function') {
-            // make a button which calls a function
-            return <AboutButton onClick={onClickAbout} />;
-        }
-        // assume it's an array of objects
-        // each item must have a 'title' FormattedMessage and a 'handleClick' function
-        // generate a menu with items for each object in the array
-        return (
-            <div
-                className={classNames(styles.menuBarItem, styles.hoverable, {
-                    [styles.active]: this.props.aboutMenuOpen
-                })}
-                onMouseUp={this.props.onRequestOpenAbout}
-            >
-                <img
-                    className={styles.aboutIcon}
-                    src={aboutIcon}
-                    draggable={false}
-                />
-                <MenuBarMenu
-                    className={classNames(styles.menuBarMenu)}
-                    open={this.props.aboutMenuOpen}
-                    place={this.props.isRtl ? 'right' : 'left'}
-                    onRequestClose={this.props.onRequestCloseAbout}
-                >
-                    {
-                        onClickAbout.map(itemProps => (
-                            <MenuItem
-                                key={itemProps.title}
-                                isRtl={this.props.isRtl}
-                                onClick={this.wrapAboutMenuCallback(itemProps.onClick)}
-                            >
-                                {itemProps.title}
-                            </MenuItem>
-                        ))
-                    }
-                </MenuBarMenu>
-            </div>
-        );
-    }
-    wrapAboutMenuCallback(callback) {
-        return () => {
-            callback();
-            this.props.onRequestCloseAbout();
-        };
-    }
     handleClickDownloadLogs() { downloadLogs(); }
     render() {
         const saveNowMessage = (
@@ -439,13 +316,6 @@ class MenuBar extends React.Component {
                 id="gui.menuBar.saveAsCopy"
             />
         );
-        const remixMessage = (
-            <FormattedMessage
-                defaultMessage="Remix"
-                description="Menu bar item for remixing"
-                id="gui.menuBar.remix"
-            />
-        );
         const newProjectMessage = (
             <FormattedMessage
                 defaultMessage="New"
@@ -453,21 +323,6 @@ class MenuBar extends React.Component {
                 id="gui.menuBar.new"
             />
         );
-        const remixButton = (
-            <Button
-                className={classNames(
-                    styles.menuBarButton,
-                    styles.remixButton
-                )}
-                iconClassName={styles.remixButtonIcon}
-                iconSrc={remixIcon}
-                onClick={this.handleClickRemix}
-            >
-                {remixMessage}
-            </Button>
-        );
-        // Show the About button only if we have a handler for it (like in the desktop app)
-        const aboutButton = this.buildAboutMenu(this.props.onClickAbout);
         return (
             <Box
                 className={classNames(
@@ -548,20 +403,13 @@ class MenuBar extends React.Component {
                                     onRequestClose={this.props.onRequestCloseErrors}
                                 >
                                     <MenuSection>
-                                        <MenuItemLink href="https://discord.gg/NZ9MBMYTZh">
+                                        <MenuItem>
                                             <FormattedMessage
                                                 defaultMessage="Some scripts could not be compiled."
-                                                description="Link in error menu"
+                                                description="Text in error menu"
                                                 id="tw.menuBar.reportError1"
                                             />
-                                        </MenuItemLink>
-                                        <MenuItemLink href="https://discord.gg/NZ9MBMYTZh">
-                                            <FormattedMessage
-                                                defaultMessage="This is a bug. Please report it."
-                                                description="Link in error menu"
-                                                id="tw.menuBar.reportError2"
-                                            />
-                                        </MenuItemLink>
+                                        </MenuItem>
                                     </MenuSection>
                                     <MenuSection>
                                         {this.props.compileErrors.map(({ id, sprite, error }) => (
@@ -615,7 +463,7 @@ class MenuBar extends React.Component {
                                             />
                                         </MenuItem>
                                     )}
-                                    {(this.props.canSave || this.props.canCreateCopy || this.props.canRemix) && (
+                                    {(this.props.canSave || this.props.canCreateCopy) && (
                                         <MenuSection>
                                             {this.props.canSave && (
                                                 <MenuItem onClick={this.handleClickSave}>
@@ -625,11 +473,6 @@ class MenuBar extends React.Component {
                                             {this.props.canCreateCopy && (
                                                 <MenuItem onClick={this.handleClickSaveAsCopy}>
                                                     {createCopyMessage}
-                                                </MenuItem>
-                                            )}
-                                            {this.props.canRemix && (
-                                                <MenuItem onClick={this.handleClickRemix}>
-                                                    {remixMessage}
                                                 </MenuItem>
                                             )}
                                         </MenuSection>
@@ -806,46 +649,6 @@ class MenuBar extends React.Component {
                                             )}
                                         </MenuItem>
                                     )}</FramerateChanger>
-                                    <ChangeUsername>{changeUsername => (
-                                        <MenuItem
-                                            className={classNames({ [styles.disabled]: this.props.usernameLoggedIn })}
-                                            onClick={this.props.usernameLoggedIn ? () => {} : changeUsername}
-                                        >
-                                            <FormattedMessage
-                                                defaultMessage="Change Username"
-                                                description="Menu bar item for changing the username"
-                                                id="tw.menuBar.changeUsername"
-                                            />
-                                        </MenuItem>
-                                    )}</ChangeUsername>
-                                    <CloudVariablesToggler>{(toggleCloudVariables, { enabled, canUseCloudVariables }) => (
-                                        <MenuItem
-                                            className={classNames({ [styles.disabled]: !canUseCloudVariables })}
-                                            onClick={toggleCloudVariables}
-                                        >
-                                            {canUseCloudVariables ? (
-                                                enabled ? (
-                                                    <FormattedMessage
-                                                        defaultMessage="Disable Cloud Variables"
-                                                        description="Menu bar item for disabling cloud variables"
-                                                        id="tw.menuBar.cloudOff"
-                                                    />
-                                                ) : (
-                                                    <FormattedMessage
-                                                        defaultMessage="Enable Cloud Variables"
-                                                        description="Menu bar item for enabling cloud variables"
-                                                        id="tw.menuBar.cloudOn"
-                                                    />
-                                                )
-                                            ) : (
-                                                <FormattedMessage
-                                                    defaultMessage="Cloud Variables are not Available"
-                                                    description="Menu bar item for when cloud variables are not available"
-                                                    id="tw.menuBar.cloudUnavailable"
-                                                />
-                                            )}
-                                        </MenuItem>
-                                    )}</CloudVariablesToggler>
                                 </MenuSection>
                                 <MenuSection>
                                     <MenuItem onClick={this.props.onClickSettings}>
@@ -916,9 +719,6 @@ class MenuBar extends React.Component {
                             </MenuBarItemTooltip>
                         </div>
                     ) : null}
-                    <div className={classNames(styles.menuBarItem)}>
-                        {this.props.canRemix ? remixButton : []}
-                    </div>
                     {/* PMDESKTOP_STAGE_PATCH: "See Project Page" and "Upload" buttons removed */}
                     {/* PMDESKTOP_STAGE_PATCH: "Back to Home" button removed */}
                 </div>
@@ -928,8 +728,6 @@ class MenuBar extends React.Component {
                         <TWSaveStatus />
                     </div>
                 </div>
-
-                {aboutButton}
             </Box>
         );
     }

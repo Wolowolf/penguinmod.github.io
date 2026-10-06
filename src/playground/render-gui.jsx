@@ -1,8 +1,8 @@
 import React from 'react';
 import GUI from '../containers/gui.jsx';
 
-const searchParams = new URLSearchParams(location.search);
-const cloudHost = searchParams.get('cloud_host') || 'wss://clouddata.turbowarp.org';
+// PMDESKTOP_STAGE_PATCH: no cloud server (cloud variables removed)
+const cloudHost = null;
 
 const RenderGUI = props => (
     <GUI

@@ -206,9 +206,6 @@ class Blocks extends React.Component {
         toolboxWorkspace.registerButtonCallback('OPEN_RETURN_DOCS', () => {
             window.open('https://docs.turbowarp.org/return', '_blank');
         });
-        toolboxWorkspace.registerButtonCallback('OPEN_USERNAME_DOCS', () => {
-            window.open('https://docs.penguinmod.com/username', '_blank');
-        });
 
         // Store the xml of the toolbox that is actually rendered.
         // This is used in componentDidUpdate instead of prevProps, because

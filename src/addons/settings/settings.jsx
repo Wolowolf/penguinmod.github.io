@@ -1052,16 +1052,6 @@ class AddonSettingsComponent extends React.Component {
                                 onClick={this.handleClickSearchButton}
                             />
                         </div>
-                        <a
-                            href="https://discord.gg/NZ9MBMYTZh"
-                            target="_blank"
-                            rel="noreferrer"
-                            className={styles.feedbackButtonOuter}
-                        >
-                            <span className={styles.feedbackButtonInner}>
-                                {settingsTranslations.addonFeedback}
-                            </span>
-                        </a>
                     </div>
                     {this.state.dirty && (
                         <Dirty
