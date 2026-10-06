@@ -948,6 +948,7 @@ class MenuBar extends React.Component {
                             />
                         ) : []))}
                     </div>
+                    {/* PMDESKTOP_STAGE_PATCH: "Back to Home" button removed */}
                     <div className={styles.menuBarItem}>
                         {this.props.isShowingProject && this.props.canEditTitle ?
                             (<ShareButton
@@ -955,22 +956,6 @@ class MenuBar extends React.Component {
                                 isShared={this.props.isShared}
                             />)
                             : (null)}
-                    </div>
-                    <div className={styles.menuBarItem}>
-                        <a
-                            className={styles.feedbackLink}
-                            href="https://penguinmod.com"
-                            rel="noopener noreferrer"
-                            target="_blank"
-                        >
-                            <Button className={styles.feedbackButton}>
-                                <FormattedMessage
-                                    defaultMessage="Back to Home"
-                                    description="Button to go back to the home page"
-                                    id="pm.backToHomeButton"
-                                />
-                            </Button>
-                        </a>
                     </div>
                 </div>
 
