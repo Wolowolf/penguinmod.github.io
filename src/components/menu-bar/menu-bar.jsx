@@ -919,44 +919,8 @@ class MenuBar extends React.Component {
                     <div className={classNames(styles.menuBarItem)}>
                         {this.props.canRemix ? remixButton : []}
                     </div>
-                    <div className={classNames(styles.menuBarItem, styles.communityButtonWrapper)}>
-                        {this.props.enableCommunity ? (
-                            (this.props.isShowingProject || this.props.isUpdating) && (
-                                <ProjectWatcher onDoneUpdating={this.props.onSeeCommunity}>
-                                    {
-                                        waitForUpdate => (
-                                            <CommunityButton
-                                                className={styles.menuBarButton}
-                                                /* eslint-disable react/jsx-no-bind */
-                                                onClick={() => {
-                                                    this.handleClickSeeCommunity(waitForUpdate);
-                                                }}
-                                            /* eslint-enable react/jsx-no-bind */
-                                            />
-                                        )
-                                    }
-                                </ProjectWatcher>
-                            )
-                        ) : (this.props.showComingSoon ? (
-                            <MenuBarItemTooltip id="community-button">
-                                <CommunityButton className={styles.menuBarButton} />
-                            </MenuBarItemTooltip>
-                        ) : (this.props.enableSeeInside ? (
-                            <SeeInsideButton
-                                className={styles.menuBarButton}
-                                onClick={this.handleClickSeeInside}
-                            />
-                        ) : []))}
-                    </div>
+                    {/* PMDESKTOP_STAGE_PATCH: "See Project Page" and "Upload" buttons removed */}
                     {/* PMDESKTOP_STAGE_PATCH: "Back to Home" button removed */}
-                    <div className={styles.menuBarItem}>
-                        {this.props.isShowingProject && this.props.canEditTitle ?
-                            (<ShareButton
-                                className={styles.menuBarButton}
-                                isShared={this.props.isShared}
-                            />)
-                            : (null)}
-                    </div>
                 </div>
 
                 <div className={styles.accountInfoGroup}>
