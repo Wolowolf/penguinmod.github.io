@@ -1,0 +1,43 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+
+/* Sits in the gutter on the left edge of the stage column, full height. */
+.handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: $space;
+    z-index: 10;
+    cursor: ew-resize;
+    touch-action: none;
+    user-select: none;
+
+    /* the grip sits at the bottom-left corner */
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+[dir="rtl"] .handle {
+    left: auto;
+    right: 0;
+}
+
+.handle:hover,
+.handle.active {
+    background: $ui-black-transparent;
+}
+
+.grip {
+    width: 4px;
+    height: 36px;
+    margin-bottom: 12px;
+    border-radius: 2px;
+    background: rgba(128, 128, 128, 0.6);
+}
+
+.handle:hover .grip,
+.handle.active .grip {
+    background: rgba(128, 128, 128, 0.95);
+}
