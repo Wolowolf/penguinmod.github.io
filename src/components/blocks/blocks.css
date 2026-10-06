@@ -98,3 +98,90 @@
     min-width: auto;
     min-height: auto;
 }
+
+/* PMDESKTOP_STAGE_PATCH: category menu = equal-width colour boxes with only the name */
+.blocks :global(.scratchCategoryMenu) {
+    /* box = "Pointerlock" (61 px of text) + 0.15rem padding on each side, + 2 px menu padding */
+    width: 4.5rem;
+    box-sizing: border-box;
+    padding: 2px;
+}
+
+.blocks :global(.scratchCategoryMenuRow) {
+    margin: 0 0 2px;
+}
+
+.blocks :global(.scratchCategoryMenuItem) {
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    /* half of the padding Session 6 had (0.3rem at the sides, about 0.43rem top and bottom) */
+    padding: 0.215rem 0.15rem;
+    text-align: left;
+    background: var(--pm-cat-colour, #666666);
+    color: #ffffff !important;
+}
+
+/* selected entry: no frame, the box is two lines tall instead of one */
+.blocks :global(.scratchCategoryMenuItem.categorySelected) {
+    background: var(--pm-cat-colour, #666666);
+    min-height: calc(1.54rem + 0.43rem);
+}
+
+.blocks :global(.scratchCategoryMenuItem:hover) {
+    color: #ffffff !important;
+    filter: brightness(1.15);
+}
+
+/* no icons or colour dots any more, just the name */
+.blocks :global(.scratchCategoryItemBubble),
+.blocks :global(.scratchCategoryItemIcon) {
+    display: none !important;
+}
+
+.blocks :global(.scratchCategoryMenuItemLabel) {
+    flex: 1 1 auto;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 0.7rem;
+    font-weight: 600;
+    line-height: 1.1;
+    text-align: left;
+    color: #ffffff !important;
+    /* thin black outline around the white letters: small blurred shadows on four sides
+       plus a soft halo are anti-aliased and look smoother than -webkit-text-stroke */
+    text-shadow: -0.7px 0 0.6px #000000, 0.7px 0 0.6px #000000, 0 -0.7px 0.6px #000000,
+        0 0.7px 0.6px #000000, 0 0 1px #000000;
+    /* one line, cut when too long (no "...": the dot below marks a cut name) */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+}
+
+/* selected: up to two lines (a height limit, not line-clamp, which always adds "...") */
+.blocks :global(.scratchCategoryMenuItem.categorySelected .scratchCategoryMenuItemLabel) {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    max-height: 2.2em;
+}
+
+/* a cut name: one small dot under its first letter, in the box's bottom padding */
+.blocks :global(.scratchCategoryMenuItem) {
+    position: relative;
+}
+
+.blocks :global(.scratchCategoryMenuItem[data-pm-cut]::after) {
+    content: "";
+    position: absolute;
+    left: calc(0.15rem + 2px);
+    bottom: 1px;
+    width: 2px;
+    height: 2px;
+    background: #ffffff;
+    /* the same outline as the letters (see .scratchCategoryMenuItemLabel) */
+    box-shadow: -0.7px 0 0.6px #000000, 0.7px 0 0.6px #000000, 0 -0.7px 0.6px #000000,
+        0 0.7px 0.6px #000000, 0 0 1px #000000;
+}

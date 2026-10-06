@@ -8,6 +8,53 @@ import LazyScratchBlocks from './tw-lazy-scratch-blocks';
 export default function (vm) {
     const ScratchBlocks = LazyScratchBlocks.get();
 
+    // PMDESKTOP_STAGE_PATCH: give every category menu entry its colour as a CSS variable
+    const pmCategory = ScratchBlocks.Toolbox && ScratchBlocks.Toolbox.Category;
+    if (pmCategory && !pmCategory.prototype.pmColoured) {
+        const originalCreateDom = pmCategory.prototype.createDom;
+        pmCategory.prototype.pmColoured = true;
+        pmCategory.prototype.createDom = function () {
+            originalCreateDom.apply(this, arguments);
+            const colour = typeof this.colour_ === 'string' && /^#[0-9a-fA-F]{6}/.test(this.colour_) ?
+                this.colour_ : '#666666';
+            if (this.item_) {
+                this.item_.style.setProperty('--pm-cat-colour', colour);
+                pmMarkCut(this.item_);
+            }
+        };
+
+        // A name that does not fit is cut without "..."; its box gets data-pm-cut, which
+        // draws a dot under the first letter. Checked again when the box is (de)selected,
+        // since the selected box shows two lines. (setSelected replaces the class name,
+        // so the mark is an attribute.)
+        const pmMarkCut = item => requestAnimationFrame(() => {
+            const label = item.querySelector('.scratchCategoryMenuItemLabel');
+            if (!label) return;
+            item.toggleAttribute('data-pm-cut', label.scrollWidth > label.clientWidth + 1 ||
+                label.scrollHeight > label.clientHeight + 1);
+        });
+        const originalSetSelected = pmCategory.prototype.setSelected;
+        pmCategory.prototype.setSelected = function () {
+            originalSetSelected.apply(this, arguments);
+            if (this.item_) pmMarkCut(this.item_);
+        };
+        if (document.fonts) {
+            document.fonts.ready.then(() => document.querySelectorAll('.scratchCategoryMenuItem')
+                .forEach(pmMarkCut));
+        }
+
+        // The blocks library assumes the category menu is 60 px wide (toolbox width =
+        // menu + flyout). Ours is wider, so add the difference; otherwise the menu would
+        // cover the left edge of the block palette.
+        const toolboxProto = ScratchBlocks.Toolbox.prototype;
+        const originalGetWidth = toolboxProto.getWidth;
+        toolboxProto.getWidth = function () {
+            const table = this.categoryMenu_ && this.categoryMenu_.table;
+            if (table && table.offsetWidth) this.pmMenuWidth = table.offsetWidth;
+            return originalGetWidth.apply(this, arguments) + Math.max(0, (this.pmMenuWidth || 60) - 60);
+        };
+    }
+
     const jsonForMenuBlock = function (name, menuOptionsFn, colors, start) {
         return {
             message0: '%1',
