@@ -10,7 +10,7 @@ import Input from '../forms/input.jsx';
 import BufferedInputHOC from '../forms/buffered-input-hoc.jsx';
 import AudioSelector from '../../containers/audio-selector.jsx';
 import IconButton from '../icon-button/icon-button.jsx';
-import {SOUND_BYTE_LIMIT} from '../../lib/audio/audio-util.js';
+// PMDESKTOP_STAGE_PATCH: no upload-size warning on sounds (section 19)
 
 import styles from './sound-editor.css';
 
@@ -427,15 +427,6 @@ const SoundEditor = props => (
                 {` (${formatSoundSize(props.size)})`}
             </div>
         </div>
-        {props.size >= SOUND_BYTE_LIMIT && (
-            <div className={classNames(styles.alert, styles.tooLarge)}>
-                <FormattedMessage
-                    defaultMessage="This sound could be too large to upload to PenguinMod."
-                    description="Message that appears when a sound exceeds the PenguinMod sound size limit."
-                    id="pm.tooLarge"
-                />
-            </div>
-        )}
         {(props.dataFormat === "mp3" || props.dataFormat === "ogg" || props.dataFormat === "flac") && (
             <div className={classNames(styles.alert, styles.stereo)}>
                 <FormattedMessage
