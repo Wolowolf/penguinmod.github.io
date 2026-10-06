@@ -91,15 +91,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 loadingState === "FETCHING_NEW_DEFAULT" &&
                 (projectId == 0 || projectId === null)
             ) {
-                this.props.vm.setFramerate(30);
-                this.props.vm.setRuntimeOptions({
-                    disableDirectionClamping: false,
-                    dangerousOptimizations: false,
-                    disableOffscreenRendering: false,
-                    fencing: true,
-                    maxClones: 300,
-                    miscLimits: true,
-                });
+                this.props.vm.pmNewProject = true; // PMDESKTOP_STAGE_PATCH: 60 FPS, 1920x1080 (section 21)
             }
             let assetPromise;
             // In case running in node...

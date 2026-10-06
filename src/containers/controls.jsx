@@ -76,7 +76,6 @@ Controls.propTypes = {
     projectRunning: PropTypes.bool.isRequired,
     turbo: PropTypes.bool.isRequired,
     framerate: PropTypes.number.isRequired,
-    interpolation: PropTypes.bool.isRequired,
     isSmall: PropTypes.bool,
     paused: PropTypes.bool,
     vm: PropTypes.instanceOf(VM)
@@ -86,7 +85,6 @@ const mapStateToProps = state => ({
     isStarted: state.scratchGui.vmStatus.started,
     projectRunning: state.scratchGui.vmStatus.running,
     framerate: state.scratchGui.tw.framerate,
-    interpolation: state.scratchGui.tw.interpolation,
     turbo: state.scratchGui.vmStatus.turbo,
     paused: state.scratchGui.vmStatus.paused
 });

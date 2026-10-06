@@ -1,79 +1,34 @@
+// PenguinMod Desktop (patches/stage-layout.js section 21): replaces upstream's
+// src/containers/tw-settings-modal.jsx. High quality pen, infinite clones, remove fencing, remove
+// miscellaneous limits and dangerous optimizations are always on (in the VM) and interpolation is
+// removed, so their switches are gone; FPS is a number box and the stage size has no presets.
 import PropTypes from 'prop-types';
 import React from 'react';
-import {defineMessages, injectIntl, intlShape} from 'react-intl';
+import {injectIntl, intlShape} from 'react-intl';
 import bindAll from 'lodash.bindall';
 import {connect} from 'react-redux';
 import {closeSettingsModal} from '../reducers/modals';
 import SettingsModalComponent from '../components/tw-settings-modal/settings-modal.jsx';
-import {defaultStageSize} from '../reducers/custom-stage-size';
-
-const messages = defineMessages({
-    newFramerate: {
-        defaultMessage: 'New framerate:',
-        description: 'Prompt shown to choose a new framerate',
-        id: 'tw.menuBar.newFramerate'
-    }
-});
 
 class UsernameModal extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
             'handleFramerateChange',
-            'handleCustomizeFramerate',
-            'handleHighQualityPenChange',
-            'handleInterpolationChange',
-            'handleInfiniteClonesChange',
-            'handleRemoveFencingChange',
-            'handleRemoveLimitsChange',
             'handleWarpTimerChange',
-            'handleStageWidthChange',
-            'handleStageHeightChange',
-            'handleStagePresetUsed',
+            'handleStageSizeChange',
             'handleDisableCompilerChange',
             'handleStoreProjectOptions',
-            'handleEnableDangerousOptimizationsChange',
             'handleDisableOffscreenRenderingChange',
             'handleDisableDirectionClamping'
         ]);
     }
-    handleFramerateChange (e) {
-        this.props.vm.setFramerate(e.target.checked ? 60 : 30);
-    }
-    async handleCustomizeFramerate () {
-        // prompt() returns Promise in desktop app
-        // eslint-disable-next-line no-alert
-        const newFramerate = await prompt(this.props.intl.formatMessage(messages.newFramerate), this.props.framerate);
-        const parsed = parseFloat(newFramerate);
-        if (isFinite(parsed)) {
-            this.props.vm.setFramerate(parsed);
+    handleFramerateChange (value) {
+        const framerate = Number(value);
+        // 1 to 250 times per second (the VM caps it at 250 too); anything else is ignored
+        if (framerate >= 1) {
+            this.props.vm.setFramerate(Math.min(250, framerate));
         }
-    }
-    handleHighQualityPenChange (e) {
-        this.props.vm.renderer.setUseHighQualityRender(e.target.checked);
-    }
-    handleInterpolationChange (e) {
-        this.props.vm.setInterpolation(e.target.checked);
-    }
-    handleInfiniteClonesChange (e) {
-        this.props.vm.setRuntimeOptions({
-            maxClones: e.target.checked ? Infinity : 300
-        });
-    }
-    handleRemoveFencingChange (e) {
-        this.props.vm.setRuntimeOptions({
-            fencing: !e.target.checked
-        });
-    }
-    handleRemoveLimitsChange (e) {
-        this.props.vm.setRuntimeOptions({
-            miscLimits: !e.target.checked
-        });
-    }
-    handleEnableDangerousOptimizationsChange (e) {
-        this.props.vm.setRuntimeOptions({
-            dangerousOptimizations: e.target.checked
-        });
     }
     handleDisableOffscreenRenderingChange (e) {
         this.props.vm.setRuntimeOptions({
@@ -95,24 +50,8 @@ class UsernameModal extends React.Component {
             enabled: !e.target.checked
         });
     }
-    handleStageWidthChange (value) {
-        this.props.vm.setStageSize(value, this.props.customStageSize.height);
-    }
-    handleStageHeightChange (value) {
-        this.props.vm.setStageSize(this.props.customStageSize.width, value);
-    }
-    handleStagePresetUsed (widescreen) {
-        switch (widescreen) {
-        case 1:
-            this.props.vm.setStageSize(640, 360);
-            break;
-        case 2:
-            this.props.vm.setStageSize(360, 360);
-            break;
-        default:
-            this.props.vm.setStageSize(480, 360);
-            break;
-        }
+    handleStageSizeChange (width, height) {
+        this.props.vm.setStageSize(width, height);
     }
     handleStoreProjectOptions () {
         this.props.vm.storeProjectOptions();
@@ -129,26 +68,13 @@ class UsernameModal extends React.Component {
             <SettingsModalComponent
                 onClose={this.props.onClose}
                 onFramerateChange={this.handleFramerateChange}
-                onCustomizeFramerate={this.handleCustomizeFramerate}
-                onHighQualityPenChange={this.handleHighQualityPenChange}
-                onInterpolationChange={this.handleInterpolationChange}
-                onInfiniteClonesChange={this.handleInfiniteClonesChange}
-                onRemoveFencingChange={this.handleRemoveFencingChange}
-                onRemoveLimitsChange={this.handleRemoveLimitsChange}
-                onEnableDangerousOptimizationsChange={this.handleEnableDangerousOptimizationsChange}
                 onDisableOffscreenRenderingChange={this.handleDisableOffscreenRenderingChange}
                 onDisableDirectionClamping={this.handleDisableDirectionClamping}
                 onWarpTimerChange={this.handleWarpTimerChange}
-                onStageWidthChange={this.handleStageWidthChange}
-                onStageHeightChange={this.handleStageHeightChange}
-                onStagePresetUsed={this.handleStagePresetUsed}
+                onStageSizeChange={this.handleStageSizeChange}
                 onDisableCompilerChange={this.handleDisableCompilerChange}
                 stageWidth={this.props.customStageSize.width}
                 stageHeight={this.props.customStageSize.height}
-                customStageSizeEnabled={
-                    this.props.customStageSize.width !== defaultStageSize.width ||
-                    this.props.customStageSize.height !== defaultStageSize.height
-                }
                 onStoreProjectOptions={this.handleStoreProjectOptions}
                 {...props}
             />
@@ -160,24 +86,16 @@ UsernameModal.propTypes = {
     intl: intlShape,
     onClose: PropTypes.func,
     vm: PropTypes.shape({
-        renderer: PropTypes.shape({
-            setUseHighQualityRender: PropTypes.func
-        }),
         setFramerate: PropTypes.func,
         setCompilerOptions: PropTypes.func,
-        setInterpolation: PropTypes.func,
         setRuntimeOptions: PropTypes.func,
         setStageSize: PropTypes.func,
         storeProjectOptions: PropTypes.func
     }),
     isEmbedded: PropTypes.bool,
     framerate: PropTypes.number,
-    highQualityPen: PropTypes.bool,
-    interpolation: PropTypes.bool,
-    infiniteClones: PropTypes.bool,
-    removeFencing: PropTypes.bool,
-    removeLimits: PropTypes.bool,
-    dangerousOptimizations: PropTypes.bool,
+    disableOffscreenRendering: PropTypes.bool,
+    disableDirectionClamping: PropTypes.bool,
     warpTimer: PropTypes.bool,
     customStageSize: PropTypes.shape({
         width: PropTypes.number,
@@ -190,14 +108,8 @@ const mapStateToProps = state => ({
     vm: state.scratchGui.vm,
     isEmbedded: state.scratchGui.mode.isEmbedded,
     framerate: state.scratchGui.tw.framerate,
-    highQualityPen: state.scratchGui.tw.highQualityPen,
-    interpolation: state.scratchGui.tw.interpolation,
-    infiniteClones: state.scratchGui.tw.runtimeOptions.maxClones === Infinity,
-    removeFencing: !state.scratchGui.tw.runtimeOptions.fencing,
-    removeLimits: !state.scratchGui.tw.runtimeOptions.miscLimits,
     disableOffscreenRendering: state.scratchGui.tw.runtimeOptions.disableOffscreenRendering,
     disableDirectionClamping: state.scratchGui.tw.runtimeOptions.disableDirectionClamping,
-    dangerousOptimizations: state.scratchGui.tw.runtimeOptions.dangerousOptimizations,
     warpTimer: state.scratchGui.tw.compilerOptions.warpTimer,
     customStageSize: state.scratchGui.customStageSize,
     disableCompiler: !state.scratchGui.tw.compilerOptions.enabled

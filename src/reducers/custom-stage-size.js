@@ -30,9 +30,9 @@ const getDimensions = () => {
     };
 };
 
-const defaultStageSize = {
-    width: 480,
-    height: 360
+const defaultStageSize = { // PMDESKTOP_STAGE_PATCH: new projects are 1920x1080 (section 21)
+    width: 1920,
+    height: 1080
 };
 
 const initialState = getDimensions() || defaultStageSize;

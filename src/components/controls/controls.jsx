@@ -40,7 +40,6 @@ const Controls = function (props) {
         onStopAllClick,
         turbo,
         framerate,
-        interpolation,
         isSmall,
         ...componentProps
     } = props;
@@ -70,7 +69,6 @@ const Controls = function (props) {
             {!isSmall && (
                 <FramerateIndicator
                     framerate={framerate}
-                    interpolation={interpolation}
                 />
             )}
         </div>
@@ -86,7 +84,6 @@ Controls.propTypes = {
     onPauseButtonClick: PropTypes.func.isRequired,
     onStopAllClick: PropTypes.func.isRequired,
     framerate: PropTypes.number,
-    interpolation: PropTypes.bool,
     isSmall: PropTypes.bool,
     turbo: PropTypes.bool
 };

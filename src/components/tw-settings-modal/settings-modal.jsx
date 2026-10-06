@@ -10,6 +10,7 @@ import Input from '../forms/input.jsx';
 import BufferedInputHOC from '../forms/buffered-input-hoc.jsx';
 import DocumentationLink from '../tw-documentation-link/documentation-link.jsx';
 import styles from './settings-modal.css';
+import {FramerateSetting, StageSizeSetting} from './pm-settings-parts.jsx'; // PMDESKTOP_STAGE_PATCH (section 21)
 
 /* eslint-disable react/no-multi-comp */
 
@@ -123,177 +124,6 @@ BooleanSetting.propTypes = {
     label: PropTypes.node.isRequired
 };
 
-const HighQualityPen = props => (
-    <BooleanSetting
-        {...props}
-        label={
-            <FormattedMessage
-                defaultMessage="High Quality Pen"
-                description="High quality pen setting"
-                id="tw.settingsModal.highQualityPen"
-            />
-        }
-        help={
-            <FormattedMessage
-                // eslint-disable-next-line max-len
-                defaultMessage="Allows pen projects to render at higher resolutions and disables some coordinate rounding in the editor. Not all projects benefit from this setting and it may impact performance."
-                description="High quality pen setting help"
-                id="tw.settingsModal.highQualityPenHelp"
-            />
-        }
-        slug="high-quality-pen"
-    />
-);
-
-const CustomFPS = props => (
-    <BooleanSetting
-        value={props.framerate !== 30}
-        onChange={props.onChange}
-        label={
-            <FormattedMessage
-                defaultMessage="60 FPS (Custom FPS)"
-                description="FPS setting"
-                id="tw.settingsModal.fps"
-            />
-        }
-        help={
-            <FormattedMessage
-                // eslint-disable-next-line max-len
-                defaultMessage="Runs scripts 60 times per second instead of 30. Most projects will not work properly with this enabled. You should try Interpolation with 60 FPS mode disabled if that is the case. {customFramerate}."
-                description="FPS setting help"
-                id="tw.settingsModal.fpsHelp"
-                values={{
-                    customFramerate: (
-                        <a
-                            onClick={props.onCustomizeFramerate}
-                            tabIndex="0"
-                        >
-                            <FormattedMessage
-                                defaultMessage="Click to use a framerate other than 30 or 60"
-                                description="FPS settings help"
-                                id="tw.settingsModal.fpsHelp.customFramerate"
-                            />
-                        </a>
-                    )
-                }}
-            />
-        }
-        slug="custom-fps"
-    />
-);
-CustomFPS.propTypes = {
-    framerate: PropTypes.number,
-    onChange: PropTypes.func,
-    onCustomizeFramerate: PropTypes.func
-};
-
-const Interpolation = props => (
-    <BooleanSetting
-        {...props}
-        label={
-            <FormattedMessage
-                defaultMessage="Interpolation"
-                description="Interpolation setting"
-                id="tw.settingsModal.interpolation"
-            />
-        }
-        help={
-            <FormattedMessage
-                // eslint-disable-next-line max-len
-                defaultMessage="Makes projects appear smoother by interpolating sprite motion. Interpolation should not be used on 3D projects, raytracers, pen projects, and laggy projects as interpolation will make them run slower without making them appear smoother."
-                description="Interpolation setting help"
-                id="tw.settingsModal.interpolationHelp"
-            />
-        }
-        slug="interpolation"
-    />
-);
-
-const InfiniteClones = props => (
-    <BooleanSetting
-        {...props}
-        label={
-            <FormattedMessage
-                defaultMessage="Infinite Clones"
-                description="Infinite Clones setting"
-                id="tw.settingsModal.infiniteClones"
-            />
-        }
-        help={
-            <FormattedMessage
-                defaultMessage="Disables Scratch's 300 clone limit."
-                description="Infinite Clones setting help"
-                id="tw.settingsModal.infiniteClonesHelp"
-            />
-        }
-        slug="infinite-clones"
-    />
-);
-
-const RemoveFencing = props => (
-    <BooleanSetting
-        {...props}
-        label={
-            <FormattedMessage
-                defaultMessage="Remove Fencing"
-                description="Remove Fencing setting"
-                id="tw.settingsModal.removeFencing"
-            />
-        }
-        help={
-            <FormattedMessage
-                // eslint-disable-next-line max-len
-                defaultMessage="Allows sprites to move offscreen, become as large or as small as they want, and makes touching blocks work offscreen."
-                description="Remove Fencing setting help"
-                id="tw.settingsModal.removeFencingHelp"
-            />
-        }
-        slug="remove-fencing"
-    />
-);
-
-const RemoveMiscLimits = props => (
-    <BooleanSetting
-        {...props}
-        label={
-            <FormattedMessage
-                defaultMessage="Remove Miscellaneous Limits"
-                description="Remove Miscellaneous Limits setting"
-                id="tw.settingsModal.removeMiscLimits"
-            />
-        }
-        help={
-            <FormattedMessage
-                defaultMessage="Removes sound effect limits and pen size limits."
-                description="Remove Miscellaneous Limits setting help"
-                id="tw.settingsModal.removeMiscLimitsHelp"
-            />
-        }
-        slug="remove-misc-limits"
-    />
-);
-
-const EnableDangerousOptimizations = props => (
-    <BooleanSetting
-        {...props}
-        label={
-            <FormattedMessage
-                defaultMessage="Enable Dangerous Optimizations"
-                description="Enable Dangerous Optimizations setting"
-                id="pm.settingsModal.dangerousOptimizations"
-            />
-        }
-        help={
-            <FormattedMessage
-                defaultMessage="Precomputes certain numbers & uses faster methods for certain operations, at the cost of losing tiny features like typing special text in certain number inputs. Not all projects will be compatible with this setting."
-                description="Dangerous Optimizations setting help"
-                id="pm.settingsModal.dangerousOptimizationsHelp"
-            />
-        }
-        // slug="enable-dangerous-optimizations"
-    />
-);
-
 const DisableOffscreenRendering = props => (
     <BooleanSetting
         {...props}
@@ -357,110 +187,6 @@ const WarpTimer = props => (
     />
 );
 
-const CustomStageSize = ({
-    customStageSizeEnabled,
-    stageWidth,
-    onStageWidthChange,
-    stageHeight,
-    onStageHeightChange,
-    onStagePresetUsed
-}) => (
-    <Setting
-        active={customStageSizeEnabled}
-        unsetHeight={true}
-        primary={(
-            <div className={classNames(styles.label, styles.customStageSize)}>
-                <FormattedMessage
-                    defaultMessage="Stage Size:"
-                    description="Stage Size option"
-                    id="pm.settingsModal.stageSize"
-                />
-                <div>
-                    <button
-                        className={styles.customStageSizeButton}
-                        data-selected={stageWidth === 360 && stageHeight === 360}
-                        data-square={true}
-                        onClick={() => onStagePresetUsed(2)}
-                    >
-                        1:1
-                    </button>
-                    <button
-                        className={styles.customStageSizeButton}
-                        data-selected={stageWidth === 480 && stageHeight === 360}
-                        onClick={() => onStagePresetUsed(0)}
-                    >
-                        4:3
-                    </button>
-                    <button
-                        className={styles.customStageSizeButton}
-                        data-selected={stageWidth === 640 && stageHeight === 360}
-                        data-widescreen={true}
-                        onClick={() => onStagePresetUsed(1)}
-                    >
-                        16:9
-                    </button>
-                </div>
-                <div className={styles.customStageSizeContainer}>
-                    <FormattedMessage
-                        defaultMessage="Custom Stage Size:"
-                        description="Custom Stage Size option"
-                        id="tw.settingsModal.customStageSize"
-                    />
-                    <BufferedInput
-                        value={stageWidth}
-                        onSubmit={onStageWidthChange}
-                        className={styles.customStageSizeInput}
-                        type="number"
-                        min="0"
-                        max="1024"
-                        step="1"
-                    />
-                    <span>{'×'}</span>
-                    <BufferedInput
-                        value={stageHeight}
-                        onSubmit={onStageHeightChange}
-                        className={styles.customStageSizeInput}
-                        type="number"
-                        min="0"
-                        max="1024"
-                        step="1"
-                    />
-                </div>
-            </div>
-        )}
-        secondary={
-            (stageWidth >= 1000 || stageHeight >= 1000) && (
-                <div className={styles.warning}>
-                    <FormattedMessage
-                        // eslint-disable-next-line max-len
-                        defaultMessage="Using a custom stage size this large is not recommended! Instead, use a lower size with the same aspect ratio and let fullscreen mode upscale it to match the user's display."
-                        description="Warning about using stages that are too large in settings modal"
-                        id="tw.settingsModal.largeStageWarning"
-                    />
-                    <LearnMore slug="custom-stage-size" />
-                </div>
-            )
-        }
-        help={(
-            <FormattedMessage
-                // eslint-disable-next-line max-len
-                defaultMessage="Changes the size of the Scratch stage from 480x360 to something else. Try 640x360 to make the stage widescreen. Very few projects will handle this properly."
-                description="Custom Stage Size option"
-                id="tw.settingsModal.customStageSizeHelp"
-            />
-        )}
-        slug="custom-stage-size"
-    />
-);
-CustomStageSize.propTypes = {
-    customStageSizeEnabled: PropTypes.bool,
-    stageWidth: PropTypes.number,
-    onStageWidthChange: PropTypes.func,
-    stageHeight: PropTypes.number,
-    onStageHeightChange: PropTypes.func,
-    onStagePresetUsed: PropTypes.func
-};
-
 const StoreProjectOptions = ({ onStoreProjectOptions }) => (
     <div className={styles.setting}>
         <div>
@@ -512,105 +238,29 @@ const SettingsModalComponent = props => (
         id="settingsModal"
     >
         <Box className={styles.body}>
-            <Header>
-                <FormattedMessage
-                    defaultMessage="Gameplay"
-                    description="Settings modal section"
-                    id="pm.settingsModal.gameplay"
-                />
-            </Header>
-            <CustomFPS
+            <FramerateSetting
                 framerate={props.framerate}
                 onChange={props.onFramerateChange}
-                onCustomizeFramerate={props.onCustomizeFramerate}
-            />
-            <HighQualityPen
-                value={props.highQualityPen}
-                onChange={props.onHighQualityPenChange}
             />
             <WarpTimer
                 value={props.warpTimer}
                 onChange={props.onWarpTimerChange}
             />
-            <Header>
-                <FormattedMessage
-                    defaultMessage="Remove Limits"
-                    description="Settings modal section"
-                    id="tw.settingsModal.removeLimits"
-                />
-            </Header>
-            <InfiniteClones
-                value={props.infiniteClones}
-                onChange={props.onInfiniteClonesChange}
-            />
-            <RemoveFencing
-                value={props.removeFencing}
-                onChange={props.onRemoveFencingChange}
-            />
-            <RemoveMiscLimits
-                value={props.removeLimits}
-                onChange={props.onRemoveLimitsChange}
-            />
-            <Header>
-                <FormattedMessage
-                    defaultMessage="Optimizations"
-                    description="Settings modal section"
-                    id="pm.settingsModal.optimizations"
-                />
-            </Header>
             <DisableOffscreenRendering
                 value={props.disableOffscreenRendering}
                 onChange={props.onDisableOffscreenRenderingChange}
-            />
-            <EnableDangerousOptimizations
-                value={props.dangerousOptimizations}
-                onChange={props.onEnableDangerousOptimizationsChange}
             />
             <DisableDirectionClamping
                 value={props.disableDirectionClamping}
                 onChange={props.onDisableDirectionClamping}
             />
-            <Header>
-                <FormattedMessage
-                    defaultMessage="Screen Resolution"
-                    description="Settings modal section"
-                    id="pm.settingsModal.screenResolution"
-                />
-            </Header>
             {!props.isEmbedded && (
-                <CustomStageSize
-                    {...props}
+                <StageSizeSetting
+                    width={props.stageWidth}
+                    height={props.stageHeight}
+                    onChange={props.onStageSizeChange}
                 />
             )}
-            {/* {!props.isEmbedded && (
-                <StoreProjectOptions
-                    {...props}
-                />
-            )} */}
-            <details>
-                <summary className={styles.summary}>
-                    <Header>
-                        <span className={styles.dropdown}>⯈</span>
-                        <FormattedMessage
-                            defaultMessage="Unsupported"
-                            description="Old unsupported settings section"
-                            id="pm.settingsModal.unsupported"
-                        />
-                    </Header>
-                </summary>
-                <div className={styles.warning}>
-                    <FormattedMessage
-                        // eslint-disable-next-line max-len
-                        defaultMessage="The settings here are unsupported and can break at any time. These settings are here as they either have better methods to create their effects with better results, or break often when used with other extensions."
-                        description="Warning about old unsupported settings in settings menu"
-                        id="pm.settingsModal.unsupportedWarning"
-                    />
-                </div>
-                <Interpolation
-                    value={props.interpolation}
-                    onChange={props.onInterpolationChange}
-                />
-            </details>
         </Box>
     </Modal>
 );
@@ -621,23 +271,13 @@ SettingsModalComponent.propTypes = {
     isEmbedded: PropTypes.bool,
     framerate: PropTypes.number,
     onFramerateChange: PropTypes.func,
-    onCustomizeFramerate: PropTypes.func,
-    highQualityPen: PropTypes.bool,
-    onHighQualityPenChange: PropTypes.func,
-    interpolation: PropTypes.bool,
-    onInterpolationChange: PropTypes.func,
-    infiniteClones: PropTypes.bool,
-    onInfiniteClonesChange: PropTypes.func,
-    removeFencing: PropTypes.bool,
-    onRemoveFencingChange: PropTypes.func,
-    removeLimits: PropTypes.bool,
-    onRemoveLimitsChange: PropTypes.func,
     warpTimer: PropTypes.bool,
     onWarpTimerChange: PropTypes.func,
     disableCompiler: PropTypes.bool,
-    dangerousOptimizations: PropTypes.bool,
     onDisableCompilerChange: PropTypes.func,
-    onEnableDangerousOptimizationsChange: PropTypes.func,
+    stageWidth: PropTypes.number,
+    stageHeight: PropTypes.number,
+    onStageSizeChange: PropTypes.func,
     disableOffscreenRendering: PropTypes.bool,
     onDisableOffscreenRenderingChange: PropTypes.func
 };

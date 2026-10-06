@@ -4,7 +4,7 @@ import {FormattedMessage} from 'react-intl';
 
 import styles from './framerate-indicator.css';
 
-const FramerateIndicator = ({framerate, interpolation}) => (
+const FramerateIndicator = ({framerate}) => (
     <React.Fragment>
         {/* 0 is technically a valid framerate that means "at monitor refresh rate" */}
         {/* we won't display anything for that yet because we don't know how to explain it */}
@@ -22,23 +22,11 @@ const FramerateIndicator = ({framerate, interpolation}) => (
                 </div>
             </div>
         )}
-        {interpolation && (
-            <div className={styles.framerateContainer}>
-                <div className={styles.framerateLabel}>
-                    <FormattedMessage
-                        defaultMessage="Interpolation"
-                        description="Label to indicate interpolation is enabled"
-                        id="tw.interpolationEnabled"
-                    />
-                </div>
-            </div>
-        )}
     </React.Fragment>
 );
 
 FramerateIndicator.propTypes = {
-    framerate: PropTypes.number,
-    interpolation: PropTypes.bool
+    framerate: PropTypes.number
 };
 
 export default FramerateIndicator;

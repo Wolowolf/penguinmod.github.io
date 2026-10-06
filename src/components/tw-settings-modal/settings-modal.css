@@ -187,3 +187,45 @@
 details[open] .dropdown {
     transform: rotate(90deg);
 }
+/* PMDESKTOP_STAGE_PATCH: the note under FPS and the stage size chain link (section 21) */
+/* no up / down arrows in the FPS and stage size boxes */
+.custom-stage-size-input::-webkit-inner-spin-button,
+.custom-stage-size-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+/* ...and each box is only as wide as its value */
+input.custom-stage-size-input {
+    -moz-appearance: textfield;
+    field-sizing: content;
+    width: auto;
+    min-width: 2.25rem;
+    padding: 0 0.5rem;
+    text-align: center;
+}
+.pm-setting-note {
+    margin: 0 0 0.25rem;
+    font-size: 0.8rem;
+    opacity: 0.85;
+}
+.pm-ratio-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 26px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    opacity: 0.45;
+    cursor: pointer;
+}
+.pm-ratio-link:hover {
+    opacity: 0.8;
+}
+.pm-ratio-link-on,
+.pm-ratio-link-on:hover {
+    color: $motion-primary;
+    opacity: 1;
+}

@@ -314,10 +314,6 @@ const TWStateManager = function (WrappedComponent) {
                 this.props.vm.setFramerate(60);
             }
 
-            if (urlParams.has('interpolate')) {
-                this.props.vm.setInterpolation(true);
-            }
-
             if (urlParams.has('username') && !this.props.usernameLoggedIn) {
                 const username = urlParams.get('username');
                 // Do not save username when loaded from URL
@@ -454,7 +450,6 @@ const TWStateManager = function (WrappedComponent) {
                 this.props.compilerOptions !== prevProps.compilerOptions ||
                 this.props.highQualityPen !== prevProps.highQualityPen ||
                 this.props.framerate !== prevProps.framerate ||
-                this.props.interpolation !== prevProps.interpolation ||
                 this.props.turbo !== prevProps.turbo
             ) {
                 const searchParams = new URLSearchParams(location.search);
@@ -475,12 +470,6 @@ const TWStateManager = function (WrappedComponent) {
                     searchParams.delete('fps');
                 } else {
                     searchParams.set('fps', this.props.framerate);
-                }
-
-                if (this.props.interpolation) {
-                    searchParams.set('interpolate', '');
-                } else {
-                    searchParams.delete('interpolate');
                 }
 
                 if (this.props.turbo) {
@@ -591,7 +580,6 @@ const TWStateManager = function (WrappedComponent) {
                 runtimeOptions,
                 highQualityPen,
                 framerate,
-                interpolation,
                 turbo,
                 onSetIsFullScreen,
                 onSetIsPlayerOnly,
@@ -635,7 +623,6 @@ const TWStateManager = function (WrappedComponent) {
         }),
         highQualityPen: PropTypes.bool,
         framerate: PropTypes.number,
-        interpolation: PropTypes.bool,
         turbo: PropTypes.bool,
         usernameLoggedIn: PropTypes.bool,
         onSetIsFullScreen: PropTypes.func,
@@ -663,7 +650,6 @@ const TWStateManager = function (WrappedComponent) {
         runtimeOptions: state.scratchGui.tw.runtimeOptions,
         highQualityPen: state.scratchGui.tw.highQualityPen,
         framerate: state.scratchGui.tw.framerate,
-        interpolation: state.scratchGui.tw.interpolation,
         turbo: state.scratchGui.vmStatus.turbo,
         username: state.scratchGui.tw.username,
         vm: state.scratchGui.vm

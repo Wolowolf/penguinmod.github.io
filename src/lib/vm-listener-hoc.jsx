@@ -18,7 +18,6 @@ import {
     addCompileError,
     clearCompileErrors,
     setRuntimeOptionsState,
-    setInterpolationState,
     setHasCloudVariables
 } from '../reducers/tw';
 import {setCustomStageSize} from '../reducers/custom-stage-size';
@@ -70,7 +69,6 @@ const vmListenerHOC = function (WrappedComponent) {
             this.props.vm.on('COMPILER_OPTIONS_CHANGED', this.props.onCompilerOptionsChanged);
             this.props.vm.on('RUNTIME_OPTIONS_CHANGED', this.props.onRuntimeOptionsChanged);
             this.props.vm.on('FRAMERATE_CHANGED', this.props.onFramerateChanged);
-            this.props.vm.on('INTERPOLATION_CHANGED', this.props.onInterpolationChanged);
             this.props.vm.on('COMPILE_ERROR', this.handleCompileError);
             this.props.vm.on('RUNTIME_STARTED', this.props.onClearCompileErrors);
             this.props.vm.on('STAGE_SIZE_CHANGED', this.props.onStageSizeChanged);
@@ -206,7 +204,6 @@ const vmListenerHOC = function (WrappedComponent) {
                 hasCloudVariables,
                 onHasCloudVariablesChanged,
                 onFramerateChanged,
-                onInterpolationChanged,
                 onCompilerOptionsChanged,
                 onRuntimeOptionsChanged,
                 onStageSizeChanged,
@@ -242,7 +239,6 @@ const vmListenerHOC = function (WrappedComponent) {
         hasCloudVariables: PropTypes.bool,
         onHasCloudVariablesChanged: PropTypes.func.isRequired,
         onFramerateChanged: PropTypes.func.isRequired,
-        onInterpolationChanged: PropTypes.func.isRequired,
         onCompilerOptionsChanged: PropTypes.func.isRequired,
         onRuntimeOptionsChanged: PropTypes.func.isRequired,
         onStageSizeChanged: PropTypes.func,
@@ -295,7 +291,6 @@ const vmListenerHOC = function (WrappedComponent) {
         onTurboModeOff: () => dispatch(setTurboState(false)),
         onHasCloudVariablesChanged: hasCloudVariables => dispatch(setHasCloudVariables(hasCloudVariables)),
         onFramerateChanged: framerate => dispatch(setFramerateState(framerate)),
-        onInterpolationChanged: interpolation => dispatch(setInterpolationState(interpolation)),
         onCompilerOptionsChanged: options => dispatch(setCompilerOptionsState(options)),
         onRuntimeOptionsChanged: options => dispatch(setRuntimeOptionsState(options)),
         onStageSizeChanged: (width, height) => dispatch(setCustomStageSize(width, height)),

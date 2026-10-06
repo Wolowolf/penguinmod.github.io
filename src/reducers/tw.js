@@ -1,5 +1,4 @@
 const SET_FRAMERATE = 'tw/SET_FRAMERATE';
-const SET_INTERPOLATION = 'tw/SET_INTERPOLATION';
 const SET_COMPILER_OPTIONS = 'tw/SET_COMPILER_OPTIONS';
 const SET_RUNTIME_OPTIONS = 'tw/SET_RUNTIME_OPTIONS';
 const SET_USERNAME = 'tw/SET_USERNAME';
@@ -20,22 +19,21 @@ const SET_HAS_CLOUD_VARIABLES = 'tw/SET_HAS_CLOUD_VARIABLES';
 const SET_CLOUD_HOST = 'tw/SET_CLOUD_HOST';
 
 export const initialState = {
-    framerate: 30,
-    interpolation: false,
+    framerate: 60, // PMDESKTOP_STAGE_PATCH: defaults of section 21
     cloud: true,
     username: '',
     highQualityPen: true,
     compilerOptions: {
         enabled: true,
-        warpTimer: false
+        warpTimer: true
     },
     runtimeOptions: {
-        maxClones: 300,
-        miscLimits: true,
-        dangerousOptimizations: false,
-        disableOffscreenRendering: false,
+        maxClones: Infinity,
+        miscLimits: false,
+        dangerousOptimizations: true,
+        disableOffscreenRendering: true,
         disableDirectionClamping: false,
-        fencing: true
+        fencing: false
     },
     isWindowFullScreen: false,
     dimensions: [0, 0],
@@ -75,10 +73,6 @@ const reducer = function (state, action) {
     case SET_FRAMERATE:
         return Object.assign({}, state, {
             framerate: action.framerate
-        });
-    case SET_INTERPOLATION:
-        return Object.assign({}, state, {
-            interpolation: action.interpolation
         });
     case SET_COMPILER_OPTIONS:
         return Object.assign({}, state, {
@@ -164,13 +158,6 @@ const setFramerateState = function (framerate) {
     return {
         type: SET_FRAMERATE,
         framerate: framerate
-    };
-};
-
-const setInterpolationState = function (interpolation) {
-    return {
-        type: SET_INTERPOLATION,
-        interpolation: interpolation
     };
 };
 
@@ -303,7 +290,6 @@ export {
     reducer as default,
     initialState as twInitialState,
     setFramerateState,
-    setInterpolationState,
     setCompilerOptionsState,
     setRuntimeOptionsState,
     setUsername,
