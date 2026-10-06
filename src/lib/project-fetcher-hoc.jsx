@@ -108,6 +108,12 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                     ? null
                     : new URLSearchParams(location.search).get("project_url");
             if (projectUrl) {
+                // PMDESKTOP_STAGE_PATCH: use project_url only once (section 18)
+                try {
+                    const pageUrl = new URL(location.href);
+                    pageUrl.searchParams.delete("project_url");
+                    history.replaceState(history.state, "", pageUrl.href);
+                } catch (e) { /* keep the address as it is */ }
                 if (
                     !projectUrl.startsWith("http:") &&
                     !projectUrl.startsWith("https:")
