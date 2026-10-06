@@ -393,3 +393,16 @@ $fade-out-distance: 15px;
 .stage-and-target-wrapper {
     position: relative;
 }
+
+/* PMDESKTOP_STAGE_PATCH: no rounded corners anywhere in the editor */
+:global(*),
+:global(*::before),
+:global(*::after) {
+    border-radius: 0 !important;
+}
+
+:global(*::-webkit-scrollbar),
+:global(*::-webkit-scrollbar-thumb),
+:global(*::-webkit-scrollbar-track) {
+    border-radius: 0 !important;
+}
