@@ -140,3 +140,74 @@
 .sprite-input {
     width: 8rem;
 }
+
+/* PMDESKTOP_STAGE_PATCH: one wrapping row, boxes sized to their content, no rounded corners */
+.sprite-info {
+    padding: 0.25rem 0.4rem;
+    min-width: 0;
+}
+
+.row {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.25rem 0.5rem;
+}
+
+.group {
+    flex: 0 0 auto;
+    max-width: 100%;
+}
+
+/* every box is only as wide as what is inside it */
+.sprite-info input {
+    field-sizing: content;
+    box-sizing: border-box;
+    width: auto;
+    min-width: 1.5rem;
+    height: 1.5rem;
+    padding: 0 0.3rem;
+    border-radius: 0;
+    text-align: center;
+    text-overflow: clip;
+}
+
+.larger-input input {
+    width: auto;
+}
+
+.sprite-info input.sprite-input {
+    min-width: 3rem;
+    max-width: 9rem;
+    text-align: left;
+    text-overflow: ellipsis;
+}
+
+/* one button that toggles between shown (eye) and hidden (crossed-out eye) */
+.eye-toggle {
+    flex: 0 0 auto;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0.2rem;
+    box-sizing: border-box;
+    border: 1px solid $ui-black-transparent;
+    border-radius: 0;
+}
+
+.eye-toggle:focus {
+    border-color: $motion-primary;
+}
+
+/* the size / direction symbols a bit bigger so they are readable */
+.sprite-info [class*="label_input-label-secondary"] {
+    font-size: 0.875rem;
+    line-height: 1;
+}
+
+[dir="ltr"] .sprite-info [class*="label_input-label"] {
+    margin-right: 0.25rem;
+}
+
+[dir="rtl"] .sprite-info [class*="label_input-label"] {
+    margin-left: 0.25rem;
+}

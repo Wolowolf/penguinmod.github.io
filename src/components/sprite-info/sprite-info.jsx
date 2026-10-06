@@ -93,17 +93,6 @@ class SpriteInfo extends React.Component {
 
         const xPosition = (
             <div className={styles.group}>
-                {
-                    (stageSize === STAGE_DISPLAY_SIZES.large) ?
-                        <div className={styles.iconWrapper}>
-                            <img
-                                aria-hidden="true"
-                                className={classNames(styles.xIcon, styles.icon)}
-                                src={xIcon}
-                            />
-                        </div> :
-                        null
-                }
                 <Label text="x">
                     <BufferedInput
                         small
@@ -120,17 +109,6 @@ class SpriteInfo extends React.Component {
 
         const yPosition = (
             <div className={styles.group}>
-                {
-                    (stageSize === STAGE_DISPLAY_SIZES.large) ?
-                        <div className={styles.iconWrapper}>
-                            <img
-                                aria-hidden="true"
-                                className={classNames(styles.yIcon, styles.icon)}
-                                src={yIcon}
-                            />
-                        </div> :
-                        null
-                }
                 <Label text="y">
                     <BufferedInput
                         small
@@ -163,74 +141,39 @@ class SpriteInfo extends React.Component {
 
         return (
             <Box className={styles.spriteInfo}>
-                <div className={classNames(styles.row, styles.rowPrimary)}>
+                <div className={styles.row}>
+                    <div
+                        className={classNames(
+                            styles.radio,
+                            styles.eyeToggle,
+                            {
+                                [styles.isActive]: this.props.visible && !this.props.disabled,
+                                [styles.isDisabled]: this.props.disabled
+                            }
+                        )}
+                        tabIndex="0"
+                        onClick={this.props.disabled ? null : (
+                            this.props.visible ? this.props.onClickNotVisible : this.props.onClickVisible
+                        )}
+                        onKeyPress={this.props.disabled ? null : (
+                            this.props.visible ? this.props.onPressNotVisible : this.props.onPressVisible
+                        )}
+                    >
+                        <img
+                            className={styles.icon}
+                            src={this.props.visible ? showIcon : hideIcon}
+                        />
+                    </div>
                     <div className={styles.group}>
-                        <Label
-                            above={labelAbove}
-                            text={sprite}
-                        >
-                            {spriteNameInput}
-                        </Label>
+                        {spriteNameInput}
                     </div>
                     {xPosition}
                     {yPosition}
-                </div>
-                <div className={classNames(styles.row, styles.rowSecondary)}>
-                    <div className={labelAbove ? styles.column : styles.group}>
-                        {
-                            stageSize === STAGE_DISPLAY_SIZES.large ?
-                                <Label
-                                    secondary
-                                    text={showLabel}
-                                /> :
-                                null
-                        }
-                        <div className={styles.radioWrapper}>
-                            <div
-                                className={classNames(
-                                    styles.radio,
-                                    styles.radioFirst,
-                                    styles.iconWrapper,
-                                    {
-                                        [styles.isActive]: this.props.visible && !this.props.disabled,
-                                        [styles.isDisabled]: this.props.disabled
-                                    }
-                                )}
-                                tabIndex="0"
-                                onClick={this.props.onClickVisible}
-                                onKeyPress={this.props.onPressVisible}
-                            >
-                                <img
-                                    className={styles.icon}
-                                    src={showIcon}
-                                />
-                            </div>
-                            <div
-                                className={classNames(
-                                    styles.radio,
-                                    styles.radioLast,
-                                    styles.iconWrapper,
-                                    {
-                                        [styles.isActive]: !this.props.visible && !this.props.disabled,
-                                        [styles.isDisabled]: this.props.disabled
-                                    }
-                                )}
-                                tabIndex="0"
-                                onClick={this.props.onClickNotVisible}
-                                onKeyPress={this.props.onPressNotVisible}
-                            >
-                                <img
-                                    className={styles.icon}
-                                    src={hideIcon}
-                                />
-                            </div>
-                        </div>
-                    </div>
                     <div className={classNames(styles.group, styles.largerInput)}>
                         <Label
                             secondary
                             above={labelAbove}
-                            text={sizeLabel}
+                            text="⇪"
                         >
                             <BufferedInput
                                 small

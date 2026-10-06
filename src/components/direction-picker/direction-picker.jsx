@@ -67,7 +67,7 @@ const DirectionPicker = props => (
     <Label
         secondary
         above={props.labelAbove}
-        text={directionLabel}
+        text="⟳"
     >
         <Popover
             body={
