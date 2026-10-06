@@ -2,6 +2,30 @@ import layout, {STAGE_DISPLAY_SCALES, STAGE_SIZE_MODES, STAGE_DISPLAY_SIZES} fro
 
 const maxScaleParam = typeof URLSearchParams !== 'undefined' && new URLSearchParams(location.search).get('scale');
 
+// PMDESKTOP_STAGE_PATCH
+// The editor stage is scaled to fit inside a box of this width (height = width * 3/4).
+const DEFAULT_STAGE_BOX_WIDTH = 480;
+const MIN_STAGE_BOX_WIDTH = 240;
+// Narrowest the stage column may get (the sprite panel can wrap down to this).
+const MIN_STAGE_COLUMN_WIDTH = 242;
+const MAX_STAGE_BOX_WIDTH = 1200;
+const STAGE_BOX_RATIO = 3 / 4;
+// Space that must always be left for the block palette + workspace.
+const MIN_EDITOR_WIDTH = 560;
+
+/**
+ * Limit a wanted stage box width to what fits in the current window.
+ * @param {number} preferred - the width the user asked for
+ * @return {number} a usable width
+ */
+const getEffectiveStageBoxWidth = preferred => {
+    let width = Number(preferred);
+    if (!isFinite(width) || width <= 0) width = DEFAULT_STAGE_BOX_WIDTH;
+    const available = typeof window === 'undefined' ? MAX_STAGE_BOX_WIDTH : window.innerWidth - MIN_EDITOR_WIDTH;
+    const max = Math.max(MIN_STAGE_BOX_WIDTH, Math.min(MAX_STAGE_BOX_WIDTH, available));
+    return Math.round(Math.max(MIN_STAGE_BOX_WIDTH, Math.min(max, width)));
+};
+
 /**
  * @typedef {object} StageDimensions
  * @property {int} height - the height to be used for the stage in the current situation.
@@ -27,15 +51,7 @@ const STAGE_DIMENSION_DEFAULTS = {
  * @param {boolean} isFullSize - true if the window is large enough for the large stage at its full size.
  * @return {STAGE_DISPLAY_SIZES} - the stage size enum value we should use in this situation.
  */
-const resolveStageSize = (stageSizeMode, isFullSize) => {
-    if (stageSizeMode === STAGE_SIZE_MODES.small) {
-        return STAGE_DISPLAY_SIZES.small;
-    }
-    if (isFullSize) {
-        return STAGE_DISPLAY_SIZES.large;
-    }
-    return STAGE_DISPLAY_SIZES.largeConstrained;
-};
+const resolveStageSize = () => STAGE_DISPLAY_SIZES.large;
 
 /**
  * Retrieve info used to determine the actual stage size based on the current GUI and browser state.
@@ -44,7 +60,7 @@ const resolveStageSize = (stageSizeMode, isFullSize) => {
  * @param {boolean} isFullScreen - true if full-screen mode is enabled.
  * @return {StageDimensions} - an object describing the dimensions of the stage.
  */
-const getStageDimensions = (stageSize, customStageSize, isFullScreen) => {
+const getStageDimensions = (stageSize, customStageSize, isFullScreen, boxWidth) => {
     const stageDimensions = {
         heightDefault: customStageSize.height,
         widthDefault: customStageSize.width,
@@ -69,6 +85,15 @@ const getStageDimensions = (stageSize, customStageSize, isFullScreen) => {
         }
 
         stageDimensions.scale = stageDimensions.width / stageDimensions.widthDefault;
+    } else if (boxWidth) {
+        // Fixed-size editor stage: scale the stage to fit the box, keeping its aspect ratio
+        const boxHeight = boxWidth * STAGE_BOX_RATIO;
+        stageDimensions.scale = Math.min(
+            boxWidth / stageDimensions.widthDefault,
+            boxHeight / stageDimensions.heightDefault
+        );
+        stageDimensions.height = stageDimensions.scale * stageDimensions.heightDefault;
+        stageDimensions.width = stageDimensions.scale * stageDimensions.widthDefault;
     } else {
         stageDimensions.scale = STAGE_DISPLAY_SCALES[stageSize];
         stageDimensions.height = stageDimensions.scale * stageDimensions.heightDefault;
@@ -82,7 +107,7 @@ const getStageDimensions = (stageSize, customStageSize, isFullScreen) => {
     return stageDimensions;
 };
 
-const getMinWidth = stageSize => STAGE_DISPLAY_SCALES[stageSize] * 480;
+const getMinWidth = (stageSize, boxWidth) => boxWidth || STAGE_DISPLAY_SCALES[stageSize] * 480;
 
 /**
  * Take a pair of sizes for the stage (a target height and width and a default height and width),
@@ -106,6 +131,11 @@ const stageSizeToTransform = ({width, height, widthDefault, heightDefault}) => {
 };
 
 export {
+    DEFAULT_STAGE_BOX_WIDTH,
+    MIN_STAGE_BOX_WIDTH,
+    MIN_STAGE_COLUMN_WIDTH,
+    MAX_STAGE_BOX_WIDTH,
+    getEffectiveStageBoxWidth,
     getStageDimensions,
     getMinWidth,
     resolveStageSize,
