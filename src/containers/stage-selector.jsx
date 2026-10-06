@@ -20,6 +20,7 @@ import {getEventXY} from '../lib/touch-utils';
 import StageSelectorComponent from '../components/stage-selector/stage-selector.jsx';
 
 import {getBackdropLibrary} from '../lib/libraries/tw-async-libraries';
+import {addRandomOfflineAsset} from '../lib/pm-asset-sources.js';
 import {handleFileUpload, costumeUpload} from '../lib/file-uploader.js';
 
 const dragTypes = [
@@ -92,6 +93,7 @@ class StageSelector extends React.Component {
     }
     async handleSurpriseBackdrop (e) {
         e.stopPropagation(); // Prevent click from falling through to selecting stage.
+        return addRandomOfflineAsset(this.props.vm, 'backdrop');
         const backdropLibraryContent = await getBackdropLibrary();
         // @todo should this not add a backdrop you already have?
         const item = backdropLibraryContent[Math.floor(Math.random() * backdropLibraryContent.length)];

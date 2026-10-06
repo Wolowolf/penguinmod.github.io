@@ -19,6 +19,7 @@ import SoundLibrary from './sound-library.jsx';
 import SoundEditorNotSupported from '../components/tw-sound-editor-not-supported/sound-editor-not-supported.jsx';
 
 import { getSoundLibrary } from '../lib/libraries/tw-async-libraries';
+import {addRandomOfflineAsset} from '../lib/pm-asset-sources.js';
 import { handleFileUpload, soundUpload } from '../lib/file-uploader.js';
 import errorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import DragConstants from '../lib/drag-constants';
@@ -113,6 +114,7 @@ class SoundTab extends React.Component {
     }
 
     async handleSurpriseSound() {
+        return addRandomOfflineAsset(this.props.vm, 'sound').then(() => this.handleNewSound());
         const soundLibraryContent = await getSoundLibrary();
         const soundItem = soundLibraryContent[Math.floor(Math.random() * soundLibraryContent.length)];
         const vmSound = {

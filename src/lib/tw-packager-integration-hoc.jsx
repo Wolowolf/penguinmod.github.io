@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import log from './log';
+import {confirmPackaging} from './pm-credits.js'; // PMDESKTOP_STAGE_PATCH (section 16)
 import { getIsShowingProject } from '../reducers/project-state';
 
 const PACKAGER_URL = 'https://studio.penguinmod.com/PenguinMod-Packager';
@@ -22,7 +23,9 @@ const PackagerIntegrationHOC = function (WrappedComponent) {
         }
         handleClickPackager() {
             if (this.props.canOpenPackager) {
-                window.open(`${PACKAGER_URL}/?import_from=${location.origin}`);
+                confirmPackaging(this.props.vm).then(ok => {
+                    if (ok) window.open(`${PACKAGER_URL}/?import_from=${location.origin}`);
+                });
             }
         }
         handleMessage(e) {

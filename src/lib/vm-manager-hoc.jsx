@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 
 import VM from "scratch-vm";
 import AudioEngine from "scratch-audio";
+import installCredits from "./pm-credits.js"; // PMDESKTOP_STAGE_PATCH (section 16)
 
 import { setProjectUnchanged } from "../reducers/project-changed";
 import {
@@ -29,6 +30,7 @@ const vmManagerHOC = function (WrappedComponent) {
         componentDidMount() {
             if (!this.props.vm.initialized) {
                 window.vm = this.props.vm;
+                installCredits(this.props.vm);
                 try {
                     this.audioEngine = new AudioEngine();
                     this.props.vm.attachAudioEngine(this.audioEngine);

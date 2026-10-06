@@ -35,6 +35,7 @@ import surpriseIcon from '../components/action-menu/icon--surprise.svg';
 import searchIcon from '../components/action-menu/icon--search.svg';
 
 import { getCostumeLibrary, getBackdropLibrary } from '../lib/libraries/tw-async-libraries';
+import {addRandomOfflineAsset} from '../lib/pm-asset-sources.js';
 
 let messages = defineMessages({
     addLibraryBackdropMsg: {
@@ -169,6 +170,7 @@ class CostumeTab extends React.Component {
         this.handleNewCostume(emptyCostume(name));
     }
     async handleSurpriseCostume() {
+        return addRandomOfflineAsset(this.props.vm, 'costume');
         const costumeLibraryContent = await getCostumeLibrary();
         const item = costumeLibraryContent[Math.floor(Math.random() * costumeLibraryContent.length)];
         const vmCostume = {
@@ -187,6 +189,7 @@ class CostumeTab extends React.Component {
         this.handleNewCostume(vmCostume, true /* fromCostumeLibrary */);
     }
     async handleSurpriseBackdrop() {
+        return addRandomOfflineAsset(this.props.vm, 'backdrop');
         const backdropLibraryContent = await getBackdropLibrary();
         const item = backdropLibraryContent[Math.floor(Math.random() * backdropLibraryContent.length)];
         const vmCostume = {
