@@ -6,6 +6,7 @@ import VM from 'scratch-vm';
 import {connect} from 'react-redux';
 
 import {STAGE_DISPLAY_SIZES} from '../lib/layout-constants';
+import {getEffectiveStageBoxWidth} from '../lib/screen-utils';
 import {getEventXY} from '../lib/touch-utils';
 import VideoProvider from '../lib/video/video-provider';
 import {BitmapAdapter as V2BitmapAdapter} from 'scratch-svg-renderer';
@@ -100,6 +101,7 @@ class Stage extends React.Component {
     }
     shouldComponentUpdate (nextProps, nextState) {
         return this.props.stageSize !== nextProps.stageSize ||
+            this.props.stageBoxWidth !== nextProps.stageBoxWidth ||
             this.props.isColorPicking !== nextProps.isColorPicking ||
             this.state.colorInfo !== nextState.colorInfo ||
             this.props.isFullScreen !== nextProps.isFullScreen ||
@@ -537,6 +539,7 @@ Stage.propTypes = {
     micIndicator: PropTypes.bool,
     onActivateColorPicker: PropTypes.func,
     onDeactivateColorPicker: PropTypes.func,
+    stageBoxWidth: PropTypes.number,
     stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
     useEditorDragStyle: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired
@@ -549,6 +552,7 @@ Stage.defaultProps = {
 const mapStateToProps = state => ({
     highQualityPen: state.scratchGui.tw.highQualityPen,
     customStageSize: state.scratchGui.customStageSize,
+    stageBoxWidth: getEffectiveStageBoxWidth(state.scratchGui.stageSize.boxWidth),
     disableEditingTargetChange: (
         state.scratchGui.mode.isFullScreen ||
         state.scratchGui.mode.isEmbedded ||
