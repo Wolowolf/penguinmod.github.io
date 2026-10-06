@@ -523,7 +523,8 @@ const deleteLegacyRestorePoint = () => {
     }
 };
 
-const DEFAULT_INTERVAL = 1000 * 60 * 5;
+// PMDESKTOP_STAGE_PATCH: automatic restore points are off unless the user turns them on
+const DEFAULT_INTERVAL = -1;
 const INTERVAL_STORAGE_KEY = 'tw:restore-point-interval';
 
 const readInterval = () => {
