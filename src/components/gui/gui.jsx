@@ -42,6 +42,7 @@ import TWSecurityManager from '../../containers/tw-security-manager.jsx';
 import TWCustomExtensionModal from '../../containers/tw-custom-extension-modal.jsx';
 import TWRestorePointManager from '../../containers/tw-restore-point-manager.jsx';
 import TWFontsModal from '../../containers/tw-fonts-modal.jsx';
+import PMProfilerModal from '../pm-profiler/pm-profiler-modal.jsx';
 import PMExtensionModals from '../../containers/pm-extension-modals.jsx';
 
 import layout, {STAGE_SIZE_MODES} from '../../lib/layout-constants';
@@ -178,6 +179,7 @@ const GUIComponent = props => {
         settingsModalVisible,
         customExtensionModalVisible,
         fontsModalVisible,
+        profilerModalVisible,
         isPlayground,
         vm,
         ...componentProps
@@ -385,6 +387,7 @@ const GUIComponent = props => {
                 {settingsModalVisible && <TWSettingsModal />}
                 {customExtensionModalVisible && <TWCustomExtensionModal />}
                 {fontsModalVisible && <TWFontsModal />}
+                {profilerModalVisible && <PMProfilerModal vm={vm} />}
                 <PMExtensionModals vm={vm} />
             </React.Fragment>
         );
@@ -762,6 +765,7 @@ GUIComponent.propTypes = {
     settingsModalVisible: PropTypes.bool,
     customExtensionModalVisible: PropTypes.bool,
     fontsModalVisible: PropTypes.bool,
+    profilerModalVisible: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 GUIComponent.defaultProps = {

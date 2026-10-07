@@ -16,6 +16,13 @@
     user-select: none;
 }
 
+.stage-wrapper .meter-anchor {
+    /* the frame-time meter (section 36) sits in the stage's corner and is never wider than the stage */
+    position: relative;
+    width: fit-content;
+    max-width: 100%;
+}
+
 .stage-wrapper.full-screen {
     position: fixed;
     top: $stage-menu-height;

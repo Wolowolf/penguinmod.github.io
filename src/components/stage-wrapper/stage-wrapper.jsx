@@ -8,6 +8,7 @@ import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants.js';
 import StageHeader from '../../containers/stage-header.jsx';
 import Stage from '../../containers/stage.jsx';
 import Loader from '../loader/loader.jsx';
+import FrameMeter from '../pm-profiler/pm-frame-meter.jsx';
 
 import styles from './stage-wrapper.css';
 
@@ -42,14 +43,17 @@ const StageWrapperComponent = function (props) {
                 </Box>
             )}
             <Box className={styles.stageCanvasWrapper}>
-                {
-                    isRendererSupported ?
-                        <Stage
-                            stageSize={stageSize}
-                            vm={vm}
-                        /> :
-                        null
-                }
+                <div className={styles.meterAnchor}>
+                    <FrameMeter vm={vm} />
+                    {
+                        isRendererSupported ?
+                            <Stage
+                                stageSize={stageSize}
+                                vm={vm}
+                            /> :
+                            null
+                    }
+                </div>
             </Box>
             {loading ? (
                 <Loader isFullScreen={isFullScreen} />

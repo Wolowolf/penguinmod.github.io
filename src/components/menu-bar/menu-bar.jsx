@@ -26,7 +26,7 @@ import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 import FramerateChanger from '../../containers/tw-framerate-changer.jsx';
 import TWSaveStatus from './tw-save-status.jsx';
 
-import { openTipsLibrary, openSettingsModal, openRestorePointModal } from '../../reducers/modals';
+import { openTipsLibrary, openSettingsModal, openRestorePointModal, openProfilerModal } from '../../reducers/modals';
 import { setPlayer } from '../../reducers/mode';
 import {
     autoUpdateProject,
@@ -658,6 +658,13 @@ class MenuBar extends React.Component {
                                             id="pm.menuBar.moreSettings"
                                         />
                                     </MenuItem>
+                                    <MenuItem onClick={this.props.onClickProfiler}>
+                                        <FormattedMessage
+                                            defaultMessage="Profiler"
+                                            description="Menu bar item that opens the profiler window"
+                                            id="pm.menuBar.profiler"
+                                        />
+                                    </MenuItem>
                                     <MenuItem onClick={this.handleClickDownloadLogs}>
                                         <FormattedMessage
                                             defaultMessage="Download Logs"
@@ -797,6 +804,7 @@ MenuBar.propTypes = {
     onClickSave: PropTypes.func,
     onClickSaveAsCopy: PropTypes.func,
     onClickSettings: PropTypes.func,
+    onClickProfiler: PropTypes.func,
     onClickErrors: PropTypes.func,
     onRequestCloseErrors: PropTypes.func,
     onLogOut: PropTypes.func,
@@ -892,6 +900,10 @@ const mapDispatchToProps = dispatch => ({
     onClickRestorePoints: () => dispatch(openRestorePointModal()),
     onClickSettings: () => {
         dispatch(openSettingsModal());
+        dispatch(closeEditMenu());
+    },
+    onClickProfiler: () => {
+        dispatch(openProfilerModal());
         dispatch(closeEditMenu());
     },
     onSeeCommunity: () => dispatch(setPlayer(true))

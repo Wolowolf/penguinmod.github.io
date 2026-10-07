@@ -1,0 +1,234 @@
+@import "../../css/units.css";
+@import "../../css/colors.css";
+
+/* ---- the on-screen frame-time meter (section 36) ---- */
+
+.meter {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    z-index: 50;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2px 8px;
+    max-width: calc(100% - 8px);
+    padding: 3px 6px;
+    border-radius: 3px;
+    /* white text on this is above 12:1; the words and signs say the state, the colours only help */
+    background: rgba(15, 18, 30, 0.88);
+    color: #fff;
+    font-size: 0.75rem;
+    line-height: 1.3;
+    /* the stage underneath keeps getting clicks; only the button below takes them */
+    pointer-events: none;
+}
+
+.readout {
+    font-variant-numeric: tabular-nums;
+}
+
+.number {
+    font-weight: bold;
+}
+
+.status-smooth .status-word {
+    color: #8fe3a3;
+}
+.status-busy .status-word {
+    color: #ffd166;
+}
+.status-slow .status-word {
+    color: #ffa3a3;
+}
+.status-word {
+    font-weight: bold;
+}
+
+.bars {
+    display: block;
+    flex-shrink: 0;
+}
+.bar {
+    fill: #9ec5ff;
+}
+.bar-late {
+    fill: #ffa3a3;
+}
+.target-line {
+    stroke: #fff;
+    stroke-width: 1;
+    stroke-dasharray: 3 3;
+    opacity: 0.6;
+}
+
+.meter-button {
+    pointer-events: auto;
+    cursor: pointer;
+    padding: 1px 6px;
+    border: 1px solid #fff;
+    border-radius: 3px;
+    background: transparent;
+    color: #fff;
+    font: inherit;
+}
+.meter-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+.meter-button:focus-visible {
+    outline: 3px solid #ffd166;
+    outline-offset: 1px;
+}
+.stage-toggle:focus-visible {
+    outline: 3px solid #0b57d0;
+    outline-offset: 1px;
+}
+[theme="dark"] .stage-toggle:focus-visible {
+    outline-color: #ffd166;
+}
+
+.stage-toggle[aria-pressed="true"] {
+    box-shadow: inset 0 0 0 2px #0b57d0;
+}
+[theme="dark"] .stage-toggle[aria-pressed="true"] {
+    box-shadow: inset 0 0 0 2px #ffd166;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ---- the profiler window ---- */
+
+.modal-content {
+    max-width: max(60%, 750px);
+}
+
+.body {
+    background: $ui-white;
+    color: $text-primary;
+    padding: 1.25rem 2rem;
+    min-height: 150px;
+    max-height: calc(100vh - 250px);
+    overflow-y: auto;
+}
+[theme="dark"] .body {
+    background: $ui-primary;
+}
+
+@media (max-height: 600px) {
+    .modal-content {
+        margin: 50px auto;
+    }
+    .body {
+        max-height: calc(100vh - 150px);
+    }
+}
+
+.intro,
+.summary,
+.note {
+    margin: 0 0 0.75rem;
+    line-height: 1.4;
+}
+.note {
+    margin: 0.75rem 0 0;
+    font-size: 0.85rem;
+}
+
+.toolbar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.tool-button {
+    cursor: pointer;
+    padding: 0.35rem 0.9rem;
+    border: 1px solid $text-primary;
+    border-radius: 4px;
+    background: transparent;
+    color: $text-primary;
+    font: inherit;
+    font-weight: bold;
+}
+.tool-button:hover {
+    background: $ui-tertiary;
+}
+.tool-button:focus-visible,
+.sort-button:focus-visible {
+    outline: 3px solid #0b57d0;
+    outline-offset: 1px;
+}
+[theme="dark"] .tool-button:focus-visible,
+[theme="dark"] .sort-button:focus-visible {
+    outline-color: #ffd166;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+}
+.table th,
+.table td {
+    padding: 0.3rem 0.4rem;
+    border-bottom: 1px solid $ui-black-transparent;
+    font-weight: normal;
+}
+.table thead th {
+    font-weight: bold;
+    border-bottom-width: 2px;
+}
+
+.name-cell {
+    text-align: left;
+}
+.num-cell {
+    text-align: right;
+    white-space: nowrap;
+}
+/* column headings may wrap so the table fits the window */
+.num-head {
+    text-align: right;
+    vertical-align: bottom;
+}
+
+.sort-button {
+    cursor: pointer;
+    max-width: 100%;
+    padding: 0.1rem 0.2rem;
+    text-align: inherit;
+    border: none;
+    border-radius: 3px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-weight: bold;
+}
+.sort-button:hover {
+    background: $ui-tertiary;
+}
+
+.detail {
+    display: block;
+    font-size: 0.75rem;
+    opacity: 0.85;
+}
+
+.empty {
+    margin: 1rem 0;
+    text-align: center;
+}

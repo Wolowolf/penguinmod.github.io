@@ -16,6 +16,7 @@ const MODAL_SETTINGS = 'settingsModal';
 const MODAL_CUSTOM_EXTENSION = 'customExtensionModal';
 const MODAL_RESTORE_POINTS = 'restorePointModal';
 const MODAL_FONTS = 'fontsModal';
+const MODAL_PROFILER = 'profilerModal'; // PMDESKTOP section 36
 
 const initialState = {
     [MODAL_BACKDROP_LIBRARY]: false,
@@ -33,6 +34,7 @@ const initialState = {
     [MODAL_CUSTOM_EXTENSION]: false,
     [MODAL_RESTORE_POINTS]: false,
     [MODAL_FONTS]: false,
+    [MODAL_PROFILER]: false,
     extensionModalSwapId: null
 };
 
@@ -112,6 +114,9 @@ const openRestorePointModal = function () {
 const openFontsModal = function () {
     return openModal(MODAL_FONTS);
 };
+const openProfilerModal = function () {
+    return openModal(MODAL_PROFILER);
+};
 const closeBackdropLibrary = function () {
     return closeModal(MODAL_BACKDROP_LIBRARY);
 };
@@ -157,6 +162,9 @@ const closeRestorePointModal = function () {
 const closeFontsModal = function () {
     return closeModal(MODAL_FONTS);
 };
+const closeProfilerModal = function () {
+    return closeModal(MODAL_PROFILER);
+};
 export {
     reducer as default,
     initialState as modalsInitialState,
@@ -175,6 +183,7 @@ export {
     openCustomExtensionModal,
     openRestorePointModal,
     openFontsModal,
+    openProfilerModal,
     closeBackdropLibrary,
     closeCostumeLibrary,
     closeExtensionLibrary,
@@ -189,5 +198,6 @@ export {
     closeSettingsModal,
     closeCustomExtensionModal,
     closeRestorePointModal,
-    closeFontsModal
+    closeFontsModal,
+    closeProfilerModal
 };

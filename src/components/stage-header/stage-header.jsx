@@ -24,6 +24,7 @@ import settingsIcon from './icon--settings.svg';
 import styles from './stage-header.css';
 
 import FullscreenAPI from '../../lib/tw-fullscreen-api';
+import {FrameMeterToggle} from '../pm-profiler/pm-frame-meter.jsx';
 
 const messages = defineMessages({
     largeStageSizeMessage: {
@@ -148,6 +149,7 @@ const StageHeaderComponent = function (props) {
                     <Controls vm={vm} />
                     <div className={styles.embedButtons}>
                         {settingsButton}
+                        <FrameMeterToggle />
                         {/* {popoutWindowButton} */}
                         {fullscreenButton}
                     </div>
@@ -168,6 +170,7 @@ const StageHeaderComponent = function (props) {
                         {stageControls}
                         <div className={styles.embedButtons}>
                             {/* {popoutWindowButton} */}
+                            <FrameMeterToggle />
                             <Button
                                 className={styles.stageButton}
                                 onClick={onSetStageFull}
