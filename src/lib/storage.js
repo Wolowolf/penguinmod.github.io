@@ -13,51 +13,9 @@ class Storage extends ScratchStorage {
         this.cacheDefaultProject();
     }
     addOfficialScratchWebStores() {
-        const die = () => {
-            throw new Error("Cannot use this web store like that!!!");
-        };
-
-        this.addWebStore(
-            [this.AssetType.Project],
-            this.getProjectGetConfig.bind(this),
-            die,
-            die,
-        );
-        this.addWebStore(
-            [
-                this.AssetType.ImageVector,
-                this.AssetType.ImageBitmap,
-                this.AssetType.Sound,
-                this.AssetType.Font,
-            ],
-            this.getAssetGetConfig.bind(this),
-            // We set both the create and update configs to the same method because
-            // storage assumes it should update if there is an assetId, but the
-            // asset store uses the assetId as part of the create URI.
-            die,
-            die,
-        );
-        this.addWebStore(
-            [
-                this.AssetType.ImageVector,
-                this.AssetType.ImageBitmap,
-                this.AssetType.Sound,
-            ],
-            this.getScratchAssetGetConfig.bind(this),
-            die,
-            die,
-        );
-        this.addWebStore(
-            [
-                this.AssetType.ImageVector,
-                this.AssetType.ImageBitmap,
-                this.AssetType.Sound,
-                this.AssetType.Font,
-            ],
-            this.getAssetBackupGetConfig.bind(this),
-            die,
-            die,
-        );
+        // PMDESKTOP section 23: no web stores. Projects and their files are never loaded from
+        // projects.penguinmod.com, asset-cdn.penguinmod.com or assets.scratch.mit.edu; only the
+        // built-in default / missing projects and the files inside opened projects are used.
     }
     setProjectHost(projectHost) {
         this.projectHost = projectHost;

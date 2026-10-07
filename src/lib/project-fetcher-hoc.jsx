@@ -231,11 +231,10 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         setProjectId: PropTypes.func,
         vm: PropTypes.instanceOf(VM),
     };
+    // PMDESKTOP section 23: no project / asset server (storage.js has no web stores either).
     ProjectFetcherComponent.defaultProps = {
-        assetHost:
-            "https://asset-cdn.penguinmod.com/file/penguinmod-warm-tier-s2-cf",
-        projectHost:
-            "https://projects.penguinmod.com/api/v1/projects/getProject?requestType=protobuf&projectID",
+        assetHost: "",
+        projectHost: "",
     };
 
     const mapStateToProps = (state) => ({

@@ -65,10 +65,11 @@ const TWProjectMetaFetcherHOC = function (WrappedComponent) {
             this.props.onSetDescription('', '');
             this.props.onSetRemixedProjectInfo(false, '', '');
             const projectId = this.props.projectId;
-            // Don't try to load metadata for empty projects.
-            if (projectId === '0') {
-                return;
-            }
+            // PMDESKTOP section 23: never ask projects.penguinmod.com for a project's title, author,
+            // description or remixes (upstream did this for every project ID except '0'). The code
+            // below this return is upstream's and never runs.
+            return;
+            // eslint-disable-next-line no-unreachable
             fetchProjectMeta(projectId)
                 .then(data => {
                     /* todo: fix this and make it work properly */
