@@ -231,11 +231,13 @@ const GUIComponent = props => {
                     draggable={false}
                     src={codeIcon}
                 />
-                <FormattedMessage
-                    defaultMessage="Code"
-                    description="Button to get to the code panel"
-                    id="gui.gui.codeTab"
-                />
+                <span className={styles.tabLabel}>
+                    <FormattedMessage
+                        defaultMessage="Code"
+                        description="Button to get to the code panel"
+                        id="gui.gui.codeTab"
+                    />
+                </span>
             </ContextMenuWrapTab>
         </Tab>);
     const costumesTab = (<Tab className={classNames(tabClassNames.tab, tabOrder.includes('costume') ? null : styles.tabDisabled)} onClick={onActivateCostumesTab}>
@@ -244,19 +246,21 @@ const GUIComponent = props => {
                     draggable={false}
                     src={costumesIcon}
                 />
-                {targetIsStage ? (
-                    <FormattedMessage
-                        defaultMessage="Backdrops"
-                        description="Button to get to the backdrops panel"
-                        id="gui.gui.backdropsTab"
-                    />
-                ) : (
-                    <FormattedMessage
-                        defaultMessage="Costumes"
-                        description="Button to get to the costumes panel"
-                        id="gui.gui.costumesTab"
-                    />
-                )}
+                <span className={styles.tabLabel}>
+                    {targetIsStage ? (
+                        <FormattedMessage
+                            defaultMessage="Backdrops"
+                            description="Button to get to the backdrops panel"
+                            id="gui.gui.backdropsTab"
+                        />
+                    ) : (
+                        <FormattedMessage
+                            defaultMessage="Costumes"
+                            description="Button to get to the costumes panel"
+                            id="gui.gui.costumesTab"
+                        />
+                    )}
+                </span>
             </ContextMenuWrapTab>
         </Tab>);
     const soundsTab = (<Tab className={classNames(tabClassNames.tab, tabOrder.includes('sound') ? null : styles.tabDisabled)} onClick={onActivateSoundsTab}>
@@ -265,11 +269,13 @@ const GUIComponent = props => {
                     draggable={false}
                     src={soundsIcon}
                 />
-                <FormattedMessage
-                    defaultMessage="Sounds"
-                    description="Button to get to the sounds panel"
-                    id="gui.gui.soundsTab"
-                />
+                <span className={styles.tabLabel}>
+                    <FormattedMessage
+                        defaultMessage="Sounds"
+                        description="Button to get to the sounds panel"
+                        id="gui.gui.soundsTab"
+                    />
+                </span>
             </ContextMenuWrapTab>
         </Tab>);
     const variablesTab = (<Tab className={classNames(tabClassNames.tab, tabOrder.includes('variable') ? null : styles.tabDisabled)} onClick={onActivateVariablesTab}>
@@ -278,11 +284,13 @@ const GUIComponent = props => {
                     draggable={false}
                     src={variablesIcon}
                 />
-                <FormattedMessage
-                    defaultMessage="Variables"
-                    description="Button to get to the variables panel"
-                    id="pm.gui.variablesTab"
-                />
+                <span className={styles.tabLabel}>
+                    <FormattedMessage
+                        defaultMessage="Variables"
+                        description="Button to get to the variables panel"
+                        id="pm.gui.variablesTab"
+                    />
+                </span>
             </ContextMenuWrapTab>
         </Tab>);
     const filesTab = (<Tab className={classNames(tabClassNames.tab, tabOrder.includes('file') ? null : styles.tabDisabled)} onClick={onActivateFilesTab}>
@@ -291,11 +299,13 @@ const GUIComponent = props => {
                     draggable={false}
                     src={filesIcon}
                 />
-                <FormattedMessage
-                    defaultMessage="Files"
-                    description="Button to get to the files panel"
-                    id="pm.gui.filesTab"
-                />
+                <span className={styles.tabLabel}>
+                    <FormattedMessage
+                        defaultMessage="Files"
+                        description="Button to get to the files panel"
+                        id="pm.gui.filesTab"
+                    />
+                </span>
             </ContextMenuWrapTab>
         </Tab>);
 

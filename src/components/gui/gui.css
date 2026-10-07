@@ -80,7 +80,7 @@
     border-radius: 1rem 1rem 0 0;
     border: 1px solid $ui-black-transparent;
 
-    padding: 0.125rem 1.25rem 0;
+    padding: 0.0625rem 0.3125rem 0;
     font-size: 0.75rem;
 
     background-color: $ui-tertiary;
@@ -200,6 +200,25 @@
 
 [dir="rtl"] .tab img {
     margin-left: 0.125rem;
+}
+
+/* Only the selected tab shows its name; the others show just the icon
+   (the name stays in the page for screen readers) */
+.tab:not(.is-selected) .tab-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+[dir="ltr"] .tab:not(.is-selected) img {
+    margin-right: 0;
+}
+
+[dir="rtl"] .tab:not(.is-selected) img {
+    margin-left: 0;
 }
 
 /* mirror blocks and sound tab icons */
