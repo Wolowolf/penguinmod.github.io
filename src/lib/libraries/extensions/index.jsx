@@ -1427,7 +1427,7 @@ if (IsLocal || IsLiveTests) {
         {
             name: 'fire in the hole',
             extensionId: 'https://extensions.penguinmod.com/extensions/JeremyGamer13/FireInTheHole.js',
-            iconURL: 'https://library.penguinmod.com/files/emojis/cluelesssmile.png',
+            iconURL: defaultExtensionIcon, // PMDESKTOP section 24: was library.penguinmod.com/files/emojis/cluelesssmile.png
             tags: ['penguinmod', 'joke'],
             internetConnectionRequired: true,
             description: 'april fools took too long man this joke is not funny anymore',
