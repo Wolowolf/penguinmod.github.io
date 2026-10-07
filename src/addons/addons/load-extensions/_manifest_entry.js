@@ -21,18 +21,6 @@ const manifest = {
       "id": "pen",
       "type": "boolean",
       "default": true
-    },
-    {
-      "name": "Text to Speech",
-      "id": "text2speech",
-      "type": "boolean",
-      "default": false
-    },
-    {
-      "name": "Translate",
-      "id": "translate",
-      "type": "boolean",
-      "default": false
     }
   ],
   "dynamicDisable": true,

@@ -12,11 +12,7 @@ import penInsetIconURL from './pen/pen-small.svg';
 import videoSensingIconURL from './videoSensing/video-sensing.png';
 import videoSensingInsetIconURL from './videoSensing/video-sensing-small.svg';
 
-import text2speechIconURL from './text2speech/text2speech.png';
-import text2speechInsetIconURL from './text2speech/text2speech-small.svg';
 
-import translateIconURL from './translate/translate.png';
-import translateInsetIconURL from './translate/translate-small.png';
 
 import makeymakeyIconURL from './makeymakey/makeymakey.png';
 import makeymakeyInsetIconURL from './makeymakey/makeymakey-small.svg';
@@ -115,7 +111,6 @@ import lilyTempVariablesExtensionIcon from './penguinmod/orgtw/TempVariables2.sv
 import gsaTempVariablesExtensionIcon from './penguinmod/extensions/tempvariables.svg';
 import jgIframeExtensionIcon from './penguinmod/extensions/iframe.png';
 import jgExtendedAudioExtensionIcon from './penguinmod/extensions/extendedaudio.png';
-import jgScratchAuthExtensionIcon from './penguinmod/extensions/scratchauth2.svg';
 import jgPermissionExtensionIcon from './penguinmod/extensions/permissions.png';
 import jgCloneManagerExtensionIcon from './penguinmod/extensions/clonemanager.png';
 import pmInlineBlocksExtensionIcon from './penguinmod/extensions/inlineblocks.png';
@@ -156,7 +151,6 @@ import spSoundWaveIcon from './penguinmod/extensions/soundWaves.svg';
 import spTempVarsIcon from './penguinmod/extensions/sp_tempVars.svg';
 
 // events
-import jgStorageExtensionIcon from './penguinmod/extensions/storage.png';
 import jgTimersExtensionIcon from './penguinmod/extensions/multipletimers.png';
 import jgAdvancedTextExtensionIcon from './penguinmod/extensions/advancedtext.png';
 
@@ -271,55 +265,6 @@ const menuItems = [
         tags: ['scratch'],
         description: 'Sense faces with the camera.',
         featured: true
-    },
-    {
-        name: (
-            <FormattedMessage
-                defaultMessage="Text to Speech"
-                description="Name for the Text to Speech extension"
-                id="gui.extension.text2speech.name"
-            />
-        ),
-        extensionId: 'text2speech',
-        collaborator: 'Amazon Web Services',
-        credits: 'Google TTS',
-        iconURL: text2speechIconURL,
-        insetIconURL: text2speechInsetIconURL,
-        customInsetColor: '#9966FF',
-        tags: ['scratch', 'noisemaker'],
-        description: (
-            <FormattedMessage
-                defaultMessage="Make your projects talk."
-                description="Description for the Text to speech extension"
-                id="gui.extension.text2speech.description"
-            />
-        ),
-        featured: true,
-        internetConnectionRequired: true
-    },
-    {
-        name: (
-            <FormattedMessage
-                defaultMessage="Translate"
-                description="Name for the Translate extension"
-                id="gui.extension.translate.name"
-            />
-        ),
-        extensionId: 'translate',
-        collaborator: 'Google',
-        iconURL: translateIconURL,
-        insetIconURL: translateInsetIconURL,
-        customInsetColor: '#5CB1D6',
-        tags: ['scratch'],
-        description: (
-            <FormattedMessage
-                defaultMessage="Translate text into many languages."
-                description="Description for the Translate extension"
-                id="gui.extension.translate.description"
-            />
-        ),
-        featured: true,
-        internetConnectionRequired: true
     },
     {
         name: 'Makey Makey',
@@ -631,15 +576,6 @@ const menuItems = [
         featured: true
     },
     {
-        name: 'Storage',
-        extensionId: 'jgStorage',
-        iconURL: jgStorageExtensionIcon,
-        tags: ['penguinmod', 'datamgmt'],
-        description: 'Store data after PenguinMod has already been closed out. Basic Server Storage is also included.',
-        eventSubmittor: 'Fir & silvxrcat',
-        featured: true
-    },
-    {
         name: 'HTTP',
         extensionId: 'https://extensions.turbowarp.org/godslayerakp/http.js',
         iconURL: 'https://extensions.turbowarp.org/images/godslayerakp/http.svg',
@@ -839,14 +775,6 @@ const menuItems = [
         featured: true,
         internetConnectionRequired: false,
         twDeveloper: 'GarboMuffin'
-    },
-    {
-        name: 'Scratch Authentication',
-        extensionId: 'jgScratchAuthenticate',
-        iconURL: jgScratchAuthExtensionIcon,
-        tags: ['penguinmod'],
-        description: "Interact with Scratch Authentication to prove the player is a real scratch user.",
-        featured: true
     },
     {
         name: 'JavaScript',
