@@ -144,7 +144,6 @@ import sharkpoolMBPIcon from './penguinmod/extensions/myBlocksPlus.svg';
 import sharkpoolBCIcon from './penguinmod/extensions/BetterComments.svg';
 import sharkpoolPEIcon from './penguinmod/extensions/particleEngine.svg';
 import jgScriptsExtensionIcon from './penguinmod/extensions/scripts.svg';
-import sharkpoolLooksExpandedIcon from './penguinmod/extensions/looksExpanded.svg';
 import spTurboSkinsIcon from './penguinmod/extensions/turboSkins.svg';
 import spFontManagerIcon from './penguinmod/extensions/fontManager.svg';
 import spSoundWaveIcon from './penguinmod/extensions/soundWaves.svg';
@@ -360,15 +359,6 @@ const menuItems = [
         description: 'More small motion blocks for movement or collision.',
         featured: true,
         credits: 'Some blocks from NexusKitten'
-    },
-    {
-        name: 'Looks Expanded',
-        extensionId: 'https://sharkpools-extensions.vercel.app/extension-code/Looks-Expanded.js',
-        iconURL: sharkpoolLooksExpandedIcon,
-        tags: ['penguinmod', 'categoryexpansion', 'graphics'],
-        description: 'Expansion of the Looks Category.',
-        extDeveloper: 'SharkPool, CST1229',
-        featured: true
     },
     {
         name: 'Events Expansion',
