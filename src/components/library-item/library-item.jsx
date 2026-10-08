@@ -46,6 +46,23 @@ class LibraryItemComponent extends React.PureComponent {
                 onClick={this.props.onClick}
             >
                 <div className={styles.featuredImageContainer}>
+                    {this.props.used ? (
+                        <div
+                            className={styles.libraryItemUsed}
+                            title="Used in this project"
+                        >
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M6 12.5l4 4 8-9"
+                                    fill="none"
+                                    stroke="white"
+                                    strokeWidth="3"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                />
+                            </svg>
+                        </div>
+                    ) : null}
                     {this.props.disabled ? (
                         <div className={styles.comingSoonText}>
                             <FormattedMessage
@@ -490,6 +507,7 @@ LibraryItemComponent.propTypes = {
 
     favoritable: PropTypes.bool,
     favorited: PropTypes.bool,
+    used: PropTypes.bool,
     deletable: PropTypes.bool,
     custom: PropTypes.bool,
     onFavoriteClick: PropTypes.func,

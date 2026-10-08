@@ -155,6 +155,8 @@ class LibraryComponent extends React.Component {
         }
         // wait for spinner stuff
         this.waitForLoading(spinnerProcesses).then((packet) => {
+            // keep newer data that arrived while loading (the extension galleries' items)
+            if (!this.state.data.then) delete packet.data;
             const data = { loaded: true, ...packet };
             this.setState(data);
         });
@@ -472,7 +474,7 @@ class LibraryComponent extends React.Component {
                                 insetIconURL={dataItem.insetIconURL}
                                 internetConnectionRequired={dataItem.internetConnectionRequired}
                                 isPlaying={this.state.playingItem === index}
-                                key={typeof dataItem.name === 'string' ? dataItem.name : dataItem.rawURL}
+                                key={dataItem.extensionId || (typeof dataItem.name === 'string' ? dataItem.name : dataItem.rawURL)}
                                 name={dataItem.name}
                                 showPlayButton={this.props.showPlayButton}
                                 onMouseEnter={this.handleMouseEnter}
@@ -481,6 +483,7 @@ class LibraryComponent extends React.Component {
 
                                 favoritable={this.props.actor === "ExtensionLibrary" && dataItem.extensionId}
                                 favorited={this.state.favorites.includes(dataItem.extensionId)}
+                                used={dataItem.used}
                                 deletable={dataItem.deletable}
                                 custom={dataItem.custom}
                                 onFavoriteUpdated={() => this.handleFavoritesUpdate()}

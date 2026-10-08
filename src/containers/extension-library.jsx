@@ -8,6 +8,7 @@ import { manuallyTrustExtension } from './tw-security-manager.jsx';
 
 import extensionLibraryContent from '../lib/libraries/extensions/index.jsx';
 import extensionTags from '../lib/libraries/extension-tags';
+import loadGalleryExtensions from '../lib/libraries/extensions/galleries.js';
 
 import LibraryComponent from '../components/library/library.jsx';
 import extensionIcon from '../components/action-menu/icon--sprite.svg';
@@ -62,12 +63,17 @@ class ExtensionLibrary extends React.PureComponent {
             'handleItemSelect',
             'wrapperEventHandler'
         ]);
+        this.state = {galleryItems: []};
     }
 
     componentDidMount() {
         window.addEventListener('message', this.wrapperEventHandler);
+        loadGalleryExtensions().then(galleryItems => {
+            if (!this.unmounted) this.setState({galleryItems});
+        });
     }
     componentWillUnmount() {
+        this.unmounted = true;
         window.removeEventListener('message', this.wrapperEventHandler);
     }
     async wrapperEventHandler(e) {
@@ -212,11 +218,33 @@ class ExtensionLibrary extends React.PureComponent {
         }
     }
     render() {
-        const extensionLibraryThumbnailData = extensionLibraryContent.map(extension => ({
-            rawURL: extension.iconURL || extensionIcon,
-            disabled: extension.disabled && !this.props.liveTest,
-            ...extension
-        }));
+        // Gallery extensions already listed here only get the gallery's tag, the others are added.
+        const galleryTags = {};
+        const listedIds = new Set();
+        for (const extension of extensionLibraryContent) {
+            listedIds.add(extension.extensionId);
+            if (extension.extensionURL) listedIds.add(extension.extensionURL);
+        }
+        const galleryOnly = this.state.galleryItems.filter(item => {
+            if (!listedIds.has(item.extensionId)) return true;
+            galleryTags[item.extensionId] = (galleryTags[item.extensionId] || []).concat(item.tags);
+            return false;
+        });
+        // Extensions in the project: IDs of loaded ones, and the URLs custom ones were loaded from.
+        const extensionManager = this.props.vm.extensionManager;
+        const used = new Set(extensionManager._loadedExtensions.keys());
+        for (const url of Object.values(extensionManager.getExtensionURLs())) used.add(url);
+        const extensionLibraryThumbnailData = extensionLibraryContent.concat(galleryOnly).map(extension => {
+            const extraTags = galleryTags[extension.extensionId] || galleryTags[extension.extensionURL];
+            return {
+                rawURL: extension.iconURL || extensionIcon,
+                disabled: extension.disabled && !this.props.liveTest,
+                ...extension,
+                tags: extraTags ? (extension.tags || []).concat(extraTags) : extension.tags,
+                used: !!extension.extensionId &&
+                    (used.has(extension.extensionId) || used.has(extension.extensionURL))
+            };
+        });
         return (
             <LibraryComponent
                 data={extensionLibraryThumbnailData}

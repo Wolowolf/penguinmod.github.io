@@ -101,6 +101,26 @@
     opacity: 0;
 }
 
+/* extension already in the project */
+.library-item-used {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #2fb350;
+    border: 2px solid white;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+    pointer-events: none;
+    z-index: 1;
+}
+.library-item-used svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
 .library-item-delete {
     background: transparent;
     position: absolute;
