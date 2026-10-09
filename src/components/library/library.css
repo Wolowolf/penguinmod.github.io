@@ -58,7 +58,8 @@
 /* extension library: category shortcuts in the side bar and headings in the list */
 .category-jump {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    white-space: nowrap;
     width: 100%;
     padding: 0.3rem 0.5rem;
     border: 0;
@@ -71,6 +72,14 @@
 .category-jump:hover {
     background: $motion-transparent;
 }
+.category-jump-count {
+    min-width: 2ch;
+    text-align: right;
+}
+.category-jump-bar {
+    white-space: pre;
+    opacity: 0.6;
+}
 .group-heading {
     flex: 0 0 100%;
     margin: 1.25rem 0.5rem 0.25rem;
@@ -79,7 +88,6 @@
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    opacity: 0.7;
     border-bottom: 1px solid $motion-transparent;
 }
 

@@ -298,18 +298,30 @@ class LibraryComponent extends React.Component {
         }
 
         // one long list: favorites first, then the topic categories in order, then the rest
+        // (the "Custom Extension" tile is left out: the side bar button does the same)
         const order = this.getGroupOrder();
-        const withGroup = filtered.map(item => Object.assign(item, { custom: !!item.custom }));
-        return withGroup
-            .map((item, index) => ({ item, index, rank: order.indexOf(this.getGroupOf(item)) }))
+        const visible = filtered
+            .filter(item => item.extensionId !== '')
+            .map(item => Object.assign(item, { custom: !!item.custom }));
+        // favorites are shown twice: here at the top, and again in their own category
+        const favorites = visible
+            .filter(item => item.custom || this.state.favorites.includes(item.extensionId))
+            .map(item => Object.assign({}, item, { _group: 'cat_favorites' }));
+        const rest = visible
+            .filter(item => !item.custom)
+            .map((item, index) => {
+                const rank = order.indexOf(this.getGroupOf(item));
+                return { item, index, rank: rank < 0 ? order.length : rank };
+            })
             .sort((a, b) => (a.rank - b.rank) || (a.index - b.index))
             .map(entry => entry.item);
+        return favorites.concat(rest);
     }
     getGroupOrder () {
         return (this.props.tags || []).filter(tag => tag.type === 'jump').map(tag => tag.tag);
     }
     getGroupOf (item) {
-        if (item.custom || this.state.favorites.includes(item.extensionId)) return 'cat_favorites';
+        if (item._group) return item._group;
         const category = (item.tags || []).find(tag => typeof tag === 'string' && tag.startsWith('cat_'));
         return category && this.getGroupOrder().includes(category) ? category : 'cat_other';
     }
@@ -334,7 +346,7 @@ class LibraryComponent extends React.Component {
                 id={this.props.id}
                 onRequestClose={this.handleClose}
             >
-                {this.props.header ? (
+                {this.props.header && this.props.actor !== 'ExtensionLibrary' ? (
                     <h1
                         className={classNames(
                             styles.libraryHeader,
@@ -359,18 +371,24 @@ class LibraryComponent extends React.Component {
                     </h1>
                 ) : null}
                 {/* filter bar & stuff */}
-                <div className={classNames(styles.libraryContentWrapper)}>
+                <div
+                    className={classNames(styles.libraryContentWrapper)}
+                    style={this.props.actor === 'ExtensionLibrary' ? { height: 'calc(100% - 3.4em)' } : null}
+                >
                     <div
                         className={classNames(styles.libraryFilterBar)}
-                        style={this.state.collapsed ? { display: "none" } : null}
+                        style={this.state.collapsed ? { display: "none" } :
+                            (this.props.actor === 'ExtensionLibrary' ? { width: 'max-content', flexShrink: 0 } : null)}
                     >
-                        <h3 className={classNames(styles.whiteTextInDarkMode)}>
-                            <FormattedMessage
-                                defaultMessage="Filters"
-                                description="Header text for the filter controls in the asset picker"
-                                id="pm.library.filtersHeader"
-                            />
-                        </h3>
+                        {this.props.actor !== 'ExtensionLibrary' && (
+                            <h3 className={classNames(styles.whiteTextInDarkMode)}>
+                                <FormattedMessage
+                                    defaultMessage="Filters"
+                                    description="Header text for the filter controls in the asset picker"
+                                    id="pm.library.filtersHeader"
+                                />
+                            </h3>
+                        )}
                         {this.props.filterable && (
                             <div>
                                 <Filter
@@ -412,8 +430,9 @@ class LibraryComponent extends React.Component {
                                                 key={`jump-${tagProps.tag}`}
                                                 onClick={() => this.handleJump(tagProps.tag)}
                                             >
+                                                <span className={styles.categoryJumpCount}>{count}</span>
+                                                <span className={styles.categoryJumpBar}>{' | '}</span>
                                                 <span>{tagProps.intlLabel}</span>
-                                                <span className={styles.libraryTagCount}>{count}</span>
                                             </button>
                                         );
                                     }
@@ -477,17 +496,18 @@ class LibraryComponent extends React.Component {
                     </div>
                     <div
                         className={classNames(styles.libraryScrollGrid)}
+                        style={this.props.actor === 'ExtensionLibrary' ? { width: 'auto', minWidth: 0 } : null}
                         ref={this.setFilteredDataRef}
                     >
                         {this.state.loaded ? this.getFilteredData().map((dataItem, index, all) => (
-                            <React.Fragment key={dataItem.extensionId || (typeof dataItem.name === 'string' ? dataItem.name : dataItem.rawURL)}>
+                            <React.Fragment key={(dataItem._group ? 'fav-' : '') + dataItem.extensionId || (typeof dataItem.name === 'string' ? dataItem.name : dataItem.rawURL)}>
                             {this.props.actor === 'ExtensionLibrary' &&
                                 (index === 0 || this.getGroupOf(all[index - 1]) !== this.getGroupOf(dataItem)) && (
                                 <h4
                                     className={classNames(styles.groupHeading, styles.whiteTextInDarkMode)}
                                     data-group={this.getGroupOf(dataItem)}
                                 >
-                                    {(this.props.tags.find(tag => tag.tag === this.getGroupOf(dataItem)) || {}).intlLabel}
+                                    {(this.props.tags.find(tag => tag.tag === this.getGroupOf(dataItem)) || { intlLabel: 'Other' }).intlLabel}
                                 </h4>
                             )}
                             <LibraryItem

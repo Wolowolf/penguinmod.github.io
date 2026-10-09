@@ -4,9 +4,7 @@ import { categories } from './extension-categories.js';
 export default [
     { tag: 'cat_favorites', intlLabel: 'Favorites', type: 'jump' },
     ...categories.map(category => ({ tag: category.tag, intlLabel: category.label, type: 'jump' })),
-    { tag: 'cat_other', intlLabel: 'Other', type: 'jump' },
     { tag: 'divider3', intlLabel: messages.scratch, type: 'divider' },
-    { tag: 'divider1', intlLabel: 'Actions', type: 'title' },
     { tag: 'custom', intlLabel: messages.customextension, type: 'custom', func: (library) => {
         library.select(''); // selects custom extension since it's id is ''
     } },

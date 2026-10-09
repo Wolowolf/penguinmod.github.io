@@ -33,7 +33,7 @@ const getMSFormatted = (ms) => {
 // the author names for the bottom right corner of the picture, one per line (names are separated by commas)
 const getAuthorNames = props => {
     const names = [];
-    for (const value of [props.extDeveloper, props.twDeveloper, props.collaborator, props.eventSubmittor]) {
+    for (const value of [props.extDeveloper, props.twDeveloper, props.collaborator, props.eventSubmittor, props.credits]) {
         if (typeof value !== 'string') continue;
         for (const name of value.split(',')) {
             const trimmed = name.trim();
@@ -99,32 +99,6 @@ class LibraryItemComponent extends React.PureComponent {
                         </div>
                     ) : null}
                 </div>
-                {(this.props.insetIconURL && !this.props.customInsetColor) ? (
-                    <div className={
-                        this.props.twDeveloper ?
-                            classNames(styles.libraryItemInsetImageContainer, styles.twLibraryItemInsetImageContainer)
-                            : styles.libraryItemInsetImageContainer
-                    }
-                    >
-                        <img
-                            className={styles.libraryItemInsetImage}
-                            src={this.props.insetIconURL}
-                            draggable={false}
-                        />
-                    </div>
-                ) : null}
-                {(this.props.insetIconURL && this.props.customInsetColor) ? (
-                    <div className={
-                        styles.libraryItemInsetImageContainerNoBg
-                    }
-                        style={{ backgroundColor: this.props.customInsetColor }}
-                    >
-                        <img
-                            className={styles.libraryItemInsetImage}
-                            src={this.props.insetIconURL}
-                        />
-                    </div>
-                ) : null}
                 {(this.props.favoritable && !this.props.deletable) ? (
                     <button
                         // data-clearclick just makes it so the item
@@ -245,7 +219,6 @@ class LibraryItemComponent extends React.PureComponent {
                 {
                     this.props.bluetoothRequired ||
                         this.props.internetConnectionRequired ||
-                        this.props.credits ||
                         this.props.extraLabels
                         ? (
                             <div className={styles.featuredExtensionMetadata}>
@@ -273,22 +246,6 @@ class LibraryItemComponent extends React.PureComponent {
                                     ) : null}
                                 </div>
                                 <div className={styles.featuredExtensionCollaboration}>
-                                    {this.props.credits ? (
-                                        <div className={styles.smallBottomMargin}>
-                                            <div>
-                                                <FormattedMessage
-                                                    defaultMessage="Credits"
-                                                    description="Text for put credits onto a library item."
-                                                    id="pm.libraryItem.generalCredits"
-                                                />
-                                            </div>
-                                            <div
-                                                className={styles.featuredExtensionMetadataDetail}
-                                            >
-                                                {this.props.credits}
-                                            </div>
-                                        </div>
-                                    ) : null}
                                     {this.props.extraLabels ? this.props.extraLabels.map((label) => (
                                         <div className={styles.smallBottomMargin}>
                                             <div>
