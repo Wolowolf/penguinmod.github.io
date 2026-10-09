@@ -68,6 +68,8 @@ class LibraryComponent extends React.Component {
             'waitForLoading',
             'handleFavoritesUpdate',
             'handleJump',
+            'handleColumnsPointer',
+            'setColumnSliderRef',
             'getGroupOrder',
             'getGroupOf',
             'createFilteredData',
@@ -79,6 +81,7 @@ class LibraryComponent extends React.Component {
             selectedTags: [],
             favorites: [],
             collapsed: false,
+            columns: LibraryComponent.loadColumns(),
             loaded: false,
             data: props.data
         };
@@ -325,6 +328,28 @@ class LibraryComponent extends React.Component {
         const category = (item.tags || []).find(tag => typeof tag === 'string' && tag.startsWith('cat_'));
         return category && this.getGroupOrder().includes(category) ? category : 'cat_other';
     }
+    static loadColumns () {
+        try {
+            const value = parseInt(localStorage.getItem('pm:extension_columns'), 10);
+            if (value >= 2 && value <= 12) return value;
+        } catch (e) { /* storage unavailable */ }
+        return 3;
+    }
+    setColumnSliderRef (ref) {
+        this.columnSliderRef = ref;
+    }
+    handleColumnsPointer (event) {
+        // click, or press and drag across the segments
+        if (event.type === 'pointermove' && event.buttons !== 1) return;
+        const rect = this.columnSliderRef.getBoundingClientRect();
+        const fraction = Math.min(0.999, Math.max(0, (event.clientX - rect.left) / rect.width));
+        const columns = 2 + Math.floor(fraction * 11);
+        if (columns === this.state.columns) return;
+        this.setState({ columns });
+        try {
+            localStorage.setItem('pm:extension_columns', String(columns));
+        } catch (e) { /* storage unavailable */ }
+    }
     handleJump (tag) {
         const grid = this.filteredDataRef;
         const heading = grid && grid.querySelector(`[data-group="${tag}"]`);
@@ -436,6 +461,33 @@ class LibraryComponent extends React.Component {
                                             </button>
                                         );
                                     }
+                                    if (tagProps.type === 'columns') {
+                                        // segmented slider: number of columns of the extension list (2 to 12)
+                                        return (
+                                            <div
+                                                className={classNames(styles.columnSlider, styles.whiteTextInDarkMode)}
+                                                key="columns"
+                                                ref={this.setColumnSliderRef}
+                                                title="Columns"
+                                                onPointerDown={event => {
+                                                    event.currentTarget.setPointerCapture(event.pointerId);
+                                                    this.handleColumnsPointer(event);
+                                                }}
+                                                onPointerMove={this.handleColumnsPointer}
+                                            >
+                                                {Array.from({ length: 11 }, (_, i) => i + 2).map(number => (
+                                                    <div
+                                                        className={classNames(styles.columnSegment, {
+                                                            [styles.columnSegmentActive]: number === this.state.columns
+                                                        })}
+                                                        key={number}
+                                                    >
+                                                        {number}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        );
+                                    }
                                     if (tagProps.type === 'custom') {
                                         onclick = () => {
                                             const api = {};
@@ -496,7 +548,18 @@ class LibraryComponent extends React.Component {
                     </div>
                     <div
                         className={classNames(styles.libraryScrollGrid)}
-                        style={this.props.actor === 'ExtensionLibrary' ? { width: 'auto', minWidth: 0 } : null}
+                        style={this.props.actor === 'ExtensionLibrary' ? {
+                            width: 'auto',
+                            minWidth: 0,
+                            display: 'grid',
+                            gridTemplateColumns: `repeat(${this.state.columns}, minmax(0, 1fr))`,
+                            gridAutoRows: 'max-content',
+                            alignContent: 'start',
+                            alignItems: 'start',
+                            '--ext-tile-max': 'none',
+                            '--ext-tile-text': '100%',
+                            '--ext-img-h': 'auto'
+                        } : null}
                         ref={this.setFilteredDataRef}
                     >
                         {this.state.loaded ? this.getFilteredData().map((dataItem, index, all) => (

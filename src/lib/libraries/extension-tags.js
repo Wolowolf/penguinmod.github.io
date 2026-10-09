@@ -8,4 +8,5 @@ export default [
     { tag: 'custom', intlLabel: messages.customextension, type: 'custom', func: (library) => {
         library.select(''); // selects custom extension since it's id is ''
     } },
+    { tag: 'columns', intlLabel: 'Columns', type: 'columns' }
 ];

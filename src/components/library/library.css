@@ -80,7 +80,33 @@
     white-space: pre;
     opacity: 0.6;
 }
+.column-slider {
+    display: flex;
+    width: 100%;
+    margin-top: 0.75rem;
+    border: 1px solid $motion-transparent;
+    border-radius: 4px;
+    overflow: hidden;
+    user-select: none;
+    touch-action: none;
+    cursor: pointer;
+}
+.column-segment {
+    flex: 1 1 0;
+    padding: 0.35rem 0;
+    font-size: 0.7rem;
+    text-align: center;
+    border-left: 1px solid $motion-transparent;
+}
+.column-segment:first-child {
+    border-left: 0;
+}
+.column-segment-active {
+    background: $motion-primary;
+    color: white;
+}
 .group-heading {
+    grid-column: 1 / -1;
     flex: 0 0 100%;
     margin: 1.25rem 0.5rem 0.25rem;
     padding-bottom: 0.25rem;
