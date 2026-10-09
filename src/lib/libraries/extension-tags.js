@@ -1,4 +1,5 @@
 import messages from './tag-messages.js';
+import { categories } from './extension-categories.js';
 export default [
     { tag: 'penguinmod', intlLabel: messages.penguinmod },
     { tag: 'turbowarp', intlLabel: messages.turbowarp },
@@ -9,16 +10,8 @@ export default [
     { tag: 'twgallery', intlLabel: 'TurboWarp Gallery' },
     { tag: 'spgallery', intlLabel: 'SharkPool\'s Collection' },
     { tag: 'divider2', intlLabel: messages.scratch, type: 'divider' },
-    { tag: 'graphics', intlLabel: messages.graphics },
-    { tag: 'noisemaker', intlLabel: messages.noisemaker },
-    { tag: 'math', intlLabel: messages.math },
-    { tag: 'datamgmt', intlLabel: messages.datamgmt },
-    { tag: 'hardware', intlLabel: messages.hardware },
-    { tag: 'divider2', intlLabel: messages.scratch, type: 'divider' },
-    { tag: 'categoryexpansion', intlLabel: messages.categoryexpansion },
-    { tag: 'programminglanguage', intlLabel: messages.programminglanguage },
-    { tag: 'divider1', intlLabel: messages.scratch, type: 'divider' },
-    { tag: 'extcreate', intlLabel: messages.extcreate },
+    // topic categories
+    ...categories.map(category => ({ tag: category.tag, intlLabel: category.label })),
     { tag: 'divider3', intlLabel: messages.scratch, type: 'divider' },
     { tag: 'divider1', intlLabel: 'Actions', type: 'title' },
     { tag: 'custom', intlLabel: messages.customextension, type: 'custom', func: (library) => {

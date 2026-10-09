@@ -8,6 +8,7 @@ import { manuallyTrustExtension } from './tw-security-manager.jsx';
 
 import extensionLibraryContent from '../lib/libraries/extensions/index.jsx';
 import extensionTags from '../lib/libraries/extension-tags';
+import {categoryTagOf} from '../lib/libraries/extension-categories';
 import loadGalleryExtensions from '../lib/libraries/extensions/galleries.js';
 
 import LibraryComponent from '../components/library/library.jsx';
@@ -240,7 +241,8 @@ class ExtensionLibrary extends React.PureComponent {
                 rawURL: extension.iconURL || extensionIcon,
                 disabled: extension.disabled && !this.props.liveTest,
                 ...extension,
-                tags: extraTags ? (extension.tags || []).concat(extraTags) : extension.tags,
+                tags: (extraTags ? (extension.tags || []).concat(extraTags) : (extension.tags || []))
+                    .concat(categoryTagOf(extension.extensionId) || []),
                 used: !!extension.extensionId &&
                     (used.has(extension.extensionId) || used.has(extension.extensionURL))
             };

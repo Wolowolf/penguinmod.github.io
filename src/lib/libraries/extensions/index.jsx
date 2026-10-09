@@ -112,7 +112,7 @@ const menuItems = [
         iconURL: musicIconURL,
         insetIconURL: musicInsetIconURL,
         customInsetColor: '#CF63CF',
-        tags: ['scratch', 'noisemaker'],
+        tags: ['scratch'],
         description: (
             <FormattedMessage
                 defaultMessage="Play instruments and drums."
@@ -133,7 +133,7 @@ const menuItems = [
         extensionId: 'pen',
         iconURL: penIconURL,
         insetIconURL: penInsetIconURL,
-        tags: ['scratch', 'graphics'],
+        tags: ['scratch'],
         description: (
             <FormattedMessage
                 defaultMessage="Draw with your sprites."
@@ -155,7 +155,7 @@ const menuItems = [
         iconURL: videoSensingIconURL,
         insetIconURL: videoSensingInsetIconURL,
         customInsetColor: '#74BDDC',
-        tags: ['scratch', 'hardware'],
+        tags: ['scratch'],
         description: (
             <FormattedMessage
                 defaultMessage="Sense motion with the camera."
@@ -193,7 +193,7 @@ const menuItems = [
         extensionId: 'https://sharkpools-extensions.vercel.app/extension-code/Files-Expanded.js',
         extDeveloper: 'SharkPool',
         iconURL: filesExtensionIcon,
-        tags: ['turbowarp', 'datamgmt'],
+        tags: ['turbowarp'],
         description: 'Blocks for reading, editing, & creating files & folders.',
         featured: true
     },
@@ -202,7 +202,7 @@ const menuItems = [
         extensionId: 'https://extensions.turbowarp.org/CST1229/zip.js',
         iconURL: 'https://extensions.turbowarp.org/images/CST1229/zip.svg',
         insetIconURL: turbowarpIcon,
-        tags: ['turbowarp', 'datamgmt'],
+        tags: ['turbowarp'],
         description: 'Create and edit .zip format files, including .sb3 files.',
         twDeveloper: 'CST1229',
         featured: true
@@ -211,7 +211,7 @@ const menuItems = [
         name: 'Sound Systems',
         extensionId: 'jgExtendedAudio',
         iconURL: jgExtendedAudioExtensionIcon,
-        tags: ['penguinmod', 'categoryexpansion', 'noisemaker'],
+        tags: ['penguinmod'],
         description: 'An audio grouping system for more intensive audio work.',
         featured: true
     },
@@ -219,7 +219,7 @@ const menuItems = [
         name: 'Tune Shark V3',
         extensionId: 'https://sharkpools-extensions.vercel.app/extension-code/Tune-Shark-V3.js',
         iconURL: sharkpoolTuneIcon,
-        tags: ['penguinmod', 'categoryexpansion', 'noisemaker'],
+        tags: ['penguinmod'],
         description: 'Advanced audio engine with complex sound control, multiple audio effects and more!',
         extDeveloper: 'SharkPool',
         featured: true
@@ -228,7 +228,7 @@ const menuItems = [
         name: 'Sound Waves',
         extensionId: 'https://extensions.penguinmod.com/extensions/SharkPool/Sound-Waves.js',
         iconURL: spSoundWaveIcon,
-        tags: ['penguinmod', 'noisemaker'],
+        tags: ['penguinmod'],
         description: 'Make sounds with oscillators!',
         extDeveloper: 'SharkPool',
         featured: true
@@ -237,7 +237,7 @@ const menuItems = [
         name: 'Motion Expansion',
         extensionId: 'pmMotionExpansion',
         iconURL: pmMotionExpansionExtensionIcon,
-        tags: ['penguinmod', 'categoryexpansion'],
+        tags: ['penguinmod'],
         description: 'More small motion blocks for movement or collision.',
         featured: true,
         credits: 'Some blocks from NexusKitten'
@@ -246,7 +246,7 @@ const menuItems = [
         name: 'Events Expansion',
         extensionId: 'pmEventsExpansion',
         iconURL: pmEventsExpansionExtensionIcon,
-        tags: ['penguinmod', 'categoryexpansion'],
+        tags: ['penguinmod'],
         description: 'More events for sending & receiving information, notifing specific sprites or better control when things should happen.',
         featured: true,
         credits: 'Some blocks from LilyMakesThings'
@@ -255,7 +255,7 @@ const menuItems = [
         name: 'Controls Expansion',
         extensionId: 'pmControlsExpansion',
         iconURL: pmControlsExpansionExtensionIcon,
-        tags: ['penguinmod', 'categoryexpansion'],
+        tags: ['penguinmod'],
         description: 'More control blocks for animations, complex systems or cleaner one-time use blocks.',
         featured: true,
         credits: '"new thread" by CubesterYT, CST1229, SharkPool'
@@ -264,7 +264,7 @@ const menuItems = [
         name: 'Sensing Expansion',
         extensionId: 'pmSensingExpansion',
         iconURL: pmSensingExpansionExtensionIcon,
-        tags: ['penguinmod', 'categoryexpansion'],
+        tags: ['penguinmod'],
         description: "More sensing blocks for specific use cases or interacting with the user's device.",
         credits: 'Some blocks from SharkPool-SP',
         featured: true
@@ -273,7 +273,7 @@ const menuItems = [
         name: 'Operators Expansion',
         extensionId: 'pmOperatorsExpansion',
         iconURL: pmOperatorsExpansionExtensionIcon,
-        tags: ['penguinmod', 'categoryexpansion', 'math'],
+        tags: ['penguinmod'],
         description: 'More operators like nand, nor, character code to character, reading multiple lined text line by line, etc.',
         featured: true
     },
@@ -281,7 +281,7 @@ const menuItems = [
         name: 'My Blocks+',
         extensionId: 'https://sharkpools-extensions.vercel.app/extension-code/My-Blocks-Plus.js',
         iconURL: sharkpoolMBPIcon,
-        tags: ['penguinmod', 'categoryexpansion'],
+        tags: ['penguinmod'],
         description: 'Create private or global custom blocks with custom inputs, colors, and more!',
         extDeveloper: 'SharkPool, CST1229, 0znzw',
         featured: true
@@ -290,7 +290,7 @@ const menuItems = [
         name: 'Better Comments',
         extensionId: 'https://sharkpools-extensions.vercel.app/extension-code/Better-Comments.js',
         iconURL: sharkpoolBCIcon,
-        tags: ['penguinmod', 'categoryexpansion'],
+        tags: ['penguinmod'],
         description: 'Better Comments with Customization and Markdown support',
         extDeveloper: 'SharkPool',
         featured: true
@@ -299,7 +299,7 @@ const menuItems = [
         name: 'Particle Engine',
         extensionId: 'https://sharkpools-extensions.vercel.app/extension-code/Particle-Engine.js',
         iconURL: sharkpoolPEIcon,
-        tags: ['penguinmod', 'graphics'],
+        tags: ['penguinmod'],
         description: 'Create powerful Particle Engines without Clones',
         extDeveloper: 'SharkPool',
         featured: true
@@ -344,7 +344,7 @@ const menuItems = [
     {
         name: 'Clones+',
         extensionId: 'https://extensions.turbowarp.org/Lily/ClonesPlus.js',
-        tags: ['turbowarp', 'categoryexpansion'],
+        tags: ['turbowarp'],
         iconURL: 'https://extensions.turbowarp.org/images/Lily/ClonesPlus.svg',
         insetIconURL: turbowarpIcon,
         description: "Expansion of Scratch's clone features.",
@@ -354,7 +354,7 @@ const menuItems = [
     {
         name: 'Turbo Skins',
         extensionId: 'https://sharkpools-extensions.vercel.app/extension-code/Turbo-Skins.js',
-        tags: ['penguinmod', 'graphics'],
+        tags: ['penguinmod'],
         iconURL: spTurboSkinsIcon,
         description: 'Display sprites with various images or costumes and control their hitboxes',
         extraLabels: [
@@ -370,7 +370,7 @@ const menuItems = [
         name: 'SharkPool\'s Temporary Variables',
         extensionId: 'https://sharkpools-extensions.vercel.app/extension-code/Temporary-Variables.js',
         iconURL: spTempVarsIcon,
-        tags: ['penguinmod', 'datamgmt'],
+        tags: ['penguinmod'],
         description: 'Create temporary runtime, threaded, sprite & scoped variables.',
         featured: true
     },
@@ -378,7 +378,7 @@ const menuItems = [
         name: 'Swift JSON',
         extensionId: 'https://sharkpools-extensions.vercel.app/extension-code/JSON-Array.js',
         iconURL: spJSONExtensionIcon,
-        tags: ['penguinmod', 'datamgmt'],
+        tags: ['penguinmod'],
         extDeveloper: 'SharkPool',
         description: 'FAST Extension for handling JSON objects and arrays efficiently. Recommended if you are heavily using JSON several times in a project.',
         featured: true
@@ -407,7 +407,7 @@ const menuItems = [
         name: 'Scripts',
         extensionId: 'jgScripts',
         iconURL: jgScriptsExtensionIcon,
-        tags: ['penguinmod', 'datamgmt'],
+        tags: ['penguinmod'],
         description: 'Create compiled scripts with blocks while the project is running.',
         featured: true
     },
@@ -424,7 +424,7 @@ const menuItems = [
         name: '3D Math',
         extensionId: 'https://extensions.penguinmod.com/extensions/ObviousAlexC/3DMath.js',
         iconURL: 'https://extensions.penguinmod.com/images/ObviousAlexC/3DMath.svg',
-        tags: ['penguinmod', '3d', 'graphics', 'math'],
+        tags: ['penguinmod', '3d'],
         description: 'A handful of utilities for making your own sprite-based 3D engine.',
         extDeveloper: 'pinksheep2917',
         featured: true
@@ -442,7 +442,7 @@ const menuItems = [
         name: 'LZ Compress',
         extensionId: 'shovellzcompresss',
         iconURL: theshovelLzCompressIcon,
-        tags: ['penguinmod', 'datamgmt'],
+        tags: ['penguinmod'],
         description: 'Compress and decompress text using lz-string.',
         extDeveloper: 'TheShovel',
         featured: true
@@ -450,7 +450,7 @@ const menuItems = [
     {
         name: 'Prism',
         extensionId: 'jgPrism',
-        tags: ['penguinmod', 'datamgmt'],
+        tags: ['penguinmod'],
         iconURL: jgPrismExtensionIcon,
         description: 'Blocks for specific use-cases or major convenience.',
         featured: true
@@ -507,7 +507,7 @@ const menuItems = [
     },
     {
         name: 'Printing',
-        tags: ['penguinmod', 'hardware'],
+        tags: ['penguinmod'],
         extensionId: 'sharkpoolPrinting',
         iconURL: sharkpoolPrintingIcon,
         description: 'Allows you to show a dialog for printing text, images, and custom HTML to a printer.',
@@ -517,7 +517,7 @@ const menuItems = [
         name: 'Clipping and Blending',
         extensionId: 'https://extensions.turbowarp.org/Xeltalliv/clippingblending.js',
         iconURL: clippingblending,
-        tags: ['turbowarp', 'graphics'],
+        tags: ['turbowarp'],
         insetIconURL: turbowarpIcon,
         description: 'Clipping outside of a specified rectangular area and additive color blending.',
         featured: true,
@@ -561,7 +561,7 @@ const menuItems = [
         name: 'JavaScript',
         extensionId: 'SPjavascriptV2',
         iconURL: jgJavascriptExtensionIcon,
-        tags: ['penguinmod', 'programminglanguage'],
+        tags: ['penguinmod'],
         description: 'Run your own custom code written in JavaScript!',
         featured: true
     },
@@ -569,7 +569,7 @@ const menuItems = [
         name: 'Arrays',
         extensionId: 'jwArray',
         iconURL: jwArrayExtensionThumb,
-        tags: ['penguinmod', 'datamgmt'],
+        tags: ['penguinmod'],
         description: 'Store data efficiently in multi-purpose arrays.',
         extDeveloper: 'jwklong',
         featured: true
@@ -578,7 +578,7 @@ const menuItems = [
         name: 'Objects',
         extensionId: 'https://extensions.penguinmod.com/extensions/DogeisCut/dogeiscutObject.js',
         iconURL: 'https://extensions.penguinmod.com/images/DogeisCut/dogeiscutObject.svg',
-        tags: ['penguinmod', 'datamgmt'],
+        tags: ['penguinmod'],
         description: 'Store data efficiently in multi-purpose objects.',
         extDeveloper: 'DogeisCut',
         featured: true
@@ -587,7 +587,7 @@ const menuItems = [
         name: 'XML',
         extensionId: 'jwXML',
         iconURL: jwXMLExtensionIcon,
-        tags: ['penguinmod', 'datamgmt'],
+        tags: ['penguinmod'],
         description: 'Creating, parsing and modifying XML data.',
         extDeveloper: 'jwklong',
         featured: true
@@ -605,7 +605,7 @@ const menuItems = [
         name: 'Color',
         extensionId: 'jwColor',
         iconURL: jwColorExtensionThumb,
-        tags: ['penguinmod', 'graphics'],
+        tags: ['penguinmod'],
         description: 'Utilities for anything involving colors.',
         extDeveloper: 'jwklong',
         featured: true
@@ -614,7 +614,7 @@ const menuItems = [
         name: 'Vector',
         extensionId: 'jwVector',
         iconURL: jwVectorExtensionThumb,
-        tags: ['penguinmod', 'math'],
+        tags: ['penguinmod'],
         description: 'Vector type for calculating with X and Y coordinates.',
         extDeveloper: 'jwklong',
         featured: true
@@ -641,7 +641,7 @@ const menuItems = [
         name: 'Pointers',
         extensionId: 'jwPointer',
         iconURL: jwPointerExtensionThumb,
-        tags: ['penguinmod', 'datamgmt'],
+        tags: ['penguinmod'],
         description: 'Define references to values. (extra blocks if used with Array extension)',
         extDeveloper: 'jwklong',
         featured: true
