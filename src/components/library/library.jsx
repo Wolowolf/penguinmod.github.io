@@ -286,6 +286,23 @@ class LibraryComponent extends React.Component {
                 tags.push(name.toLowerCase());
             }
 
+            if (this.props.actor === "ExtensionLibrary") {
+                // the extension library searches what the tile shows (the tags are only internal)
+                const text = value => {
+                    if (typeof value === "string") return value;
+                    if (value && value.props && value.props.defaultMessage) {
+                        return this.props.intl.formatMessage(value.props);
+                    }
+                    return "";
+                };
+                tags = [
+                    name ? name.toLowerCase() : "",
+                    text(dataItem.description).toLowerCase(),
+                    text(dataItem.extDeveloper).toLowerCase(),
+                    text(dataItem.credits).toLowerCase()
+                ];
+            }
+
             tags = tags.join("\n");
 
             const query = this.state.filterQuery.toLowerCase();
@@ -331,7 +348,7 @@ class LibraryComponent extends React.Component {
     static loadColumns () {
         try {
             const value = parseInt(localStorage.getItem('pm:extension_columns'), 10);
-            if (value >= 2 && value <= 12) return value;
+            if (value >= 2) return Math.min(value, 8);
         } catch (e) { /* storage unavailable */ }
         return 3;
     }
@@ -343,7 +360,7 @@ class LibraryComponent extends React.Component {
         if (event.type === 'pointermove' && event.buttons !== 1) return;
         const rect = this.columnSliderRef.getBoundingClientRect();
         const fraction = Math.min(0.999, Math.max(0, (event.clientX - rect.left) / rect.width));
-        const columns = 2 + Math.floor(fraction * 11);
+        const columns = 2 + Math.floor(fraction * 7);
         if (columns === this.state.columns) return;
         this.setState({ columns });
         try {
@@ -462,7 +479,7 @@ class LibraryComponent extends React.Component {
                                         );
                                     }
                                     if (tagProps.type === 'columns') {
-                                        // segmented slider: number of columns of the extension list (2 to 12)
+                                        // segmented slider: number of columns of the extension list (2 to 8)
                                         return (
                                             <div
                                                 className={classNames(styles.columnSlider, styles.whiteTextInDarkMode)}
@@ -475,7 +492,7 @@ class LibraryComponent extends React.Component {
                                                 }}
                                                 onPointerMove={this.handleColumnsPointer}
                                             >
-                                                {Array.from({ length: 11 }, (_, i) => i + 2).map(number => (
+                                                {Array.from({ length: 7 }, (_, i) => i + 2).map(number => (
                                                     <div
                                                         className={classNames(styles.columnSegment, {
                                                             [styles.columnSegmentActive]: number === this.state.columns

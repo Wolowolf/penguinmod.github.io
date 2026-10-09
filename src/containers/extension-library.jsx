@@ -250,7 +250,7 @@ class ExtensionLibrary extends React.PureComponent {
         return (
             <LibraryComponent
                 data={extensionLibraryThumbnailData}
-                filterable={false}
+                filterable={true}
                 tags={extensionTags}
                 id="extensionLibrary"
                 actor="ExtensionLibrary"
