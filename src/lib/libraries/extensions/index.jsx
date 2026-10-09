@@ -18,7 +18,6 @@ import faceSensingIconURL from './faceSensing/thumb.png';
 import customExtensionIcon from './custom/custom.svg';
 import turbowarpIcon from './penguinmod/extensions/turbowarp_icon.svg';
 
-import ExtForgeIcon from './penguinmod/extforge.svg';
 
 import filesExtensionIcon from './penguinmod/extensions/files.svg';
 import jgTweenExtensionIcon from './penguinmod/extensions/tween.svg';
@@ -645,18 +644,6 @@ const menuItems = [
         tags: ['penguinmod', 'datamgmt'],
         description: 'Define references to values. (extra blocks if used with Array extension)',
         extDeveloper: 'jwklong',
-        featured: true
-    },
-    {
-        // not really an extension, but it's easiest to present it as one
-        name: 'ExtForge',
-        href: 'https://jwklong.github.io/extforge',
-        extensionId: 'special_extforge',
-        iconURL: ExtForgeIcon,
-        description: 'Create extensions with a block-based UI.',
-        extDeveloper: 'jwklong',
-        isNew: true,
-        tags: ['extcreate'],
         featured: true
     },
     {
