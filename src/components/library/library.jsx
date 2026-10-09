@@ -67,6 +67,9 @@ class LibraryComponent extends React.Component {
             'loadLibraryFavorites',
             'waitForLoading',
             'handleFavoritesUpdate',
+            'handleJump',
+            'getGroupOrder',
+            'getGroupOf',
             'createFilteredData',
             'getFilteredData'
         ]);
@@ -294,12 +297,28 @@ class LibraryComponent extends React.Component {
             return filtered;
         }
 
-        const fully_filtered = [].concat(
-            filtered.filter(item => (this.state.favorites.includes(item.extensionId))),
-            filtered.filter(item => (!this.state.favorites.includes(item.extensionId)))
-        ).map(item => Object.assign(item, { custom: !!item.custom }));
-
-        return fully_filtered;
+        // one long list: favorites first, then the topic categories in order, then the rest
+        const order = this.getGroupOrder();
+        const withGroup = filtered.map(item => Object.assign(item, { custom: !!item.custom }));
+        return withGroup
+            .map((item, index) => ({ item, index, rank: order.indexOf(this.getGroupOf(item)) }))
+            .sort((a, b) => (a.rank - b.rank) || (a.index - b.index))
+            .map(entry => entry.item);
+    }
+    getGroupOrder () {
+        return (this.props.tags || []).filter(tag => tag.type === 'jump').map(tag => tag.tag);
+    }
+    getGroupOf (item) {
+        if (item.custom || this.state.favorites.includes(item.extensionId)) return 'cat_favorites';
+        const category = (item.tags || []).find(tag => typeof tag === 'string' && tag.startsWith('cat_'));
+        return category && this.getGroupOrder().includes(category) ? category : 'cat_other';
+    }
+    handleJump (tag) {
+        const grid = this.filteredDataRef;
+        const heading = grid && grid.querySelector(`[data-group="${tag}"]`);
+        if (!heading) return;
+        const top = heading.getBoundingClientRect().top - grid.getBoundingClientRect().top + grid.scrollTop;
+        grid.scrollTo({ top: Math.max(0, top - 8), behavior: 'smooth' });
     }
     scrollToTop () {
         this.filteredDataRef.scrollTop = 0;
@@ -381,6 +400,23 @@ class LibraryComponent extends React.Component {
                                     if (tagProps.type === 'subtitle') {
                                         return (<h5 className={classNames(styles.whiteTextInDarkMode)}>{tagProps.intlLabel}</h5>);
                                     }
+                                    if (tagProps.type === 'jump') {
+                                        // a shortcut to that category's heading in the list
+                                        if (!this.state.loaded) return null;
+                                        const count = this.getFilteredData()
+                                            .filter(item => this.getGroupOf(item) === tagProps.tag).length;
+                                        if (count === 0) return null;
+                                        return (
+                                            <button
+                                                className={classNames(styles.categoryJump, styles.whiteTextInDarkMode)}
+                                                key={`jump-${tagProps.tag}`}
+                                                onClick={() => this.handleJump(tagProps.tag)}
+                                            >
+                                                <span>{tagProps.intlLabel}</span>
+                                                <span className={styles.libraryTagCount}>{count}</span>
+                                            </button>
+                                        );
+                                    }
                                     if (tagProps.type === 'custom') {
                                         onclick = () => {
                                             const api = {};
@@ -443,7 +479,17 @@ class LibraryComponent extends React.Component {
                         className={classNames(styles.libraryScrollGrid)}
                         ref={this.setFilteredDataRef}
                     >
-                        {this.state.loaded ? this.getFilteredData().map((dataItem, index) => (
+                        {this.state.loaded ? this.getFilteredData().map((dataItem, index, all) => (
+                            <React.Fragment key={dataItem.extensionId || (typeof dataItem.name === 'string' ? dataItem.name : dataItem.rawURL)}>
+                            {this.props.actor === 'ExtensionLibrary' &&
+                                (index === 0 || this.getGroupOf(all[index - 1]) !== this.getGroupOf(dataItem)) && (
+                                <h4
+                                    className={classNames(styles.groupHeading, styles.whiteTextInDarkMode)}
+                                    data-group={this.getGroupOf(dataItem)}
+                                >
+                                    {(this.props.tags.find(tag => tag.tag === this.getGroupOf(dataItem)) || {}).intlLabel}
+                                </h4>
+                            )}
                             <LibraryItem
                                 bluetoothRequired={dataItem.bluetoothRequired}
                                 collaborator={dataItem.collaborator}
@@ -489,6 +535,7 @@ class LibraryComponent extends React.Component {
                                 onFavoriteUpdated={() => this.handleFavoritesUpdate()}
                                 _unsandboxed={dataItem._unsandboxed}
                             />
+                            </React.Fragment>
                         )) : (
                             <div className={styles.spinnerWrapper}>
                                 <Spinner
