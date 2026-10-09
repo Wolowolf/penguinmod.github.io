@@ -30,6 +30,19 @@ const getMSFormatted = (ms) => {
 };
 
 /* eslint-disable react/prefer-stateless-function */
+// the author names for the bottom right corner of the picture, one per line (names are separated by commas)
+const getAuthorNames = props => {
+    const names = [];
+    for (const value of [props.extDeveloper, props.twDeveloper, props.collaborator, props.eventSubmittor]) {
+        if (typeof value !== 'string') continue;
+        for (const name of value.split(',')) {
+            const trimmed = name.trim();
+            if (trimmed && !names.includes(trimmed)) names.push(trimmed);
+        }
+    }
+    return names;
+};
+
 class LibraryItemComponent extends React.PureComponent {
     render() {
         return this.props.featured ? (
@@ -78,6 +91,13 @@ class LibraryItemComponent extends React.PureComponent {
                         draggable={false}
                         src={this.props.iconURL}
                     />
+                    {getAuthorNames(this.props).length > 0 ? (
+                        <div className={styles.featuredAuthors}>
+                            {getAuthorNames(this.props).map(name => (
+                                <div key={name}>{name}</div>
+                            ))}
+                        </div>
+                    ) : null}
                 </div>
                 {(this.props.insetIconURL && !this.props.customInsetColor) ? (
                     <div className={
@@ -225,11 +245,8 @@ class LibraryItemComponent extends React.PureComponent {
                 {
                     this.props.bluetoothRequired ||
                         this.props.internetConnectionRequired ||
-                        this.props.collaborator ||
-                        this.props.extDeveloper ||
-                        this.props.twDeveloper ||
-                        this.props.eventSubmittor ||
-                        this.props.credits
+                        this.props.credits ||
+                        this.props.extraLabels
                         ? (
                             <div className={styles.featuredExtensionMetadata}>
                                 <div className={styles.featuredExtensionRequirement}>
@@ -256,70 +273,6 @@ class LibraryItemComponent extends React.PureComponent {
                                     ) : null}
                                 </div>
                                 <div className={styles.featuredExtensionCollaboration}>
-                                    {this.props.collaborator ? (
-                                        <div className={styles.smallBottomMargin}>
-                                            <div>
-                                                <FormattedMessage
-                                                    defaultMessage="Collaboration with"
-                                                    description="Label for extension collaboration"
-                                                    id="gui.extensionLibrary.collaboration"
-                                                />
-                                            </div>
-                                            <div
-                                                className={styles.featuredExtensionMetadataDetail}
-                                            >
-                                                {this.props.collaborator}
-                                            </div>
-                                        </div>
-                                    ) : null}
-                                    {this.props.twDeveloper ? (
-                                        <div className={styles.smallBottomMargin}>
-                                            <div>
-                                                <FormattedMessage
-                                                    defaultMessage="Originally for TurboWarp by"
-                                                    description="Text for crediting that an extension was originally made for turbowarp, and who has made it."
-                                                    id="pm.libraryItem.turbowarpDeveloperCredits"
-                                                />
-                                            </div>
-                                            <div
-                                                className={styles.featuredExtensionMetadataDetail}
-                                            >
-                                                {this.props.twDeveloper}
-                                            </div>
-                                        </div>
-                                    ) : null}
-                                    {this.props.extDeveloper ? (
-                                        <div className={styles.smallBottomMargin}>
-                                            <div>
-                                                <FormattedMessage
-                                                    defaultMessage="created by"
-                                                    description="Text for crediting an extensions creator."
-                                                    id="pm.libraryItem.extensionCredits"
-                                                />
-                                            </div>
-                                            <div
-                                                className={styles.featuredExtensionMetadataDetail}
-                                            >
-                                                {this.props.extDeveloper}
-                                            </div>
-                                        </div>
-                                    ) : null}
-                                    {this.props.eventSubmittor ? (
-                                        <div className={styles.smallBottomMargin}>
-                                            <div>
-                                                <FormattedMessage
-                                                    defaultMessage="event submission by"
-                                                    description="Text for crediting who made a submission for an event."
-                                                    id="pm.libraryItem.eventSubmissionCredits"
-                                                />
-                                            </div>
-                                            <div
-                                                className={styles.featuredExtensionMetadataDetail}
-                                            >
-                                                {this.props.eventSubmittor}
-                                            </div>
-                                        </div>
-                                    ) : null}
                                     {this.props.credits ? (
                                         <div className={styles.smallBottomMargin}>
                                             <div>
