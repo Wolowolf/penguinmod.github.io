@@ -12,42 +12,7 @@ import penInsetIconURL from './pen/pen-small.svg';
 import videoSensingIconURL from './videoSensing/video-sensing.png';
 import videoSensingInsetIconURL from './videoSensing/video-sensing-small.svg';
 
-
-
-import makeymakeyIconURL from './makeymakey/makeymakey.png';
-import makeymakeyInsetIconURL from './makeymakey/makeymakey-small.svg';
-
-import animatedTextIconURL from './penguinmod/extensions/text extension.png';
-import animatedTextInsetIconURL from './penguinmod/extensions/text extension small.svg';
-
-import microbitIconURL from './microbit/microbit.png';
-import microbitInsetIconURL from './microbit/microbit-small.svg';
-import microbitConnectionIconURL from './microbit/microbit-illustration.svg';
-import microbitConnectionSmallIconURL from './microbit/microbit-small.svg';
-
-import ev3IconURL from './ev3/ev3.png';
-import ev3InsetIconURL from './ev3/ev3-small.svg';
-import ev3ConnectionIconURL from './ev3/ev3-hub-illustration.svg';
-import ev3ConnectionSmallIconURL from './ev3/ev3-small.svg';
-
 import faceSensingIconURL from './faceSensing/thumb.png';
-
-import wedo2IconURL from './wedo2/wedo.png'; // TODO: Rename file names to match variable/prop names?
-import wedo2InsetIconURL from './wedo2/wedo-small.svg';
-import wedo2ConnectionIconURL from './wedo2/wedo-illustration.svg';
-import wedo2ConnectionSmallIconURL from './wedo2/wedo-small.svg';
-import wedo2ConnectionTipIconURL from './wedo2/wedo-button-illustration.svg';
-
-import boostIconURL from './boost/boost.png';
-import boostInsetIconURL from './boost/boost-small.svg';
-import boostConnectionIconURL from './boost/boost-illustration.svg';
-import boostConnectionSmallIconURL from './boost/boost-small.svg';
-import boostConnectionTipIconURL from './boost/boost-button-illustration.svg';
-
-import gdxforIconURL from './gdxfor/gdxfor.png';
-import gdxforInsetIconURL from './gdxfor/gdxfor-small.svg';
-import gdxforConnectionIconURL from './gdxfor/gdxfor-illustration.svg';
-import gdxforConnectionSmallIconURL from './gdxfor/gdxfor-small.svg';
 
 // turbowarp & gallery icons
 import twIcon from './tw/tw.svg';
@@ -70,14 +35,12 @@ import jwStructsExtensionIcon from './penguinmod/extensions/ooplogo.png';
 
 import jwArrayExtensionThumb from './penguinmod/extensions/jwArray.svg';
 import jwTargetsExtensionThumb from './penguinmod/extensions/jwTargets.svg';
-import jwNumExtensionThumb from './penguinmod/extensions/jwNum.svg';
 import jwColorExtensionThumb from './penguinmod/extensions/jwColor.svg';
 import jwVectorExtensionThumb from './penguinmod/extensions/jwVector.svg';
 import jwLambdaExtensionThumb from './penguinmod/extensions/jwLambda.svg';
 import jwScopeExtensionThumb from './penguinmod/extensions/jwScope.svg';
 import jwXMLExtensionIcon from './penguinmod/extensions/jwXML.svg';
 import jwPointerExtensionThumb from './penguinmod/extensions/jwPointer.svg';
-import jwIntExtensionThumb from './penguinmod/extensions/jwInt.svg';
 
 import iygPerlinNoiseExtensionIcon from './penguinmod/extensions/perlinnoisebanner.png';
 
@@ -96,17 +59,14 @@ import canvasExtensionIcon from './penguinmod/extensions/CanvasSmall.png';
 import griffpatchPhysicsThumb from './penguinmod/extensions/griffpatch_physics.png';
 import griffpatchPhysicsIcon from './penguinmod/extensions/griffpatch_physicsIcon.svg';
 
-import gp from './penguinmod/extensions/gamepad.svg';
 import clippingblending from './penguinmod/extensions/clippingblending.svg';
 
 import pointerlockThumb from './penguinmod/extensions/pointerlock.png';
 import cursorThumb from './penguinmod/extensions/cursor.svg';
 
 // LilyMakesThings 🙏
-import lilyTempVariablesExtensionIcon from './penguinmod/orgtw/TempVariables2.svg';
 
 // more icons so they arent just red when the extension color is not red
-import gsaTempVariablesExtensionIcon from './penguinmod/extensions/tempvariables.svg';
 import jgIframeExtensionIcon from './penguinmod/extensions/iframe.png';
 import jgExtendedAudioExtensionIcon from './penguinmod/extensions/extendedaudio.png';
 import jgPermissionExtensionIcon from './penguinmod/extensions/permissions.png';
@@ -143,12 +103,10 @@ import sharkpoolBCIcon from './penguinmod/extensions/BetterComments.svg';
 import sharkpoolPEIcon from './penguinmod/extensions/particleEngine.svg';
 import jgScriptsExtensionIcon from './penguinmod/extensions/scripts.svg';
 import spTurboSkinsIcon from './penguinmod/extensions/turboSkins.svg';
-import spFontManagerIcon from './penguinmod/extensions/fontManager.svg';
 import spSoundWaveIcon from './penguinmod/extensions/soundWaves.svg';
 import spTempVarsIcon from './penguinmod/extensions/sp_tempVars.svg';
 
 // events
-import jgTimersExtensionIcon from './penguinmod/extensions/multipletimers.png';
 import jgAdvancedTextExtensionIcon from './penguinmod/extensions/advancedtext.png';
 
 import jgJavascriptExtensionIcon from './penguinmod/extensions/javascript.png';
@@ -169,7 +127,6 @@ import turboBuilderDevIcon from './penguinmod/turbobuilder-dev.png';
 
 import silvxrcatOddMessagesExtensionIcon from './penguinmod/extensions/oddmessages.svg';
 import gsaColorUtilExtensionIcon from './penguinmod/extensions/colorutil.png';
-import jgJSONExtensionIcon from './penguinmod/extensions/json.png';
 */
 
 // default icon if one is not made yet...
@@ -224,16 +181,6 @@ const menuItems = [
         featured: true
     },
     {
-        name: 'Animated Text',
-        extensionId: 'text',
-        iconURL: animatedTextIconURL,
-        insetIconURL: animatedTextInsetIconURL,
-        customInsetColor: '#9A66FF',
-        tags: ['scratch'],
-        description: 'Bring words to life.',
-        featured: true
-    },
-    {
         name: (
             <FormattedMessage
                 defaultMessage="Video Sensing"
@@ -261,23 +208,6 @@ const menuItems = [
         iconURL: faceSensingIconURL,
         tags: ['scratch'],
         description: 'Sense faces with the camera.',
-        featured: true
-    },
-    {
-        name: 'Makey Makey',
-        extensionId: 'makeymakey',
-        collaborator: 'JoyLabz',
-        iconURL: makeymakeyIconURL,
-        insetIconURL: makeymakeyInsetIconURL,
-        customInsetColor: '#E64D00',
-        tags: ['scratch', 'hardware'],
-        description: (
-            <FormattedMessage
-                defaultMessage="Make anything into a key."
-                description="Description for the 'Makey Makey' extension"
-                id="gui.extension.makeymakey.description"
-            />
-        ),
         featured: true
     },
     {
@@ -313,15 +243,6 @@ const menuItems = [
         description: 'Create and edit .zip format files, including .sb3 files.',
         twDeveloper: 'CST1229',
         featured: true
-    },
-    {
-        name: 'Pen+',
-        extensionId: 'https://extensions.penguinmod.com/extensions/ObviousAlexC/PenPlus.js',
-        tags: ['categoryexpansion', 'graphics'],
-        iconURL: 'https://extensions.penguinmod.com/images/ObviousAlexC/PenPlus.svg',
-        description: 'An extension to the Pen category! Adds blocks for drawing triangles using textures and tints, drawing images and editing their pixels, etc.',
-        featured: true,
-        extDeveloper: 'pinksheep2917'
     },
     {
         name: 'Sound Systems',
@@ -502,38 +423,11 @@ const menuItems = [
         credits: 'SharkPool'
     },
     {
-        name: 'Multiple Timers',
-        extensionId: 'jgTimers',
-        iconURL: jgTimersExtensionIcon,
-        tags: ['penguinmod'],
-        description: 'Create different timers you can control seperately.',
-        eventSubmittor: 'Arrow',
-        featured: true
-    },
-    {
-        name: 'Temporary Variables',
-        extensionId: 'tempVars',
-        iconURL: gsaTempVariablesExtensionIcon,
-        tags: ['penguinmod'],
-        description: 'Create temporary variables for use in one block stack.',
-        featured: true
-    },
-    {
         name: 'SharkPool\'s Temporary Variables',
         extensionId: 'https://sharkpools-extensions.vercel.app/extension-code/Temporary-Variables.js',
         iconURL: spTempVarsIcon,
         tags: ['penguinmod', 'datamgmt'],
         description: 'Create temporary runtime, threaded, sprite & scoped variables.',
-        featured: true
-    },
-    {
-        name: 'TurboWarp Temporary Variables',
-        extensionId: 'lmsTempVars2',
-        iconURL: lilyTempVariablesExtensionIcon,
-        tags: ['turbowarp'],
-        description: 'Create disposable runtime or thread variables.',
-        insetIconURL: turbowarpIcon,
-        credits: 'LilyMakesThings',
         featured: true
     },
     {
@@ -555,15 +449,6 @@ const menuItems = [
         featured: true
     },
     {
-        name: 'Font Manager',
-        extensionId: 'https://extensions.penguinmod.com/extensions/SharkPool/Font-Manager.js',
-        iconURL: spFontManagerIcon,
-        tags: ['penguinmod', 'graphics'],
-        description: 'Manage, create, and delete fonts.',
-        credits: 'SharkPool, Ashimee',
-        featured: true
-    },
-    {
         name: 'HTTP',
         extensionId: 'https://extensions.turbowarp.org/godslayerakp/http.js',
         iconURL: 'https://extensions.turbowarp.org/images/godslayerakp/http.svg',
@@ -573,17 +458,6 @@ const menuItems = [
         featured: true,
         internetConnectionRequired: true,
         customInsetColor: '#ff4d4d'
-    },
-    {
-        name: 'CloudLink',
-        extensionId: 'https://extensions.penguinmod.com/extensions/MikeDev101/cloudlink.js',
-        tags: ['turbowarp', 'penguinmod'],
-        insetIconURL: cloudlinkIcon,
-        iconURL: 'https://extensions.penguinmod.com/images/MikeDev101/cloudlink.svg',
-        description: 'A powerful WebSocket extension for Scratch.',
-        featured: true,
-        extDeveloper: 'MikeDev',
-        internetConnectionRequired: true
     },
     {
         name: 'Scripts',
@@ -697,22 +571,6 @@ const menuItems = [
         featured: true
     },
     {
-        name: 'GamePad',
-        extensionId: 'Gamepad',
-        tags: ['turbowarp', 'hardware'],
-        insetIconURL: turbowarpIcon,
-        twDeveloper: 'GarboMuffin',
-        iconURL: gp,
-        description: (
-            <FormattedMessage
-                defaultMessage="Directly access gamepads instead of just mapping buttons to keys."
-                description="Description for the 'GamePad' extension"
-                id="GamepadExtension.GamepadExtension.description"
-            />
-        ),
-        featured: true
-    },
-    {
         name: 'Printing',
         tags: ['penguinmod', 'hardware'],
         extensionId: 'sharkpoolPrinting',
@@ -809,16 +667,6 @@ const menuItems = [
         featured: true
     },
     {
-        name: 'Infinity',
-        extensionId: 'jwNum',
-        iconURL: jwNumExtensionThumb,
-        tags: ['penguinmod', 'math'],
-        description: 'Advanced number type capable of really big numbers.',
-        extDeveloper: 'jwklong',
-        credits: 'Naruyoko for ExpantaNum.js',
-        featured: true
-    },
-    {
         name: 'Color',
         extensionId: 'jwColor',
         iconURL: jwColorExtensionThumb,
@@ -864,176 +712,6 @@ const menuItems = [
         featured: true
     },
     {
-        name: 'Integers',
-        extensionId: 'jwInt',
-        iconURL: jwIntExtensionThumb,
-        tags: ['penguinmod', 'math'],
-        description: 'Large integers with zero precision loss.',
-        extDeveloper: 'jwklong',
-        featured: true
-    },
-    {
-        name: 'micro:bit',
-        extensionId: 'microbit',
-        collaborator: 'micro:bit',
-        iconURL: microbitIconURL,
-        insetIconURL: microbitInsetIconURL,
-        tags: ['scratch', 'hardware'],
-        description: (
-            <FormattedMessage
-                defaultMessage="Connect your projects with the world."
-                description="Description for the 'micro:bit' extension"
-                id="gui.extension.microbit.description"
-            />
-        ),
-        featured: true,
-        disabled: false,
-        bluetoothRequired: true,
-        internetConnectionRequired: true,
-        launchPeripheralConnectionFlow: true,
-        useAutoScan: false,
-        connectionIconURL: microbitConnectionIconURL,
-        connectionSmallIconURL: microbitConnectionSmallIconURL,
-        connectingMessage: (
-            <FormattedMessage
-                defaultMessage="Connecting"
-                description="Message to help people connect to their micro:bit."
-                id="gui.extension.microbit.connectingMessage"
-            />
-        ),
-        helpLink: 'https://scratch.mit.edu/microbit'
-    },
-    {
-        name: 'LEGO MINDSTORMS EV3',
-        extensionId: 'ev3',
-        collaborator: 'LEGO',
-        iconURL: ev3IconURL,
-        insetIconURL: ev3InsetIconURL,
-        tags: ['scratch', 'hardware'],
-        description: (
-            <FormattedMessage
-                defaultMessage="Build interactive robots and more."
-                description="Description for the 'LEGO MINDSTORMS EV3' extension"
-                id="gui.extension.ev3.description"
-            />
-        ),
-        featured: true,
-        disabled: false,
-        bluetoothRequired: true,
-        internetConnectionRequired: true,
-        launchPeripheralConnectionFlow: true,
-        useAutoScan: false,
-        connectionIconURL: ev3ConnectionIconURL,
-        connectionSmallIconURL: ev3ConnectionSmallIconURL,
-        customInsetColor: '#FFBF00',
-        connectingMessage: (
-            <FormattedMessage
-                defaultMessage="Connecting. Make sure the pin on your EV3 is set to 1234."
-                description="Message to help people connect to their EV3. Must note the PIN should be 1234."
-                id="gui.extension.ev3.connectingMessage"
-            />
-        ),
-        helpLink: 'https://scratch.mit.edu/ev3'
-    },
-    {
-        name: 'LEGO BOOST',
-        extensionId: 'boost',
-        collaborator: 'LEGO',
-        iconURL: boostIconURL,
-        insetIconURL: boostInsetIconURL,
-        tags: ['scratch', 'hardware'],
-        description: (
-            <FormattedMessage
-                defaultMessage="Bring robotic creations to life."
-                description="Description for the 'LEGO BOOST' extension"
-                id="gui.extension.boost.description"
-            />
-        ),
-        featured: true,
-        disabled: false,
-        bluetoothRequired: true,
-        internetConnectionRequired: true,
-        launchPeripheralConnectionFlow: true,
-        useAutoScan: true,
-        connectionIconURL: boostConnectionIconURL,
-        connectionSmallIconURL: boostConnectionSmallIconURL,
-        connectionTipIconURL: boostConnectionTipIconURL,
-        customInsetColor: '#FFAB19',
-        connectingMessage: (
-            <FormattedMessage
-                defaultMessage="Connecting"
-                description="Message to help people connect to their BOOST."
-                id="gui.extension.boost.connectingMessage"
-            />
-        ),
-        helpLink: 'https://scratch.mit.edu/boost'
-    },
-    {
-        name: 'LEGO Education WeDo 2.0',
-        extensionId: 'wedo2',
-        collaborator: 'LEGO',
-        iconURL: wedo2IconURL,
-        insetIconURL: wedo2InsetIconURL,
-        description: (
-            <FormattedMessage
-                defaultMessage="Build with motors and sensors."
-                description="Description for the 'LEGO WeDo 2.0' extension"
-                id="gui.extension.wedo2.description"
-            />
-        ),
-        featured: true,
-        disabled: false,
-        tags: ['scratch', 'hardware'],
-        bluetoothRequired: true,
-        internetConnectionRequired: true,
-        launchPeripheralConnectionFlow: true,
-        useAutoScan: true,
-        connectionIconURL: wedo2ConnectionIconURL,
-        connectionSmallIconURL: wedo2ConnectionSmallIconURL,
-        connectionTipIconURL: wedo2ConnectionTipIconURL,
-        customInsetColor: '#FF6680',
-        connectingMessage: (
-            <FormattedMessage
-                defaultMessage="Connecting"
-                description="Message to help people connect to their WeDo."
-                id="gui.extension.wedo2.connectingMessage"
-            />
-        ),
-        helpLink: 'https://scratch.mit.edu/wedo'
-    },
-    {
-        name: 'Go Direct Force & Acceleration',
-        extensionId: 'gdxfor',
-        collaborator: 'Vernier',
-        iconURL: gdxforIconURL,
-        insetIconURL: gdxforInsetIconURL,
-        customInsetColor: '#4C97FF',
-        tags: ['scratch', 'hardware'],
-        description: (
-            <FormattedMessage
-                defaultMessage="Sense push, pull, motion, and spin."
-                description="Description for the Vernier Go Direct Force and Acceleration sensor extension"
-                id="gui.extension.gdxfor.description"
-            />
-        ),
-        featured: true,
-        disabled: false,
-        bluetoothRequired: true,
-        internetConnectionRequired: true,
-        launchPeripheralConnectionFlow: true,
-        useAutoScan: false,
-        connectionIconURL: gdxforConnectionIconURL,
-        connectionSmallIconURL: gdxforConnectionSmallIconURL,
-        connectingMessage: (
-            <FormattedMessage
-                defaultMessage="Connecting"
-                description="Message to help people connect to their force and acceleration sensor."
-                id="gui.extension.gdxfor.connectingMessage"
-            />
-        ),
-        helpLink: 'https://scratch.mit.edu/vernier'
-    },
-    {
         // not really an extension, but it's easiest to present it as one
         name: 'ExtForge',
         href: 'https://jwklong.github.io/extforge',
@@ -1067,14 +745,6 @@ const menuItems = [
     }
     /*DEPRECATED
     {
-        name: 'JSON',
-        extensionId: 'jgJSON',
-        iconURL: jgJSONExtensionIcon,
-        tags: ['penguinmod', 'datamgmt'],
-        description: 'Blocks for handling JSON objects and Arrays.',
-        featured: true
-    },
-    {
         name: 'Color Utility Blocks',
         extensionId: 'colors',
         iconURL: gsaColorUtilExtensionIcon,
@@ -1090,15 +760,6 @@ const menuItems = [
         description: 'For logging and variable utilization.',
         featured: true,
         extDeveloper: 'silvxrcat'
-    },
-    {
-        name: 'Extra Mathematics',
-        extensionId: 'https://extensions.penguinmod.com/extensions/jwklong/mathematics.js',
-        iconURL: 'https://extensions.penguinmod.com/images/jwklong/mathematics.avif',
-        tags: ['penguinmod', 'categoryexpansion', 'math'],
-        description: 'Complicated maths extension for nerds.',
-        extDeveloper: 'jwklong',
-        featured: false
     },
     {
         name: 'All Menus',
@@ -1254,15 +915,6 @@ if (IsLocal || IsLiveTests) {
             iconURL: 'https://extensions.penguinmod.com/images/JeremyGamer13/epicutils.avif',
             tags: ['penguinmod', 'joke'],
             description: 'the super good utilities brought to you by todays sponsor sharkpool (the epic utilities)',
-            featured: true
-        },
-        {
-            name: 'CATS',
-            extensionId: 'https://extensions.penguinmod.com/extensions/Gen1x/CATS.js',
-            iconURL: 'https://extensions.penguinmod.com/images/Gen1x/cats.avif',
-            tags: ['penguinmod', 'joke'],
-            description: 'Blocks related to cats.',
-            extDeveloper: 'G1nX',
             featured: true
         },
         {
