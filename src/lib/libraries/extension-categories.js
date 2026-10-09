@@ -52,7 +52,6 @@ const keysByTag = {
     cat_animation: [
         'jgTween',
         'Animations.js',
-        'TheShovel/qoan-renderer.js',
         'jgTailgating'
     ],
     cat_graphics: [
@@ -61,11 +60,9 @@ const keysByTag = {
         'Pen-Papers.js',
         'pmCamera',
         'Layer-Control.js',
-        'Renderer-Control.js',
         'stretch.js',
         'Xeltalliv/clippingblending.js',
         'TheShovel/CanvasEffects.js',
-        'Longboost/color_channels.js',
         'Sprite-Effects-V2.js',
         'Particle-Engine.js',
         'Gen1x/lighting.js',
@@ -91,12 +88,10 @@ const keysByTag = {
     ],
     cat_sound: [
         'music',
-        'jgExtendedAudio',
         'Tune-Shark-V3.js',
         'SharkPool/Sound-Waves.js',
         'Lily/SoundExpanded.js',
         'MIDI-Tools.js',
-        'NishiOwO/libxmp.js',
         'Recording-V2.js',
         'Newgrounds-Audio.js',
         'Gen1x/beat_sync.js',
@@ -122,12 +117,9 @@ const keysByTag = {
         'gaimerI17/DeviceMotion.js'
     ],
     cat_ui: [
-        'LordCat0/ProjectInterfaces.js',
         'Popup-Phoenix.js',
         'Speech-Bubbles.js',
-        'Sty-Lists.js',
         'TheShovel/CustomStyles.js',
-        'NexusKitten/controlcontrols.js',
         'mdwalters/notifications.js',
         'MubiLop/toastnotifs.js',
         'Gen1x/iris-text.js'
@@ -174,7 +166,6 @@ const keysByTag = {
         'DogeisCut/FormatNumbers.js',
         'NOname-awa/graphics2d.js',
         'iygPerlin',
-        'Seeds.js',
         'Gen1x/random_utils.js'
     ],
     cat_time: [
@@ -218,12 +209,10 @@ const keysByTag = {
         'NamelessCat/corsproxy.js',
         'Codefoxy/cfupload.js',
         'MubiLop/yeetyourfiles.js',
-        'SammerLOL/pangapi.js',
         'bop_tw/Twitch.js',
         'YouTube-Operations.js',
         'Spotify.js',
         'SoundCloud-API.js',
-        'Google-Spreadsheets.js',
         'veggiecan/LongmanDictionary.js',
         'RubyDevs/turboweather.js',
         'bruhbeast-pixel/CockatielLocation.js',
@@ -236,7 +225,6 @@ const keysByTag = {
     cat_browser: [
         'DogeisCut/Resolution.js',
         'CubesterYT/WindowControls.js',
-        'veggiecan/browserfullscreen.js',
         'XmerOriginals/closecontrol.js',
         'DNin/wake-lock.js',
         'navigator.js',
@@ -254,7 +242,6 @@ const keysByTag = {
         'jwLambda',
         'jwScope',
         'jwPointer',
-        'Div/divAlgEffects.js',
         'jwProto',
         'My-Blocks-Plus.js',
         'Dropdown-Maker.js',
@@ -271,7 +258,6 @@ const keysByTag = {
         'Lily/lmsutils.js',
         'Sharktilities.js',
         'jgPrism',
-        'true-fantom/couplers.js',
         'Lily/McUtils.js'
     ]
 };

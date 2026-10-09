@@ -59,7 +59,6 @@ import pointerlockThumb from './penguinmod/extensions/pointerlock.png';
 
 // more icons so they arent just red when the extension color is not red
 import jgIframeExtensionIcon from './penguinmod/extensions/iframe.png';
-import jgExtendedAudioExtensionIcon from './penguinmod/extensions/extendedaudio.png';
 import spJSONExtensionIcon from './penguinmod/extensions/sp_json.svg';
 
 // import jgTweeningExtensionIcon from './penguinmod/extensions/tween.png';
@@ -205,14 +204,6 @@ const menuItems = [
         tags: ['turbowarp'],
         description: 'Create and edit .zip format files, including .sb3 files.',
         twDeveloper: 'CST1229',
-        featured: true
-    },
-    {
-        name: 'Sound Systems',
-        extensionId: 'jgExtendedAudio',
-        iconURL: jgExtendedAudioExtensionIcon,
-        tags: ['penguinmod'],
-        description: 'An audio grouping system for more intensive audio work.',
         featured: true
     },
     {
@@ -409,15 +400,6 @@ const menuItems = [
         iconURL: jgScriptsExtensionIcon,
         tags: ['penguinmod'],
         description: 'Create compiled scripts with blocks while the project is running.',
-        featured: true
-    },
-    {
-        name: 'Pang API',
-        extensionId: 'https://extensions.penguinmod.com/extensions/SammerLOL/pangapi.js',
-        iconURL: 'https://extensions.penguinmod.com/images/SammerLOL/pangapi.avif',
-        tags: ['penguinmod'],
-        description: 'Fetch information from the PenguinMod API.',
-        extDeveloper: 'oc9x97, Ianyourgod',
         featured: true
     },
     {
