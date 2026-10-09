@@ -2,8 +2,9 @@
 // As soon as the project uses an asset whose licence asks for credit (see pm-asset-sources.js),
 // a hidden sprite named "credit" appears (a warning sign). Its local variable "credit" holds every
 // credit the game must show and is rewritten whenever such an asset is added, removed or edited.
-// The sprite comes with a credits screen script (also put in the backpack) and a note explaining
-// both. While credits are needed the sprite can't be deleted or renamed. When none are needed any
+// The same text is drawn into its "credits text 1", "2", … costumes (no extension needed), sized to
+// the stage, and redrawn when the credits or the stage size change. The sprite comes with a
+// credits screen script (also put in the backpack) and a note explaining both. While credits are needed the sprite can't be deleted or renamed. When none are needed any
 // more, the note says so and the sprite can be deleted. Before the packager opens, a warning
 // appears if nothing in the sprite shows it (confirmPackaging, used by section 16 f).
 import localBackpack from './tw-local-backpack-api';
@@ -15,7 +16,8 @@ const NOTE_ID = 'pmDesktopCreditsNote';
 const SIGNATURE = 'this note updates itself'; // old credit notes and the "no credit needed" note
 const NOTE_MARK = 'the local variable "credit" holds'; // the note (comment ids change when a project is saved)
 const NOTE_TEXT = [
-    'The local variable "credit" holds the mandatory credits for all the licensed work in this project: you must show them somewhere in your game.',
+    'The local variable "credit" holds the mandatory credits for all the licensed work in this project: you must show them somewhere in your game. ' +
+        'The "credits text" costumes show the same text and update themselves.',
     '',
     '(their authors cannot claim your game, and you can use everything, even commercially)',
     '',
@@ -23,16 +25,20 @@ const NOTE_TEXT = [
 ].join('\n');
 const NO_CREDIT_TEXT = 'No asset in this project needs credit right now, so you can delete this sprite. (This note updates itself.)';
 // as wide as the line in parentheses (measured in the editor's comment font)
-const NOTE = {x: 40, y: 40, width: 650, height: 210};
+const NOTE = {x: 40, y: 40, width: 650, height: 250};
 const BACKPACK_NAME = 'credits screen';
 const END_MESSAGE = 'credits end';
+const SCROLL_MESSAGE = 'credits scroll';
+const SPEED = 9; // seconds the text takes to cross the stage
 const WARNING_TEXT = '⚠ ATTENTION! We detected that the mandatory credits stored in the "credit" sprite are never shown. ' +
     'We could be wrong, but if so, by continuing without proper attribution you accept the LEGAL RISK and responsibility. ⚠';
 
-// Costumes: the button players click, the black screen, and an empty one that marks the text clone.
+// Costumes: the button players click, the black screen (as big as the stage) and the text pages.
 const BUTTON = 'warning';
 const SCREEN = 'credits screen';
-const TEXT = 'credits text';
+const PAGE = 'credits text '; // "credits text 1", "credits text 2", …
+const OLD_TEXT = 'credits text'; // the empty costume of the Animated Text version (upgraded when found)
+const isPageName = name => name.startsWith(PAGE) && /^\d+$/.test(name.slice(PAGE.length));
 const WARNING_SVG = '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="49.55819" height="49.55819" ' +
     'viewBox="0,0,49.55819,49.55819"><g transform="translate(-215.2209,-155.2209)"><g stroke="none" stroke-miterlimit="10">' +
     '<path d="M215.22091,155.2209h49.55819v49.55819h-49.55819z" fill="#000000"/><path d="M217.2858,198.58365l22.71382,' +
@@ -41,10 +47,66 @@ const WARNING_SVG = '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width
     '0.19685 -1.4702,0.59468c-0.39646,0.39783 -0.59469,0.8879 -0.59469,1.4702c0,0.5823 0.19823,1.07306 0.59469,1.47227c0.39646,' +
     '0.39921 0.88653,0.59676 1.4702,0.59262c0.58367,-0.00413 1.07443,-0.20236 1.47226,-0.59469M237.93472,186.19429h4.12978v' +
     '-10.32446h-4.12978z" fill="#ffa200"/></g></g></svg>';
-const SCREEN_SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="480" height="360" viewBox="0 0 480 360">' +
-    '<rect width="480" height="360" fill="#000000"/></svg>';
-const TEXT_SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">' +
-    '<rect width="100" height="100" fill="none"/></svg>';
+const fix = n => +n.toFixed(3);
+const screenSvg = (width, height) => `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" ` +
+    `viewBox="0 0 ${width} ${height}"><rect width="${width}" height="${height}" fill="#000000"/></svg>`;
+
+/* The text pages: white Sans Serif (the costume font every player has) at 1/25 of the stage height,
+   wrapped to 95% of the stage width, so the text keeps its size relative to any stage size. Pages
+   are at most one stage high, so the renderer keeps them sharp (it shrinks costume textures bigger
+   than 2048 pixels). Each page has an empty margin of 16 units above and below the text: fencing
+   keeps up to 15 units of a sprite on the stage, so only an empty margin is ever held there.
+   Rotation centre = top of the text. */
+const MARGIN = 16;
+const escapeXml = text => text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const wrapLines = (text, maxWidth, measure) => {
+    const lines = [];
+    for (const paragraph of text.split('\n')) {
+        let line = '';
+        for (const word of paragraph.split(' ').filter(Boolean)) {
+            const longer = line ? `${line} ${word}` : word;
+            if (measure(longer) <= maxWidth) {
+                line = longer;
+                continue;
+            }
+            if (line) lines.push(line);
+            line = word;
+            while (line.length > 1 && measure(line) > maxWidth) { // a word longer than a line (a link): cut it
+                let cut = line.length - 1;
+                while (cut > 1 && measure(line.slice(0, cut)) > maxWidth) cut--;
+                lines.push(line.slice(0, cut));
+                line = line.slice(cut);
+            }
+        }
+        lines.push(line);
+    }
+    return lines;
+};
+const pageSvgs = async (text, width, height) => {
+    const fontSize = height / 25;
+    const lineHeight = fontSize * 1.25;
+    const font = `${fix(fontSize)}px "Sans Serif"`;
+    try {
+        await document.fonts.load(font);
+    } catch (e) {
+        // measured with a fallback font
+    }
+    const context = document.createElement('canvas').getContext('2d');
+    context.font = font;
+    const lines = wrapLines(text, width * 0.95, line => context.measureText(line).width);
+    const perPage = Math.max(1, Math.floor((height / lineHeight) + 1e-9)); // 20
+    const pages = [];
+    for (let first = 0; first < lines.length; first += perPage) {
+        const pageLines = lines.slice(first, first + perPage);
+        const pageHeight = fix((MARGIN * 2) + (pageLines.length * lineHeight));
+        const texts = pageLines.map((line, k) => (line ? `<text x="${fix(width / 2)}" ` +
+            `y="${fix(MARGIN + (k * lineHeight) + (lineHeight / 2) + (fontSize * 0.35))}" font-family="Sans Serif" ` +
+            `font-size="${fix(fontSize)}" fill="#ffffff" text-anchor="middle" xml:space="preserve">${escapeXml(line)}</text>` : ''));
+        pages.push(`<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${pageHeight}" ` +
+            `viewBox="0 0 ${width} ${pageHeight}">${texts.join('')}</svg>`);
+    }
+    return pages;
+};
 
 const freeComments = target => Object.keys(target.comments || {})
     .map(id => target.comments[id]).filter(c => c && !c.blockId);
@@ -117,13 +179,15 @@ const creditText = credits => {
     ].join('\n');
 };
 
-/* The credits screen script (sb3 blocks). Clicking the sprite makes a clone that fades in to black
-   ("credits screen" costume). It makes a second clone ("credits text" costume) that shows the
-   variable with the Animated Text extension and glides it from below the stage to above it, then
-   broadcasts "credits end" so the black clone fades out. Two blank lines above and below the text
-   keep the strip that fencing leaves on the stage empty (up to 28 units: fencing measures the text
-   before it is first drawn). */
-const NUMBER_INPUTS = /^(NUM\d|X|Y|SECS|SIZE|VALUE|CHANGE|WIDTH|DURATION)$/;
+/* The credits screen script (sb3 blocks, no extension). Clicking the sprite makes a clone that fades
+   in to black ("credits screen" costume, as big as the stage). It makes one clone per text page,
+   each waiting just below the stage. The last page broadcasts "credits scroll" (and waits): every
+   page then glides up one page height at a time, all in step (same glides, started in the same
+   frame), page n after waiting n - 1 glides, its last glide only as far as needed to leave the
+   stage. Then "credits end" makes the black clone fade out and the pages delete themselves. Sizes
+   come from the costumes ("height of costume"), so the script works for any stage size. */
+const NUMBER_INPUTS = /^(NUM\d?|X|Y|SECS|SIZE|VALUE|CHANGE|WIDTH|DURATION|TIMES)$/;
+const SHADOW_TYPES = {TIMES: 6, DURATION: 5, DIRECTION: 8};
 const BOOLEAN_OPS = /^operator_(not|and|or|equals|lt|gt)$/;
 const buildBlocks = (scripts, prefix) => {
     const blocks = {};
@@ -153,13 +217,13 @@ const buildBlocks = (scripts, prefix) => {
         return first;
     };
     const input = (name, value, parent) => {
-        if (typeof value === 'number') return [1, [{TIMES: 6, DURATION: 5, DIRECTION: 8}[name] || 4, String(value)]];
+        if (typeof value === 'number') return [1, [SHADOW_TYPES[name] || 4, String(value)]];
         if (typeof value === 'string') return [1, [10, value]];
         if (Array.isArray(value)) return [2, stack(value, parent)];
         if (value.literal) return [1, value.literal];
         if (value.menu) return [1, block(value, parent, true)];
         if (BOOLEAN_OPS.test(value.op)) return [2, block(value, parent)];
-        return [3, block(value, parent), NUMBER_INPUTS.test(name) ? [4, ''] : [10, '']];
+        return [3, block(value, parent), NUMBER_INPUTS.test(name) ? [SHADOW_TYPES[name] || 4, ''] : [10, '']];
     };
     for (const {x, y, script} of scripts) {
         const top = blocks[stack(script, null)];
@@ -169,70 +233,98 @@ const buildBlocks = (scripts, prefix) => {
     return {blocks, comments};
 };
 
-const creditScripts = (messageId, prefix) => {
+const creditScripts = (endId, scrollId, prefix) => {
     const costumeName = {op: 'looks_costumenumbername', f: {NUMBER_NAME: 'name'}};
     const costumeIs = name => ({op: 'operator_equals', i: {OPERAND1: costumeName, OPERAND2: name}});
+    const isPage = {op: 'operator_contains', i: {STRING1: costumeName, STRING2: PAGE}};
     const math = op => (a, b) => ({op: `operator_${op}`, i: {NUM1: a, NUM2: b}});
-    const [plus, times, divide] = ['add', 'multiply', 'divide'].map(math);
-    const height = {op: 'text_getHeight'};
-    const wearCostume = name => ({op: 'looks_switchcostumeto', i: {COSTUME: {menu: true, op: 'looks_costume', f: {COSTUME: name}}}});
+    const [plus, minus, times, divide] = ['add', 'subtract', 'multiply', 'divide'].map(math);
+    const costumeMenu = name => ({menu: true, op: 'looks_costume', f: {COSTUME: name}});
+    const costumeValue = (what, costume) => ({op: 'looks_getinputofcostume', i: {
+        INPUT: {menu: true, op: 'looks_getinput_menu', f: {INPUT: what}}, COSTUME: costume
+    }});
+    // a page's text height: costume height minus the two empty margins
+    const textHeight = costume => minus(costumeValue('height', costume), MARGIN * 2);
+    const stageHeight = costumeValue('height', costumeMenu(SCREEN));
+    const pageHeight = textHeight(costumeMenu(`${PAGE}1`));
+    // glides a distance at the scroll speed
+    const glide = (distance, y, comment) => ({op: 'motion_glidesecstoxy', comment,
+        i: {SECS: times(divide(distance, stageHeight), SPEED), X: 0, Y: y}});
+    const yPosition = {op: 'motion_yposition'};
+    const pageNumber = {op: 'operator_replaceAll', i: {text: costumeName, term: PAGE, res: ''}};
+    // where a page ends: the bottom of its text at the top of the stage
+    const endY = plus(divide(stageHeight, 2), textHeight(costumeName));
+    const wearCostume = name => ({op: 'looks_switchcostumeto', i: {COSTUME: costumeMenu(name)}});
     const cloneMyself = {op: 'control_create_clone_of', i: {CLONE_OPTION: {menu: true, op: 'control_create_clone_of_menu', f: {CLONE_OPTION: '_myself_'}}}};
     const ghost = (op, value) => ({op, i: {[op === 'looks_seteffectto' ? 'VALUE' : 'CHANGE']: value}, f: {EFFECT: 'GHOST'}});
-    const repeat = (times, body) => ({op: 'control_repeat', i: {TIMES: times, SUBSTACK: body}});
+    const repeat = (count, body, comment) => ({op: 'control_repeat', i: {TIMES: count, SUBSTACK: body}, comment});
     const goTo = (x, y, comment) => ({op: 'motion_gotoxy', i: {X: x, Y: y}, comment});
     const front = {op: 'looks_gotofrontback', f: {FRONT_BACK: 'front'}};
+    const broadcast = (op, name, id) => ({op, i: {BROADCAST_INPUT: {literal: [11, name, id]}}});
+    const deleteClone = {op: 'control_delete_this_clone'};
     const note = (x, y, width, height, text) => ({x, y, width, height, text});
-    return buildBlocks([{x: 40, y: 290, script: [
+    return buildBlocks([{x: 40, y: 330, script: [
         {op: 'event_whenthisspriteclicked'},
         // the clones are clickable too: only the button starts the credits
         {op: 'control_if', i: {
-            CONDITION: {op: 'operator_not', i: {OPERAND: {op: 'operator_or', i: {OPERAND1: costumeIs(SCREEN), OPERAND2: costumeIs(TEXT)}}}},
+            CONDITION: {op: 'operator_not', i: {OPERAND: {op: 'operator_or', i: {OPERAND1: costumeIs(SCREEN), OPERAND2: isPage}}}},
             SUBSTACK: [cloneMyself]
         }}
-    ]}, {x: 40, y: 540, script: [
+    ]}, {x: 40, y: 580, script: [
         {op: 'control_start_as_clone'},
         {op: 'control_if_else', i: {
-            CONDITION: costumeIs(TEXT),
-            SUBSTACK: [ // the scrolling text (made by the black screen below, already sized)
+            CONDITION: isPage,
+            SUBSTACK: [ // a text page (made below the stage): makes the next page, the last one starts the scrolling
                 front,
-                {op: 'text_setFont', i: {FONT: {menu: true, op: 'text_menu_FONT', f: {FONT: 'Sans Serif'}}}},
-                {op: 'text_setColor', i: {COLOR: {literal: [9, '#ffffff']}}},
-                {op: 'text_setWidth', i: {WIDTH: 760}, f: {ALIGN: 'center'}},
-                {op: 'text_setText', i: {TEXT: ''}},
-                {op: 'text_addLine', i: {TEXT: ''}, comment: note(1150, 970, 300, 100,
-                    'Two blank lines above and below the credits keep them off the stage at the start and the end.')},
-                {op: 'text_addLine', i: {TEXT: {literal: [12, VAR_NAME, VAR_ID]}}},
-                {op: 'text_addLine', i: {TEXT: ''}},
-                // a no-break space: empty lines at the very end of a text are dropped
-                {op: 'text_addLine', i: {TEXT: ' '}},
-                goTo(0, -180, note(1150, 1140, 300, 60, 'Starts just below the stage.')),
-                {op: 'control_wait', i: {DURATION: 0}, comment: note(1150, 1210, 300, 80, 'One frame, so the editor draws the text and knows its height.')},
-                {op: 'motion_glidesecstoxy', i: {SECS: divide(plus(times(height, 0.6), 360), 40), X: 0, Y: plus(180, times(height, 0.6))},
-                    comment: note(1150, 1300, 300, 130, 'Scroll speed: change the 40 (pixels per second, bigger = faster). 360 = stage height, 0.6 = text size.')},
-                {op: 'event_broadcast', i: {BROADCAST_INPUT: {literal: [11, END_MESSAGE, messageId]}}},
-                {op: 'control_delete_this_clone'}
+                {op: 'looks_nextcostume'},
+                {op: 'control_if_else', comment: note(700, 700, 300, 110,
+                    'Each page makes the next one. The last page starts all pages together, then ends the credits.'),
+                i: {
+                    CONDITION: isPage,
+                    SUBSTACK: [cloneMyself, {op: 'looks_previouscostume'}],
+                    SUBSTACK2: [
+                        {op: 'looks_previouscostume'},
+                        broadcast('event_broadcastandwait', SCROLL_MESSAGE, scrollId),
+                        broadcast('event_broadcast', END_MESSAGE, endId)
+                    ]
+                }}
             ],
-            SUBSTACK2: [ // the black screen: fades in, then makes the text clone
+            SUBSTACK2: [ // the black screen: fades in, then makes the first page
                 wearCostume(SCREEN),
                 {op: 'looks_cleargraphiceffects'},
                 ghost('looks_seteffectto', 100),
                 {op: 'motion_pointindirection', i: {DIRECTION: 90}},
-                {op: 'looks_setsizeto', i: {SIZE: 1000}},
+                {op: 'looks_setsizeto', i: {SIZE: 100}},
                 goTo(0, 0),
                 front,
                 repeat(10, [ghost('looks_changeeffectby', -10)]),
-                wearCostume(TEXT),
-                {op: 'looks_setsizeto', i: {SIZE: 60}, comment: note(1150, 2004, 300, 60, 'Text size (the clone keeps it).')},
+                wearCostume(`${PAGE}1`),
+                goTo(0, minus(0, divide(stageHeight, 2)), note(700, 1650, 300, 100,
+                    'The first page starts just below the stage (the top of its text).')),
                 cloneMyself,
                 wearCostume(SCREEN),
-                {op: 'looks_setsizeto', i: {SIZE: 1000}}
+                goTo(0, 0)
             ]
         }}
-    ]}, {x: 1000, y: 40, script: [
-        {op: 'event_whenbroadcastreceived', f: {BROADCAST_OPTION: [END_MESSAGE, messageId]}},
-        {op: 'control_if', i: {
+    ]}, {x: 1100, y: 40, script: [
+        {op: 'event_whenbroadcastreceived', f: {BROADCAST_OPTION: [END_MESSAGE, endId]}},
+        {op: 'control_if_else', i: {
             CONDITION: costumeIs(SCREEN),
-            SUBSTACK: [repeat(10, [ghost('looks_changeeffectby', 10)]), {op: 'control_delete_this_clone'}]
+            SUBSTACK: [repeat(10, [ghost('looks_changeeffectby', 10)]), deleteClone],
+            SUBSTACK2: [{op: 'control_if', i: {CONDITION: isPage, SUBSTACK: [deleteClone]}}]
+        }}
+    ]}, {x: 40, y: 2000, script: [
+        {op: 'event_whenbroadcastreceived', f: {BROADCAST_OPTION: [SCROLL_MESSAGE, scrollId]}},
+        {op: 'control_if', i: {
+            CONDITION: isPage,
+            SUBSTACK: [
+                repeat(minus(pageNumber, 1), [glide(pageHeight, yPosition)], note(40, 2700, 300, 110,
+                    'Page n waits n - 1 glides for the pages above it: the same glides as theirs, so all pages stay in step.')),
+                repeat(minus({op: 'operator_mathop', f: {OPERATOR: 'ceiling'}, i: {NUM: divide(plus(stageHeight, textHeight(costumeName)), pageHeight)}}, 1),
+                    [glide(pageHeight, plus(yPosition, pageHeight))]),
+                glide(minus(endY, yPosition), endY, note(400, 2700, 300, 130,
+                    `Scroll speed: change the ${SPEED} in all three glide blocks (seconds the text takes to cross the stage, smaller = faster).`))
+            ]
         }}
     ]}], prefix);
 };
@@ -257,11 +349,16 @@ const backpackThumbnail = () => new Promise(resolve => {
     image.onerror = () => resolve('');
     image.src = `data:image/svg+xml;base64,${btoa(WARNING_SVG)}`;
 });
-const addToBackpack = async sprite => {
+const addToBackpack = async blocks => {
     try {
         const items = await localBackpack.getBackpackContents({limit: 1000, offset: 0});
-        if (items.some(item => item.type === 'script' && item.name === BACKPACK_NAME)) return;
-        const blockObjects = Object.values(sprite.blocks._blocks).map(b => {
+        const old = items.find(item => item.type === 'script' && item.name === BACKPACK_NAME);
+        if (old) {
+            // the Animated Text version is replaced
+            if (!new TextDecoder().decode(old.bodyData).includes('"text_')) return;
+            await localBackpack.deleteBackpackObject({id: old.id});
+        }
+        const blockObjects = Object.values(blocks._blocks).map(b => {
             const copy = JSON.parse(JSON.stringify(b));
             delete copy.comment;
             return copy;
@@ -279,6 +376,19 @@ const addToBackpack = async sprite => {
 // A sprite made by an older version: blank costume, no scripts (it gets replaced by a new one)
 const isOldSprite = sprite => sprite.getCostumes().length === 1 && sprite.getCostumes()[0].name === 'blank' &&
     Object.keys(sprite.blocks._blocks).length === 0;
+// A sprite made by the Animated Text version: its credits scripts (they use the costumes "credits
+// screen" / "credits text") are replaced, the user's other scripts stay.
+const isOldScript = (blocks, topId) => {
+    const top = blocks.getBlock(topId);
+    if (!['event_whenthisspriteclicked', 'control_start_as_clone', 'event_whenbroadcastreceived'].includes(top.opcode)) return false;
+    return Object.values(blocks._blocks).some(b => {
+        let first = b;
+        while (first.parent) first = blocks.getBlock(first.parent);
+        return first === top && (b.opcode.startsWith('text_') ||
+            Object.values(b.fields).some(field => field.value === SCREEN || field.value === OLD_TEXT));
+    });
+};
+const generated = costume => costume.name === SCREEN || costume.name === OLD_TEXT || isPageName(costume.name);
 
 /* Packager check: is the credit sprite shown by a script (a "show" block under a hat block)? */
 const SHOW_OPCODES = ['looks_show', 'looks_changeVisibilityOfSprite', 'looks_changeVisibilityOfSpriteShow'];
@@ -356,55 +466,135 @@ export default function installCredits (vm) {
     vm.pmCreditsInstalled = true;
     const runtime = vm.runtime;
     let timer = null;
-    let creating = false;
+    let busy = false;
     const originalDelete = vm.deleteSprite;
 
     const creditsNeeded = () => collectCredits(runtime).length > 0;
+    const button = () => svgCostume(runtime.storage, BUTTON, WARNING_SVG, 24.779095, 24.779095);
+
+    // The black screen and the text pages for this text and stage size (made once, copied on each use
+    // because loading a costume adds fields to it).
+    let made = {key: null, costumes: null};
+    const stageCostumes = async text => {
+        const {stageWidth: width, stageHeight: height, storage} = runtime;
+        const key = `${width}x${height}\n${text}`;
+        if (made.key !== key) {
+            const pages = await pageSvgs(text || ' ', width, height);
+            made = {key, costumes: [svgCostume(storage, SCREEN, screenSvg(width, height), width / 2, height / 2)]
+                .concat(pages.map((svg, k) => svgCostume(storage, `${PAGE}${k + 1}`, svg, width / 2, MARGIN)))};
+        }
+        return made.costumes.map(costume => Object.assign({}, costume));
+    };
+
+    const scripts = () => {
+        const stage = runtime.getTargetForStage();
+        const messageId = name => {
+            const existing = stage.lookupBroadcastByInputValue(name);
+            if (existing) return existing.id;
+            const id = `pmDesktopCredits${name.replace(/\W/g, '')}${Date.now().toString(36)}`;
+            stage.createVariable(id, name, 'broadcast_msg');
+            return id;
+        };
+        return creditScripts(messageId(END_MESSAGE), messageId(SCROLL_MESSAGE), `pmcr${Date.now().toString(36)}_`);
+    };
+    const restoreEditingTarget = previous => {
+        if (previous && runtime.getTargetById(previous)) vm.setEditingTarget(previous);
+        else vm.emitWorkspaceUpdate();
+    };
 
     const createSprite = async credits => {
         const previous = vm.editingTarget && vm.editingTarget.id;
-        const stage = runtime.getTargetForStage();
-        const existing = stage.lookupBroadcastByInputValue(END_MESSAGE);
-        const messageId = existing ? existing.id : `pmDesktopCreditsEnd${Date.now().toString(36)}`;
-        if (!existing) stage.createVariable(messageId, END_MESSAGE, 'broadcast_msg');
-        const {blocks, comments} = creditScripts(messageId, `pmcr${Date.now().toString(36)}_`);
+        const {blocks, comments} = scripts();
         comments[NOTE_ID] = Object.assign({blockId: null, minimized: false, text: NOTE_TEXT}, NOTE);
-        const storage = runtime.storage;
+        const text = creditText(credits);
         await vm.addSprite(JSON.stringify({
             isStage: false, name: SPRITE_NAME,
-            variables: {[VAR_ID]: [VAR_NAME, creditText(credits)]}, lists: {}, broadcasts: {},
-            blocks, comments, currentCostume: 0, extensions: ['text'], // Animated Text
-            costumes: [
-                svgCostume(storage, BUTTON, WARNING_SVG, 24.779095, 24.779095),
-                svgCostume(storage, SCREEN, SCREEN_SVG, 240, 180),
-                svgCostume(storage, TEXT, TEXT_SVG, 50, 50)
-            ],
+            variables: {[VAR_ID]: [VAR_NAME, text]}, lists: {}, broadcasts: {},
+            blocks, comments, currentCostume: 0, extensions: [],
+            costumes: [button()].concat(await stageCostumes(text)),
             sounds: [], volume: 100, visible: false, x: 0, y: 0, size: 100, direction: 90,
             draggable: false, rotationStyle: 'all around'
         }));
         const sprite = vm.editingTarget;
-        if (previous && runtime.getTargetById(previous)) vm.setEditingTarget(previous);
-        else vm.emitWorkspaceUpdate();
-        addToBackpack(sprite);
+        restoreEditingTarget(previous);
+        addToBackpack(sprite.blocks);
+    };
+
+    // Animated Text version -> this one: its credits scripts are swapped for the new ones, which are
+    // read from a short-lived sprite (the VM turns the sb3 blocks into its own format there).
+    const upgradeScripts = async sprite => {
+        for (const topId of sprite.blocks.getScripts().slice()) {
+            if (isOldScript(sprite.blocks, topId)) sprite.blocks.deleteBlock(topId);
+        }
+        for (const [id, comment] of Object.entries(sprite.comments)) {
+            if (comment.blockId && !sprite.blocks.getBlock(comment.blockId)) delete sprite.comments[id];
+        }
+        const previous = vm.editingTarget && vm.editingTarget.id;
+        const {blocks, comments} = scripts();
+        await vm.addSprite(JSON.stringify({
+            isStage: false, name: `${SPRITE_NAME} scripts`, variables: {}, lists: {}, broadcasts: {},
+            blocks, comments, currentCostume: 0, extensions: [], costumes: [button()],
+            sounds: [], volume: 100, visible: false, x: 0, y: 0, size: 100, direction: 90,
+            draggable: false, rotationStyle: 'all around'
+        }));
+        const temporary = vm.editingTarget;
+        for (const block of Object.values(temporary.blocks._blocks)) {
+            sprite.blocks.createBlock(JSON.parse(JSON.stringify(block)));
+        }
+        for (const c of Object.values(temporary.comments)) {
+            sprite.createComment(c.id, c.blockId, c.text, c.x, c.y, c.width, c.height, c.minimized);
+        }
+        addToBackpack(temporary.blocks);
+        originalDelete.call(vm, temporary.id);
+        // Animated Text came with the old script: it goes when no block uses it (projects save every loaded extension)
+        const usesText = runtime.targets.some(t => Object.values(t.blocks._blocks).some(b => b.opcode.startsWith('text_')));
+        if (!usesText && vm.extensionManager.isExtensionLoaded('text')) vm.extensionManager.removeExtension('text');
+        restoreEditingTarget(previous);
+    };
+
+    // Puts the black screen and the text pages for the current text and stage size into the sprite.
+    const updateCostumes = async (sprite, text) => {
+        const wanted = await stageCostumes(text);
+        const have = sprite.getCostumes().filter(generated);
+        if (have.length === wanted.length && wanted.every((costume, k) =>
+            have[k].name === costume.name && have[k].assetId === costume.assetId)) return false;
+        const wearing = sprite.getCostumes()[sprite.currentCostume].name;
+        if (sprite.getCostumes().every(generated)) {
+            const extra = button();
+            await vm.addCostume(extra.md5ext, extra, sprite.id); // a sprite keeps at least one costume
+        }
+        for (let k = sprite.getCostumes().length - 1; k >= 0; k--) {
+            if (generated(sprite.getCostumes()[k])) sprite.deleteCostume(k);
+        }
+        for (const costume of wanted) await vm.addCostume(costume.md5ext, costume, sprite.id);
+        sprite.setCostume(Math.max(0, sprite.getCostumeIndexByName(wearing)));
+        return true;
     };
 
     const sync = async () => {
         timer = null;
-        if (creating) return;
+        if (busy) return schedule();
+        busy = true;
+        try {
+            await update();
+        } finally {
+            busy = false;
+        }
+    };
+    const update = async () => {
         const credits = collectCredits(runtime);
-        let sprite = findCreditSprite(runtime);
+        const sprite = findCreditSprite(runtime);
         if (credits.length && (!sprite || isOldSprite(sprite))) {
-            creating = true;
-            try {
-                if (sprite) originalDelete.call(vm, sprite.id);
-                await createSprite(credits);
-            } finally {
-                creating = false;
-            }
+            if (sprite) originalDelete.call(vm, sprite.id);
+            await createSprite(credits);
             return;
         }
         if (!sprite) return;
         let changed = false;
+        if (sprite.getCostumeIndexByName(OLD_TEXT) >= 0) {
+            await upgradeScripts(sprite);
+            changed = true;
+        }
         const text = credits.length ? NOTE_TEXT : NO_CREDIT_TEXT;
         const note = findNote(sprite);
         if (!note) {
@@ -426,6 +616,7 @@ export default function installCredits (vm) {
             variable.value = value;
             changed = true;
         }
+        if (await updateCostumes(sprite, value)) changed = true;
         if (!changed) return;
         runtime.emitProjectChanged();
         if (vm.editingTarget === sprite) vm.emitWorkspaceUpdate();
@@ -435,6 +626,7 @@ export default function installCredits (vm) {
     };
 
     vm.on('targetsUpdate', schedule); // sprites, costumes or sounds were added, removed or loaded
+    runtime.on('STAGE_SIZE_CHANGED', schedule); // the pages are made for the stage size
 
     // Editing a credited asset marks it as modified (licences like CC BY ask you to say so).
     const markModified = list => index => {
