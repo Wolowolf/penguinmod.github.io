@@ -75,24 +75,26 @@
     border-color: $sound-primary;
 }
 
+/* the star sits in the top left corner of the picture and grows with the tile (its width is a container size) */
 .library-item-favorite {
     background: transparent;
     position: absolute;
-    top: calc(11.5rem + 4px);
-    right: 4px;
-    width: 24px;
-    height: 24px;
+    top: 4px;
+    left: 4px;
+    width: clamp(16px, 11cqw, 40px);
+    height: clamp(16px, 11cqw, 40px);
     border: 0;
     margin: 0;
     padding: 0;
+    z-index: 1;
 }
 .library-item-favorite img {
     background: transparent;
     position: absolute;
     top: 0;
-    right: 0;
-    width: 24px;
-    height: 24px;
+    left: 0;
+    width: 100%;
+    height: 100%;
     border: 0;
     margin: 0;
     padding: 0;
@@ -346,6 +348,7 @@
 }
 
 .featured-item {
+    container-type: inline-size;
     flex-basis: 300px;
     max-width: var(--ext-tile-max, 300px);
     height: auto;
