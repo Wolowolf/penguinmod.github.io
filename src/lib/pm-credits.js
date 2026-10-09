@@ -28,7 +28,7 @@ const NO_CREDIT_TEXT = 'No asset in this project needs credit right now, so you 
 const NOTE = {x: 40, y: 40, width: 650, height: 250};
 const BACKPACK_NAME = 'credits screen';
 const END_MESSAGE = 'credits end';
-const SCROLL_MESSAGE = 'credits scroll';
+const SCROLL_MESSAGE = 'credits scroll'; // used by the first no-extension version (upgraded when found)
 const SPEED = 9; // seconds the text takes to cross the stage
 const WARNING_TEXT = '⚠ ATTENTION! We detected that the mandatory credits stored in the "credit" sprite are never shown. ' +
     'We could be wrong, but if so, by continuing without proper attribution you accept the LEGAL RISK and responsibility. ⚠';
@@ -83,8 +83,8 @@ const wrapLines = (text, maxWidth, measure) => {
     return lines;
 };
 const pageSvgs = async (text, width, height) => {
-    const fontSize = height / 25;
-    const lineHeight = fontSize * 1.25;
+    const lineHeight = height / 20; // 20 lines: a full page's text is exactly one stage high
+    const fontSize = lineHeight / 1.25;
     const font = `${fix(fontSize)}px "Sans Serif"`;
     try {
         await document.fonts.load(font);
@@ -94,11 +94,10 @@ const pageSvgs = async (text, width, height) => {
     const context = document.createElement('canvas').getContext('2d');
     context.font = font;
     const lines = wrapLines(text, width * 0.95, line => context.measureText(line).width);
-    const perPage = Math.max(1, Math.floor((height / lineHeight) + 1e-9)); // 20
     const pages = [];
-    for (let first = 0; first < lines.length; first += perPage) {
-        const pageLines = lines.slice(first, first + perPage);
-        const pageHeight = fix((MARGIN * 2) + (pageLines.length * lineHeight));
+    for (let first = 0; first < lines.length; first += 20) {
+        const pageLines = lines.slice(first, first + 20);
+        const pageHeight = pageLines.length === 20 ? height + (MARGIN * 2) : fix((MARGIN * 2) + (pageLines.length * lineHeight));
         const texts = pageLines.map((line, k) => (line ? `<text x="${fix(width / 2)}" ` +
             `y="${fix(MARGIN + (k * lineHeight) + (lineHeight / 2) + (fontSize * 0.35))}" font-family="Sans Serif" ` +
             `font-size="${fix(fontSize)}" fill="#ffffff" text-anchor="middle" xml:space="preserve">${escapeXml(line)}</text>` : ''));
@@ -180,12 +179,13 @@ const creditText = credits => {
 };
 
 /* The credits screen script (sb3 blocks, no extension). Clicking the sprite makes a clone that fades
-   in to black ("credits screen" costume, as big as the stage). It makes one clone per text page,
-   each waiting just below the stage. The last page broadcasts "credits scroll" (and waits): every
-   page then glides up one page height at a time, all in step (same glides, started in the same
-   frame), page n after waiting n - 1 glides, its last glide only as far as needed to leave the
-   stage. Then "credits end" makes the black clone fade out and the pages delete themselves. Sizes
-   come from the costumes ("height of costume"), so the script works for any stage size. */
+   in to black ("credits screen" costume, as big as the stage) and makes a clone for page 1. Each
+   page starts with the top of its text at the bottom of the stage, glides up one stage height
+   (its text is at most that high), makes the next page there and glides on until its text has left
+   the stage. A new clone's script runs in the frame it is made, so the next page starts gliding in
+   the same frame as the one above it: they stay exactly one stage height apart. The last page
+   broadcasts "credits end": the black clone fades out. Sizes come from the costumes ("height of
+   costume"), so the script works for any stage size. */
 const NUMBER_INPUTS = /^(NUM\d?|X|Y|SECS|SIZE|VALUE|CHANGE|WIDTH|DURATION|TIMES)$/;
 const SHADOW_TYPES = {TIMES: 6, DURATION: 5, DIRECTION: 8};
 const BOOLEAN_OPS = /^operator_(not|and|or|equals|lt|gt)$/;
@@ -233,61 +233,51 @@ const buildBlocks = (scripts, prefix) => {
     return {blocks, comments};
 };
 
-const creditScripts = (endId, scrollId, prefix) => {
+const creditScripts = (endId, prefix) => {
     const costumeName = {op: 'looks_costumenumbername', f: {NUMBER_NAME: 'name'}};
-    const costumeIs = name => ({op: 'operator_equals', i: {OPERAND1: costumeName, OPERAND2: name}});
-    const isPage = {op: 'operator_contains', i: {STRING1: costumeName, STRING2: PAGE}};
+    const contains = text => ({op: 'operator_contains', i: {STRING1: costumeName, STRING2: text}});
+    const not = condition => ({op: 'operator_not', i: {OPERAND: condition}});
+    const isPage = contains(PAGE);
     const math = op => (a, b) => ({op: `operator_${op}`, i: {NUM1: a, NUM2: b}});
     const [plus, minus, times, divide] = ['add', 'subtract', 'multiply', 'divide'].map(math);
     const costumeMenu = name => ({menu: true, op: 'looks_costume', f: {COSTUME: name}});
-    const costumeValue = (what, costume) => ({op: 'looks_getinputofcostume', i: {
-        INPUT: {menu: true, op: 'looks_getinput_menu', f: {INPUT: what}}, COSTUME: costume
+    const height = costume => ({op: 'looks_getinputofcostume', i: {
+        INPUT: {menu: true, op: 'looks_getinput_menu', f: {INPUT: 'height'}}, COSTUME: costume
     }});
-    // a page's text height: costume height minus the two empty margins
-    const textHeight = costume => minus(costumeValue('height', costume), MARGIN * 2);
-    const stageHeight = costumeValue('height', costumeMenu(SCREEN));
-    const pageHeight = textHeight(costumeMenu(`${PAGE}1`));
-    // glides a distance at the scroll speed
-    const glide = (distance, y, comment) => ({op: 'motion_glidesecstoxy', comment,
-        i: {SECS: times(divide(distance, stageHeight), SPEED), X: 0, Y: y}});
+    const stageHeight = height(costumeMenu(SCREEN));
+    const textHeight = minus(height(costumeName), MARGIN * 2); // this page's text, without the empty margins
     const yPosition = {op: 'motion_yposition'};
-    const pageNumber = {op: 'operator_replaceAll', i: {text: costumeName, term: PAGE, res: ''}};
-    // where a page ends: the bottom of its text at the top of the stage
-    const endY = plus(divide(stageHeight, 2), textHeight(costumeName));
+    const glide = (secs, y, comment) => ({op: 'motion_glidesecstoxy', i: {SECS: secs, X: 0, Y: y}, comment});
     const wearCostume = name => ({op: 'looks_switchcostumeto', i: {COSTUME: costumeMenu(name)}});
     const cloneMyself = {op: 'control_create_clone_of', i: {CLONE_OPTION: {menu: true, op: 'control_create_clone_of_menu', f: {CLONE_OPTION: '_myself_'}}}};
     const ghost = (op, value) => ({op, i: {[op === 'looks_seteffectto' ? 'VALUE' : 'CHANGE']: value}, f: {EFFECT: 'GHOST'}});
-    const repeat = (count, body, comment) => ({op: 'control_repeat', i: {TIMES: count, SUBSTACK: body}, comment});
-    const goTo = (x, y, comment) => ({op: 'motion_gotoxy', i: {X: x, Y: y}, comment});
+    const repeat = (count, body) => ({op: 'control_repeat', i: {TIMES: count, SUBSTACK: body}});
     const front = {op: 'looks_gotofrontback', f: {FRONT_BACK: 'front'}};
-    const broadcast = (op, name, id) => ({op, i: {BROADCAST_INPUT: {literal: [11, name, id]}}});
-    const deleteClone = {op: 'control_delete_this_clone'};
-    const note = (x, y, width, height, text) => ({x, y, width, height, text});
+    const note = (x, y, width, h, text) => ({x, y, width, height: h, text});
     return buildBlocks([{x: 40, y: 330, script: [
         {op: 'event_whenthisspriteclicked'},
         // the clones are clickable too: only the button starts the credits
-        {op: 'control_if', i: {
-            CONDITION: {op: 'operator_not', i: {OPERAND: {op: 'operator_or', i: {OPERAND1: costumeIs(SCREEN), OPERAND2: isPage}}}},
-            SUBSTACK: [cloneMyself]
-        }}
-    ]}, {x: 40, y: 580, script: [
+        {op: 'control_if', i: {CONDITION: not(contains('credits')), SUBSTACK: [cloneMyself]}}
+    ]}, {x: 40, y: 540, script: [
         {op: 'control_start_as_clone'},
         {op: 'control_if_else', i: {
             CONDITION: isPage,
-            SUBSTACK: [ // a text page (made below the stage): makes the next page, the last one starts the scrolling
+            SUBSTACK: [ // a text page
+                {op: 'motion_gotoxy', i: {X: 0, Y: minus(0, divide(stageHeight, 2))}, comment: note(1550, 600, 330, 150,
+                    'Each page starts just below the stage (the top of its text), glides up one stage height, ' +
+                    'makes the next page below itself, then glides on until its text has left the stage.')},
                 front,
+                glide(SPEED, plus(yPosition, stageHeight), note(1550, 770, 330, 110,
+                    `Scroll speed: change the ${SPEED} in both glide blocks (seconds the text takes to cross the stage, smaller = faster).`)),
                 {op: 'looks_nextcostume'},
-                {op: 'control_if_else', comment: note(700, 700, 300, 110,
-                    'Each page makes the next one. The last page starts all pages together, then ends the credits.'),
-                i: {
-                    CONDITION: isPage,
-                    SUBSTACK: [cloneMyself, {op: 'looks_previouscostume'}],
-                    SUBSTACK2: [
-                        {op: 'looks_previouscostume'},
-                        broadcast('event_broadcastandwait', SCROLL_MESSAGE, scrollId),
-                        broadcast('event_broadcast', END_MESSAGE, endId)
-                    ]
-                }}
+                {op: 'control_if', i: {CONDITION: isPage, SUBSTACK: [cloneMyself]}},
+                {op: 'looks_previouscostume'},
+                glide(times(divide(textHeight, stageHeight), SPEED), plus(yPosition, textHeight)),
+                {op: 'looks_nextcostume'},
+                {op: 'control_if', i: {CONDITION: not(isPage), SUBSTACK: [
+                    {op: 'event_broadcast', i: {BROADCAST_INPUT: {literal: [11, END_MESSAGE, endId]}}}
+                ]}},
+                {op: 'control_delete_this_clone'}
             ],
             SUBSTACK2: [ // the black screen: fades in, then makes the first page
                 wearCostume(SCREEN),
@@ -295,36 +285,19 @@ const creditScripts = (endId, scrollId, prefix) => {
                 ghost('looks_seteffectto', 100),
                 {op: 'motion_pointindirection', i: {DIRECTION: 90}},
                 {op: 'looks_setsizeto', i: {SIZE: 100}},
-                goTo(0, 0),
+                {op: 'motion_gotoxy', i: {X: 0, Y: 0}},
                 front,
                 repeat(10, [ghost('looks_changeeffectby', -10)]),
                 wearCostume(`${PAGE}1`),
-                goTo(0, minus(0, divide(stageHeight, 2)), note(700, 1650, 300, 100,
-                    'The first page starts just below the stage (the top of its text).')),
                 cloneMyself,
-                wearCostume(SCREEN),
-                goTo(0, 0)
+                wearCostume(SCREEN)
             ]
         }}
-    ]}, {x: 1100, y: 40, script: [
+    ]}, {x: 1000, y: 40, script: [
         {op: 'event_whenbroadcastreceived', f: {BROADCAST_OPTION: [END_MESSAGE, endId]}},
-        {op: 'control_if_else', i: {
-            CONDITION: costumeIs(SCREEN),
-            SUBSTACK: [repeat(10, [ghost('looks_changeeffectby', 10)]), deleteClone],
-            SUBSTACK2: [{op: 'control_if', i: {CONDITION: isPage, SUBSTACK: [deleteClone]}}]
-        }}
-    ]}, {x: 40, y: 2000, script: [
-        {op: 'event_whenbroadcastreceived', f: {BROADCAST_OPTION: [SCROLL_MESSAGE, scrollId]}},
         {op: 'control_if', i: {
-            CONDITION: isPage,
-            SUBSTACK: [
-                repeat(minus(pageNumber, 1), [glide(pageHeight, yPosition)], note(40, 2700, 300, 110,
-                    'Page n waits n - 1 glides for the pages above it: the same glides as theirs, so all pages stay in step.')),
-                repeat(minus({op: 'operator_mathop', f: {OPERATOR: 'ceiling'}, i: {NUM: divide(plus(stageHeight, textHeight(costumeName)), pageHeight)}}, 1),
-                    [glide(pageHeight, plus(yPosition, pageHeight))]),
-                glide(minus(endY, yPosition), endY, note(400, 2700, 300, 130,
-                    `Scroll speed: change the ${SPEED} in all three glide blocks (seconds the text takes to cross the stage, smaller = faster).`))
-            ]
+            CONDITION: {op: 'operator_equals', i: {OPERAND1: costumeName, OPERAND2: SCREEN}},
+            SUBSTACK: [repeat(10, [ghost('looks_changeeffectby', 10)]), {op: 'control_delete_this_clone'}]
         }}
     ]}], prefix);
 };
@@ -354,8 +327,9 @@ const addToBackpack = async blocks => {
         const items = await localBackpack.getBackpackContents({limit: 1000, offset: 0});
         const old = items.find(item => item.type === 'script' && item.name === BACKPACK_NAME);
         if (old) {
-            // the Animated Text version is replaced
-            if (!new TextDecoder().decode(old.bodyData).includes('"text_')) return;
+            // older versions (Animated Text, "credits scroll") are replaced
+            const body = new TextDecoder().decode(old.bodyData);
+            if (!body.includes('"text_') && !body.includes(SCROLL_MESSAGE)) return;
             await localBackpack.deleteBackpackObject({id: old.id});
         }
         const blockObjects = Object.values(blocks._blocks).map(b => {
@@ -376,8 +350,12 @@ const addToBackpack = async blocks => {
 // A sprite made by an older version: blank costume, no scripts (it gets replaced by a new one)
 const isOldSprite = sprite => sprite.getCostumes().length === 1 && sprite.getCostumes()[0].name === 'blank' &&
     Object.keys(sprite.blocks._blocks).length === 0;
-// A sprite made by the Animated Text version: its credits scripts (they use the costumes "credits
-// screen" / "credits text") are replaced, the user's other scripts stay.
+// A sprite made by an older version (Animated Text, or the first version without it, which used the
+// message "credits scroll"): its credits scripts (they use the costumes "credits screen" / "credits
+// text") are replaced, the user's other scripts stay.
+const needsUpgrade = sprite => sprite.getCostumeIndexByName(OLD_TEXT) >= 0 || Object.values(sprite.blocks._blocks)
+    .some(b => b.opcode === 'event_whenbroadcastreceived' && b.fields.BROADCAST_OPTION &&
+        b.fields.BROADCAST_OPTION.value === SCROLL_MESSAGE);
 const isOldScript = (blocks, topId) => {
     const top = blocks.getBlock(topId);
     if (!['event_whenthisspriteclicked', 'control_start_as_clone', 'event_whenbroadcastreceived'].includes(top.opcode)) return false;
@@ -495,7 +473,7 @@ export default function installCredits (vm) {
             stage.createVariable(id, name, 'broadcast_msg');
             return id;
         };
-        return creditScripts(messageId(END_MESSAGE), messageId(SCROLL_MESSAGE), `pmcr${Date.now().toString(36)}_`);
+        return creditScripts(messageId(END_MESSAGE), `pmcr${Date.now().toString(36)}_`);
     };
     const restoreEditingTarget = previous => {
         if (previous && runtime.getTargetById(previous)) vm.setEditingTarget(previous);
@@ -591,7 +569,7 @@ export default function installCredits (vm) {
         }
         if (!sprite) return;
         let changed = false;
-        if (sprite.getCostumeIndexByName(OLD_TEXT) >= 0) {
+        if (needsUpgrade(sprite)) {
             await upgradeScripts(sprite);
             changed = true;
         }
