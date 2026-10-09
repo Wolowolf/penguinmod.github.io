@@ -91,10 +91,7 @@ import fr3dPhysicsInsetExtensionIcon from './penguinmod/extensions/3d_physics_ic
 // virtal realty
 import jgVrExtensionIcon from './penguinmod/extensions/vr_extension.png';
 
-import theshovelCustomStylesIcon from './penguinmod/orgtw/CustomStyles.svg';
-import theshovelCanvasEffectsIcon from './penguinmod/extensions/canvas_effects.svg';
 import theshovelLzCompressIcon from './penguinmod/orgtw/lz-compress2.svg';
-import theshovelColorPickerIcon from './penguinmod/orgtw/ColorPicker.svg';
 
 // sharkpool
 import sharkpoolPrintingIcon from './penguinmod/extensions/printing.svg';
@@ -343,15 +340,6 @@ const menuItems = [
         featured: true
     },
     {
-        name: 'Custom Styles',
-        extensionId: 'shovelcss',
-        iconURL: theshovelCustomStylesIcon,
-        tags: ['penguinmod', 'graphics'],
-        description: 'Customize the appearance of variable monitors and prompts in your project.',
-        extDeveloper: 'TheShovel',
-        featured: true
-    },
-    {
         name: 'Physics',
         extensionId: 'https://extensions.turbowarp.org/box2d.js',
         tags: ['turbowarp'],
@@ -386,16 +374,6 @@ const menuItems = [
         tags: ['penguinmod'],
         description: 'Place sprites on grids.',
         extDeveloper: 'SharkPool-SP',
-        featured: true
-    },
-    {
-        name: 'Canvas Effects',
-        extensionId: 'theshovelcanvaseffects',
-        iconURL: theshovelCanvasEffectsIcon,
-        tags: ['penguinmod', 'graphics'],
-        description: 'Apply visual effects to the entire stage.',
-        extDeveloper: 'TheShovel',
-        credits: 'SharkPool',
         featured: true
     },
     {
@@ -520,15 +498,6 @@ const menuItems = [
         description: 'Blocks to place and move around frames that contain HTML content or websites.',
         featured: true,
         internetConnectionRequired: true
-    },
-    {
-        name: 'Color Picker',
-        extensionId: 'shovelColorPicker',
-        iconURL: theshovelColorPickerIcon,
-        tags: ['penguinmod'],
-        description: 'Allow the user to choose a color using the built-in color picker, so you don\'t need to make your own.',
-        extDeveloper: 'TheShovel',
-        featured: true
     },
     {
         name: (
@@ -761,15 +730,6 @@ const menuItems = [
         description: 'For logging and variable utilization.',
         featured: true,
         extDeveloper: 'silvxrcat'
-    },
-    {
-        name: 'All Menus',
-        extensionId: 'https://extensions.penguinmod.com/extensions/Lily/AllMenus.js',
-        iconURL: 'https://extensions.penguinmod.com/images/Lily/AllMenus.svg',
-        tags: ['penguinmod'],
-        description: 'Every dropdown menu for each block, in one extension.',
-        extDeveloper: 'LilyMakesThings',
-        featured: true
     },
     {
         // not really an extension, but it's easiest to present it as one
