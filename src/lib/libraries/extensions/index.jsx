@@ -23,6 +23,7 @@ import penguinmodLibraryExtensionIcon from './penguinmod/library.svg';
 import ExtForgeIcon from './penguinmod/extforge.svg';
 
 import filesExtensionIcon from './penguinmod/extensions/files.svg';
+import jgTweenExtensionIcon from './penguinmod/extensions/tween.svg';
 import jgTailgatingExtensionIcon from './penguinmod/extensions/tailgating.png';
 import jgRuntimeExtensionIcon from './penguinmod/extensions/runtime.svg';
 import jgPrismExtensionIcon from './penguinmod/extensions/prism.png';
@@ -366,7 +367,7 @@ const menuItems = [
         extensionId: 'jgTween',
         credits: 'easings.net, Arrow & GarboMuffin',
         description: 'Smoothly animating values using different easing functions and directions.',
-        iconURL: 'https://extensions.turbowarp.org/images/JeremyGamer13/tween.svg',
+        iconURL: jgTweenExtensionIcon,
         tags: ['penguinmod'],
         featured: true
     },
