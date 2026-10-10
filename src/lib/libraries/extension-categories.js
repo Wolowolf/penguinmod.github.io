@@ -1,274 +1,301 @@
-// The 21 topic categories of the extension library. Each extension is listed once, under its key:
-// the id of a built-in extension, or the part of a gallery address after the host (without
-// "extensions/" or "extension-code/"). An extension with no entry here gets no topic tag.
+// The topic categories of the extension library, in the order the list shows them (most useful for a
+// beginner making games first). Each extension is listed once, under its key: the id of a built-in
+// extension, or the part of a gallery address after the host (without "extensions/" or
+// "extension-code/"). Inside a category the list follows the order below: the most used first,
+// extensions that work together next to each other. An extension with no entry gets no topic tag.
 export const categories = [
-    { tag: 'cat_expansions', label: 'Block Category Expansions' },
-    { tag: 'cat_sprites', label: 'Sprites / Costumes / Clones' },
-    { tag: 'cat_animation', label: 'Animation / Motion' },
-    { tag: 'cat_graphics', label: 'Graphics / Rendering' },
-    { tag: 'cat_threed', label: '3D / Vectors' },
+    { tag: 'cat_expansions', label: 'Block Expansions' },
+    { tag: 'cat_sprites', label: 'Sprites / Clones' },
+    { tag: 'cat_looks', label: 'Costumes / Effects' },
+    { tag: 'cat_animation', label: 'Animation / Particles' },
+    { tag: 'cat_pen', label: 'Pen / Drawing / Colors' },
+    { tag: 'cat_camera', label: 'Camera / Screen' },
     { tag: 'cat_physics', label: 'Physics / Collisions' },
-    { tag: 'cat_sound', label: 'Sound / Music / Speech' },
-    { tag: 'cat_camera', label: 'Camera / Video / Face' },
+    { tag: 'cat_threed', label: '3D / AR' },
     { tag: 'cat_input', label: 'Input / Controls' },
-    { tag: 'cat_ui', label: 'UI / Popups / Notifications' },
-    { tag: 'cat_control', label: 'Project / Script Control' },
+    { tag: 'cat_sound', label: 'Sound / Music / Speech' },
+    { tag: 'cat_video', label: 'Video / Webcam' },
+    { tag: 'cat_ui', label: 'Text Display / Popups' },
+    { tag: 'cat_flow', label: 'Pause / Scenes / Runtime' },
+    { tag: 'cat_storage', label: 'Saving / Files' },
     { tag: 'cat_data', label: 'Variables / Lists / Data' },
-    { tag: 'cat_text', label: 'Text / Strings' },
     { tag: 'cat_math', label: 'Math / Numbers / Random' },
-    { tag: 'cat_time', label: 'Time / Dates' },
-    { tag: 'cat_storage', label: 'Storage / Files' },
-    { tag: 'cat_encoding', label: 'Encoding / Conversion / Security' },
-    { tag: 'cat_network', label: 'Network / Web Services' },
-    { tag: 'cat_browser', label: 'Browser / Window / Device' },
-    { tag: 'cat_programming', label: 'Programming / Developer Tools' },
-    { tag: 'cat_utility', label: 'Utility Collections' }
+    { tag: 'cat_time', label: 'Time / Timers' },
+    { tag: 'cat_text', label: 'Text / Strings' },
+    { tag: 'cat_utility', label: 'Utility Collections' },
+    { tag: 'cat_network', label: 'Multiplayer / Web Requests' },
+    { tag: 'cat_services', label: 'Web Services / Accounts' },
+    { tag: 'cat_browser', label: 'Browser / Device' },
+    { tag: 'cat_encoding', label: 'Encoding / Security' },
+    { tag: 'cat_programming', label: 'Custom Blocks / Programming' },
+    { tag: 'cat_debug', label: 'Debugging / Editor Tools' }
 ];
 
 const keysByTag = {
+    // more blocks for the built-in categories, in the editor's category order
     cat_expansions: [
         'pmMotionExpansion',
-        'pmEventsExpansion',
-        'pmControlsExpansion',
-        'pmSensingExpansion',
-        'pmOperatorsExpansion',
-        'obviousAlexC/SensingPlus.js',
         'Lily/LooksPlus.js',
-        'Hyper-Sense-V2.js',
+        'pmEventsExpansion',
+        'Messages-Plus.js',
+        'pmControlsExpansion',
         'Extra-Controls.js',
-        'Messages-Plus.js'
+        'pmSensingExpansion',
+        'obviousAlexC/SensingPlus.js',
+        'Hyper-Sense-V2.js',
+        'pmOperatorsExpansion'
     ],
     cat_sprites: [
         'Lily/ClonesPlus.js',
-        'jwTargets',
         'Sprite-Parenting.js',
-        'Turbo-Skins.js',
+        'jgTailgating',
+        'SharkPool/Tile-Grids.js',
+        'Lily/Assets.js',
+        'jwTargets'
+    ],
+    cat_looks: [
+        'Sprite-Effects-V2.js',
+        'stretch.js',
         'MubiLop/spritesheeter.js',
         'SVG-Spritesheets.js',
         'GIF-Manager.js',
-        'Lily/Assets.js',
-        'SharkPool/Tile-Grids.js'
+        'Turbo-Skins.js',
+        'TheShovel/CanvasEffects.js',
+        'Gen1x/lighting.js',
+        'Xeltalliv/clippingblending.js',
+        'CST1229/images.js',
+        'Image-Editor.js'
     ],
     cat_animation: [
         'jgTween',
         'Animations.js',
-        'jgTailgating'
+        'Particle-Engine.js'
     ],
-    cat_graphics: [
+    cat_pen: [
         'pen',
         'obviousAlexC/penPlus.js',
-        'Pen-Papers.js',
-        'pmCamera',
         'Layer-Control.js',
-        'stretch.js',
-        'Xeltalliv/clippingblending.js',
-        'TheShovel/CanvasEffects.js',
-        'Sprite-Effects-V2.js',
-        'Particle-Engine.js',
-        'Gen1x/lighting.js',
-        'CST1229/images.js',
-        'Image-Editor.js',
-        'jwColor',
+        'Pen-Papers.js',
         'Color-Master.js',
+        'jwColor',
         'TheShovel/ColorPicker.js'
+    ],
+    cat_camera: [
+        'pmCamera',
+        'DogeisCut/Resolution.js',
+        'CubesterYT/WindowControls.js'
+    ],
+    cat_physics: [
+        'box2d.js',
+        'Lazy-Collisions.js',
+        'Rigidbodies.js',
+        'pooiod/Box2D.js',
+        'NishiOwO/ode.js'
     ],
     cat_threed: [
         'Xeltalliv/simple3D.js',
         'ObviousAlexC/3DMath.js',
         'Div/divVecQuat.js',
-        'jwVector',
         'ar.js'
-    ],
-    cat_physics: [
-        'box2d.js',
-        'pooiod/Box2D.js',
-        'NishiOwO/ode.js',
-        'Rigidbodies.js',
-        'Lazy-Collisions.js'
-    ],
-    cat_sound: [
-        'music',
-        'Tune-Shark-V3.js',
-        'SharkPool/Sound-Waves.js',
-        'Lily/SoundExpanded.js',
-        'MIDI-Tools.js',
-        'Recording-V2.js',
-        'Newgrounds-Audio.js',
-        'Gen1x/beat_sync.js',
-        'PuzzlingGGG/ttsrV2.js',
-        'pooiod/Dictation.js'
-    ],
-    cat_camera: [
-        'videoSensing',
-        'lab/face-sensing.js',
-        'Camera-Sensing-Plus.js',
-        'lab/video-sprites.js',
-        'Lily/Video.js',
-        'pooiod/VideoSharing.js'
     ],
     cat_input: [
         'KeysPlusV2.js',
         'Gamepad-Expanded.js',
-        'CubesterYT/KeySimulation.js',
-        'pointerlock.js',
         'cursor.js',
+        'pointerlock.js',
         'veggiecan/mobilekeyboard.js',
-        'electricfuzzball_pm/MIDI.js',
-        'gaimerI17/DeviceMotion.js'
+        'gaimerI17/DeviceMotion.js',
+        'CubesterYT/KeySimulation.js',
+        'electricfuzzball_pm/MIDI.js'
+    ],
+    cat_sound: [
+        'Lily/SoundExpanded.js',
+        'music',
+        'Tune-Shark-V3.js',
+        'Newgrounds-Audio.js',
+        'SharkPool/Sound-Waves.js',
+        'Gen1x/beat_sync.js',
+        'MIDI-Tools.js',
+        'Recording-V2.js',
+        'PuzzlingGGG/ttsrV2.js',
+        'pooiod/Dictation.js'
+    ],
+    cat_video: [
+        'Lily/Video.js',
+        'YouTube-Operations.js',
+        'videoSensing',
+        'Camera-Sensing-Plus.js',
+        'lab/video-sprites.js',
+        'lab/face-sensing.js',
+        'pooiod/VideoSharing.js'
     ],
     cat_ui: [
-        'Popup-Phoenix.js',
+        'Gen1x/iris-text.js',
+        'SharkPool/Font-Manager.js',
         'Speech-Bubbles.js',
-        'TheShovel/CustomStyles.js',
-        'mdwalters/notifications.js',
+        'Popup-Phoenix.js',
         'MubiLop/toastnotifs.js',
-        'Gen1x/iris-text.js'
+        'mdwalters/notifications.js',
+        'TheShovel/CustomStyles.js'
     ],
-    cat_control: [
+    cat_flow: [
         'Pause.js',
         'Scenes.js',
-        'Script-Control.js',
+        'runtime-options.js',
+        'jgRuntime',
         'Runtime-Events.js',
         'jgScripts',
-        'jgRuntime',
-        'runtime-options.js'
+        'Script-Control.js'
+    ],
+    cat_storage: [
+        'local-storage.js',
+        'Gen1x/storage_plus.js',
+        'Ikelene/serverStorageExtension.js',
+        'Files-Expanded.js',
+        'Anonymous_cat1/updateFile.js',
+        'CST1229/zip.js',
+        '0832/rxFS2.js'
     ],
     cat_data: [
+        'Variables-Expanded.js',
+        'qxsck/var-and-list.js',
+        'Lily/ListTools.js',
+        'Temporary-Variables.js',
+        'MrRedstonia/counterplusplus.js',
+        'Skyhigh173/json.js',
+        'JSON-Array.js',
+        'vercte/dictionaries.js',
+        'skyhigh173/object.js',
         'jwArray',
         'DogeisCut/dogeiscutObject.js',
         'DogeisCut/dogeiscutSet.js',
         'Div/divIterators.js',
-        'AndrewGaming587/agBuffer.js',
         'jwXML',
-        'JSON-Array.js',
-        'Skyhigh173/json.js',
-        'skyhigh173/object.js',
-        'vercte/dictionaries.js',
-        'qxsck/var-and-list.js',
-        'Lily/ListTools.js',
-        'Temporary-Variables.js',
-        'Variables-Expanded.js'
+        'AndrewGaming587/agBuffer.js'
+    ],
+    cat_math: [
+        'true-fantom/math.js',
+        'Gen1x/random_utils.js',
+        'iygPerlin',
+        'MubiLop/numutils.js',
+        'DogeisCut/FormatNumbers.js',
+        'jwVector',
+        'NOname-awa/graphics2d.js',
+        'Skyhigh173/bigint.js',
+        'qxsck/big-decimal.js',
+        'true-fantom/base.js',
+        'bitwise.js'
+    ],
+    cat_time: [
+        'steve0greatness/timers.js',
+        'XeroName/Deltatime.js',
+        '-SIPC-/time.js',
+        'ddededodediamante/dateFormatV2.js',
+        'Time-Calculation.js'
     ],
     cat_text: [
         'text.js',
         'Medericoder/textcase.js',
         'DogeisCut/YetAnotherStringExtension.js',
-        'true-fantom/regexp.js',
-        'SharkPool/Font-Manager.js',
         'Embin/embintranslation.js',
-        'MrRedstonia/counterplusplus.js'
+        'true-fantom/regexp.js'
     ],
-    cat_math: [
-        'true-fantom/math.js',
-        'Skyhigh173/bigint.js',
-        'qxsck/big-decimal.js',
-        'MubiLop/numutils.js',
-        'DogeisCut/FormatNumbers.js',
-        'NOname-awa/graphics2d.js',
-        'iygPerlin',
-        'Gen1x/random_utils.js'
+    cat_utility: [
+        'utilities.js',
+        'Lily/lmsutils.js',
+        'TheShovel/ShovelUtils.js',
+        'Sharktilities.js',
+        'jgPrism',
+        'Lily/McUtils.js'
     ],
-    cat_time: [
-        '-SIPC-/time.js',
-        'ddededodediamante/dateFormatV2.js',
-        'Time-Calculation.js',
-        'XeroName/Deltatime.js',
-        'steve0greatness/timers.js'
+    cat_network: [
+        'cloudlink.js',
+        'godslayerakp/ws.js',
+        'MikeDev101/webrtc.js',
+        'godslayerakp/http.js',
+        'fetch.js',
+        'Fetch-Progress.js',
+        'true-fantom/network.js',
+        'NamelessCat/corsproxy.js',
+        'CubesterYT/Webhooks.js',
+        'MubiLop/penguinhook.js',
+        'Codefoxy/cfupload.js',
+        'MubiLop/yeetyourfiles.js'
     ],
-    cat_storage: [
-        'Files-Expanded.js',
-        'CST1229/zip.js',
-        '0832/rxFS2.js',
-        'local-storage.js',
-        'Gen1x/storage_plus.js',
-        'Ikelene/serverStorageExtension.js',
-        'Anonymous_cat1/updateFile.js'
+    cat_services: [
+        'steamworks.js',
+        'itchio.js',
+        'NotHouse/DiscordAuth.js',
+        'Ikelene/googleAuthExtension.js',
+        'bop_tw/Twitch.js',
+        'Spotify.js',
+        'SoundCloud-API.js',
+        'RubyDevs/turboweather.js',
+        'Geolocation.js',
+        'bruhbeast-pixel/CockatielLocation.js',
+        'veggiecan/LongmanDictionary.js'
+    ],
+    cat_browser: [
+        'clipboard.js',
+        'XmerOriginals/closecontrol.js',
+        'DNin/wake-lock.js',
+        'sharkpoolPrinting',
+        'navigator.js',
+        'battery.js',
+        'iframe.js',
+        'jgIframe',
+        'ZXMushroom63/searchApi.js',
+        'pooiod/WindowHasher.js',
+        'DOM-Selector.js'
     ],
     cat_encoding: [
         'encoding.js',
-        'true-fantom/base.js',
-        'bitwise.js',
         'Lily/Cast.js',
         'numerical-encoding-2.js',
-        'Clay/htmlEncode.js',
         'shovellzcompresss',
+        'QR-Codes.js',
+        'Clay/htmlEncode.js',
         'gaimerI17/crypto.js',
-        'MikeDev101/e2ee.js',
-        'QR-Codes.js'
-    ],
-    cat_network: [
-        'fetch.js',
-        'Fetch-Progress.js',
-        'godslayerakp/http.js',
-        'godslayerakp/ws.js',
-        'MikeDev101/webrtc.js',
-        'CubesterYT/Webhooks.js',
-        'MubiLop/penguinhook.js',
-        'true-fantom/network.js',
-        'cloudlink.js',
-        'NamelessCat/corsproxy.js',
-        'Codefoxy/cfupload.js',
-        'MubiLop/yeetyourfiles.js',
-        'bop_tw/Twitch.js',
-        'YouTube-Operations.js',
-        'Spotify.js',
-        'SoundCloud-API.js',
-        'veggiecan/LongmanDictionary.js',
-        'RubyDevs/turboweather.js',
-        'bruhbeast-pixel/CockatielLocation.js',
-        'Geolocation.js',
-        'steamworks.js',
-        'itchio.js',
-        'Ikelene/googleAuthExtension.js',
-        'NotHouse/DiscordAuth.js'
-    ],
-    cat_browser: [
-        'DogeisCut/Resolution.js',
-        'CubesterYT/WindowControls.js',
-        'XmerOriginals/closecontrol.js',
-        'DNin/wake-lock.js',
-        'navigator.js',
-        'battery.js',
-        'clipboard.js',
-        'ZXMushroom63/searchApi.js',
-        'pooiod/WindowHasher.js',
-        'DOM-Selector.js',
-        'jgIframe',
-        'iframe.js',
-        'sharkpoolPrinting'
+        'MikeDev101/e2ee.js'
     ],
     cat_programming: [
-        'SPjavascriptV2',
+        'My-Blocks-Plus.js',
+        'Dropdown-Maker.js',
         'jwLambda',
         'jwScope',
         'jwPointer',
         'jwProto',
-        'My-Blocks-Plus.js',
-        'Dropdown-Maker.js',
         'Lily/AllMenus.js',
-        'Better-Comments.js',
-        'Sprite-Panel.js',
-        '-SIPC-/consoles.js',
-        'TheShovel/shoveldebugger.js',
+        'SPjavascriptV2',
         'TheShovel/extexp.js'
     ],
-    cat_utility: [
-        'utilities.js',
-        'TheShovel/ShovelUtils.js',
-        'Lily/lmsutils.js',
-        'Sharktilities.js',
-        'jgPrism',
-        'Lily/McUtils.js'
+    cat_debug: [
+        'Better-Comments.js',
+        'TheShovel/shoveldebugger.js',
+        '-SIPC-/consoles.js',
+        'Sprite-Panel.js'
     ]
 };
 
 const tagByKey = {};
+const positionByKey = {};
 for (const tag of Object.keys(keysByTag)) {
-    for (const key of keysByTag[tag]) tagByKey[key] = tag;
+    keysByTag[tag].forEach((key, position) => {
+        tagByKey[key] = tag;
+        positionByKey[key] = position;
+    });
 }
 
-export const categoryTagOf = extensionId => {
+const keyOf = extensionId => {
     if (typeof extensionId !== 'string') return null;
     const match = extensionId.match(/^https:\/\/[^/]+\/(?:extensions\/|extension-code\/)?(.*)$/);
-    return tagByKey[match ? match[1] : extensionId] || null;
+    return match ? match[1] : extensionId;
+};
+
+export const categoryTagOf = extensionId => tagByKey[keyOf(extensionId)] || null;
+
+// the place inside its category (extensions without a category: after the others)
+export const categoryPositionOf = extensionId => {
+    const position = positionByKey[keyOf(extensionId)];
+    return typeof position === 'number' ? position : Infinity;
 };

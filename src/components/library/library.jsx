@@ -333,7 +333,8 @@ class LibraryComponent extends React.Component {
                 const rank = order.indexOf(this.getGroupOf(item));
                 return { item, index, rank: rank < 0 ? order.length : rank };
             })
-            .sort((a, b) => (a.rank - b.rank) || (a.index - b.index))
+            // inside a category: the order of extension-categories.js
+            .sort((a, b) => (a.rank - b.rank) || (a.item.categoryPosition - b.item.categoryPosition) || (a.index - b.index))
             .map(entry => entry.item);
         return favorites.concat(rest);
     }
