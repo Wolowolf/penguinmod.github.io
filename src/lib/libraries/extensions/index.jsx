@@ -22,20 +22,12 @@ import turbowarpIcon from './penguinmod/extensions/turbowarp_icon.svg';
 import filesExtensionIcon from './penguinmod/extensions/files.svg';
 import jgTweenExtensionIcon from './penguinmod/extensions/tween.svg';
 import jgTailgatingExtensionIcon from './penguinmod/extensions/tailgating.png';
-import jgRuntimeExtensionIcon from './penguinmod/extensions/runtime.svg';
 import jgPrismExtensionIcon from './penguinmod/extensions/prism.png';
 
 import jwProtoExtensionIcon from './penguinmod/extensions/proto.svg';
 
 
-import jwArrayExtensionThumb from './penguinmod/extensions/jwArray.svg';
-import jwTargetsExtensionThumb from './penguinmod/extensions/jwTargets.svg';
 import jwColorExtensionThumb from './penguinmod/extensions/jwColor.svg';
-import jwVectorExtensionThumb from './penguinmod/extensions/jwVector.svg';
-import jwLambdaExtensionThumb from './penguinmod/extensions/jwLambda.svg';
-import jwScopeExtensionThumb from './penguinmod/extensions/jwScope.svg';
-import jwXMLExtensionIcon from './penguinmod/extensions/jwXML.svg';
-import jwPointerExtensionThumb from './penguinmod/extensions/jwPointer.svg';
 
 import iygPerlinNoiseExtensionIcon from './penguinmod/extensions/perlinnoisebanner.png';
 
@@ -59,7 +51,6 @@ import pointerlockThumb from './penguinmod/extensions/pointerlock.png';
 
 // more icons so they arent just red when the extension color is not red
 import jgIframeExtensionIcon from './penguinmod/extensions/iframe.png';
-import spJSONExtensionIcon from './penguinmod/extensions/sp_json.svg';
 
 // import jgTweeningExtensionIcon from './penguinmod/extensions/tween.png';
 
@@ -73,9 +64,7 @@ import theshovelLzCompressIcon from './penguinmod/orgtw/lz-compress2.svg';
 import sharkpoolPrintingIcon from './penguinmod/extensions/printing.svg';
 import sharkpoolTuneIcon from './penguinmod/extensions/tuneShark.svg';
 import sharkpoolMBPIcon from './penguinmod/extensions/myBlocksPlus.svg';
-import sharkpoolBCIcon from './penguinmod/extensions/BetterComments.svg';
 import sharkpoolPEIcon from './penguinmod/extensions/particleEngine.svg';
-import jgScriptsExtensionIcon from './penguinmod/extensions/scripts.svg';
 import spTurboSkinsIcon from './penguinmod/extensions/turboSkins.svg';
 import spSoundWaveIcon from './penguinmod/extensions/soundWaves.svg';
 import spTempVarsIcon from './penguinmod/extensions/sp_tempVars.svg';
@@ -278,15 +267,6 @@ const menuItems = [
         featured: true
     },
     {
-        name: 'Better Comments',
-        extensionId: 'https://sharkpools-extensions.vercel.app/extension-code/Better-Comments.js',
-        iconURL: sharkpoolBCIcon,
-        tags: ['penguinmod'],
-        description: 'Better Comments with Customization and Markdown support',
-        extDeveloper: 'SharkPool',
-        featured: true
-    },
-    {
         name: 'Particle Engine',
         extensionId: 'https://sharkpools-extensions.vercel.app/extension-code/Particle-Engine.js',
         iconURL: sharkpoolPEIcon,
@@ -366,24 +346,6 @@ const menuItems = [
         featured: true
     },
     {
-        name: 'Swift JSON',
-        extensionId: 'https://sharkpools-extensions.vercel.app/extension-code/JSON-Array.js',
-        iconURL: spJSONExtensionIcon,
-        tags: ['penguinmod'],
-        extDeveloper: 'SharkPool',
-        description: 'FAST Extension for handling JSON objects and arrays efficiently. Recommended if you are heavily using JSON several times in a project.',
-        featured: true
-    },
-    {
-        name: 'Runtime Modifications',
-        extensionId: 'jgRuntime',
-        tags: ['penguinmod'],
-        iconURL: jgRuntimeExtensionIcon,
-        description: 'Blocks for updating Scratch objects like the stage and sprites.',
-        credits: 'TheShovel, showierdata9978, SharkPool',
-        featured: true
-    },
-    {
         name: 'HTTP',
         extensionId: 'https://extensions.turbowarp.org/godslayerakp/http.js',
         iconURL: 'https://extensions.turbowarp.org/images/godslayerakp/http.svg',
@@ -393,14 +355,6 @@ const menuItems = [
         featured: true,
         internetConnectionRequired: true,
         customInsetColor: '#ff4d4d'
-    },
-    {
-        name: 'Scripts',
-        extensionId: 'jgScripts',
-        iconURL: jgScriptsExtensionIcon,
-        tags: ['penguinmod'],
-        description: 'Create compiled scripts with blocks while the project is running.',
-        featured: true
     },
     {
         name: '3D Math',
@@ -548,83 +502,11 @@ const menuItems = [
         featured: true
     },
     {
-        name: 'Arrays',
-        extensionId: 'jwArray',
-        iconURL: jwArrayExtensionThumb,
-        tags: ['penguinmod'],
-        description: 'Store data efficiently in multi-purpose arrays.',
-        extDeveloper: 'jwklong',
-        featured: true
-    },
-    {
-        name: 'Objects',
-        extensionId: 'https://extensions.penguinmod.com/extensions/DogeisCut/dogeiscutObject.js',
-        iconURL: 'https://extensions.penguinmod.com/images/DogeisCut/dogeiscutObject.svg',
-        tags: ['penguinmod'],
-        description: 'Store data efficiently in multi-purpose objects.',
-        extDeveloper: 'DogeisCut',
-        featured: true
-    },
-    {
-        name: 'XML',
-        extensionId: 'jwXML',
-        iconURL: jwXMLExtensionIcon,
-        tags: ['penguinmod'],
-        description: 'Creating, parsing and modifying XML data.',
-        extDeveloper: 'jwklong',
-        featured: true
-    },
-    {
-        name: 'Targets',
-        extensionId: 'jwTargets',
-        iconURL: jwTargetsExtensionThumb,
-        tags: ['penguinmod'],
-        description: 'Direct access to sprites and their clones.',
-        extDeveloper: 'jwklong',
-        featured: true
-    },
-    {
         name: 'Color',
         extensionId: 'jwColor',
         iconURL: jwColorExtensionThumb,
         tags: ['penguinmod'],
         description: 'Utilities for anything involving colors.',
-        extDeveloper: 'jwklong',
-        featured: true
-    },
-    {
-        name: 'Vector',
-        extensionId: 'jwVector',
-        iconURL: jwVectorExtensionThumb,
-        tags: ['penguinmod'],
-        description: 'Vector type for calculating with X and Y coordinates.',
-        extDeveloper: 'jwklong',
-        featured: true
-    },
-    {
-        name: 'Lambda',
-        extensionId: 'jwLambda',
-        iconURL: jwLambdaExtensionThumb,
-        tags: ['penguinmod'],
-        description: 'Create anonymous functions with arguments and execute them.',
-        extDeveloper: 'jwklong',
-        featured: true
-    },
-    {
-        name: 'Scope',
-        extensionId: 'jwScope',
-        iconURL: jwScopeExtensionThumb,
-        tags: ['penguinmod'],
-        description: 'Temporary variables based on block stack. (extra blocks if used with Array extension)',
-        extDeveloper: 'jwklong',
-        featured: true
-    },
-    {
-        name: 'Pointers',
-        extensionId: 'jwPointer',
-        iconURL: jwPointerExtensionThumb,
-        tags: ['penguinmod'],
-        description: 'Define references to values. (extra blocks if used with Array extension)',
         extDeveloper: 'jwklong',
         featured: true
     },

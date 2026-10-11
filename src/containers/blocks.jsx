@@ -22,6 +22,7 @@ import defineDynamicBlock from '../lib/define-dynamic-block';
 import AddonHooks from '../addons/hooks';
 import LoadScratchBlocksHOC from '../lib/tw-load-scratch-blocks-hoc.jsx';
 import uid from "../lib/uid.js";
+import attachBetterComments from '../lib/better-comments.js';
 
 import {connect} from 'react-redux';
 import {updateToolbox} from '../reducers/toolbox';
@@ -225,6 +226,7 @@ class Blocks extends React.Component {
         addFunctionListener(this.workspace, 'zoom', this.onWorkspaceMetricsChange);
 
         this.attachVM();
+        this.betterComments = attachBetterComments(this.ScratchBlocks, this.workspace, this.props.vm);
         // Only update blocks/vm locale when visible to avoid sizing issues
         // If locale changes while not visible it will get handled in didUpdate
         if (this.props.isVisible) {
@@ -294,6 +296,7 @@ class Blocks extends React.Component {
     }
     componentWillUnmount () {
         this.detachVM();
+        this.betterComments.detach();
         this.workspace.dispose();
         clearTimeout(this.toolboxUpdateTimeout);
         this.props.vm.setInEditor(false);
@@ -511,6 +514,7 @@ class Blocks extends React.Component {
             log.error('Workspace Update Error:', error);
         }
         this.workspace.addChangeListener(this.props.vm.blockListener);
+        this.betterComments.refreshAll();
 
         if (this.props.vm.editingTarget && this.props.workspaceMetrics.targets[this.props.vm.editingTarget.id]) {
             const {scrollX, scrollY, scale} = this.props.workspaceMetrics.targets[this.props.vm.editingTarget.id];

@@ -27,8 +27,7 @@ export const categories = [
     { tag: 'cat_services', label: 'Web Services / Accounts' },
     { tag: 'cat_browser', label: 'Browser / Device' },
     { tag: 'cat_encoding', label: 'Encoding / Security' },
-    { tag: 'cat_programming', label: 'Custom Blocks / Programming' },
-    { tag: 'cat_debug', label: 'Debugging / Editor Tools' }
+    { tag: 'cat_programming', label: 'Custom Blocks / Programming' }
 ];
 
 const keysByTag = {
@@ -49,9 +48,7 @@ const keysByTag = {
         'Lily/ClonesPlus.js',
         'Sprite-Parenting.js',
         'jgTailgating',
-        'SharkPool/Tile-Grids.js',
-        'Lily/Assets.js',
-        'jwTargets'
+        'SharkPool/Tile-Grids.js'
     ],
     cat_looks: [
         'Sprite-Effects-V2.js',
@@ -62,9 +59,7 @@ const keysByTag = {
         'Turbo-Skins.js',
         'TheShovel/CanvasEffects.js',
         'Gen1x/lighting.js',
-        'Xeltalliv/clippingblending.js',
-        'CST1229/images.js',
-        'Image-Editor.js'
+        'Xeltalliv/clippingblending.js'
     ],
     cat_animation: [
         'jgTween',
@@ -89,14 +84,12 @@ const keysByTag = {
         'box2d.js',
         'Lazy-Collisions.js',
         'Rigidbodies.js',
-        'pooiod/Box2D.js',
-        'NishiOwO/ode.js'
+        'pooiod/Box2D.js'
     ],
     cat_threed: [
         'Xeltalliv/simple3D.js',
         'ObviousAlexC/3DMath.js',
-        'Div/divVecQuat.js',
-        'ar.js'
+        'Div/divVecQuat.js'
     ],
     cat_input: [
         'KeysPlusV2.js',
@@ -139,13 +132,8 @@ const keysByTag = {
         'TheShovel/CustomStyles.js'
     ],
     cat_flow: [
-        'Pause.js',
         'Scenes.js',
-        'runtime-options.js',
-        'jgRuntime',
-        'Runtime-Events.js',
-        'jgScripts',
-        'Script-Control.js'
+        'runtime-options.js'
     ],
     cat_storage: [
         'local-storage.js',
@@ -160,18 +148,7 @@ const keysByTag = {
         'Variables-Expanded.js',
         'qxsck/var-and-list.js',
         'Lily/ListTools.js',
-        'Temporary-Variables.js',
-        'MrRedstonia/counterplusplus.js',
-        'Skyhigh173/json.js',
-        'JSON-Array.js',
-        'vercte/dictionaries.js',
-        'skyhigh173/object.js',
-        'jwArray',
-        'DogeisCut/dogeiscutObject.js',
-        'DogeisCut/dogeiscutSet.js',
-        'Div/divIterators.js',
-        'jwXML',
-        'AndrewGaming587/agBuffer.js'
+        'Temporary-Variables.js'
     ],
     cat_math: [
         'true-fantom/math.js',
@@ -179,7 +156,6 @@ const keysByTag = {
         'iygPerlin',
         'MubiLop/numutils.js',
         'DogeisCut/FormatNumbers.js',
-        'jwVector',
         'NOname-awa/graphics2d.js',
         'Skyhigh173/bigint.js',
         'qxsck/big-decimal.js',
@@ -189,16 +165,12 @@ const keysByTag = {
     cat_time: [
         'steve0greatness/timers.js',
         'XeroName/Deltatime.js',
-        '-SIPC-/time.js',
-        'ddededodediamante/dateFormatV2.js',
         'Time-Calculation.js'
     ],
     cat_text: [
         'text.js',
         'Medericoder/textcase.js',
-        'DogeisCut/YetAnotherStringExtension.js',
-        'Embin/embintranslation.js',
-        'true-fantom/regexp.js'
+        'Embin/embintranslation.js'
     ],
     cat_utility: [
         'utilities.js',
@@ -260,20 +232,8 @@ const keysByTag = {
     ],
     cat_programming: [
         'My-Blocks-Plus.js',
-        'Dropdown-Maker.js',
-        'jwLambda',
-        'jwScope',
-        'jwPointer',
         'jwProto',
-        'Lily/AllMenus.js',
-        'SPjavascriptV2',
-        'TheShovel/extexp.js'
-    ],
-    cat_debug: [
-        'Better-Comments.js',
-        'TheShovel/shoveldebugger.js',
-        '-SIPC-/consoles.js',
-        'Sprite-Panel.js'
+        'SPjavascriptV2'
     ]
 };
 
