@@ -346,17 +346,6 @@ const menuItems = [
         featured: true
     },
     {
-        name: 'HTTP',
-        extensionId: 'https://extensions.turbowarp.org/godslayerakp/http.js',
-        iconURL: 'https://extensions.turbowarp.org/images/godslayerakp/http.svg',
-        insetIconURL: turbowarpIcon,
-        tags: ['turbowarp'],
-        description: 'Comprehensive extension for interacting with external websites.',
-        featured: true,
-        internetConnectionRequired: true,
-        customInsetColor: '#ff4d4d'
-    },
-    {
         name: '3D Math',
         extensionId: 'https://extensions.penguinmod.com/extensions/ObviousAlexC/3DMath.js',
         iconURL: 'https://extensions.penguinmod.com/images/ObviousAlexC/3DMath.svg',

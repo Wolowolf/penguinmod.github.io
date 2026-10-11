@@ -137,12 +137,8 @@ const keysByTag = {
     ],
     cat_storage: [
         'local-storage.js',
-        'Gen1x/storage_plus.js',
-        'Ikelene/serverStorageExtension.js',
         'Files-Expanded.js',
-        'Anonymous_cat1/updateFile.js',
-        'CST1229/zip.js',
-        '0832/rxFS2.js'
+        'CST1229/zip.js'
     ],
     cat_data: [
         'Variables-Expanded.js',
@@ -155,7 +151,6 @@ const keysByTag = {
         'Gen1x/random_utils.js',
         'iygPerlin',
         'MubiLop/numutils.js',
-        'DogeisCut/FormatNumbers.js',
         'NOname-awa/graphics2d.js',
         'Skyhigh173/bigint.js',
         'qxsck/big-decimal.js',
@@ -184,12 +179,8 @@ const keysByTag = {
         'cloudlink.js',
         'godslayerakp/ws.js',
         'MikeDev101/webrtc.js',
-        'godslayerakp/http.js',
-        'fetch.js',
-        'Fetch-Progress.js',
         'true-fantom/network.js',
         'NamelessCat/corsproxy.js',
-        'CubesterYT/Webhooks.js',
         'MubiLop/penguinhook.js',
         'Codefoxy/cfupload.js',
         'MubiLop/yeetyourfiles.js'
@@ -222,8 +213,6 @@ const keysByTag = {
     ],
     cat_encoding: [
         'encoding.js',
-        'Lily/Cast.js',
-        'numerical-encoding-2.js',
         'shovellzcompresss',
         'QR-Codes.js',
         'Clay/htmlEncode.js',
