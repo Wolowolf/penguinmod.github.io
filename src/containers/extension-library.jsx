@@ -4,7 +4,6 @@ import React from 'react';
 import VM from 'scratch-vm';
 import { defineMessages, injectIntl, intlShape } from 'react-intl';
 import log from '../lib/log';
-import { manuallyTrustExtension } from './tw-security-manager.jsx';
 
 import extensionLibraryContent from '../lib/libraries/extensions/index.jsx';
 import extensionTags from '../lib/libraries/extension-tags';
@@ -175,23 +174,11 @@ class ExtensionLibrary extends React.PureComponent {
         // }
         
         const extensionId = item.extensionId;
-        const isCustomURL = !item.disabled && !extensionId;
-        if (isCustomURL) {
-            this.props.onOpenCustomExtensionModal();
-            return;
-        }
         if (extensionId === 'special_penguinmodExtensionLibrary') {
             window.open('https://extensions.penguinmod.com/?editor=true');
             return;
         }
         const url = (item.extensionURL ? item.extensionURL : extensionId);
-        if (item._unsandboxed) {
-            if (url.startsWith("data:")) {
-                manuallyTrustExtension(url);
-            } else {
-                await this.props.vm.securityManager.canLoadExtensionFromProject(url);
-            }
-        }
         if (!item.disabled) {
             if (this.props.vm.extensionManager.isExtensionLoaded(extensionId)) {
                 this.props.onCategorySelected(extensionId);
@@ -270,7 +257,6 @@ class ExtensionLibrary extends React.PureComponent {
 ExtensionLibrary.propTypes = {
     intl: intlShape.isRequired,
     onCategorySelected: PropTypes.func,
-    onOpenCustomExtensionModal: PropTypes.func,
     onRequestClose: PropTypes.func,
     visible: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired // eslint-disable-line react/no-unused-prop-types

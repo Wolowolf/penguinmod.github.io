@@ -123,46 +123,6 @@
     height: 100%;
 }
 
-.library-item-delete {
-    background: transparent;
-    position: absolute;
-    top: calc(11.5rem + 4px);
-    right: 4px;
-    width: 24px;
-    height: 24px;
-    border: 0;
-    margin: 0;
-    padding: 0;
-}
-.library-item-delete img {
-    background: transparent;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 24px;
-    height: 24px;
-    border: 0;
-    margin: 0;
-    padding: 0;
-}
-
-/* delete button */
-.library-item-delete > img {
-    filter: brightness(0);
-    opacity: 0.25;
-}
-[theme="dark"] .library-item-delete>img {
-    filter: saturate(0) brightness(255);
-}
-.library-item-delete:hover > img {
-    filter: brightness(1);
-    opacity: 1;
-}
-.library-item-delete:active > img {
-    filter: brightness(0.25);
-    opacity: 1;
-}
-
 /* unfavorited items */
 .library-item-favorite[data-activated="false"] > img[data-usedimage="true"] {
     filter: brightness(0);
@@ -203,23 +163,6 @@
     border-color: $ui-black-transparent;
 }
 
-.inspect-extension {
-    position: relative;
-    background: #00c3ff;
-    color: white;
-    font-weight: bold;
-    padding: 0;
-    margin: 0 4px;
-    border: 0;
-    border-radius: 4px;
-    float: right;
-    width: 20px;
-    height: 20px;
-}
-.inspect-extension > img {
-    width: 20px;
-    height: 20px;
-}
 .small-bottom-margin {
     margin-bottom: 4px;
 }
@@ -388,7 +331,7 @@
 .featured-authors {
     position: absolute;
     right: 0.5rem;
-    bottom: 0.4rem;
+    bottom: 2px; /* where 0.4rem put them before the picture became a block */
     max-width: 90%;
     text-align: right;
     font-size: 0.75rem;
@@ -400,6 +343,8 @@
 }
 
 .featured-image {
+    /* block: no gap under the picture, so corner overlays measure from its real edge */
+    display: block;
     width: 100%;
     height: var(--ext-img-h, 11.5rem);
     aspect-ratio: 300 / 184;

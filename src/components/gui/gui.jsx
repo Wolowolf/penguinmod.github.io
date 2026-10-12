@@ -39,7 +39,6 @@ import TelemetryModal from '../telemetry-modal/telemetry-modal.jsx';
 import TWUsernameModal from '../../containers/tw-username-modal.jsx';
 import TWSettingsModal from '../../containers/tw-settings-modal.jsx';
 import TWSecurityManager from '../../containers/tw-security-manager.jsx';
-import TWCustomExtensionModal from '../../containers/tw-custom-extension-modal.jsx';
 import TWRestorePointManager from '../../containers/tw-restore-point-manager.jsx';
 import TWFontsModal from '../../containers/tw-fonts-modal.jsx';
 import PMProfilerModal from '../pm-profiler/pm-profiler-modal.jsx';
@@ -177,7 +176,6 @@ const GUIComponent = props => {
         tipsLibraryVisible,
         usernameModalVisible,
         settingsModalVisible,
-        customExtensionModalVisible,
         fontsModalVisible,
         profilerModalVisible,
         isPlayground,
@@ -385,7 +383,6 @@ const GUIComponent = props => {
                 <TWRestorePointManager />
                 {usernameModalVisible && <TWUsernameModal />}
                 {settingsModalVisible && <TWSettingsModal />}
-                {customExtensionModalVisible && <TWCustomExtensionModal />}
                 {fontsModalVisible && <TWFontsModal />}
                 {profilerModalVisible && <PMProfilerModal vm={vm} />}
                 <PMExtensionModals vm={vm} />
@@ -763,7 +760,6 @@ GUIComponent.propTypes = {
     tipsLibraryVisible: PropTypes.bool,
     usernameModalVisible: PropTypes.bool,
     settingsModalVisible: PropTypes.bool,
-    customExtensionModalVisible: PropTypes.bool,
     fontsModalVisible: PropTypes.bool,
     profilerModalVisible: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired

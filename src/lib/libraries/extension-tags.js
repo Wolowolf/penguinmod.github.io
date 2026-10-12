@@ -5,8 +5,7 @@ export default [
     { tag: 'cat_favorites', intlLabel: 'Favorites', type: 'jump' },
     ...categories.map(category => ({ tag: category.tag, intlLabel: category.label, type: 'jump' })),
     { tag: 'divider3', intlLabel: messages.scratch, type: 'divider' },
-    { tag: 'custom', intlLabel: messages.customextension, type: 'custom', func: (library) => {
-        library.select(''); // selects custom extension since it's id is ''
-    } },
-    { tag: 'columns', intlLabel: 'Columns', type: 'columns' }
+    { tag: 'columns', intlLabel: 'Columns', type: 'columns' },
+    { tag: 'difficulty', intlLabel: 'Difficulty', type: 'difficulty' },
+    { tag: 'difficultyBadges', intlLabel: 'Hide difficulty level', type: 'difficultyBadges' }
 ];

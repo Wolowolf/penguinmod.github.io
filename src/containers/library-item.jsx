@@ -20,7 +20,6 @@ class LibraryItem extends React.PureComponent {
             'handlePlay',
             'handleStop',
             'processFavoriteClick',
-            'handleDeleteClick',
             'rotateIcon',
             'startRotatingIcons',
             'stopRotatingIcons'
@@ -60,26 +59,6 @@ class LibraryItem extends React.PureComponent {
     }
     handleFavoriteClick (...args) {
         this.processFavoriteClick(...args);
-    }
-    async handleDeleteClick () {
-        const id = this.props._id;
-        const db = "pm:favorited_extensions";
-        let favorites = [];
-        const _saved = await localforage.getItem(db);
-        if (_saved) {
-            favorites = _saved;
-        }
-
-        // remove from favorites
-        favorites = favorites.filter(item => {
-            // console.log(item._id, id);
-            return item._id !== id;
-        });
-
-        await localforage.setItem(db, favorites);
-
-        // update on library.jsx
-        this.props.onFavoriteUpdated();
     }
     handleFocus (id) {
         if (!this.props.showPlayButton) {
@@ -199,7 +178,6 @@ class LibraryItem extends React.PureComponent {
                 soundLength={this.props.soundLength}
                 icons={this.props.icons}
                 id={this.props.id}
-                _id={this.props._id}
                 incompatibleWithScratch={this.props.incompatibleWithScratch}
                 extensionWarningOnImport={this.props.extensionWarningOnImport}
                 insetIconURL={this.props.insetIconURL}
@@ -213,11 +191,7 @@ class LibraryItem extends React.PureComponent {
                 favorited={this.props.favorited}
                 used={this.props.used}
                 difficulty={this.props.difficulty}
-                deletable={this.props.deletable}
-                custom={this.props.custom}
-                _unsandboxed={this.props._unsandboxed}
                 onFavoriteClick={this.handleFavoriteClick}
-                onDeleteClick={this.handleDeleteClick}
 
                 onBlur={this.handleBlur}
                 onClick={this.handleClick}
@@ -307,11 +281,7 @@ LibraryItem.propTypes = {
     favorited: PropTypes.bool,
     used: PropTypes.bool,
     difficulty: PropTypes.number,
-    deletable: PropTypes.bool,
-    custom: PropTypes.bool,
     onFavoriteUpdated: PropTypes.func,
-    _unsandboxed: PropTypes.bool,
-    _id: PropTypes.string,
 };
 
 export default injectIntl(LibraryItem);

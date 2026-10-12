@@ -30,8 +30,7 @@ import {activateColorPicker} from '../reducers/color-picker';
 import {
     closeExtensionLibrary,
     openSoundRecorder,
-    openConnectionModal,
-    openCustomExtensionModal
+    openConnectionModal
 } from '../reducers/modals';
 import {activateCustomProcedures, deactivateCustomProcedures} from '../reducers/custom-procedures';
 import {setConnectionModalExtensionId} from '../reducers/connection-modal';
@@ -98,11 +97,6 @@ class Blocks extends React.Component {
                 text: 'Remove Unused Extensions',
                 enabled: true,
                 callback: () => props.vm.extensionManager.removeUnusedExtensions()
-            },
-            {
-                text: 'Replace Extension',
-                enabled: true,
-                callback: ext => this.props.onOpenCustomExtensionModal(ext)
             }
         ]);
         window.ScratchBlocks = this.ScratchBlocks;
@@ -794,7 +788,6 @@ class Blocks extends React.Component {
             onActivateColorPicker,
             onOpenConnectionModal,
             onOpenSoundRecorder,
-            onOpenCustomExtensionModal,
             updateToolboxState,
             onActivateCustomProcedures,
             onRequestCloseExtensionLibrary,
@@ -848,7 +841,6 @@ class Blocks extends React.Component {
                         onCategorySelected={this.handleCategorySelected}
                         onEnableProcedureReturns={this.handleEnableProcedureReturns}
                         onRequestClose={onRequestCloseExtensionLibrary}
-                        onOpenCustomExtensionModal={this.props.onOpenCustomExtensionModal}
                     />
                 ) : null}
                 {customProceduresVisible ? (
@@ -882,7 +874,6 @@ Blocks.propTypes = {
     onActivateCustomProcedures: PropTypes.func,
     onOpenConnectionModal: PropTypes.func,
     onOpenSoundRecorder: PropTypes.func,
-    onOpenCustomExtensionModal: PropTypes.func,
     onRequestCloseCustomProcedures: PropTypes.func,
     onRequestCloseExtensionLibrary: PropTypes.func,
     options: PropTypes.shape({
@@ -980,7 +971,6 @@ const mapDispatchToProps = dispatch => ({
         dispatch(activateTab(SOUNDS_TAB_INDEX));
         dispatch(openSoundRecorder());
     },
-    onOpenCustomExtensionModal: swapId => dispatch(openCustomExtensionModal(swapId)),
     onRequestCloseExtensionLibrary: () => {
         dispatch(closeExtensionLibrary());
     },

@@ -15,7 +15,6 @@ import videoSensingInsetIconURL from './videoSensing/video-sensing-small.svg';
 import faceSensingIconURL from './faceSensing/thumb.png';
 
 // turbowarp & gallery icons
-import customExtensionIcon from './custom/custom.svg';
 import turbowarpIcon from './penguinmod/extensions/turbowarp_icon.svg';
 
 
@@ -497,26 +496,6 @@ const menuItems = [
         tags: ['penguinmod'],
         description: 'Utilities for anything involving colors.',
         extDeveloper: 'jwklong',
-        featured: true
-    },
-    {
-        // not really an extension, but it's easiest to present it as one
-        name: (
-            <FormattedMessage
-                defaultMessage="Custom Extension"
-                description="Name of library item to load a custom extension from a remote source"
-                id="tw.customExtension.name"
-            />
-        ),
-        extensionId: '',
-        iconURL: customExtensionIcon,
-        description: (
-            <FormattedMessage
-                defaultMessage="Load custom extensions from URLs, files, or JavaScript source code."
-                description="Description of library item to load a custom extension from a custom source"
-                id="tw.customExtension.description"
-            />
-        ),
         featured: true
     }
 ];

@@ -105,6 +105,41 @@
     background: $motion-primary;
     color: white;
 }
+/* difficulty switches (colours as the badges); a hidden level is dimmed and crossed out */
+.difficulty-bar {
+    cursor: default;
+    background: transparent;
+}
+.difficulty-segment {
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 0;
+    background: #000000;
+    font-weight: bold;
+    cursor: pointer;
+}
+.difficulty-segment[data-difficulty="1"] { color: #3ccf4e; }
+.difficulty-segment[data-difficulty="2"] { color: #ffd600; }
+.difficulty-segment[data-difficulty="3"] { color: #ff9100; }
+.difficulty-segment[data-difficulty="4"] { color: #ff3b30; }
+.difficulty-segment-hidden {
+    opacity: 0.35;
+    text-decoration: line-through;
+}
+.difficulty-badges-button {
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0.35rem 0.5rem;
+    border: 1px solid $motion-transparent;
+    border-radius: 4px;
+    background: transparent;
+    font-size: 0.75rem;
+    cursor: pointer;
+    color: inherit;
+}
+.difficulty-badges-button:hover {
+    background: $motion-transparent;
+}
 .group-heading {
     grid-column: 1 / -1;
     flex: 0 0 100%;

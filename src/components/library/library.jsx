@@ -69,6 +69,8 @@ class LibraryComponent extends React.Component {
             'handleFavoritesUpdate',
             'handleJump',
             'handleColumnsPointer',
+            'handleDifficultyToggle',
+            'handleDifficultyBadgesToggle',
             'setColumnSliderRef',
             'getGroupOrder',
             'getGroupOf',
@@ -82,6 +84,8 @@ class LibraryComponent extends React.Component {
             favorites: [],
             collapsed: false,
             columns: LibraryComponent.loadColumns(),
+            hiddenDifficulties: LibraryComponent.loadHiddenDifficulties(),
+            hideDifficultyBadges: LibraryComponent.loadHideDifficultyBadges(),
             loaded: false,
             data: props.data
         };
@@ -256,16 +260,8 @@ class LibraryComponent extends React.Component {
     handleFilterClear () {
         this.setState({filterQuery: ''});
     }
-    get custom_extensions() {
-        return this.state.favorites
-            .filter(item => (typeof item !== "string"))
-            .map(item => Object.assign(item, { custom: true }));
-    }
     createFilteredData () {
-        const data = [].concat(
-            this.custom_extensions,
-            this.state.data
-        );
+        const data = this.state.data;
 
         const no_tags = this.state.selectedTags.length === 0;
         const no_query = this.state.filterQuery === "";
@@ -317,18 +313,16 @@ class LibraryComponent extends React.Component {
             return filtered;
         }
 
-        // one long list: favorites first, then the topic categories in order, then the rest
-        // (the "Custom Extension" tile is left out: the side bar button does the same)
+        // one long list: favorites first, then the topic categories in order, then the rest;
+        // extensions of a difficulty switched off in the side bar are left out everywhere
         const order = this.getGroupOrder();
         const visible = filtered
-            .filter(item => item.extensionId !== '')
-            .map(item => Object.assign(item, { custom: !!item.custom }));
+            .filter(item => !this.state.hiddenDifficulties.includes(item.difficulty));
         // favorites are shown twice: here at the top, and again in their own category
         const favorites = visible
-            .filter(item => item.custom || this.state.favorites.includes(item.extensionId))
+            .filter(item => this.state.favorites.includes(item.extensionId))
             .map(item => Object.assign({}, item, { _group: 'cat_favorites' }));
         const rest = visible
-            .filter(item => !item.custom)
             .map((item, index) => {
                 const rank = order.indexOf(this.getGroupOf(item));
                 return { item, index, rank: rank < 0 ? order.length : rank };
@@ -352,6 +346,35 @@ class LibraryComponent extends React.Component {
             if (value >= 2) return Math.min(value, 8);
         } catch (e) { /* storage unavailable */ }
         return 3;
+    }
+    static loadHiddenDifficulties () {
+        try {
+            const value = JSON.parse(localStorage.getItem('pm:extension_hidden_difficulties'));
+            if (Array.isArray(value)) return value.filter(level => [1, 2, 3, 4].includes(level));
+        } catch (e) { /* storage unavailable or not JSON */ }
+        return [];
+    }
+    static loadHideDifficultyBadges () {
+        try {
+            return localStorage.getItem('pm:extension_hide_difficulty_badges') === 'true';
+        } catch (e) { /* storage unavailable */ }
+        return false;
+    }
+    handleDifficultyToggle (level) {
+        const hidden = this.state.hiddenDifficulties.includes(level) ?
+            this.state.hiddenDifficulties.filter(item => item !== level) :
+            this.state.hiddenDifficulties.concat(level).sort();
+        this.setState({ hiddenDifficulties: hidden });
+        try {
+            localStorage.setItem('pm:extension_hidden_difficulties', JSON.stringify(hidden));
+        } catch (e) { /* storage unavailable */ }
+    }
+    handleDifficultyBadgesToggle () {
+        const hide = !this.state.hideDifficultyBadges;
+        this.setState({ hideDifficultyBadges: hide });
+        try {
+            localStorage.setItem('pm:extension_hide_difficulty_badges', String(hide));
+        } catch (e) { /* storage unavailable */ }
     }
     setColumnSliderRef (ref) {
         this.columnSliderRef = ref;
@@ -506,35 +529,38 @@ class LibraryComponent extends React.Component {
                                             </div>
                                         );
                                     }
-                                    if (tagProps.type === 'custom') {
-                                        onclick = () => {
-                                            const api = {};
-                                            api.useTag = this.handleTagClick;
-                                            api.close = this.handleClose;
-                                            api.select = (id) => {
-                                                const items = this.state.data;
-                                                for (const item of items) {
-                                                    if (item.extensionId === id) {
-                                                        this.handleClose();
-                                                        this.props.onItemSelected(item);
-                                                        return;
-                                                    };
-                                                }
-                                            };
-                                            tagProps.func(api);
-                                        };
+                                    if (tagProps.type === 'difficulty') {
+                                        // one switch per difficulty: a crossed-out level is hidden from the list
                                         return (
-                                            <TagButton
-                                                active={false}
-                                                className={classNames(
-                                                    styles.filterBarItem,
-                                                    styles.tagButton,
-                                                    tagProps.className
-                                                )}
-                                                key={`tag-button-${id}`}
-                                                onClick={onclick}
-                                                {...tagProps}
-                                            />
+                                            <div
+                                                className={classNames(styles.columnSlider, styles.difficultyBar)}
+                                                key="difficulty"
+                                                title="Show or hide the extensions of each difficulty"
+                                            >
+                                                {[1, 2, 3, 4].map(level => (
+                                                    <button
+                                                        className={classNames(styles.columnSegment, styles.difficultySegment, {
+                                                            [styles.difficultySegmentHidden]: this.state.hiddenDifficulties.includes(level)
+                                                        })}
+                                                        data-difficulty={level}
+                                                        key={level}
+                                                        onClick={() => this.handleDifficultyToggle(level)}
+                                                    >
+                                                        {level}
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        );
+                                    }
+                                    if (tagProps.type === 'difficultyBadges') {
+                                        return (
+                                            <button
+                                                className={classNames(styles.difficultyBadgesButton, styles.whiteTextInDarkMode)}
+                                                key="difficultyBadges"
+                                                onClick={this.handleDifficultyBadgesToggle}
+                                            >
+                                                {this.state.hideDifficultyBadges ? 'Show difficulty level' : 'Hide difficulty level'}
+                                            </button>
                                         );
                                     }
                                     return (
@@ -612,7 +638,6 @@ class LibraryComponent extends React.Component {
                                 overlayURL={dataItem.overlayURL}
                                 icons={dataItem.costumes}
                                 id={index}
-                                _id={dataItem._id}
                                 styleForSound={this.props.actor === "SoundLibrary"}
                                 soundType={dataItem.soundType}
                                 soundLength={dataItem.soundLength}
@@ -631,11 +656,8 @@ class LibraryComponent extends React.Component {
                                 favoritable={this.props.actor === "ExtensionLibrary" && dataItem.extensionId}
                                 favorited={this.state.favorites.includes(dataItem.extensionId)}
                                 used={dataItem.used}
-                                difficulty={dataItem.difficulty}
-                                deletable={dataItem.deletable}
-                                custom={dataItem.custom}
+                                difficulty={this.state.hideDifficultyBadges ? null : dataItem.difficulty}
                                 onFavoriteUpdated={() => this.handleFavoritesUpdate()}
-                                _unsandboxed={dataItem._unsandboxed}
                             />
                             </React.Fragment>
                         )) : (

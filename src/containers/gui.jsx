@@ -176,8 +176,6 @@ const mapStateToProps = (state) => {
         tipsLibraryVisible: state.scratchGui.modals.tipsLibrary,
         usernameModalVisible: state.scratchGui.modals.usernameModal,
         settingsModalVisible: state.scratchGui.modals.settingsModal,
-        customExtensionModalVisible:
-            state.scratchGui.modals.customExtensionModal,
         fontsModalVisible: state.scratchGui.modals.fontsModal,
         profilerModalVisible: state.scratchGui.modals.profilerModal,
         vm: state.scratchGui.vm,

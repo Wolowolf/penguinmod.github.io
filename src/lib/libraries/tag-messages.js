@@ -181,11 +181,6 @@ export default defineMessages({
         description: 'Tag for filtering a library by custom. Usually this is a custom button, not an actual tag',
         id: 'pm.libraryTags.custom'
     },
-    customextension: {
-        defaultMessage: 'Load Custom Extension',
-        description: 'Button that loads a custom extension.',
-        id: 'pm.libraryTags.customextension'
-    },
     hardware: {
         defaultMessage: 'Hardware',
         description: 'Tag for filtering a library by hardware.',
