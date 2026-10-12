@@ -212,6 +212,7 @@ class LibraryItem extends React.PureComponent {
                 favoritable={this.props.favoritable}
                 favorited={this.props.favorited}
                 used={this.props.used}
+                difficulty={this.props.difficulty}
                 deletable={this.props.deletable}
                 custom={this.props.custom}
                 _unsandboxed={this.props._unsandboxed}
@@ -305,6 +306,7 @@ LibraryItem.propTypes = {
     favoritable: PropTypes.bool,
     favorited: PropTypes.bool,
     used: PropTypes.bool,
+    difficulty: PropTypes.number,
     deletable: PropTypes.bool,
     custom: PropTypes.bool,
     onFavoriteUpdated: PropTypes.func,

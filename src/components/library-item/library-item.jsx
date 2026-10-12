@@ -91,6 +91,15 @@ class LibraryItemComponent extends React.PureComponent {
                         draggable={false}
                         src={this.props.iconURL}
                     />
+                    {this.props.difficulty ? (
+                        <div
+                            className={styles.difficultyBadge}
+                            data-difficulty={this.props.difficulty}
+                            title={`Difficulty ${this.props.difficulty} of 4`}
+                        >
+                            {this.props.difficulty}
+                        </div>
+                    ) : null}
                     {getAuthorNames(this.props).length > 0 ? (
                         <div className={styles.featuredAuthors}>
                             {getAuthorNames(this.props).map(name => (
@@ -418,6 +427,7 @@ LibraryItemComponent.propTypes = {
     favoritable: PropTypes.bool,
     favorited: PropTypes.bool,
     used: PropTypes.bool,
+    difficulty: PropTypes.number,
     deletable: PropTypes.bool,
     custom: PropTypes.bool,
     onFavoriteClick: PropTypes.func,

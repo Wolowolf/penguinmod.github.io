@@ -235,16 +235,17 @@ for (const tag of Object.keys(keysByTag)) {
     });
 }
 
-const keyOf = extensionId => {
+// the key of an extension id or gallery address (also used by extension-difficulty.js)
+export const extensionKeyOf = extensionId => {
     if (typeof extensionId !== 'string') return null;
     const match = extensionId.match(/^https:\/\/[^/]+\/(?:extensions\/|extension-code\/)?(.*)$/);
     return match ? match[1] : extensionId;
 };
 
-export const categoryTagOf = extensionId => tagByKey[keyOf(extensionId)] || null;
+export const categoryTagOf = extensionId => tagByKey[extensionKeyOf(extensionId)] || null;
 
 // the place inside its category (extensions without a category: after the others)
 export const categoryPositionOf = extensionId => {
-    const position = positionByKey[keyOf(extensionId)];
+    const position = positionByKey[extensionKeyOf(extensionId)];
     return typeof position === 'number' ? position : Infinity;
 };

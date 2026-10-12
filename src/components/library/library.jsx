@@ -631,6 +631,7 @@ class LibraryComponent extends React.Component {
                                 favoritable={this.props.actor === "ExtensionLibrary" && dataItem.extensionId}
                                 favorited={this.state.favorites.includes(dataItem.extensionId)}
                                 used={dataItem.used}
+                                difficulty={dataItem.difficulty}
                                 deletable={dataItem.deletable}
                                 custom={dataItem.custom}
                                 onFavoriteUpdated={() => this.handleFavoritesUpdate()}
