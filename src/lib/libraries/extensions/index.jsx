@@ -172,7 +172,7 @@ const menuItems = [
                 id="pm.extension.camera.description"
             />
         ),
-        credits: 'Inspired by⠀⠀⠀⠀⠀⠀ DT-is-not-available',
+        credits: 'DT-is-not-available',
         featured: true
     },
     {
@@ -219,7 +219,7 @@ const menuItems = [
         tags: ['penguinmod'],
         description: 'More small motion blocks for movement or collision.',
         featured: true,
-        credits: 'Some blocks from NexusKitten'
+        credits: 'NexusKitten'
     },
     {
         name: 'Events Expansion',
@@ -228,7 +228,7 @@ const menuItems = [
         tags: ['penguinmod'],
         description: 'More events for sending & receiving information, notifing specific sprites or better control when things should happen.',
         featured: true,
-        credits: 'Some blocks from LilyMakesThings'
+        credits: 'LilyMakesThings'
     },
     {
         name: 'Controls Expansion',
@@ -237,7 +237,7 @@ const menuItems = [
         tags: ['penguinmod'],
         description: 'More control blocks for animations, complex systems or cleaner one-time use blocks.',
         featured: true,
-        credits: '"new thread" by CubesterYT, CST1229, SharkPool'
+        credits: 'CubesterYT, CST1229, SharkPool'
     },
     {
         name: 'Sensing Expansion',
@@ -245,7 +245,7 @@ const menuItems = [
         iconURL: pmSensingExpansionExtensionIcon,
         tags: ['penguinmod'],
         description: "More sensing blocks for specific use cases or interacting with the user's device.",
-        credits: 'Some blocks from SharkPool-SP',
+        credits: 'SharkPool-SP',
         featured: true
     },
     {
@@ -288,7 +288,7 @@ const menuItems = [
     {
         name: 'Tweening',
         extensionId: 'jgTween',
-        credits: 'easings.net, Arrow & GarboMuffin',
+        credits: 'Arrow, GarboMuffin',
         description: 'Smoothly animating values using different easing functions and directions.',
         iconURL: jgTweenExtensionIcon,
         tags: ['penguinmod'],

@@ -18,13 +18,14 @@ const getMSFormatted = (ms) => {
 };
 
 /* eslint-disable react/prefer-stateless-function */
-// the author names for the bottom right corner of the picture, one per line (names are separated by commas)
+// the author names for the bottom right corner of the picture, one per line (names are separated by commas
+// or "&"); only names: notes in brackets (e.g. "(contributor)" in the SharkPool gallery) are left out
 const getAuthorNames = props => {
     const names = [];
     for (const value of [props.extDeveloper, props.twDeveloper, props.collaborator, props.eventSubmittor, props.credits]) {
         if (typeof value !== 'string') continue;
-        for (const name of value.split(',')) {
-            const trimmed = name.trim();
+        for (const name of value.split(/[,&]/)) {
+            const trimmed = name.replace(/\([^)]*\)/g, '').trim();
             if (trimmed && !names.includes(trimmed)) names.push(trimmed);
         }
     }
