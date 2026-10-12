@@ -6,28 +6,27 @@
 export const categories = [
     { tag: 'cat_expansions', label: 'Block Expansions' },
     { tag: 'cat_sprites', label: 'Sprites / Clones' },
-    { tag: 'cat_looks', label: 'Costumes / Effects' },
-    { tag: 'cat_animation', label: 'Animation / Particles' },
-    { tag: 'cat_pen', label: 'Pen / Drawing / Colors' },
+    { tag: 'cat_animation', label: 'Animation' },
+    { tag: 'cat_effects', label: 'Visual Effects' },
+    { tag: 'cat_pen', label: 'Pen / Colors' },
     { tag: 'cat_camera', label: 'Camera / Screen' },
     { tag: 'cat_physics', label: 'Physics / Collisions' },
-    { tag: 'cat_threed', label: '3D / AR' },
     { tag: 'cat_input', label: 'Input / Controls' },
-    { tag: 'cat_sound', label: 'Sound / Music / Speech' },
-    { tag: 'cat_video', label: 'Video / Webcam' },
-    { tag: 'cat_ui', label: 'Text Display / Popups' },
-    { tag: 'cat_flow', label: 'Pause / Scenes / Runtime' },
-    { tag: 'cat_storage', label: 'Saving / Files' },
-    { tag: 'cat_data', label: 'Variables / Lists / Data' },
-    { tag: 'cat_math', label: 'Math / Numbers / Random' },
+    { tag: 'cat_sound', label: 'Sound / Music' },
+    { tag: 'cat_text', label: 'Text / Fonts' },
+    { tag: 'cat_ui', label: 'Popups / Notifications' },
+    { tag: 'cat_storage', label: 'Saving / Scenes / Files' },
+    { tag: 'cat_data', label: 'Variables / Lists' },
+    { tag: 'cat_math', label: 'Math / Random' },
     { tag: 'cat_time', label: 'Time / Timers' },
-    { tag: 'cat_text', label: 'Text / Strings' },
+    { tag: 'cat_threed', label: '3D' },
+    { tag: 'cat_video', label: 'Video / Webcam' },
     { tag: 'cat_utility', label: 'Utility Collections' },
-    { tag: 'cat_network', label: 'Multiplayer / Web Requests' },
-    { tag: 'cat_services', label: 'Web Services / Accounts' },
+    { tag: 'cat_network', label: 'Online / Multiplayer' },
+    { tag: 'cat_services', label: 'Web Services' },
     { tag: 'cat_browser', label: 'Browser / Device' },
     { tag: 'cat_encoding', label: 'Encoding / Security' },
-    { tag: 'cat_programming', label: 'Custom Blocks / Programming' }
+    { tag: 'cat_programming', label: 'Custom Blocks / Code' }
 ];
 
 const keysByTag = {
@@ -50,21 +49,21 @@ const keysByTag = {
         'jgTailgating',
         'SharkPool/Tile-Grids.js'
     ],
-    cat_looks: [
-        'Sprite-Effects-V2.js',
-        'stretch.js',
-        'MubiLop/spritesheeter.js',
-        'SVG-Spritesheets.js',
-        'GIF-Manager.js',
-        'Turbo-Skins.js',
-        'TheShovel/CanvasEffects.js',
-        'Gen1x/lighting.js',
-        'Xeltalliv/clippingblending.js'
-    ],
     cat_animation: [
         'jgTween',
         'Animations.js',
-        'Particle-Engine.js'
+        'MubiLop/spritesheeter.js',
+        'SVG-Spritesheets.js',
+        'GIF-Manager.js'
+    ],
+    cat_effects: [
+        'Sprite-Effects-V2.js',
+        'Particle-Engine.js',
+        'stretch.js',
+        'Turbo-Skins.js',
+        'Gen1x/lighting.js',
+        'TheShovel/CanvasEffects.js',
+        'Xeltalliv/clippingblending.js'
     ],
     cat_pen: [
         'pen',
@@ -75,21 +74,18 @@ const keysByTag = {
         'jwColor',
         'TheShovel/ColorPicker.js'
     ],
+    // the game camera, the window, and the project's frame rate and stage size
     cat_camera: [
         'pmCamera',
         'DogeisCut/Resolution.js',
-        'CubesterYT/WindowControls.js'
+        'CubesterYT/WindowControls.js',
+        'runtime-options.js'
     ],
     cat_physics: [
         'box2d.js',
         'Lazy-Collisions.js',
         'Rigidbodies.js',
         'pooiod/Box2D.js'
-    ],
-    cat_threed: [
-        'Xeltalliv/simple3D.js',
-        'ObviousAlexC/3DMath.js',
-        'Div/divVecQuat.js'
     ],
     cat_input: [
         'KeysPlusV2.js',
@@ -113,30 +109,25 @@ const keysByTag = {
         'PuzzlingGGG/ttsrV2.js',
         'pooiod/Dictation.js'
     ],
-    cat_video: [
-        'Lily/Video.js',
-        'YouTube-Operations.js',
-        'videoSensing',
-        'Camera-Sensing-Plus.js',
-        'lab/video-sprites.js',
-        'lab/face-sensing.js',
-        'pooiod/VideoSharing.js'
-    ],
-    cat_ui: [
+    // working with text, and text shown on the stage
+    cat_text: [
+        'text.js',
         'Gen1x/iris-text.js',
         'SharkPool/Font-Manager.js',
         'Speech-Bubbles.js',
+        'Medericoder/textcase.js',
+        'Embin/embintranslation.js'
+    ],
+    cat_ui: [
         'Popup-Phoenix.js',
         'MubiLop/toastnotifs.js',
         'mdwalters/notifications.js',
         'TheShovel/CustomStyles.js'
     ],
-    cat_flow: [
-        'Scenes.js',
-        'runtime-options.js'
-    ],
+    // saving progress, save states (scenes) and files
     cat_storage: [
         'local-storage.js',
+        'Scenes.js',
         'Files-Expanded.js',
         'CST1229/zip.js'
     ],
@@ -162,18 +153,26 @@ const keysByTag = {
         'XeroName/Deltatime.js',
         'Time-Calculation.js'
     ],
-    cat_text: [
-        'text.js',
-        'Medericoder/textcase.js',
-        'Embin/embintranslation.js'
+    cat_threed: [
+        'Xeltalliv/simple3D.js',
+        'ObviousAlexC/3DMath.js',
+        'Div/divVecQuat.js'
+    ],
+    cat_video: [
+        'Lily/Video.js',
+        'YouTube-Operations.js',
+        'videoSensing',
+        'Camera-Sensing-Plus.js',
+        'lab/video-sprites.js',
+        'lab/face-sensing.js',
+        'pooiod/VideoSharing.js'
     ],
     cat_utility: [
         'utilities.js',
         'Lily/lmsutils.js',
         'TheShovel/ShovelUtils.js',
         'Sharktilities.js',
-        'jgPrism',
-        'Lily/McUtils.js'
+        'jgPrism'
     ],
     cat_network: [
         'cloudlink.js',

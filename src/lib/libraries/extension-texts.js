@@ -128,7 +128,6 @@ const textsByKey = {
     'TheShovel/ShovelUtils.js': ['Shovel Utilities', 'Import assets and edit the project.', 'Import images, sounds, sprites, projects or extensions from URLs; delete sprites or costumes; set a list from an array; restart; choose the edited sprite; color brightness; FPS.'],
     'Sharktilities.js': ['Sharktilities', 'Mixed sprite and text utilities.', 'What a sprite says, costume details, unclamped effects, changed-value hats, broadcast and repeat while waiting, smoothing, SVG shapes, text, rounding, random and multi-join tools, pen layer image.'],
     'jgPrism': ['Prism', 'Audio, images and encoding helpers.', 'Play audio from URLs (loop, speed, position, volume), stage screenshot, data URLs of costumes and images, mouse scroll, base64, character codes, compression, number encoding.'],
-    'Lily/McUtils.js': ['McUtils', 'Joke blocks.', 'About working in fast food.'],
     // Multiplayer / Web Requests
     'cloudlink.js': ['CloudLink', 'Online multiplayer.', 'Through CloudLink servers: connect, usernames, rooms, global, private and direct messages and variables, listeners, packet queues; JSON and web requests.'],
     'godslayerakp/ws.js': ['WebSocket', 'Live server connections.', 'Connect to a WebSocket server, send and receive messages; hats and checks for connecting, errors and closing.'],

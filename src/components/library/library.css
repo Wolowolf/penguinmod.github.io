@@ -55,6 +55,21 @@
     text-align: left;
 }
 
+/* extension library: the side bar is as wide as its longest category shortcut; the search box,
+   sliders and buttons take that width instead of setting it (width 0 adds nothing to the bar's width) */
+.extension-filter-bar > div > *:not(.category-jump) {
+    width: 0;
+    min-width: 100%;
+    box-sizing: border-box;
+}
+.extension-filter-bar .filter-input,
+.extension-filter-bar .filter-input:focus,
+.extension-filter-bar .filter-input:not([value=""]) {
+    width: 0;
+    min-width: 0;
+    flex-grow: 1;
+}
+
 /* extension library: category shortcuts in the side bar and headings in the list */
 .category-jump {
     display: flex;
@@ -68,6 +83,13 @@
     text-align: left;
     cursor: pointer;
     color: inherit;
+}
+.category-jump-empty {
+    visibility: hidden;
+    height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    overflow: hidden;
 }
 .category-jump:hover {
     background: $motion-transparent;

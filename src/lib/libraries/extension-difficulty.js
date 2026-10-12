@@ -128,7 +128,6 @@ const difficultyByKey = {
     'TheShovel/ShovelUtils.js': 2,
     'Sharktilities.js': 3,
     'jgPrism': 2,
-    'Lily/McUtils.js': 1,
     // Multiplayer / Web Requests
     'cloudlink.js': 4,
     'godslayerakp/ws.js': 4,

@@ -460,7 +460,9 @@ class LibraryComponent extends React.Component {
                     style={this.props.actor === 'ExtensionLibrary' ? { height: 'calc(100% - 3.4em)' } : null}
                 >
                     <div
-                        className={classNames(styles.libraryFilterBar)}
+                        className={classNames(styles.libraryFilterBar, {
+                            [styles.extensionFilterBar]: this.props.actor === 'ExtensionLibrary'
+                        })}
                         style={this.state.collapsed ? { display: "none" } :
                             (this.props.actor === 'ExtensionLibrary' ? { width: 'max-content', flexShrink: 0 } : null)}
                     >
@@ -504,14 +506,18 @@ class LibraryComponent extends React.Component {
                                     }
                                     if (tagProps.type === 'jump') {
                                         // a shortcut to that category's heading in the list
-                                        if (!this.state.loaded) return null;
-                                        const count = this.getFilteredData()
-                                            .filter(item => this.getGroupOf(item) === tagProps.tag).length;
-                                        if (count === 0) return null;
+                                        // an empty one stays as an invisible line of no height, so the side bar
+                                        // keeps the width of the longest category name while searching
+                                        const count = this.state.loaded ? this.getFilteredData()
+                                            .filter(item => this.getGroupOf(item) === tagProps.tag).length : 0;
                                         return (
                                             <button
-                                                className={classNames(styles.categoryJump, styles.whiteTextInDarkMode)}
+                                                aria-hidden={count === 0}
+                                                className={classNames(styles.categoryJump, styles.whiteTextInDarkMode, {
+                                                    [styles.categoryJumpEmpty]: count === 0
+                                                })}
                                                 key={`jump-${tagProps.tag}`}
+                                                tabIndex={count === 0 ? -1 : 0}
                                                 onClick={() => this.handleJump(tagProps.tag)}
                                             >
                                                 <span className={styles.categoryJumpCount}>{count}</span>
