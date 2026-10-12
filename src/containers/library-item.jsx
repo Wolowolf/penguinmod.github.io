@@ -166,6 +166,8 @@ class LibraryItem extends React.PureComponent {
                 eventSubmittor={this.props.eventSubmittor}
                 extraLabels={this.props.extraLabels}
                 description={this.props.description}
+                descriptionDetails={this.props.descriptionDetails}
+                descriptionSummary={this.props.descriptionSummary}
                 disabled={this.props.disabled}
                 isNew={this.props.isNew}
                 extensionId={this.props.extensionId}
@@ -245,6 +247,8 @@ LibraryItem.propTypes = {
         PropTypes.string,
         PropTypes.node
     ]),
+    descriptionDetails: PropTypes.string,
+    descriptionSummary: PropTypes.string,
     disabled: PropTypes.bool,
     extensionId: PropTypes.string,
     href: PropTypes.string,

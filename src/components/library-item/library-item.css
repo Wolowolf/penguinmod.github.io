@@ -375,6 +375,20 @@
     padding-top: .078rem;
     padding-bottom: .0625rem;
 }
+/* rewritten texts: the summary in the tile's text color (white in the dark theme), the details in grey */
+.featured-description-summary {
+    display: block;
+}
+[theme="dark"] .featured-description-summary {
+    color: white;
+}
+.featured-description-details {
+    display: block;
+    color: #6e6e6e;
+}
+[theme="dark"] .featured-description-details {
+    color: #b8b8b8;
+}
 
 .featured-extension-metadata {
     width: 100%;

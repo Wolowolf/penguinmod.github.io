@@ -133,7 +133,15 @@ class LibraryItemComponent extends React.PureComponent {
                 >
                     <span className={styles.libraryItemName}>{this.props.name}</span>
                     <br />
-                    <span className={styles.featuredDescription}>{this.props.description}</span>
+                    {this.props.descriptionSummary ? (
+                        // rewritten texts (extension-texts.js): a short summary, then the details in grey
+                        <span className={styles.featuredDescription}>
+                            <span className={styles.featuredDescriptionSummary}>{this.props.descriptionSummary}</span>
+                            <span className={styles.featuredDescriptionDetails}>{this.props.descriptionDetails}</span>
+                        </span>
+                    ) : (
+                        <span className={styles.featuredDescription}>{this.props.description}</span>
+                    )}
                 </div>
                 {
                     this.props.bluetoothRequired ||
@@ -306,6 +314,8 @@ LibraryItemComponent.propTypes = {
         PropTypes.string,
         PropTypes.node
     ]),
+    descriptionDetails: PropTypes.string,
+    descriptionSummary: PropTypes.string,
     disabled: PropTypes.bool,
     extensionId: PropTypes.string,
     featured: PropTypes.bool,

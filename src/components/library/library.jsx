@@ -657,6 +657,8 @@ class LibraryComponent extends React.Component {
                                 extraLabels={dataItem.extraLabels}
                                 customInsetColor={dataItem.customInsetColor}
                                 description={dataItem.description}
+                                descriptionDetails={dataItem.descriptionDetails}
+                                descriptionSummary={dataItem.descriptionSummary}
                                 disabled={dataItem.disabled}
                                 extensionId={dataItem.extensionId}
                                 featured={dataItem.featured}
