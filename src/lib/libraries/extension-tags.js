@@ -7,5 +7,6 @@ export default [
     { tag: 'divider3', intlLabel: messages.scratch, type: 'divider' },
     { tag: 'columns', intlLabel: 'Columns', type: 'columns' },
     { tag: 'difficulty', intlLabel: 'Difficulty', type: 'difficulty' },
-    { tag: 'difficultyBadges', intlLabel: 'Hide difficulty level', type: 'difficultyBadges' }
+    { tag: 'difficultyBadges', intlLabel: 'Hide difficulty level', type: 'difficultyBadges' },
+    { tag: 'originalTexts', intlLabel: 'Show original titles', type: 'originalTexts' }
 ];

@@ -71,6 +71,7 @@ class LibraryComponent extends React.Component {
             'handleColumnsPointer',
             'handleDifficultyToggle',
             'handleDifficultyBadgesToggle',
+            'handleOriginalTextsToggle',
             'setColumnSliderRef',
             'getGroupOrder',
             'getGroupOf',
@@ -86,6 +87,7 @@ class LibraryComponent extends React.Component {
             columns: LibraryComponent.loadColumns(),
             hiddenDifficulties: LibraryComponent.loadHiddenDifficulties(),
             hideDifficultyBadges: LibraryComponent.loadHideDifficultyBadges(),
+            showOriginalTexts: LibraryComponent.loadShowOriginalTexts(),
             loaded: false,
             data: props.data
         };
@@ -261,7 +263,10 @@ class LibraryComponent extends React.Component {
         this.setState({filterQuery: ''});
     }
     createFilteredData () {
-        const data = this.state.data;
+        // the rewritten title and description (extension-texts.js) unless the originals were asked for
+        const data = this.state.showOriginalTexts ? this.state.data : this.state.data.map(dataItem => (
+            dataItem.newText ? Object.assign({}, dataItem, dataItem.newText) : dataItem
+        ));
 
         const no_tags = this.state.selectedTags.length === 0;
         const no_query = this.state.filterQuery === "";
@@ -359,6 +364,19 @@ class LibraryComponent extends React.Component {
             return localStorage.getItem('pm:extension_hide_difficulty_badges') === 'true';
         } catch (e) { /* storage unavailable */ }
         return false;
+    }
+    static loadShowOriginalTexts () {
+        try {
+            return localStorage.getItem('pm:extension_original_texts') === 'true';
+        } catch (e) { /* storage unavailable */ }
+        return false;
+    }
+    handleOriginalTextsToggle () {
+        const show = !this.state.showOriginalTexts;
+        this.setState({ showOriginalTexts: show });
+        try {
+            localStorage.setItem('pm:extension_original_texts', String(show));
+        } catch (e) { /* storage unavailable */ }
     }
     handleDifficultyToggle (level) {
         const hidden = this.state.hiddenDifficulties.includes(level) ?
@@ -560,6 +578,18 @@ class LibraryComponent extends React.Component {
                                                 onClick={this.handleDifficultyBadgesToggle}
                                             >
                                                 {this.state.hideDifficultyBadges ? 'Show difficulty level' : 'Hide difficulty level'}
+                                            </button>
+                                        );
+                                    }
+                                    if (tagProps.type === 'originalTexts') {
+                                        // switches between the rewritten and the original titles and descriptions
+                                        return (
+                                            <button
+                                                className={classNames(styles.difficultyBadgesButton, styles.whiteTextInDarkMode)}
+                                                key="originalTexts"
+                                                onClick={this.handleOriginalTextsToggle}
+                                            >
+                                                {this.state.showOriginalTexts ? 'Show new titles' : 'Show original titles'}
                                             </button>
                                         );
                                     }
