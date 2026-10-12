@@ -500,6 +500,46 @@ const menuItems = [
         featured: true
     },
     {
+        name: 'Screenshot',
+        extensionId: 'https://bludisanlemon.github.io/lemons-gallery/extensions/Lemon/screenshot.js',
+        iconURL: customExtensionIcon,
+        description: 'Test extension from Lemon\x27s gallery.',
+        extDeveloper: 'Lemon',
+        featured: true
+    },
+    {
+        name: 'Autoclick Detect',
+        extensionId: 'https://bludisanlemon.github.io/lemons-gallery/extensions/Lemon/autoclick_detect.js',
+        iconURL: customExtensionIcon,
+        description: 'Test extension from Lemon\x27s gallery.',
+        extDeveloper: 'Lemon',
+        featured: true
+    },
+    {
+        name: 'Bluetooth',
+        extensionId: 'https://bludisanlemon.github.io/lemons-gallery/extensions/Lemon/bluetooth.js',
+        iconURL: customExtensionIcon,
+        description: 'Test extension from Lemon\x27s gallery.',
+        extDeveloper: 'Lemon',
+        featured: true
+    },
+    {
+        name: 'Live Keyboard',
+        extensionId: 'https://bludisanlemon.github.io/lemons-gallery/extensions/sillysoftware/LiveKeyboard.js',
+        iconURL: customExtensionIcon,
+        description: 'Test extension from Lemon\x27s gallery.',
+        extDeveloper: 'sillysoftware',
+        featured: true
+    },
+    {
+        name: 'IndexedDB',
+        extensionId: 'https://bludisanlemon.github.io/lemons-gallery/extensions/sillysoftware/IndexedDB.js',
+        iconURL: customExtensionIcon,
+        description: 'Test extension from Lemon\x27s gallery.',
+        extDeveloper: 'sillysoftware',
+        featured: true
+    },
+    {
         // not really an extension, but it's easiest to present it as one
         name: (
             <FormattedMessage

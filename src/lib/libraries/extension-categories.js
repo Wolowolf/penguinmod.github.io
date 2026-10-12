@@ -27,7 +27,8 @@ export const categories = [
     { tag: 'cat_services', label: 'Web Services / Accounts' },
     { tag: 'cat_browser', label: 'Browser / Device' },
     { tag: 'cat_encoding', label: 'Encoding / Security' },
-    { tag: 'cat_programming', label: 'Custom Blocks / Programming' }
+    { tag: 'cat_programming', label: 'Custom Blocks / Programming' },
+    { tag: 'cat_test', label: 'test' }
 ];
 
 const keysByTag = {
@@ -223,6 +224,13 @@ const keysByTag = {
         'My-Blocks-Plus.js',
         'jwProto',
         'SPjavascriptV2'
+    ],
+    cat_test: [
+        'lemons-gallery/extensions/Lemon/screenshot.js',
+        'lemons-gallery/extensions/Lemon/autoclick_detect.js',
+        'lemons-gallery/extensions/Lemon/bluetooth.js',
+        'lemons-gallery/extensions/sillysoftware/LiveKeyboard.js',
+        'lemons-gallery/extensions/sillysoftware/IndexedDB.js'
     ]
 };
 
