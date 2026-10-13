@@ -1,4 +1,5 @@
-import {BitmapAdapter, sanitizeSvg} from 'scratch-svg-renderer';
+import {sanitizeSvg} from 'scratch-svg-renderer'; // PMDESKTOP_STAGE_PATCH: BitmapAdapter now comes through pm-bitmap-import.js (section 83)
+import PMBitmapAdapter from './pm-bitmap-import.js'; // PMDESKTOP_STAGE_PATCH: costume upload without the long pause (section 83)
 import randomizeSpritePosition from './randomize-sprite-position.js';
 import bmpConverter from './bmp-converter';
 import gifDecoder from './gif-decoder';
@@ -151,7 +152,7 @@ const costumeUpload = function (fileData, fileType, vm, handleCostume, handleErr
         return;
     }
 
-    const bitmapAdapter = new BitmapAdapter();
+    const bitmapAdapter = new PMBitmapAdapter(); // PMDESKTOP_STAGE_PATCH (section 83)
     if (bitmapAdapter.setStageSize) {
         const width = vm.runtime.stageWidth;
         const height = vm.runtime.stageHeight;
@@ -254,6 +255,23 @@ const externalFileUpload = function (fileData, fileType, storage, handleFile, ha
     handleFile(vmFile);
 };
 
+// PMDESKTOP_STAGE_PATCH (section 83): the costumes as they go into the sprite's JSON. With the picture's
+// bytes inside, JSON.stringify wrote every byte as `"index":value` (a 16 MB photo became ~200 MB of text)
+// and the VM parsed it and rebuilt the bytes key by key: the editor froze for 3-5 s. Instead the picture
+// goes into the storage cache under its ID and only the ID goes into the JSON; the VM then loads it from
+// there like any costume of a loaded project (the same bytes and ID as before).
+const costumesForJSON = function (storage, vmCostumes) {
+    if (typeof storage.cache !== 'function') return vmCostumes;
+    return vmCostumes.map(costume => {
+        const asset = costume.asset;
+        if (!asset || !asset.data || !asset.assetId) return costume;
+        storage.cache(asset.assetType, asset.dataFormat, asset.data, asset.assetId);
+        const withoutAsset = Object.assign({}, costume);
+        delete withoutAsset.asset;
+        return withoutAsset;
+    });
+};
+
 const spriteUpload = function (fileData, fileType, spriteName, vm, handleSprite, handleError = () => {}) {
     switch (fileType) {
     case '':
@@ -285,7 +303,7 @@ const spriteUpload = function (fileData, fileType, spriteName, vm, handleSprite,
                 currentCostume: 0,
                 blocks: {},
                 variables: {},
-                costumes: vmCostumes,
+                costumes: costumesForJSON(vm.runtime.storage, vmCostumes), // PMDESKTOP_STAGE_PATCH (section 83)
                 sounds: [] // TODO are all of these necessary?
             };
             randomizeSpritePosition(newSprite);

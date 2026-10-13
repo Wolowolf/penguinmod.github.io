@@ -159,8 +159,37 @@ function paintWave (wave, canvas) {
     }
 }
 
+// The sound editor's columns (pm-sound-wave.jsx, patch section 20): analyseWave's, each column also
+// reaching its neighbours' peaks (at that resolution a high note's peaks otherwise fall in every other
+// column only, which looks striped), plus each column's loudness (RMS of its samples). analyseWave comes
+// as an argument so that the worker runs exactly this code too (the minifier renames functions).
+function editorWave (analyse, samples, sampleRate, w) {
+    var wave = analyse([samples], sampleRate, w);
+    var min = wave.min.slice();
+    var max = wave.max.slice();
+    var x;
+    var k;
+    var i;
+    for (x = 0; x < w; x++) {
+        for (k = Math.max(0, x - 1); k <= Math.min(w - 1, x + 1); k++) {
+            if (wave.min[k] < min[x]) min[x] = wave.min[k];
+            if (wave.max[k] > max[x]) max[x] = wave.max[k];
+        }
+    }
+    var n = samples.length;
+    var rms = new Float32Array(w);
+    for (var c = 0; c < w; c++) {
+        var start = Math.floor(c * n / w);
+        var end = Math.min(n, Math.max(start + 1, Math.floor((c + 1) * n / w)));
+        var sum = 0;
+        for (i = start; i < end; i++) sum += samples[i] * samples[i];
+        rms[c] = end > start ? Math.sqrt(sum / (end - start)) : 0;
+    }
+    return {min: min, max: max, color: wave.color, rms: rms};
+}
+
 // also used by the sound editor's waveform (pm-sound-wave.jsx, patch section 20)
-export {analyseWave, paintWave};
+export {analyseWave, paintWave, editorWave};
 
 // ---- background worker ----------------------------------------------------------------------------
 
@@ -171,8 +200,14 @@ let jobId = 0;
 
 const startWorker = () => {
     const source = `var analyseWave = ${analyseWave.toString()};\nvar paintWave = ${paintWave.toString()};\n` +
+        `var editorWave = ${editorWave.toString()};\n` +
         'self.onmessage = function (e) {\n' +
         '    var d = e.data;\n' +
+        '    if (d.editor) {\n' +
+        '        var ew = editorWave(analyseWave, d.samples, d.sampleRate, d.width);\n' +
+        '        self.postMessage({id: d.id, wave: ew}, [ew.min.buffer, ew.max.buffer, ew.color.buffer, ew.rms.buffer]);\n' +
+        '        return;\n' +
+        '    }\n' +
         '    var wave = d.points ? {points: d.points, colors: d.colors} : analyseWave(d.channels, d.sampleRate, d.width);\n' +
         '    var canvas = new OffscreenCanvas(d.width, d.height);\n' +
         '    paintWave(wave, canvas);\n' +
@@ -189,7 +224,7 @@ const startWorker = () => {
         const job = jobs.get(e.data.id);
         jobs.delete(e.data.id);
         if (!job) return;
-        if (e.data.blob) job.resolve(e.data.blob);
+        if (e.data.blob || e.data.wave) job.resolve(e.data.blob || e.data.wave);
         else job.reject(new Error(e.data.error || 'the waveform could not be drawn'));
     };
     worker.onerror = () => {
@@ -224,6 +259,26 @@ const picture = (data, transfer) => {
     paintWave(wave, canvas);
     return new Promise((resolve, reject) => canvas.toBlob(blob => (blob ? resolve(blob) :
         reject(new Error('the waveform could not be drawn'))), 'image/png'));
+};
+
+// The sound editor's columns of a long sound (patch section 83), worked out in the worker so that adding
+// or editing a song does not freeze the editor (a 3-minute sound took ~140 ms on the page). The worker
+// gets a copy of the samples. Rejects when there is no worker; the caller then works them out itself.
+export const editorWaveInWorker = (samples, sampleRate, width) => {
+    if (!worker && !workerFailed) {
+        try {
+            startWorker();
+        } catch (e) {
+            workerFailed = true;
+        }
+    }
+    if (!worker) return Promise.reject(new Error('no waveform worker'));
+    const copy = samples.slice();
+    return new Promise((resolve, reject) => {
+        const id = ++jobId;
+        jobs.set(id, {resolve, reject});
+        worker.postMessage({id, editor: true, samples: copy, sampleRate, width}, [copy.buffer]);
+    });
 };
 
 // ---- the three kinds of waveform ------------------------------------------------------------------

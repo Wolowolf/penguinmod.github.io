@@ -3,9 +3,15 @@
 // how bright that moment sounds (its spectral centroid) from blue (low) over green and yellow to red
 // (high). As only one sound is shown and it is large, it is drawn at the screen's full resolution and
 // also shows the loudness (RMS) of each column as a darker core.
+// Section 83: a long sound's columns are worked out in the background worker (editorWaveInWorker), so
+// adding or editing a song does not freeze the editor; short ones stay here, where that is quicker.
 import React from 'react';
 import PropTypes from 'prop-types';
-import {analyseWave, paintWave} from '../../lib/pm-waveforms.js';
+import {analyseWave, paintWave, editorWave, editorWaveInWorker} from '../../lib/pm-waveforms.js';
+
+// from this many samples (the engine resamples to the sound card: ~10 s at 96 kHz, ~23 s at 44.1 kHz;
+// ~15 ms of work here) the worker does it
+const WORKER_MIN_SAMPLES = 1000000;
 
 class PMSoundWave extends React.PureComponent {
     constructor (props) {
@@ -17,6 +23,7 @@ class PMSoundWave extends React.PureComponent {
         this.frame = 0;
         this.wave = null; // the analysed columns, kept while the sound and width stay the same
         this.drawn = null;
+        this.pending = null; // the worker job for the sound and width being worked out
     }
     componentDidMount () {
         if (typeof ResizeObserver !== 'undefined' && this.canvas) {
@@ -31,6 +38,7 @@ class PMSoundWave extends React.PureComponent {
     componentWillUnmount () {
         if (this.observer) this.observer.disconnect();
         cancelAnimationFrame(this.frame);
+        this.pending = null;
     }
     setCanvas (canvas) {
         this.canvas = canvas;
@@ -50,18 +58,19 @@ class PMSoundWave extends React.PureComponent {
         const d = this.drawn;
         if (d && d.samples === samples && d.w === w && d.h === h) return;
         if (!this.wave || this.wave.samples !== samples || this.wave.w !== w) {
-            const wave = analyseWave([samples], sampleRate, w);
-            // each column also reaches its neighbours' peaks: at this resolution a high note's peaks
-            // otherwise fall in every other column only, which looks striped
-            const min = wave.min.slice();
-            const max = wave.max.slice();
-            for (let x = 0; x < w; x++) {
-                for (let k = Math.max(0, x - 1); k <= Math.min(w - 1, x + 1); k++) {
-                    if (wave.min[k] < min[x]) min[x] = wave.min[k];
-                    if (wave.max[k] > max[x]) max[x] = wave.max[k];
+            if (samples.length >= WORKER_MIN_SAMPLES) {
+                const p = this.pending;
+                if (!p || p.samples !== samples || p.w !== w) this.startWorkerJob(samples, sampleRate, w);
+                // another sound: empty until its waveform arrives; same sound, new width: keep the old one
+                if (!this.wave || this.wave.samples !== samples) {
+                    canvas.width = w;
+                    canvas.height = h;
+                    this.drawn = null;
                 }
+                return;
             }
-            this.wave = {min, max, color: wave.color, rms: this.loudness(samples, w), samples, w};
+            this.pending = null;
+            this.wave = Object.assign(editorWave(analyseWave, samples, sampleRate, w), {samples, w});
         }
         canvas.width = w;
         canvas.height = h;
@@ -79,18 +88,19 @@ class PMSoundWave extends React.PureComponent {
         }
         this.drawn = {samples, w, h};
     }
-    // the RMS of each column's samples (the same columns as analyseWave's)
-    loudness (samples, columns) {
-        const n = samples.length;
-        const rms = new Float32Array(columns);
-        for (let c = 0; c < columns; c++) {
-            const start = Math.floor(c * n / columns);
-            const end = Math.min(n, Math.max(start + 1, Math.floor((c + 1) * n / columns)));
-            let sum = 0;
-            for (let i = start; i < end; i++) sum += samples[i] * samples[i];
-            rms[c] = end > start ? Math.sqrt(sum / (end - start)) : 0;
-        }
-        return rms;
+    // the same columns as editorWave's here, worked out by the worker (or here when it can't run)
+    startWorkerJob (samples, sampleRate, w) {
+        const job = {samples, w};
+        this.pending = job;
+        const done = wave => {
+            if (this.pending !== job) return; // replaced by another sound or width, or closed
+            this.pending = null;
+            this.wave = Object.assign(wave, {samples, w});
+            this.draw();
+        };
+        editorWaveInWorker(samples, sampleRate, w).then(done, () => {
+            if (this.pending === job) done(editorWave(analyseWave, samples, sampleRate, w));
+        });
     }
     render () {
         return (
