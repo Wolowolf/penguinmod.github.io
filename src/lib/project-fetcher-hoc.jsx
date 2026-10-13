@@ -151,8 +151,6 @@ const ProjectFetcherHOC = function (WrappedComponent) {
 
             return assetPromise
                 .then((projectAsset) => {
-                    console.log(`project asset: ${projectAsset}`);
-
                     // pm: If the project data is missing, it *probably* doesn't exist
                     // (barring some bad internet connection, which I don't feel like accounting for),
                     // and the "missing project" project should be loaded instead.
