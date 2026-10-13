@@ -34,7 +34,6 @@ import TipsLibrary from '../../containers/tips-library.jsx';
 import Cards from '../../containers/cards.jsx';
 import Alerts from '../../containers/alerts.jsx';
 import DragLayer from '../../containers/drag-layer.jsx';
-import ConnectionModal from '../../containers/connection-modal.jsx';
 import TelemetryModal from '../telemetry-modal/telemetry-modal.jsx';
 import TWUsernameModal from '../../containers/tw-username-modal.jsx';
 import TWSettingsModal from '../../containers/tw-settings-modal.jsx';
@@ -119,7 +118,6 @@ const GUIComponent = props => {
         canShare,
         canUseCloud,
         children,
-        connectionModalVisible,
         costumeLibraryVisible,
         costumesTabVisible,
         customStageSize,
@@ -455,11 +453,6 @@ const GUIComponent = props => {
                 ) : null}
                 {alertsVisible ? (
                     <Alerts className={styles.alertsContainer} />
-                ) : null}
-                {connectionModalVisible ? (
-                    <ConnectionModal
-                        vm={vm}
-                    />
                 ) : null}
                 {costumeLibraryVisible ? (
                     <CostumeLibrary

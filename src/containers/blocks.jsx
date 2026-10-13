@@ -12,7 +12,6 @@ import log from '../lib/log.js';
 import Prompt from './prompt.jsx';
 import BlocksComponent from '../components/blocks/blocks.jsx';
 import ExtensionLibrary from './extension-library.jsx';
-import extensionData from '../lib/libraries/extensions/index.jsx';
 import CustomProcedures from './custom-procedures.jsx';
 import errorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import {BLOCKS_DEFAULT_SCALE, STAGE_DISPLAY_SIZES} from '../lib/layout-constants';
@@ -29,11 +28,9 @@ import {updateToolbox} from '../reducers/toolbox';
 import {activateColorPicker} from '../reducers/color-picker';
 import {
     closeExtensionLibrary,
-    openSoundRecorder,
-    openConnectionModal
+    openSoundRecorder
 } from '../reducers/modals';
 import {activateCustomProcedures, deactivateCustomProcedures} from '../reducers/custom-procedures';
-import {setConnectionModalExtensionId} from '../reducers/connection-modal';
 import {updateMetrics} from '../reducers/workspace-metrics';
 
 import {
@@ -108,7 +105,6 @@ class Blocks extends React.Component {
             'detachVM',
             'getToolboxXML',
             'handleCategorySelected',
-            'handleConnectionModalStart',
             'handleDrop',
             'handleStatusButtonUpdate',
             'handleOpenSoundRecorder',
@@ -138,7 +134,6 @@ class Blocks extends React.Component {
         ]);
         this.ScratchBlocks.prompt = this.handlePromptStart;
         this.ScratchBlocks.customPrompt = this.handleCustomPrompt;
-        this.ScratchBlocks.statusButtonCallback = this.handleConnectionModalStart;
         this.ScratchBlocks.recordSoundCallback = this.handleOpenSoundRecorder;
 
         this.state = {
@@ -587,11 +582,6 @@ class Blocks extends React.Component {
         this.handleExtensionAdded(categoryInfo);
     }
     handleCategorySelected (categoryId) {
-        const extension = extensionData.find(ext => ext.extensionId === categoryId);
-        if (extension && extension.launchPeripheralConnectionFlow) {
-            this.handleConnectionModalStart(categoryId);
-        }
-
         this.withToolboxUpdates(() => {
             this.workspace.toolbox_.setSelectedCategoryById(categoryId);
         });
@@ -674,9 +664,6 @@ class Blocks extends React.Component {
             });
         };
         return handle;
-    }
-    handleConnectionModalStart (extensionId) {
-        this.props.onOpenConnectionModal(extensionId);
     }
     handleStatusButtonUpdate () {
         this.ScratchBlocks.refreshStatusButtons(this.workspace);
@@ -786,7 +773,6 @@ class Blocks extends React.Component {
             isRtl,
             isVisible,
             onActivateColorPicker,
-            onOpenConnectionModal,
             onOpenSoundRecorder,
             updateToolboxState,
             onActivateCustomProcedures,
@@ -872,7 +858,6 @@ Blocks.propTypes = {
     messages: PropTypes.objectOf(PropTypes.string),
     onActivateColorPicker: PropTypes.func,
     onActivateCustomProcedures: PropTypes.func,
-    onOpenConnectionModal: PropTypes.func,
     onOpenSoundRecorder: PropTypes.func,
     onRequestCloseCustomProcedures: PropTypes.func,
     onRequestCloseExtensionLibrary: PropTypes.func,
@@ -963,10 +948,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     onActivateColorPicker: callback => dispatch(activateColorPicker(callback)),
     onActivateCustomProcedures: (data, callback) => dispatch(activateCustomProcedures(data, callback)),
-    onOpenConnectionModal: id => {
-        dispatch(setConnectionModalExtensionId(id));
-        dispatch(openConnectionModal());
-    },
     onOpenSoundRecorder: () => {
         dispatch(activateTab(SOUNDS_TAB_INDEX));
         dispatch(openSoundRecorder());

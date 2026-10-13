@@ -87,8 +87,7 @@ const reducer = function (state, action) {
                     extensionId: extensionId,
                     extensionName: extension.name,
                     iconURL: extension.connectionSmallIconURL,
-                    level: AlertLevels.WARN,
-                    showReconnect: true
+                    level: AlertLevels.WARN
                 };
                 newList.push(newAlert);
 

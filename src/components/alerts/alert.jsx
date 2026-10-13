@@ -26,9 +26,7 @@ const AlertComponent = ({
     showSaveNow,
     onCloseAlert,
     onDownload,
-    onSaveNow,
-    onReconnect,
-    showReconnect
+    onSaveNow
 }) => (
     <Box
         className={classNames(styles.alert, styles[level])}
@@ -89,18 +87,6 @@ const AlertComponent = ({
                     />
                 </button>
             )}
-            {showReconnect && (
-                <button
-                    className={styles.alertConnectionButton}
-                    onClick={onReconnect}
-                >
-                    <FormattedMessage
-                        defaultMessage="Reconnect"
-                        description="Button to reconnect the device"
-                        id="gui.connection.reconnect"
-                    />
-                </button>
-            )}
             {closeButton && (
                 <Box
                     className={styles.alertCloseButtonContainer}
@@ -126,10 +112,8 @@ AlertComponent.propTypes = {
     level: PropTypes.string,
     onCloseAlert: PropTypes.func.isRequired,
     onDownload: PropTypes.func,
-    onReconnect: PropTypes.func,
     onSaveNow: PropTypes.func,
     showDownload: PropTypes.bool,
-    showReconnect: PropTypes.bool,
     showSaveNow: PropTypes.bool
 };
 

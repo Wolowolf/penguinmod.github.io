@@ -4,24 +4,17 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import SB3Downloader from './sb3-downloader.jsx';
 import AlertComponent from '../components/alerts/alert.jsx';
-import {openConnectionModal} from '../reducers/modals';
-import {setConnectionModalExtensionId} from '../reducers/connection-modal';
 import {manualUpdateProject} from '../reducers/project-state';
 
 class Alert extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'handleOnCloseAlert',
-            'handleOnReconnect'
+            'handleOnCloseAlert'
         ]);
     }
     handleOnCloseAlert () {
         this.props.onCloseAlert(this.props.index);
-    }
-    handleOnReconnect () {
-        this.props.onOpenConnectionModal(this.props.extensionId);
-        this.handleOnCloseAlert();
     }
     render () {
         const {
@@ -35,7 +28,6 @@ class Alert extends React.Component {
             message,
             onSaveNow,
             showDownload,
-            showReconnect,
             showSaveNow
         } = this.props;
         return (
@@ -49,11 +41,9 @@ class Alert extends React.Component {
                     level={level}
                     message={message}
                     showDownload={showDownload}
-                    showReconnect={showReconnect}
                     showSaveNow={showSaveNow}
                     onCloseAlert={this.handleOnCloseAlert}
                     onDownload={downloadProject}
-                    onReconnect={this.handleOnReconnect}
                     onSaveNow={onSaveNow}
                 />
             )}</SB3Downloader>
@@ -64,10 +54,6 @@ class Alert extends React.Component {
 const mapStateToProps = () => ({});
 
 const mapDispatchToProps = dispatch => ({
-    onOpenConnectionModal: id => {
-        dispatch(setConnectionModalExtensionId(id));
-        dispatch(openConnectionModal());
-    },
     onSaveNow: () => {
         dispatch(manualUpdateProject());
     }
@@ -84,10 +70,8 @@ Alert.propTypes = {
     level: PropTypes.string.isRequired,
     message: PropTypes.string,
     onCloseAlert: PropTypes.func.isRequired,
-    onOpenConnectionModal: PropTypes.func,
     onSaveNow: PropTypes.func,
     showDownload: PropTypes.bool,
-    showReconnect: PropTypes.bool,
     showSaveNow: PropTypes.bool
 };
 
