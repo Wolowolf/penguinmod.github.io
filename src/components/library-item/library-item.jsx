@@ -13,6 +13,13 @@ import internetConnectionIconURL from './internet-connection.svg';
 import favoritedFilledUrl from './favorite/filled.svg';
 import favoritedOutlineUrl from './favorite/outline.svg';
 
+// hover text of the wi-fi symbol (extension-network.js)
+const networkTitles = {
+    required: 'Needs the internet',
+    partial: 'Some blocks need the internet',
+    optional: 'Can use the internet, works without it'
+};
+
 const getMSFormatted = (ms) => {
     return (ms / 1000).toFixed(2);
 };
@@ -80,6 +87,29 @@ class LibraryItemComponent extends React.PureComponent {
                         draggable={false}
                         src={this.props.iconURL}
                     />
+                    {this.props.network ? (
+                        <div
+                            className={styles.networkBadge}
+                            data-network={this.props.network}
+                            title={networkTitles[this.props.network]}
+                        >
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M2.5 9a14 14 0 0 1 19 0M5.8 12.4a9.3 9.3 0 0 1 12.4 0M9.1 15.8a4.6 4.6 0 0 1 5.8 0"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2.4"
+                                    strokeLinecap="round"
+                                />
+                                <circle
+                                    cx="12"
+                                    cy="19.3"
+                                    r="1.7"
+                                    fill="currentColor"
+                                />
+                            </svg>
+                        </div>
+                    ) : null}
                     {this.props.difficulty ? (
                         <div
                             className={styles.difficultyBadge}
@@ -348,6 +378,7 @@ LibraryItemComponent.propTypes = {
     favorited: PropTypes.bool,
     used: PropTypes.bool,
     difficulty: PropTypes.number,
+    network: PropTypes.oneOf(['required', 'partial', 'optional']),
     onFavoriteClick: PropTypes.func
 };
 

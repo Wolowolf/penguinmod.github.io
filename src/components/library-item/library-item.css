@@ -328,6 +328,34 @@
 .difficulty-badge[data-difficulty="3"] { color: #ff9100; }
 .difficulty-badge[data-difficulty="4"] { color: #ff3b30; }
 
+/* wi-fi symbol (internet use) on the left edge, centred between the star (top 4px) and the difficulty
+   number (bottom 4px): the difficulty number's size, smaller on short pictures (many columns) so 2px stay
+   free above and below it. Percentages here are of the picture's height. */
+.network-badge {
+    --star-size: clamp(16px, 11cqw, 40px);
+    --difficulty-size: clamp(16px, 9cqw, 32px);
+    --network-size: min(var(--difficulty-size), calc(100% - var(--star-size) - var(--difficulty-size) - 12px));
+    position: absolute;
+    left: 4px;
+    top: calc((var(--star-size) + 100% - var(--difficulty-size) - var(--network-size)) / 2);
+    height: var(--network-size);
+    aspect-ratio: 1 / 1;
+    border-radius: 50% !important;
+    background: #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 1;
+}
+.network-badge svg {
+    width: 72%;
+    height: 72%;
+}
+.network-badge[data-network="required"] { color: #ff3b30; }
+.network-badge[data-network="partial"] { color: #ff9100; }
+.network-badge[data-network="optional"] { color: #3ccf4e; }
+
 .featured-authors {
     position: absolute;
     right: 0.5rem;

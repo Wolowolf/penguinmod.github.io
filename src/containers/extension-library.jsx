@@ -9,6 +9,7 @@ import extensionLibraryContent from '../lib/libraries/extensions/index.jsx';
 import extensionTags from '../lib/libraries/extension-tags';
 import {categoryTagOf, categoryPositionOf} from '../lib/libraries/extension-categories';
 import {difficultyOf} from '../lib/libraries/extension-difficulty';
+import {networkOf} from '../lib/libraries/extension-network';
 import {newTextOf} from '../lib/libraries/extension-texts';
 import loadGalleryExtensions from '../lib/libraries/extensions/galleries.js';
 
@@ -234,6 +235,7 @@ class ExtensionLibrary extends React.PureComponent {
                     .concat(categoryTagOf(extension.extensionId) || []),
                 categoryPosition: categoryPositionOf(extension.extensionId),
                 difficulty: difficultyOf(extension.extensionId),
+                network: networkOf(extension.extensionId),
                 newText: newTextOf(extension.extensionId),
                 used: !!extension.extensionId &&
                     (used.has(extension.extensionId) || used.has(extension.extensionURL))

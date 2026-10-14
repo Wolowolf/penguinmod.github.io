@@ -695,6 +695,7 @@ class LibraryComponent extends React.Component {
                                 favorited={this.state.favorites.includes(dataItem.extensionId)}
                                 used={dataItem.used}
                                 difficulty={this.state.hideDifficultyBadges ? null : dataItem.difficulty}
+                                network={dataItem.network}
                                 onFavoriteUpdated={() => this.handleFavoritesUpdate()}
                             />
                             </React.Fragment>

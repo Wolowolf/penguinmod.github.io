@@ -193,6 +193,7 @@ class LibraryItem extends React.PureComponent {
                 favorited={this.props.favorited}
                 used={this.props.used}
                 difficulty={this.props.difficulty}
+                network={this.props.network}
                 onFavoriteClick={this.handleFavoriteClick}
 
                 onBlur={this.handleBlur}
@@ -285,6 +286,7 @@ LibraryItem.propTypes = {
     favorited: PropTypes.bool,
     used: PropTypes.bool,
     difficulty: PropTypes.number,
+    network: PropTypes.oneOf(['required', 'partial', 'optional']),
     onFavoriteUpdated: PropTypes.func,
 };
 
