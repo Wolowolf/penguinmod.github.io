@@ -49,7 +49,6 @@ import pointerlockThumb from './penguinmod/extensions/pointerlock.png';
 // LilyMakesThings 🙏
 
 // more icons so they arent just red when the extension color is not red
-import jgIframeExtensionIcon from './penguinmod/extensions/iframe.png';
 
 // import jgTweeningExtensionIcon from './penguinmod/extensions/tween.png';
 
@@ -70,7 +69,6 @@ import spTempVarsIcon from './penguinmod/extensions/sp_tempVars.svg';
 
 // events
 
-import jgJavascriptExtensionIcon from './penguinmod/extensions/javascript.png';
 
 // category expansions
 import pmMotionExpansionExtensionIcon from './penguinmod/extensions/motion_expanded.png';
@@ -380,15 +378,6 @@ const menuItems = [
         featured: true
     },
     {
-        name: 'HTML iframe Elements',
-        extensionId: 'jgIframe',
-        iconURL: jgIframeExtensionIcon,
-        tags: ['penguinmod'],
-        description: 'Blocks to place and move around frames that contain HTML content or websites.',
-        featured: true,
-        internetConnectionRequired: true
-    },
-    {
         name: (
             <FormattedMessage
                 defaultMessage="Labels"
@@ -480,14 +469,6 @@ const menuItems = [
         featured: true,
         internetConnectionRequired: false,
         twDeveloper: 'GarboMuffin'
-    },
-    {
-        name: 'JavaScript',
-        extensionId: 'SPjavascriptV2',
-        iconURL: jgJavascriptExtensionIcon,
-        tags: ['penguinmod'],
-        description: 'Run your own custom code written in JavaScript!',
-        featured: true
     },
     {
         name: 'Color',

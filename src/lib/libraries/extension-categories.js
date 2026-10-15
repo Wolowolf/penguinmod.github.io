@@ -160,7 +160,6 @@ const keysByTag = {
     ],
     cat_video: [
         'Lily/Video.js',
-        'YouTube-Operations.js',
         'videoSensing',
         'Camera-Sensing-Plus.js',
         'lab/video-sprites.js',
@@ -189,7 +188,6 @@ const keysByTag = {
         'itchio.js',
         'NotHouse/DiscordAuth.js',
         'Ikelene/googleAuthExtension.js',
-        'bop_tw/Twitch.js',
         'Spotify.js',
         'SoundCloud-API.js',
         'RubyDevs/turboweather.js',
@@ -203,12 +201,7 @@ const keysByTag = {
         'DNin/wake-lock.js',
         'sharkpoolPrinting',
         'navigator.js',
-        'battery.js',
-        'iframe.js',
-        'jgIframe',
-        'ZXMushroom63/searchApi.js',
-        'pooiod/WindowHasher.js',
-        'DOM-Selector.js'
+        'battery.js'
     ],
     cat_encoding: [
         'encoding.js',
@@ -220,8 +213,7 @@ const keysByTag = {
     ],
     cat_programming: [
         'My-Blocks-Plus.js',
-        'jwProto',
-        'SPjavascriptV2'
+        'jwProto'
     ]
 };
 

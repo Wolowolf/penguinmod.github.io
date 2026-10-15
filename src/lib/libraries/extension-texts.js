@@ -78,7 +78,6 @@ const textsByKey = {
     'pooiod/Dictation.js': ['Speech to Text', 'Type with your voice.', 'Turn spoken words into text and wait for them.'],
     // Video / Webcam
     'Lily/Video.js': ['Video Player', 'Play videos on sprites.', 'Load videos from URLs onto sprites or the stage: play, pause, loop, seek, volume, speed, time, size, screenshots.'],
-    'YouTube-Operations.js': ['YouTube', 'YouTube videos and stats.', 'Video and channel details, search, play videos in a box over the stage.'],
     'videoSensing': ['Video Sensing', 'Detect camera motion.', 'Motion and direction on sprites or the stage, motion hat, show the camera with transparency.'],
     'Camera-Sensing-Plus.js': ['Camera Plus', 'Camera on sprites and photos.', 'Show the camera on sprites, take photos, front or back camera, resolution, remove or replace colors, cut out shapes.'],
     'lab/video-sprites.js': ['Video Sprites', 'Live camera inside sprites.', 'Fill a sprite or one of its colors with the camera; zoom.'],
@@ -142,7 +141,6 @@ const textsByKey = {
     'itchio.js': ['itch.io', 'itch.io pages and game data.', 'Open pages; a game\'s details, price, sale, rewards and sub-products.'],
     'NotHouse/DiscordAuth.js': ['Discord Login', 'Sign in with Discord.', 'The user\'s ID, name, avatar and other profile details.'],
     'Ikelene/googleAuthExtension.js': ['Google Login', 'Sign in with Google.', 'Name, email, picture, ID and language.'],
-    'bop_tw/Twitch.js': ['Twitch Chat', 'Twitch chat on the stage.', 'Show a channel\'s chat over the stage; text and image overlays.'],
     'Spotify.js': ['Spotify', 'Spotify music info.', 'Song, artist, album and playlist details; play song previews.'],
     'SoundCloud-API.js': ['SoundCloud', 'SoundCloud tracks and artists.', 'Details, comments, followers, search, MP3 links. Needs a client ID.'],
     'RubyDevs/turboweather.js': ['Weather', 'Live weather data.', 'Weather and place for coordinates or the user\'s location, time in a timezone, JSON helpers.'],
@@ -156,11 +154,6 @@ const textsByKey = {
     'sharkpoolPrinting': ['Printing', 'Print to paper.', 'Text, images, the stage or HTML with fonts, colors, positions and backgrounds.'],
     'navigator.js': ['Device Info', 'System and user preferences.', 'Operating system, browser, memory, and dark mode, reduced motion and contrast preferences.'],
     'battery.js': ['Battery', 'Battery status.', 'Level, charging and time left; hats when they change.'],
-    'iframe.js': ['Web Page Overlay', 'A web page over the stage.', 'Show a website or HTML: position, size, interaction, messages to and from it.'],
-    'jgIframe': ['Web Page Frame', 'A movable web page frame.', 'A website frame over the stage to move, size, rotate, color and apply effects to; hat when it loads.'],
-    'ZXMushroom63/searchApi.js': ['URL Parameters', 'Read the page address options.', 'Read and change the parameters after "?" in the page address.'],
-    'pooiod/WindowHasher.js': ['URL Hash', 'The page address "#" part.', 'Read and set it; hat when it changes.'],
-    'DOM-Selector.js': ['Page Elements', 'Reach into the page\'s HTML.', 'Find elements, read or change their properties and attributes, sizes, event listeners.'],
     // Encoding / Security
     'encoding.js': ['Encoding', 'Convert text formats.', 'Encode and decode Unicode, base64, URLs or numbers for cloud variables, MD5 hash, character codes, random strings.'],
     'shovellzcompresss': ['Text Compression', 'Make text shorter.', 'Compress and decompress text (lz-string).'],
@@ -170,8 +163,7 @@ const textsByKey = {
     'MikeDev101/e2ee.js': ['End-to-End Encryption', 'Private messages between users.', 'Make a key pair, a shared secret with another user\'s key, encrypt and decrypt with it.'],
     // Custom Blocks / Programming
     'My-Blocks-Plus.js': ['Custom Blocks Plus', 'Better custom blocks.', 'Colors, menus, images and branches, reporters, global blocks for all sprites, settable parameters, stop the caller.'],
-    'jwProto': ['Labels & Placeholders', 'Comment and placeholder blocks.', 'Comment labels for blocks and empty placeholder blocks.'],
-    'SPjavascriptV2': ['JavaScript', 'Run your own code.', 'JavaScript with data and return values; global or local functions.']
+    'jwProto': ['Labels & Placeholders', 'Comment and placeholder blocks.', 'Comment labels for blocks and empty placeholder blocks.']
 };
 
 export const newTextOf = extensionId => {

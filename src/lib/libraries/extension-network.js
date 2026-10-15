@@ -15,8 +15,6 @@ const networkByKey = {
     'Newgrounds-Audio.js': 'required',
     'PuzzlingGGG/ttsrV2.js': 'required', // ttstool.com voices
     'pooiod/Dictation.js': 'required', // the browser's speech recognition runs on Google's servers
-    'YouTube-Operations.js': 'required',
-    'jgIframe': 'required', // shows web pages by address only
     'cloudlink.js': 'required',
     'godslayerakp/ws.js': 'required',
     'MikeDev101/webrtc.js': 'required',
@@ -27,7 +25,6 @@ const networkByKey = {
     'itchio.js': 'required',
     'NotHouse/DiscordAuth.js': 'required',
     'Ikelene/googleAuthExtension.js': 'required',
-    'bop_tw/Twitch.js': 'required',
     'Spotify.js': 'required',
     'SoundCloud-API.js': 'required',
     'RubyDevs/turboweather.js': 'required',
@@ -41,8 +38,6 @@ const networkByKey = {
     'Lily/lmsutils.js': 'partial', // open / redirect to a web address
     'true-fantom/network.js': 'partial', // web requests; browser and connection info work offline
     'jgPrism': 'partial', // data URL of an image at a web address goes through a web proxy
-    'SPjavascriptV2': 'partial', // the code editor field loads from a CDN; run [CODE] works offline
-    'iframe.js': 'partial', // show website; show HTML works offline
     'Geolocation.js': 'partial', // location and IP lookups; distance works offline
     'steamworks.js': 'partial', // opens web pages in the Steam overlay
     // green: can use the internet, works without it

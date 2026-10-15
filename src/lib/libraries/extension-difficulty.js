@@ -78,7 +78,6 @@ const difficultyByKey = {
     'pooiod/Dictation.js': 1,
     // Video / Webcam
     'Lily/Video.js': 2,
-    'YouTube-Operations.js': 2,
     'videoSensing': 1,
     'Camera-Sensing-Plus.js': 2,
     'lab/video-sprites.js': 2,
@@ -142,7 +141,6 @@ const difficultyByKey = {
     'itchio.js': 3,
     'NotHouse/DiscordAuth.js': 3,
     'Ikelene/googleAuthExtension.js': 3,
-    'bop_tw/Twitch.js': 3,
     'Spotify.js': 2,
     'SoundCloud-API.js': 2,
     'RubyDevs/turboweather.js': 2,
@@ -156,11 +154,6 @@ const difficultyByKey = {
     'sharkpoolPrinting': 2,
     'navigator.js': 1,
     'battery.js': 1,
-    'iframe.js': 2,
-    'jgIframe': 3,
-    'ZXMushroom63/searchApi.js': 2,
-    'pooiod/WindowHasher.js': 2,
-    'DOM-Selector.js': 4,
     // Encoding / Security
     'encoding.js': 2,
     'shovellzcompresss': 2,
@@ -170,8 +163,7 @@ const difficultyByKey = {
     'MikeDev101/e2ee.js': 4,
     // Custom Blocks / Programming
     'My-Blocks-Plus.js': 3,
-    'jwProto': 3,
-    'SPjavascriptV2': 4
+    'jwProto': 3
 };
 
 export const difficultyOf = extensionId => difficultyByKey[extensionKeyOf(extensionId)] || null;
