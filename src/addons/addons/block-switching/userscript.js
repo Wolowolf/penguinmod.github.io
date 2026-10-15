@@ -814,30 +814,6 @@ export default async function ({ addon, console, msg }) {
         },
         noopSwitch,
       ];
-      blockSwitches["pen_setPenHueToNumber"] = [
-        noopSwitch,
-        {
-          opcode: "pen_changePenHueBy",
-        },
-      ];
-      blockSwitches["pen_changePenHueBy"] = [
-        {
-          opcode: "pen_setPenHueToNumber",
-        },
-        noopSwitch,
-      ];
-      blockSwitches["pen_setPenShadeToNumber"] = [
-        noopSwitch,
-        {
-          opcode: "pen_changePenShadeBy",
-        },
-      ];
-      blockSwitches["pen_changePenShadeBy"] = [
-        {
-          opcode: "pen_setPenShadeToNumber",
-        },
-        noopSwitch,
-      ];
       blockSwitches["pen_setPenSizeTo"] = [
         noopSwitch,
         {

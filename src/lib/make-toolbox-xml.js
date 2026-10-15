@@ -1511,23 +1511,6 @@ const myBlocks = function () {
     `;
 };
 
-const liveTests = function () {
-    return `
-    <category name="Live Tests" id="liveTests" colour="#FF0000" secondaryColour="#FF0000">
-        <block type="procedures_call">
-            <mutation proccode="tw:debugger;" argumentids="[]" warp="false" returns="null" edited="true" optype="null"></mutation>
-        </block>
-        ${blockSeparator}
-        <block type="operator_checkboxBoolean"></block>
-        <block type="control_fieldbutton"></block>
-        <block type="motion_mutatorCheckboxTest"></block>
-        ${blockSeparator}
-        <block type="control_dualblock"></block>
-        <block type="test_spread"></block>
-    </category>
-    `;
-};
-
 /* eslint-enable no-unused-vars */
 
 const xmlOpen = '<xml style="display: none">';
@@ -1546,11 +1529,10 @@ const xmlClose = '</xml>';
  * @param {?string} costumeName - The name of the default selected costume dropdown.
  * @param {?string} backdropName - The name of the default selected backdrop dropdown.
  * @param {?string} soundName -  The name of the default selected sound dropdown.
- * @param {?boolean} isLiveTest - whether or not we should display the live tests categpory
  * @returns {string} - a ScratchBlocks-style XML document for the contents of the toolbox.
  */
 const makeToolboxXML = function (isInitialSetup, isStage = true, targetId, categoriesXML = [],
-    costumeName = '', backdropName = '', soundName = '', isLiveTest = false) {
+    costumeName = '', backdropName = '', soundName = '') {
     isStage = isInitialSetup || isStage;
     const gap = [categorySeparator];
 
@@ -1578,7 +1560,6 @@ const makeToolboxXML = function (isInitialSetup, isStage = true, targetId, categ
     const variablesXML = moveCategory('variables') || variables(isInitialSetup, isStage, targetId);
     const listsXML = moveCategory('lists') || lists(isInitialSetup, isStage, targetId);
     const myBlocksXML = moveCategory('procedures') || myBlocks(isInitialSetup, isStage, targetId);
-    const liveTestsXML = moveCategory('liveTests') || liveTests(isLiveTest);
 
     const everything = [
         xmlOpen,
@@ -1593,7 +1574,6 @@ const makeToolboxXML = function (isInitialSetup, isStage = true, targetId, categ
         listsXML,
         myBlocksXML
     ];
-    if (isLiveTest) everything.push(liveTestsXML);
 
     for (const extensionCategory of categoriesXML) {
         everything.push(extensionCategory.xml);
