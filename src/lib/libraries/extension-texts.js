@@ -79,7 +79,7 @@ const textsByKey = {
     // Video / Webcam
     'Lily/Video.js': ['Video Player', 'Play videos on sprites.', 'Load videos from URLs onto sprites or the stage: play, pause, loop, seek, volume, speed, time, size, screenshots.'],
     'videoSensing': ['Video Sensing', 'Detect camera motion.', 'Motion and direction on sprites or the stage, motion hat, show the camera with transparency.'],
-    'Camera-Sensing-Plus.js': ['Camera Plus', 'Camera on sprites and photos.', 'Show the camera on sprites, take photos, front or back camera, resolution, remove or replace colors, cut out shapes.'],
+    'Camera-Sensing-Plus.js': ['Camera Plus', 'Camera on sprites and photos.', 'Show the camera on sprites, take photos, front or back camera, resolution.'],
     'lab/video-sprites.js': ['Video Sprites', 'Live camera inside sprites.', 'Fill a sprite or one of its colors with the camera; zoom.'],
     'lab/face-sensing.js': ['Face Sensing', 'Track a face with the camera.', 'Go to the nose, eyes, ears, mouth or head, face tilt and size, hats for tilting and touching parts.'],
     'pooiod/VideoSharing.js': ['Screen Share', 'Capture the screen or camera.', 'Get frames as PNG, JPEG, WEBP or hex at any resolution; show an image.'],
@@ -123,12 +123,12 @@ const textsByKey = {
     'Embin/embintranslation.js': ['Translations', 'Projects in several languages.', 'Translation keys per language with values and placeholders, user and current language, JSON import and export.'],
     // Utility Collections
     'utilities.js': ['Utilities', 'Handy small blocks.', 'Exact compare, ≤ ≥, power, π, if-then-else value, parts of text, clamp, milliseconds, fetch a URL, JSON values, newline, regex replace.'],
-    'Lily/lmsutils.js': ['Lily\'s Toolbox', 'A big mixed toolbox.', 'Condition and key hats, inline if, logic, comparisons, text tools, encoding, math, color, angle, matrix and note values, runtime variables, costume SVGs, alerts, clipboard, links, device info, console, comments.'],
+    'Lily/lmsutils.js': ['Lily\'s Toolbox', 'A big mixed toolbox.', 'Condition and key hats, inline if, logic, comparisons, text tools, math, effect and clone info, device and window info.'],
     'TheShovel/ShovelUtils.js': ['Shovel Utilities', 'Import assets and edit the project.', 'Import images, sounds, sprites, projects or extensions from URLs; delete sprites or costumes; set a list from an array; restart; choose the edited sprite; color brightness; FPS.'],
     'Sharktilities.js': ['Sharktilities', 'Mixed sprite and text utilities.', 'What a sprite says, costume details, unclamped effects, changed-value hats, broadcast and repeat while waiting, smoothing, SVG shapes, text, rounding, random and multi-join tools, pen layer image.'],
     'jgPrism': ['Prism', 'Audio, images and encoding helpers.', 'Play audio from URLs (loop, speed, position, volume), stage screenshot, data URLs of costumes and images, mouse scroll, base64, character codes, compression, number encoding.'],
     // Multiplayer / Web Requests
-    'cloudlink.js': ['CloudLink', 'Online multiplayer.', 'Through CloudLink servers: connect, usernames, rooms, global, private and direct messages and variables, listeners, packet queues; JSON and web requests.'],
+    'cloudlink.js': ['CloudLink', 'Online multiplayer.', 'Through CloudLink servers: connect, usernames, rooms, global, private and direct messages and variables, listeners, packet queues.'],
     'godslayerakp/ws.js': ['WebSocket', 'Live server connections.', 'Connect to a WebSocket server, send and receive messages; hats and checks for connecting, errors and closing.'],
     'MikeDev101/webrtc.js': ['WebRTC', 'Peer-to-peer connections.', 'Offers, answers, ICE candidates, data channels, sending and receiving.'],
     'true-fantom/network.js': ['Network', 'Web requests and connection info.', 'Get, post, put, patch and delete with headers and forms; response text, JSON, status and headers; online and connection speed; open links.'],

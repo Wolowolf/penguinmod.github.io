@@ -271,7 +271,7 @@ const creditScripts = (endId, prefix) => {
                     `Scroll speed: change the ${SPEED} in both glide blocks (seconds the text takes to cross the stage, smaller = faster).`)),
                 {op: 'looks_nextcostume'},
                 {op: 'control_if', i: {CONDITION: isPage, SUBSTACK: [cloneMyself]}},
-                {op: 'looks_previouscostume'},
+                wearCostume('previous costume'),
                 glide(times(divide(textHeight, stageHeight), SPEED), plus(yPosition, textHeight)),
                 {op: 'looks_nextcostume'},
                 {op: 'control_if', i: {CONDITION: not(isPage), SUBSTACK: [
@@ -369,7 +369,7 @@ const isOldScript = (blocks, topId) => {
 const generated = costume => costume.name === SCREEN || costume.name === OLD_TEXT || isPageName(costume.name);
 
 /* Packager check: is the credit sprite shown by a script (a "show" block under a hat block)? */
-const SHOW_OPCODES = ['looks_show', 'looks_changeVisibilityOfSprite', 'looks_changeVisibilityOfSpriteShow'];
+const SHOW_OPCODES = ['looks_show', 'looks_changeVisibilityOfSpriteShow'];
 const inputValue = (blocks, block, name) => {
     if (block.fields[name]) return block.fields[name].value;
     const input = block.inputs[name];
@@ -386,8 +386,6 @@ const showsCredits = (runtime, sprite) => {
         if (block.opcode !== 'looks_show') {
             const option = inputValue(blocks, block, 'VISIBLE_OPTION');
             if (option !== null && option !== '_myself_' && option !== sprite.getName()) return false;
-            const type = block.opcode === 'looks_changeVisibilityOfSprite' ? inputValue(blocks, block, 'VISIBLE_TYPE') : 'show';
-            if (type !== null && String(type).toLowerCase() !== 'show') return false;
         }
         let top = block;
         while (top.parent) top = blocks.getBlock(top.parent);

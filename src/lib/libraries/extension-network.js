@@ -35,7 +35,6 @@ const networkByKey = {
     'obviousAlexC/penPlus.js': 'partial', // custom shader editor is a web page
     'Gen1x/random_utils.js': 'partial', // true random numbers and UUIDs from web services
     'utilities.js': 'partial', // fetch block
-    'Lily/lmsutils.js': 'partial', // open / redirect to a web address
     'true-fantom/network.js': 'partial', // web requests; browser and connection info work offline
     'jgPrism': 'partial', // data URL of an image at a web address goes through a web proxy
     'Geolocation.js': 'partial', // location and IP lookups; distance works offline
