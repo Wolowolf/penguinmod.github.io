@@ -107,8 +107,6 @@
     "variable-manager/too-big": "Kliknite za prikaz zelo velike vrednosti.",
     "variable-manager/variables": "Spremenljivke",
     "search-sprites/placeholder": "Iskanje figur...",
-    "sprite-properties/close-properties-panel-tooltip": "Skrči lastnosti",
-    "sprite-properties/open-properties-panel-tooltip": "Odpri lastnosti",
     "gamepad/axes-a-b": "Osi {a} in {b}",
     "gamepad/axis-arrows": "Tipke s puščicami",
     "gamepad/axis-cursor": "Kazalec miške",
@@ -224,6 +222,5 @@
     "swap-local-global/edit-variable-header": "Uredi spremenljivko",
     "swap-local-global/edit-variable-option": "Preimenuj ali uredi spremenljivko",
     "swap-local-global/to-global": "Spremeni v \"Za vse figure\"",
-    "swap-local-global/to-local": "Spremeni v \"Samo za to figuro\"",
-    "hide-stage/hide-stage": "Skrij oder"
+    "swap-local-global/to-local": "Spremeni v \"Samo za to figuro\""
 }

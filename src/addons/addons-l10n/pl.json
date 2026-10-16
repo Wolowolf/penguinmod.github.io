@@ -112,7 +112,6 @@
     "variable-manager/too-big": "Kliknij, aby wyświetlić bardzo dużą wartość.",
     "variable-manager/variables": "Zmienne",
     "search-sprites/placeholder": "Szukaj duszków...",
-    "sprite-properties/open-properties-panel-tooltip": "Otwórz panel właściwości",
     "gamepad/axes-a-b": "Osie {a} i {b}",
     "gamepad/axis-arrows": "Przyciski Strzałek",
     "gamepad/axis-cursor": "Kursor",
@@ -227,6 +226,5 @@
     "swap-local-global/edit-variable-header": "Edytuj Zmienną",
     "swap-local-global/edit-variable-option": "Zmień nazwę lub edytuj zmienną",
     "swap-local-global/to-global": "Zamień na \"Dla wszystkich duszków\"",
-    "swap-local-global/to-local": "Zamień na \"Tylko dla tego duszka\"",
-    "hide-stage/hide-stage": "Ukryj scenę"
+    "swap-local-global/to-local": "Zamień na \"Tylko dla tego duszka\""
 }

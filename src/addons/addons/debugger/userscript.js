@@ -542,12 +542,9 @@ export default async function ({ addon, console, msg }) {
   document.addEventListener(
     "click",
     (e) => {
-      if (e.target.closest("[class*='stage-header_stage-button-first']:not(.sa-hide-stage-button)")) {
+      if (e.target.closest("[class*='stage-header_stage-button-first']")) {
         document.body.classList.add("sa-debugger-small");
-      } else if (
-        e.target.closest("[class*='stage-header_stage-button-last']") ||
-        e.target.closest(".sa-hide-stage-button")
-      ) {
+      } else if (e.target.closest("[class*='stage-header_stage-button-last']")) {
         document.body.classList.remove("sa-debugger-small");
       }
     },

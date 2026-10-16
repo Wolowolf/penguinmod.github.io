@@ -115,8 +115,6 @@
     "variable-manager/too-big": "Kattints a nagyon hosszú érték megjelenítéséhez.",
     "variable-manager/variables": "Változók",
     "search-sprites/placeholder": "Szereplők keresése...",
-    "sprite-properties/close-properties-panel-tooltip": "Tulajdonságok panel összecsukása",
-    "sprite-properties/open-properties-panel-tooltip": "Tulajdonságok panel megnyitása",
     "gamepad/axes-a-b": "Tengelyek {a} & {b}",
     "gamepad/axis-arrows": "Nyíl-billentyűk",
     "gamepad/axis-cursor": "Kurzor",
@@ -229,6 +227,5 @@
     "swap-local-global/edit-variable-header": "Változó szerkesztése",
     "swap-local-global/edit-variable-option": "Változó átnevezése vagy szerkesztése",
     "swap-local-global/to-global": "Konvertálás \"Minden szereplőé\"-vé",
-    "swap-local-global/to-local": "Konvertálás \"A kiválasztott szereplőé\"-vé",
-    "hide-stage/hide-stage": "Színpad elrejtése"
+    "swap-local-global/to-local": "Konvertálás \"A kiválasztott szereplőé\"-vé"
 }

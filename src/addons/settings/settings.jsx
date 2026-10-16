@@ -103,12 +103,10 @@ const addonOrder = [
     'blocks2image',
     // Block palette
     'block-pins',
-    'toolbox-category-drag',
     'toolbox-full-blocks-on-hover',
     'hide-flyout',
     'columns',
     'block-palette-icons',
-    'load-extensions',
     // Block appearance
     'editor-theme3',
     'custom-block-shape',
@@ -119,12 +117,8 @@ const addonOrder = [
     // Editor look and layout
     'editor-tweaks',
     'editor-animations',
-    'editor-stage-left',
     'editor-buttons-reverse-order',
-    'remove-curved-stage-border',
-    'hide-stage',
     'block-count',
-    'tw-remove-feedback',
     'editor-sounds',
     // Stage and running the project
     'vol-slider',
@@ -140,7 +134,6 @@ const addonOrder = [
     // Sprite pane, costume and sound lists
     'folders',
     'search-sprites',
-    'sprite-properties',
     'initialise-sprite-position',
     'remove-sprite-confirm',
     'hide-delete-button',
@@ -163,11 +156,9 @@ const addonOrder = [
     'disable-paste-offset',
     'bitmap-copy',
     // Sound editor
-    'sounds-newgrounds-button',
     'waveform-chunk-size',
     // Removing features
-    'tw-remove-backpack',
-    'tw-disable-cloud-variables'
+    'tw-remove-backpack'
 ];
 const addonRank = id => {
     const rank = addonOrder.indexOf(id);

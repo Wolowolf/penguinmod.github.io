@@ -22,6 +22,7 @@ import AddonHooks from '../addons/hooks';
 import LoadScratchBlocksHOC from '../lib/tw-load-scratch-blocks-hoc.jsx';
 import uid from "../lib/uid.js";
 import attachBetterComments from '../lib/better-comments.js';
+import attachCategoryDrag from '../lib/pm-category-drag.js';
 
 import {connect} from 'react-redux';
 import {updateToolbox} from '../reducers/toolbox';
@@ -97,6 +98,7 @@ class Blocks extends React.Component {
             }
         ]);
         window.ScratchBlocks = this.ScratchBlocks;
+        attachCategoryDrag(this.ScratchBlocks, props.vm);
         AddonHooks.blockly = this.ScratchBlocks;
         AddonHooks.blocklyCallbacks.forEach(i => i());
         AddonHooks.blocklyCallbacks.length = 0;

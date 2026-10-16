@@ -105,8 +105,6 @@
     "variable-manager/too-big": "Klik om grote waarde weer te geven.",
     "variable-manager/variables": "Variabelen",
     "search-sprites/placeholder": "Sprites zoeken...",
-    "sprite-properties/close-properties-panel-tooltip": "Eigenschappenpaneel samenvouwen",
-    "sprite-properties/open-properties-panel-tooltip": "Eigenschappenpaneel openvouwen",
     "gamepad/axes-a-b": "Assen {a} & {b}",
     "gamepad/axis-arrows": "Pijltjestoetsen",
     "gamepad/axis-cursor": "Muisaanwijzer",
@@ -220,6 +218,5 @@
     "swap-local-global/edit-variable-header": "Variabele Bewerken",
     "swap-local-global/edit-variable-option": "Variabele hernoemen of bewerken",
     "swap-local-global/to-global": "Veranderen naar \"Voor alle sprites\"",
-    "swap-local-global/to-local": "Veranderen naar \"Alleen voor deze sprite\"",
-    "hide-stage/hide-stage": "Speelveld verbergen"
+    "swap-local-global/to-local": "Veranderen naar \"Alleen voor deze sprite\""
 }

@@ -3,7 +3,6 @@
 // here are implied to have the lowest possible precedence.
 const addonPrecedence = [
     'columns',
-    'editor-stage-left',
     'editor-theme3'
 ];
 

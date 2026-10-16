@@ -104,8 +104,6 @@
     "variable-manager/for-this-sprite": "Variables para este objeto",
     "variable-manager/search": "Buscar",
     "search-sprites/placeholder": "Buscar objetos...",
-    "sprite-properties/close-properties-panel-tooltip": "Colapsar panel de propiedades",
-    "sprite-properties/open-properties-panel-tooltip": "Abrir panel de propiedades",
     "gamepad/axes-a-b": "Ejes {a} y {b}",
     "gamepad/axis-arrows": "Flechas del Teclado",
     "gamepad/axis-custom": "Personalizado",
@@ -219,6 +217,5 @@
     "swap-local-global/edit-variable-header": "Editar Variable",
     "swap-local-global/edit-variable-option": "Renombrar o editar variable",
     "swap-local-global/to-global": "Convertir a \"Para todos los objetos\"",
-    "swap-local-global/to-local": "Convertir a \"Solo para este objeto\"",
-    "hide-stage/hide-stage": "Esconder escenario"
+    "swap-local-global/to-local": "Convertir a \"Solo para este objeto\""
 }

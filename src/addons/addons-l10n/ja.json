@@ -113,8 +113,6 @@
     "variable-manager/too-big": "クリックして非常に大きな値を表示",
     "variable-manager/variables": "変数",
     "search-sprites/placeholder": "スプライトを検索...",
-    "sprite-properties/close-properties-panel-tooltip": "プロパティ―パネルを閉じる",
-    "sprite-properties/open-properties-panel-tooltip": "プロパティ―パネルを開く",
     "gamepad/axes-a-b": "軸 {a} と {b}",
     "gamepad/axis-arrows": "矢印キー",
     "gamepad/axis-cursor": "カーソル",
@@ -229,6 +227,5 @@
     "swap-local-global/edit-variable-header": "変数を編集",
     "swap-local-global/edit-variable-option": "変数を改名・編集",
     "swap-local-global/to-global": "「すべてのスプライト用」にする",
-    "swap-local-global/to-local": "「このスプライトのみ」にする",
-    "hide-stage/hide-stage": "ステージを隠す"
+    "swap-local-global/to-local": "「このスプライトのみ」にする"
 }

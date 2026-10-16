@@ -51,7 +51,6 @@
   border-color: var(--ui-black-transparent, rgba(0, 0, 0, 0.15));
 }
 
-/* [dir] is for specificity to override editor-stage-left */
 [dir] [class*="gui_extension-button-container_"] {
   border-radius: 0.25rem;
 }
