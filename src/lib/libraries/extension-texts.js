@@ -135,8 +135,8 @@ const textsByKey = {
     // Web Services / Accounts
     'steamworks.js': ['Steam', 'Steam features for games.', 'User name, level, country and ID, achievements, DLC check, Steam overlay.'],
     'itchio.js': ['itch.io', 'itch.io pages and game data.', 'Open pages; a game\'s details, price, sale, rewards and sub-products.'],
-    'NotHouse/DiscordAuth.js': ['Discord Login', 'Sign in with Discord.', 'The user\'s ID, name, avatar and other profile details.'],
-    'Ikelene/googleAuthExtension.js': ['Google Login', 'Sign in with Google.', 'Name, email, picture, ID and language.'],
+    'NotHouse/DiscordAuth.js': ['Discord Login', 'Sign in with Discord through your own app.', 'Username, display name, ID, avatar; email if asked. Shows your privacy policy first.'],
+    'Ikelene/googleAuthExtension.js': ['Google Login', 'Sign in with Google through your own client ID.', 'Name, picture, ID; email if asked. Shows your privacy policy first.'],
     'Geolocation.js': ['Geolocation', 'Where the user is.', 'Device position (with permission) or location from an IP, watch for changes, country names, real-world distances.'],
     // Browser / Device
     'clipboard.js': ['Clipboard', 'Copy and paste text.', 'Copy text, read the clipboard and the last pasted text, copy and paste hats.'],
