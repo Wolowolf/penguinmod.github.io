@@ -24,7 +24,6 @@ const networkByKey = {
     // orange: partly needs the internet
     'obviousAlexC/SensingPlus.js': 'partial', // speech recognition blocks
     'obviousAlexC/penPlus.js': 'partial', // custom shader editor is a web page
-    'Gen1x/random_utils.js': 'partial', // true random numbers and UUIDs from web services
     'utilities.js': 'partial', // fetch block
     'true-fantom/network.js': 'partial', // web requests; browser and connection info work offline
     'jgPrism': 'partial', // data URL of an image at a web address goes through a web proxy

@@ -104,7 +104,7 @@ const textsByKey = {
     'Temporary-Variables.js': ['Temporary Variables', 'Short-lived variables.', 'Variables that exist only for a script, a sprite, the project run or a block of code.'],
     // Math / Numbers / Random
     'true-fantom/math.js': ['More Math', 'Extra math operators.', 'Powers, roots, logarithms, ≥ ≤ ≠, ranges, approximate and exact comparisons, nand, nor, xor, xnor, sign, clamp, map range, truncate, multiple and number-type checks, π, e, ∞.'],
-    'Gen1x/random_utils.js': ['Random Tools', 'More kinds of randomness.', 'Seeded random numbers, UUIDs, random strings, colors and chances.'],
+    'Gen1x/random_utils.js': ['Random Tools', 'More kinds of randomness.', 'Seeded random numbers, random strings, colors and chances.'],
     'iygPerlin': ['Noise', 'Smooth random noise.', 'Perlin, simplex and random noise in 3D with seeds and octaves, for terrain and clouds.'],
     'MubiLop/numutils.js': ['Number Format', 'Pretty-print numbers.', 'By language, decimals, significant figures, exponent, short (K, M, B), currency or percent; round to a multiple, clamp, integer and finite checks.'],
     'NOname-awa/graphics2d.js': ['Geometry', '2D shape math.', 'Distance and direction between points, perpendicular check, area and perimeter of triangles, quadrilaterals, polygons and circles.'],
@@ -127,9 +127,9 @@ const textsByKey = {
     'Sharktilities.js': ['Sharktilities', 'Mixed sprite and text utilities.', 'What a sprite says, costume details, unclamped effects, changed-value hats, broadcast and repeat while waiting, smoothing, SVG shapes, text, rounding, random and multi-join tools, pen layer image.'],
     'jgPrism': ['Prism', 'Audio, images and encoding helpers.', 'Play audio from URLs (loop, speed, position, volume), stage screenshot, data URLs of costumes and images, mouse scroll, base64, character codes, compression, number encoding.'],
     // Multiplayer / Web Requests
-    'cloudlink.js': ['CloudLink', 'Online multiplayer.', 'Through CloudLink servers: connect, usernames, rooms, global, private and direct messages and variables, listeners, packet queues.'],
+    'cloudlink.js': ['CloudLink', 'Online multiplayer.', 'Through your own CloudLink server: connect, usernames, rooms, global, private and direct messages and variables, listeners, packet queues.'],
     'godslayerakp/ws.js': ['WebSocket', 'Live server connections.', 'Connect to a WebSocket server, send and receive messages; hats and checks for connecting, errors and closing.'],
-    'MikeDev101/webrtc.js': ['WebRTC', 'Peer-to-peer connections.', 'Offers, answers, ICE candidates, data channels, sending and receiving.'],
+    'MikeDev101/webrtc.js': ['WebRTC', 'Peer-to-peer connections.', 'Your own STUN/TURN servers, offers, answers, ICE candidates, data channels, sending and receiving.'],
     'true-fantom/network.js': ['Network', 'Web requests and connection info.', 'Get, post, put, patch and delete with headers and forms; response text, JSON, status and headers; online and connection speed; open links.'],
     'MubiLop/penguinhook.js': ['Webhooks', 'Post to Discord and webhooks.', 'Messages, embeds or raw JSON.'],
     // Web Services / Accounts
