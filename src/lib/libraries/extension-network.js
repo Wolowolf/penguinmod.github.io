@@ -12,24 +12,15 @@ import {extensionKeyOf} from './extension-categories.js';
 // Keys as in extension-categories.js. No entry: no internet use, no symbol.
 const networkByKey = {
     // red: needs the internet
-    'Newgrounds-Audio.js': 'required',
     'PuzzlingGGG/ttsrV2.js': 'required', // ttstool.com voices
     'pooiod/Dictation.js': 'required', // the browser's speech recognition runs on Google's servers
     'cloudlink.js': 'required',
     'godslayerakp/ws.js': 'required',
     'MikeDev101/webrtc.js': 'required',
-    'NamelessCat/corsproxy.js': 'required',
     'MubiLop/penguinhook.js': 'required',
-    'Codefoxy/cfupload.js': 'required',
-    'MubiLop/yeetyourfiles.js': 'required',
     'itchio.js': 'required',
     'NotHouse/DiscordAuth.js': 'required',
     'Ikelene/googleAuthExtension.js': 'required',
-    'Spotify.js': 'required',
-    'SoundCloud-API.js': 'required',
-    'RubyDevs/turboweather.js': 'required',
-    'bruhbeast-pixel/CockatielLocation.js': 'required',
-    'veggiecan/LongmanDictionary.js': 'required',
     // orange: partly needs the internet
     'obviousAlexC/SensingPlus.js': 'partial', // speech recognition blocks
     'obviousAlexC/penPlus.js': 'partial', // custom shader editor is a web page

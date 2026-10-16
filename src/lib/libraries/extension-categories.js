@@ -101,7 +101,6 @@ const keysByTag = {
         'Lily/SoundExpanded.js',
         'music',
         'Tune-Shark-V3.js',
-        'Newgrounds-Audio.js',
         'SharkPool/Sound-Waves.js',
         'Gen1x/beat_sync.js',
         'MIDI-Tools.js',
@@ -178,22 +177,14 @@ const keysByTag = {
         'godslayerakp/ws.js',
         'MikeDev101/webrtc.js',
         'true-fantom/network.js',
-        'NamelessCat/corsproxy.js',
-        'MubiLop/penguinhook.js',
-        'Codefoxy/cfupload.js',
-        'MubiLop/yeetyourfiles.js'
+        'MubiLop/penguinhook.js'
     ],
     cat_services: [
         'steamworks.js',
         'itchio.js',
         'NotHouse/DiscordAuth.js',
         'Ikelene/googleAuthExtension.js',
-        'Spotify.js',
-        'SoundCloud-API.js',
-        'RubyDevs/turboweather.js',
-        'Geolocation.js',
-        'bruhbeast-pixel/CockatielLocation.js',
-        'veggiecan/LongmanDictionary.js'
+        'Geolocation.js'
     ],
     cat_browser: [
         'clipboard.js',
