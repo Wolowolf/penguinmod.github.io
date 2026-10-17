@@ -5,7 +5,7 @@ export default async function ({ addon }) {
     const ogConnectMarker = ScratchBlocks.InsertionMarkerManager.prototype.connectMarker_;
     ScratchBlocks.InsertionMarkerManager.prototype.connectMarker_ = function () {
         ogConnectMarker.call(this);
-        if (!addon.self.disabled && this.firstMarker_) {
+        if (this.firstMarker_) {
             const block = this?.workspace_?.currentGesture_?.blockDragger_?.draggingBlock_;
             block.noMoveConnection = true;
             if (block) block.render(false);
@@ -14,7 +14,7 @@ export default async function ({ addon }) {
     const ogDisconnectMarker = ScratchBlocks.InsertionMarkerManager.prototype.disconnectMarker_;
     ScratchBlocks.InsertionMarkerManager.prototype.disconnectMarker_ = function () {
         ogDisconnectMarker.call(this);
-        if (!addon.self.disabled && this.firstMarker_) {
+        if (this.firstMarker_) {
             const block = this?.workspace_?.currentGesture_?.blockDragger_?.draggingBlock_;
             block.noMoveConnection = true;
             if (block) block.render(false);
@@ -24,7 +24,6 @@ export default async function ({ addon }) {
     const ogDraw = ScratchBlocks.BlockSvg.prototype.renderDraw_;
     const ogMoveConnections = ScratchBlocks.BlockSvg.prototype.renderMoveConnections_;
     ScratchBlocks.BlockSvg.prototype.renderDraw_ = function (iconWidth, inputRows) {
-        if (addon.self.disabled) return ogDraw.call(this, iconWidth, inputRows);
 
         // If the block contains a statement (C) input and has an insertion marker,
         // use that to calculate the height of the statement inputs
@@ -68,7 +67,6 @@ export default async function ({ addon }) {
         this.noMoveConnection = false;
     };
     ScratchBlocks.BlockSvg.prototype.renderMoveConnections_ = function () {
-        if (addon.self.disabled) return ogMoveConnections.call(this);
         // Do nothing (this function is instead called by renderDraw_)
     };
 }

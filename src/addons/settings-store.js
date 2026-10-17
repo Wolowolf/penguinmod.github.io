@@ -29,21 +29,12 @@ const migrateSettings = settings => {
 
     // Migrate 1 -> 2
     // tw-project-info is now block-count
-    // tw-interface-customization became tw-remove-backpack
     if (oldVersion < 2) {
         const projectInfo = settings['tw-project-info'];
         if (projectInfo && projectInfo.enabled) {
             settings['block-count'] = {
                 enabled: true
             };
-        }
-        const interfaceCustomization = settings['tw-interface-customization'];
-        if (interfaceCustomization && interfaceCustomization.enabled) {
-            if (interfaceCustomization.removeBackpack) {
-                settings['tw-remove-backpack'] = {
-                    enabled: true
-                };
-            }
         }
     }
 
@@ -59,13 +50,10 @@ const migrateSettings = settings => {
 
     // Migrate 3 -> 4
     // editor-devtools was broken up into find-bar and middle-click-popup.
-    // If someone disabled editor-devtools, we want to keep these disabled.
+    // If someone disabled editor-devtools, we want to keep middle-click-popup disabled.
     if (oldVersion < 4) {
         const editorDevtools = settings['editor-devtools'];
         if (editorDevtools && editorDevtools.enabled === false) {
-            settings['find-bar'] = {
-                enabled: false
-            };
             settings['middle-click-popup'] = {
                 enabled: false
             };
@@ -192,6 +180,9 @@ class SettingsStore extends EventTargetShim {
         if (manifest.unsupported) {
             return false;
         }
+        if (manifest.builtIn) {
+            return true;
+        }
         const storage = this.getAddonStorage(addonId);
         if (storage.hasOwnProperty('enabled')) {
             return storage.enabled;
@@ -227,6 +218,10 @@ class SettingsStore extends EventTargetShim {
     setAddonEnabled (addonId, enabled) {
         const storage = this.getAddonStorage(addonId);
         const manifest = this.getAddonManifest(addonId);
+        if (manifest.builtIn) {
+            // part of the editor: always on
+            return;
+        }
         const oldValue = this.getAddonEnabled(addonId);
         if (enabled === null) {
             enabled = !!manifest.enabledByDefault;
@@ -367,6 +362,9 @@ class SettingsStore extends EventTargetShim {
             addons: {}
         };
         for (const [addonId, manifest] of Object.entries(addons)) {
+            if (manifest.builtIn) {
+                continue;
+            }
             const enabled = this.getAddonEnabled(addonId);
             const settings = {};
             if (manifest.settings) {

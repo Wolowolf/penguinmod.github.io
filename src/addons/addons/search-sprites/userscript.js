@@ -1,12 +1,12 @@
+const MIN_SPRITES = 10;
+
 export default async function ({ addon, console, msg }) {
+  const vm = addon.tab.traps.vm;
   let spritesContainer;
   let spriteSelectorContainer;
 
   const container = document.createElement("div");
   container.className = "sa-search-sprites-container";
-  addon.tab.displayNoneWhileDisabled(container, {
-    display: "flex",
-  });
 
   const searchBox = document.createElement("input");
   searchBox.className = "sa-search-sprites-box";
@@ -46,10 +46,18 @@ export default async function ({ addon, console, msg }) {
   resetButton.className = "sa-search-sprites-reset";
   resetButton.addEventListener("click", reset);
   resetButton.textContent = "×";
-  addon.self.addEventListener("disabled", reset);
 
   container.appendChild(searchBox);
   container.appendChild(resetButton);
+
+  // targetList holds the stage and every sprite (no clones)
+  const updateVisibility = (spriteCount) => {
+    const show = spriteCount >= MIN_SPRITES;
+    if (!show && searchBox.value) reset();
+    container.style.display = show ? "" : "none";
+  };
+  updateVisibility(vm.runtime.targets.filter((target) => target.isOriginal && !target.isStage).length);
+  vm.on("targetsUpdate", ({ targetList }) => updateVisibility(targetList.length - 1));
 
   while (true) {
     await addon.tab.waitForElement("div[class^='sprite-selector_items-wrapper']", {

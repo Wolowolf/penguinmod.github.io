@@ -1,20 +1,16 @@
 // This file is only used by pull.js to generate files. It is not used at runtime.
 
 const addons = [
-    'cat-blocks',
     'editor-devtools',
     'find-bar',
     'middle-click-popup',
     'jump-to-def',
     'editor-searchable-dropdowns',
-    'block-palette-icons',
     'hide-flyout',
     'mediarecorder',
     'drag-drop',
-    'debugger',
     'pause',
     'mute-project',
-    'vol-slider',
     'clones',
     'mouse-pos',
     'color-picker',
@@ -32,7 +28,6 @@ const addons = [
     'editor-theme3',
     'custom-block-text',
     'editor-colored-context-menus',
-    'editor-buttons-reverse-order',
     'variable-manager',
     'search-sprites',
     'gamepad',
@@ -55,13 +50,9 @@ const addons = [
     'block-duplicate',
     'swap-local-global',
     'editor-comment-previews',
-    'columns',
     'number-pad',
     'script-snap',
-    'fullscreen',
     'tw-straighten-comments',
-    'tw-remove-backpack',
-    'vol-slider',
     'number-pad',
     'rename-broadcasts',
     'paint-snap',
@@ -71,8 +62,6 @@ const addons = [
 const newAddons = [
     "paint-gradient-maker",
     "toolbox-full-blocks-on-hover",
-    "waveform-chunk-size",
-    "paint-rounded-rect-seperate",
     "paint-default-smoothing",
     "paint-tool-panel"
 ];

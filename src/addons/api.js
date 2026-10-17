@@ -189,21 +189,6 @@ const untilInEditor = () => {
 
 const getDisplayNoneWhileDisabledClass = id => `addons-display-none-${id}`;
 
-const parseArguments = code => code
-    .split(/(?=[^\\]%[nbs])/g)
-    .map(i => i.trim())
-    .filter(i => i.charAt(0) === '%')
-    .map(i => i.substring(0, 2));
-const fixDisplayName = displayName => displayName.replace(/([^\s])(%[nbs])/g, (_, before, arg) => `${before} ${arg}`);
-const compareArrays = (a, b) => JSON.stringify(a) === JSON.stringify(b);
-
-let _firstAddBlockRan = false;
-const addonBlockColor = {
-    color: '#29beb8',
-    secondaryColor: '#3aa8a4',
-    tertiaryColor: '#3aa8a4'
-};
-
 const contextMenuCallbacks = [];
 const CONTEXT_MENU_ORDER = ['editor-devtools', 'block-switching', 'blocks2image', 'swap-local-global'];
 let createdAnyBlockContextMenus = false;
@@ -468,84 +453,6 @@ class Tab extends EventTargetShim {
             spaceElement.insertBefore(element, insertAfter.nextSibling);
         }
         return true;
-    }
-
-    addBlock (procedureCode, {args, displayName, callback}) {
-        const procCodeArguments = parseArguments(procedureCode);
-        if (args.length !== procCodeArguments.length) {
-            throw new Error('Procedure code and argument list do not match');
-        }
-
-        if (displayName) {
-            displayName = fixDisplayName(displayName);
-            const displayNameArguments = parseArguments(displayName);
-            if (!compareArrays(procCodeArguments, displayNameArguments)) {
-                console.warn(`displayName ${displayName} for ${procedureCode} has invalid arguments, ignoring it.`);
-                displayName = procedureCode;
-            }
-        } else {
-            displayName = procedureCode;
-        }
-
-        const vm = this.traps.vm;
-        vm.addAddonBlock({
-            procedureCode,
-            arguments: args,
-            callback,
-            color: '#29beb8',
-            secondaryColor: '#3aa8a4',
-            displayName
-        });
-
-        if (!_firstAddBlockRan) {
-            _firstAddBlockRan = true;
-
-            this.traps.getBlockly().then(ScratchBlocks => {
-                const BlockSvg = ScratchBlocks.BlockSvg;
-                const oldUpdateColour = BlockSvg.prototype.updateColour;
-                BlockSvg.prototype.updateColour = function (...args2) {
-                    // procedures_prototype also has a procedure code but we do not want to color them.
-                    if (!this.isInsertionMarker() && this.type === 'procedures_call') {
-                        const block = this.procCode_ && vm.runtime.getAddonBlock(this.procCode_);
-                        if (block) {
-                            this.colour_ = addonBlockColor.color;
-                            this.colourSecondary_ = addonBlockColor.secondaryColor;
-                            this.colourTertiary_ = addonBlockColor.tertiaryColor;
-                            this.customContextMenu = null;
-                        }
-                    }
-                    return oldUpdateColour.call(this, ...args2);
-                };
-                const originalCreateAllInputs = ScratchBlocks.Blocks.procedures_call.createAllInputs_;
-                ScratchBlocks.Blocks.procedures_call.createAllInputs_ = function (...args2) {
-                    const block = this.procCode_ && vm.runtime.getAddonBlock(this.procCode_);
-                    if (block && block.displayName) {
-                        const originalProcCode = this.procCode_;
-                        this.procCode_ = block.displayName;
-                        const ret = originalCreateAllInputs.call(this, ...args2);
-                        this.procCode_ = originalProcCode;
-                        return ret;
-                    }
-                    return originalCreateAllInputs.call(this, ...args2);
-                };
-                if (vm.editingTarget) {
-                    vm.emitWorkspaceUpdate();
-                }
-            });
-        }
-    }
-
-    getCustomBlock (procedureCode) {
-        const vm = this.traps.vm;
-        return vm.getAddonBlock(procedureCode);
-    }
-
-    getCustomBlockColor () {
-        return addonBlockColor;
-    }
-
-    setCustomBlockColor (newColor) {
-        Object.assign(addonBlockColor, newColor);
     }
 
     createBlockContextMenu (callback, {workspace = false, blocks = false, flyout = false, comments = false} = {}) {
@@ -906,9 +813,12 @@ class AddonRunner {
 
         }
 
-        const disabledCSS = `.${getDisplayNoneWhileDisabledClass(this.id)}{display:none !important;}`;
-        const disabledStylesheet = conditionalStyles.create(`_disabled/${this.id}`, disabledCSS);
-        disabledStylesheet.addDependent(this.id, baseStylePrecedence, () => this.publicAPI.addon.self.disabled);
+        // Built-in addons are never disabled, so they need no hiding style.
+        if (!this.manifest.builtIn) {
+            const disabledCSS = `.${getDisplayNoneWhileDisabledClass(this.id)}{display:none !important;}`;
+            const disabledStylesheet = conditionalStyles.create(`_disabled/${this.id}`, disabledCSS);
+            disabledStylesheet.addDependent(this.id, baseStylePrecedence, () => this.publicAPI.addon.self.disabled);
+        }
 
         this.updateCssVariables();
 

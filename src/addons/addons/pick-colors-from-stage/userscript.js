@@ -26,7 +26,6 @@ export default async function ({ addon, msg, console }) {
     }
 
     if (
-      !addon.self.disabled &&
       isMostRecentClickUserInitiated &&
       action.type === "scratch-paint/eye-dropper/ACTIVATE_COLOR_PICKER"
     ) {

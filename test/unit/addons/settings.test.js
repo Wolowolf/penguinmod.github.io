@@ -21,27 +21,27 @@ test('enabled, event', () => {
     const store = new SettingStore();
     const fn = jest.fn();
     store.addEventListener('setting-changed', fn);
-    expect(store.getAddonEnabled('editor-devtools')).toBe(true);
-    expect('enabled' in store.store['editor-devtools']).toBe(false);
-    store.setAddonEnabled('editor-devtools', false);
-    expect(store.getAddonEnabled('editor-devtools')).toBe(false);
-    expect('enabled' in store.store['editor-devtools']).toBe(true);
-    store.setAddonEnabled('editor-devtools', true);
-    store.setAddonEnabled('cat-blocks', true);
-    expect('enabled' in store.store['cat-blocks']).toBe(true);
-    store.setAddonEnabled('cat-blocks', null);
-    expect('enabled' in store.store['cat-blocks']).toBe(false);
+    expect(store.getAddonEnabled('jump-to-def')).toBe(true);
+    expect('enabled' in store.store['jump-to-def']).toBe(false);
+    store.setAddonEnabled('jump-to-def', false);
+    expect(store.getAddonEnabled('jump-to-def')).toBe(false);
+    expect('enabled' in store.store['jump-to-def']).toBe(true);
+    store.setAddonEnabled('jump-to-def', true);
+    store.setAddonEnabled('clones', true);
+    expect('enabled' in store.store['clones']).toBe(true);
+    store.setAddonEnabled('clones', null);
+    expect('enabled' in store.store['clones']).toBe(false);
     expect(fn).toHaveBeenCalledTimes(4);
-    expect(fn.mock.calls[0][0].detail.addonId).toBe('editor-devtools');
+    expect(fn.mock.calls[0][0].detail.addonId).toBe('jump-to-def');
     expect(fn.mock.calls[0][0].detail.settingId).toBe('enabled');
     expect(fn.mock.calls[0][0].detail.value).toBe(false);
-    expect(fn.mock.calls[1][0].detail.addonId).toBe('editor-devtools');
+    expect(fn.mock.calls[1][0].detail.addonId).toBe('jump-to-def');
     expect(fn.mock.calls[1][0].detail.settingId).toBe('enabled');
     expect(fn.mock.calls[1][0].detail.value).toBe(true);
-    expect(fn.mock.calls[2][0].detail.addonId).toBe('cat-blocks');
+    expect(fn.mock.calls[2][0].detail.addonId).toBe('clones');
     expect(fn.mock.calls[2][0].detail.settingId).toBe('enabled');
     expect(fn.mock.calls[2][0].detail.value).toBe(true);
-    expect(fn.mock.calls[3][0].detail.addonId).toBe('cat-blocks');
+    expect(fn.mock.calls[3][0].detail.addonId).toBe('clones');
     expect(fn.mock.calls[3][0].detail.settingId).toBe('enabled');
     expect(fn.mock.calls[3][0].detail.value).toBe(false);
 });
@@ -71,9 +71,9 @@ test('no actual change emits no event', () => {
     const store = new SettingStore();
     const fn = jest.fn();
     store.addEventListener('setting-changed', fn);
-    for (let i = 0; i < 5; i++) store.setAddonEnabled('cat-blocks', true);
+    for (let i = 0; i < 5; i++) store.setAddonEnabled('clones', true);
     expect(fn).toHaveBeenCalledTimes(1);
-    for (let i = 0; i < 5; i++) store.setAddonEnabled('cat-blocks', false);
+    for (let i = 0; i < 5; i++) store.setAddonEnabled('clones', false);
     expect(fn).toHaveBeenCalledTimes(2);
     for (let i = 0; i < 5; i++) store.setAddonSetting('onion-skinning', 'default', true);
     expect(fn).toHaveBeenCalledTimes(3);
@@ -102,10 +102,10 @@ test('changing enabled throws on invalid values', () => {
     const store = new SettingStore();
     const fn = jest.fn();
     store.addEventListener('setting-changed', fn);
-    expect(() => store.setAddonEnabled('cat-blocks', 'sdfjlksdflk')).toThrow();
-    expect(() => store.setAddonEnabled('cat-blocks', 0)).toThrow();
-    expect(() => store.setAddonEnabled('cat-blocks', [])).toThrow();
-    expect(() => store.setAddonEnabled('cat-blocks', {})).toThrow();
+    expect(() => store.setAddonEnabled('clones', 'sdfjlksdflk')).toThrow();
+    expect(() => store.setAddonEnabled('clones', 0)).toThrow();
+    expect(() => store.setAddonEnabled('clones', [])).toThrow();
+    expect(() => store.setAddonEnabled('clones', {})).toThrow();
     expect(fn).toHaveBeenCalledTimes(0);
 });
 
@@ -168,9 +168,9 @@ test('colors with alpha channel', () => {
 
 test('reset does not change enabled', () => {
     const store = new SettingStore();
-    store.setAddonEnabled('cat-blocks', true);
-    store.resetAddon('cat-blocks');
-    expect(store.getAddonEnabled('cat-blocks')).toBe(true);
+    store.setAddonEnabled('clones', true);
+    store.resetAddon('clones');
+    expect(store.getAddonEnabled('clones')).toBe(true);
 });
 
 test('reset settings, event', () => {
@@ -193,13 +193,13 @@ test('reset settings, event', () => {
 
 test('reset all addons', () => {
     const store = new SettingStore();
-    store.setAddonEnabled('cat-blocks', true);
+    store.setAddonEnabled('clones', true);
     store.setAddonSetting('onion-skinning', 'default', true);
     const fn = jest.fn();
     store.addEventListener('setting-changed', fn);
     store.resetAllAddons();
     expect(fn).toHaveBeenCalledTimes(2);
-    expect(fn.mock.calls[0][0].detail.addonId).toBe('cat-blocks');
+    expect(fn.mock.calls[0][0].detail.addonId).toBe('clones');
     expect(fn.mock.calls[0][0].detail.settingId).toBe('enabled');
     expect(fn.mock.calls[0][0].detail.value).toBe(false);
     expect(fn.mock.calls[1][0].detail.addonId).toBe('onion-skinning');
@@ -291,7 +291,7 @@ test('export is identical after import', () => {
 
 test('import format', () => {
     const store = new SettingStore();
-    store.setAddonEnabled('cat-blocks', true);
+    store.setAddonEnabled('clones', true);
     store.import({
         core: {
             version: 'lksd',
@@ -308,7 +308,7 @@ test('import format', () => {
     });
     expect(store.getAddonEnabled('onion-skinning')).toBe(false);
     expect(store.getAddonSetting('onion-skinning', 'next')).toBe(7);
-    expect(store.getAddonEnabled('cat-blocks')).toBe(true);
+    expect(store.getAddonEnabled('clones')).toBe(true);
 });
 
 test('invalid imports', () => {
@@ -350,7 +350,7 @@ test('invalid imports', () => {
 
 test('local storage', () => {
     const store = new SettingStore();
-    store.setAddonEnabled('cat-blocks', true);
+    store.setAddonEnabled('clones', true);
     store.setAddonSetting('onion-skinning', 'default', true);
     const newStore = new SettingStore();
     newStore.readLocalStorage();
@@ -369,45 +369,45 @@ test('local storage is resistent to errors', () => {
     localStorage.setItem = () => {
         throw new Error(':(');
     };
-    store.setAddonEnabled('cat-blocks', true);
+    store.setAddonEnabled('clones', true);
     // eslint-disable-next-line no-undefined
     global.localStorage = undefined;
     store.readLocalStorage();
-    store.setAddonEnabled('cat-blocks', false);
+    store.setAddonEnabled('clones', false);
 });
 
 test('setStore diffing', () => {
     const settingsStore = new SettingStore();
     const pageStore = new SettingStore();
-    settingsStore.setAddonEnabled('editor-devtools', false);
-    pageStore.setAddonEnabled('editor-devtools', false);
+    settingsStore.setAddonEnabled('jump-to-def', false);
+    pageStore.setAddonEnabled('jump-to-def', false);
     const fn = jest.fn();
     pageStore.addEventListener('addon-changed', fn);
     pageStore.setStore(settingsStore.store);
     expect(fn).toHaveBeenCalledTimes(0);
-    settingsStore.setAddonEnabled('editor-devtools', true);
+    settingsStore.setAddonEnabled('jump-to-def', true);
     settingsStore.setAddonSetting('onion-skinning', 'next', 10);
     pageStore.setStore(settingsStore.store);
     expect(fn).toHaveBeenCalledTimes(2);
-    expect(fn.mock.calls[0][0].detail.addonId).toBe('editor-devtools');
+    expect(fn.mock.calls[0][0].detail.addonId).toBe('jump-to-def');
     expect(fn.mock.calls[1][0].detail.addonId).toBe('onion-skinning');
 });
 
 test('setStore dynamic enable/disable', () => {
     const settingsStore = new SettingStore();
     const pageStore = new SettingStore();
-    settingsStore.setAddonEnabled('block-palette-icons', false);
+    settingsStore.setAddonEnabled('clones', false);
     pageStore.setStore(settingsStore.store);
     const fn = jest.fn();
     pageStore.addEventListener('addon-changed', fn);
-    settingsStore.setAddonEnabled('block-palette-icons', true);
+    settingsStore.setAddonEnabled('clones', true);
     pageStore.setStore(settingsStore.store);
-    expect(fn.mock.calls[0][0].detail.addonId).toBe('block-palette-icons');
+    expect(fn.mock.calls[0][0].detail.addonId).toBe('clones');
     expect(fn.mock.calls[0][0].detail.dynamicEnable).toBe(true);
     expect(fn.mock.calls[0][0].detail.dynamicDisable).toBe(false);
-    settingsStore.setAddonEnabled('block-palette-icons', false);
+    settingsStore.setAddonEnabled('clones', false);
     pageStore.setStore(settingsStore.store);
-    expect(fn.mock.calls[1][0].detail.addonId).toBe('block-palette-icons');
+    expect(fn.mock.calls[1][0].detail.addonId).toBe('clones');
     expect(fn.mock.calls[1][0].detail.dynamicEnable).toBe(false);
     expect(fn.mock.calls[1][0].detail.dynamicDisable).toBe(true);
 });
@@ -456,12 +456,12 @@ test('parseUrlParameter', () => {
     const store = new SettingStore();
     expect(store.getAddonEnabled('pause')).toBe(true);
     expect(store.getAddonEnabled('mute-project')).toBe(true);
-    expect(store.getAddonEnabled('columns')).toBe(false);
+    expect(store.getAddonEnabled('clones')).toBe(false);
     expect(store.remote).toBe(false);
-    store.parseUrlParameter('pause,columns,,invalid addon??43t987(*&$');
+    store.parseUrlParameter('pause,clones,,invalid addon??43t987(*&$');
     expect(store.getAddonEnabled('pause')).toBe(true);
     expect(store.getAddonEnabled('mute-project')).toBe(false);
-    expect(store.getAddonEnabled('columns')).toBe(true);
+    expect(store.getAddonEnabled('clones')).toBe(true);
     expect(store.remote).toBe(true);
 });
 
@@ -472,13 +472,11 @@ test('Settings migration 1 -> 2', () => {
     global.localStorage.getItem = () => `{"_":1,"tw-project-info":{"enabled":false},"tw-interface-customization":{"enabled":false,"removeFeedback":true,"removeBackpack":true}}`;
     store.readLocalStorage();
     expect(store.getAddonEnabled('block-count')).toBe(false);
-    expect(store.getAddonEnabled('tw-remove-backpack')).toBe(false);
 
     // eslint-disable-next-line max-len
     global.localStorage.getItem = () => `{"_":1,"tw-project-info":{"enabled":true},"tw-interface-customization":{"enabled":true,"removeFeedback":true,"removeBackpack":true}}`;
     store.readLocalStorage();
     expect(store.getAddonEnabled('block-count')).toBe(true);
-    expect(store.getAddonEnabled('tw-remove-backpack')).toBe(true);
 });
 
 test('Settings migration 2 -> 3', () => {
@@ -501,8 +499,6 @@ test('Settings migration 3 -> 4', () => {
         _: 3
     });
     store.readLocalStorage();
-    expect(store.getAddonEnabled('editor-devtools')).toBe(true);
-    expect(store.getAddonEnabled('find-bar')).toBe(true);
     expect(store.getAddonEnabled('middle-click-popup')).toBe(true);
 
     global.localStorage.getItem = () => JSON.stringify({
@@ -512,14 +508,12 @@ test('Settings migration 3 -> 4', () => {
         }
     });
     store.readLocalStorage();
-    expect(store.getAddonEnabled('editor-devtools')).toBe(false);
-    expect(store.getAddonEnabled('find-bar')).toBe(false);
     expect(store.getAddonEnabled('middle-click-popup')).toBe(false);
 });
 
 test('if', () => {
     const store = new SettingStore();
-    store.setAddonEnabled('editor-devtools', true);
+    store.setAddonEnabled('jump-to-def', true);
     store.setAddonEnabled('onion-skinning', false);
     store.setAddonSetting('editor-theme3', 'motion-color', '#000000');
     store.setAddonSetting('editor-theme3', 'looks-color', '#FFFFFF');
@@ -536,13 +530,13 @@ test('if', () => {
         addonEnabled: 'onion-skinning'
     })).toBe(false);
     expect(store.evaluateCondition('editor-theme3', {
-        addonEnabled: ['editor-devtools']
+        addonEnabled: ['jump-to-def']
     })).toBe(true);
     expect(store.evaluateCondition('editor-theme3', {
-        addonEnabled: 'editor-devtools'
+        addonEnabled: 'jump-to-def'
     })).toBe(true);
     expect(store.evaluateCondition('editor-theme3', {
-        addonEnabled: ['editor-devtools', 'onion-skinning']
+        addonEnabled: ['jump-to-def', 'onion-skinning']
     })).toBe(true);
 
     expect(store.evaluateCondition('editor-theme3', {
@@ -577,7 +571,7 @@ test('if', () => {
     })).toBe(false);
 
     expect(store.evaluateCondition('editor-theme3', {
-        addonEnabled: ['editor-devtools'],
+        addonEnabled: ['jump-to-def'],
         settings: {
             'motion-color': '#000000'
         }
@@ -589,7 +583,7 @@ test('if', () => {
         }
     })).toBe(false);
     expect(store.evaluateCondition('editor-theme3', {
-        addonEnabled: ['editor-devtools'],
+        addonEnabled: ['jump-to-def'],
         settings: {
             'motion-color': '#000001'
         }

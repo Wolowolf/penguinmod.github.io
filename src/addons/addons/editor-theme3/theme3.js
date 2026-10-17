@@ -17,10 +17,6 @@ const twCategory = {
   settingId: "tw-color",
   colorId: "tw"
 };
-const saCategory = {
-  settingId: "sa-color",
-  colorId: "sa",
-};
 const categories = [
   {
     id: "motion",
@@ -74,18 +70,12 @@ const categories = [
   },
   extensionsCategory,
   twCategory,
-  saCategory,
 ];
 
 export default async function ({ addon, console }) {
   const Blockly = await addon.tab.traps.getBlockly();
 
   const originalColors = JSON.parse(JSON.stringify(Blockly.Colours));
-  originalColors.sa = {
-    primary: "#29beb8",
-    secondary: "#3aa8a4",
-    tertiary: "#3aa8a4",
-  };
   originalColors.tw = {
     primary: "#ff4c4c",
     secondary: "#e64444",
@@ -168,12 +158,12 @@ export default async function ({ addon, console }) {
     // Category bubbles
     if (this.iconURI_) {
       if (addon.self.disabled) return oldCategoryCreateDom.call(this);
-      if (!["sa-blocks", "videoSensing", "text2speech"].includes(this.id_)) return oldCategoryCreateDom.call(this);
+      if (!["videoSensing", "text2speech"].includes(this.id_)) return oldCategoryCreateDom.call(this);
 
       const match = dataUriRegex.exec(this.iconURI_);
       if (match) {
         const oldSvg = atob(match[1]);
-        const category = this.id_ === "sa-blocks" ? saCategory : extensionsCategory;
+        const category = extensionsCategory;
         const newColor = isColoredTextMode ? tertiaryColor(category) : primaryColor(category);
         if (newColor) {
           const newSvg = oldSvg.replace(/#29beb8|#0ebd8c/gi, newColor);
@@ -337,11 +327,6 @@ export default async function ({ addon, console }) {
       Blockly.Colours[category.colorId].secondary = secondaryColor(category);
       Blockly.Colours[category.colorId].tertiary = tertiaryColor(category);
     }
-    addon.tab.setCustomBlockColor({
-      color: primaryColor(saCategory),
-      secondaryColor: secondaryColor(saCategory),
-      tertiaryColor: tertiaryColor(saCategory),
-    });
     Blockly.Colours.textField = otherColor("input-color", "textField");
     if (uncoloredTextColor() === "#575e75") Blockly.Colours.fieldShadow = "rgba(0, 0, 0, 0.15)";
     else Blockly.Colours.fieldShadow = originalColors.fieldShadow;

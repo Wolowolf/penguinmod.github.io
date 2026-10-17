@@ -236,9 +236,6 @@ export default async function ({ addon, msg, console }) {
   };
 
   const addMoreOptionsToPrompt = (variable) => {
-    if (addon.self.disabled) {
-      return;
-    }
 
     const promptBody = document.querySelector('[class^="prompt_body_"]');
     if (!promptBody) {
@@ -255,7 +252,6 @@ export default async function ({ addon, msg, console }) {
     }
 
     const root = document.createElement("div");
-    addon.tab.displayNoneWhileDisabled(root);
 
     const createLabeledInput = (text, value) => {
       const outer = document.createElement("label");
@@ -358,7 +354,7 @@ export default async function ({ addon, msg, console }) {
       if (opt_callback) {
         opt_callback(...args);
       }
-      if (!addon.self.disabled && prompt) {
+      if (prompt) {
         convertVariable(variable, prompt.isLocal(), prompt.isCloud());
       }
     });
@@ -368,7 +364,7 @@ export default async function ({ addon, msg, console }) {
 
   addon.tab.createBlockContextMenu(
     (items, block) => {
-      if (!addon.self.disabled && (block.getCategory() === "data" || block.getCategory() === "data-lists")) {
+      if ((block.getCategory() === "data" || block.getCategory() === "data-lists")) {
         const variable = block.workspace.getVariableById(block.getVars()[0]);
         if (variable) {
           if (items.length > 0) {

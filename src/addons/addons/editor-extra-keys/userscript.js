@@ -6,75 +6,30 @@ export default async function ({ addon, msg }) {
     if (!defaultKeys) {
       defaultKeys = [...keys];
     }
-    if (!addon.self.disabled) {
-      keys.push(
-        ...[
-          ["-", "-"],
-          [",", ","],
-          [".", "."],
-        ]
-      );
-      keys.splice(5, 0, [msg("enter-key"), "enter"]);
-      if (addon.settings.get("experimentalKeys")) {
-        keys.push(
-          ...[
-            ["`", "`"],
-            ["=", "="],
-            ["[", "["],
-            ["]", "]"],
-            ["\\", "\\"],
-            [";", ";"],
-            ["'", "'"],
-            ["/", "/"],
-          ]
-        );
-      }
-      if (enableShiftKeys && addon.settings.get("shiftKeys")) {
-        keys.push(
-          ...[
-            ["!", "!"],
-            ["@", "@"],
-            ["#", "#"],
-            ["$", "$"],
-            ["%", "%"],
-            ["^", "^"],
-            ["&", "&"],
-            ["*", "*"],
-            ["(", "("],
-            [")", ")"],
-            ["_", "_"],
-            ["+", "+"],
-            ["{", "{"],
-            ["}", "}"],
-            ["|", "|"],
-            [":", ":"],
-            ['"', '"'],
-            ["?", "?"],
-            ["<", "<"],
-            [">", ">"],
-            ["~", "~"],
-          ]
-        );
-      }
-      if (addon.settings.get("twKeys")) {
-        keys.push(
-          ...[
-            ["backspace", "backspace"],
-            ["delete", "delete"],
-            ["shift", "shift"],
-            ["caps lock", "caps lock"],
-            ["scroll lock", "scroll lock"],
-            ["control", "control"],
-            ["escape", "escape"],
-            ["insert", "insert"],
-            ["home", "home"],
-            ["end", "end"],
-            ["page up", "page up"],
-            ["page down", "page down"],
-          ]
-        );
-      }
-    }
+    keys.push(
+      ...[
+        ["-", "-"],
+        [",", ","],
+        [".", "."],
+      ]
+    );
+    keys.splice(5, 0, [msg("enter-key"), "enter"]);
+    keys.push(
+      ...[
+        ["backspace", "backspace"],
+        ["delete", "delete"],
+        ["shift", "shift"],
+        ["caps lock", "caps lock"],
+        ["scroll lock", "scroll lock"],
+        ["control", "control"],
+        ["escape", "escape"],
+        ["insert", "insert"],
+        ["home", "home"],
+        ["end", "end"],
+        ["page up", "page up"],
+        ["page down", "page down"],
+      ]
+    );
     return keys;
   }
 
@@ -117,7 +72,4 @@ export default async function ({ addon, msg }) {
   };
 
   updateExistingBlocks();
-  addon.settings.addEventListener("change", updateExistingBlocks);
-  addon.self.addEventListener("disabled", updateExistingBlocks);
-  addon.self.addEventListener("reenabled", updateExistingBlocks);
 }

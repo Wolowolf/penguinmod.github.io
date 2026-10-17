@@ -11,6 +11,8 @@ export default async function ({ addon, console, msg }) {
     "RENAME_BROADCAST_MESSAGE_ID",
   ];
 
+  const MIN_ITEMS_FOR_SEARCH = 8;
+
   const canUseAsGlobalVariableName = (name, type) => {
     return !vm.runtime.getAllVarNamesOfType(type).includes(name);
   };
@@ -59,15 +61,13 @@ export default async function ({ addon, console, msg }) {
       return oldDropDownDivShow.call(this, ...args);
     }
 
-    blocklyDropdownMenu.focus = () => {}; // no-op focus() so it can't steal it from the search bar
-
+    // The search bar always exists (its empty value hides the "create variable" items),
+    // but it is only shown when the dropdown has enough items to need it.
     searchBar = document.createElement("input");
-    addon.tab.displayNoneWhileDisabled(searchBar, { display: "flex" });
     searchBar.type = "text";
     searchBar.addEventListener("input", updateSearch);
     searchBar.addEventListener("keydown", handleKeyDownEvent);
     searchBar.classList.add("u-dropdown-searchbar");
-    blocklyDropdownMenu.insertBefore(searchBar, blocklyDropdownMenu.firstChild);
 
     items = Array.from(blocklyDropdownMenu.children)
       .filter((child) => child.tagName !== "INPUT")
@@ -76,19 +76,29 @@ export default async function ({ addon, console, msg }) {
         text: element.textContent,
       }));
     currentDropdownOptions = resultOfLastGetOptions;
+    const visibleItemCount = currentDropdownOptions.filter(
+      (option) => !Object.prototype.hasOwnProperty.call(ADDON_ITEMS, option[1])
+    ).length;
+    const showSearch = visibleItemCount >= MIN_ITEMS_FOR_SEARCH;
+    if (showSearch) {
+      blocklyDropdownMenu.focus = () => {}; // no-op focus() so it can't steal it from the search bar
+      blocklyDropdownMenu.insertBefore(searchBar, blocklyDropdownMenu.firstChild);
+    }
     updateSearch();
 
     // Call the original show method after adding everything so that it can perform the correct size calculations
     const ret = oldDropDownDivShow.call(this, ...args);
 
-    // Lock the size of the dropdown
     blocklyDropDownContent = Blockly.DropDownDiv.getContentDiv();
-    blocklyDropDownContent.style.width = getComputedStyle(blocklyDropDownContent).width;
-    blocklyDropDownContent.style.height = getComputedStyle(blocklyDropDownContent).height;
+    if (showSearch) {
+      // Lock the size of the dropdown
+      blocklyDropDownContent.style.width = getComputedStyle(blocklyDropDownContent).width;
+      blocklyDropDownContent.style.height = getComputedStyle(blocklyDropDownContent).height;
 
-    // This is really strange, but if you don't reinsert the search bar into the DOM then focus() doesn't work
-    blocklyDropdownMenu.insertBefore(searchBar, blocklyDropdownMenu.firstChild);
-    searchBar.focus();
+      // This is really strange, but if you don't reinsert the search bar into the DOM then focus() doesn't work
+      blocklyDropdownMenu.insertBefore(searchBar, blocklyDropdownMenu.firstChild);
+      searchBar.focus();
+    }
 
     return ret;
   };

@@ -27,7 +27,6 @@ export default async function ({ addon, msg, console }) {
     createDom(root) {
       this.findBarOuter = document.createElement("div");
       this.findBarOuter.className = "sa-find-bar";
-      addon.tab.displayNoneWhileDisabled(this.findBarOuter, { display: "flex" });
       root.appendChild(this.findBarOuter);
 
       this.findWrapper = this.findBarOuter.appendChild(document.createElement("span"));
@@ -129,7 +128,7 @@ export default async function ({ addon, msg, console }) {
     }
 
     eventKeyDown(e) {
-      if (addon.self.disabled || !this.findBarOuter) return;
+      if (!this.findBarOuter) return;
 
       let ctrlKey = e.ctrlKey || e.metaKey;
 
@@ -808,7 +807,7 @@ export default async function ({ addon, msg, console }) {
 
   const _doBlockClick_ = Blockly.Gesture.prototype.doBlockClick_;
   Blockly.Gesture.prototype.doBlockClick_ = function () {
-    if (!addon.self.disabled && (this.mostRecentEvent_.button === 1 || this.mostRecentEvent_.shiftKey)) {
+    if ((this.mostRecentEvent_.button === 1 || this.mostRecentEvent_.shiftKey)) {
       // Wheel button...
       // Intercept clicks to allow jump to...?
       let block = this.startBlock_;

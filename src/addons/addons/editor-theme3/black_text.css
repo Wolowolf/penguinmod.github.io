@@ -1,10 +1,5 @@
 @namespace xlink url("http://www.w3.org/1999/xlink");
 
-.scratchCategoryItemBubble::after {
-  /* block-palette-icons */
-  filter: brightness(0);
-}
-
 .blocklyEditableText > text {
   fill: var(--editorTheme3-inputColor-blackText);
 }

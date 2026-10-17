@@ -857,57 +857,6 @@ export default async function ({ addon, console, msg }) {
       })
     }
 
-    if (addon.settings.get("sa")) {
-      const logProc = "\u200B\u200Blog\u200B\u200B %s";
-      const warnProc = "\u200B\u200Bwarn\u200B\u200B %s";
-      const errorProc = "\u200B\u200Berror\u200B\u200B %s";
-      const logMessage = msg("debugger_log");
-      const warnMessage = msg("debugger_warn");
-      const errorMessage = msg("debugger_error");
-      const logSwitch = {
-        mutate: {
-          proccode: logProc,
-        },
-        msg: logMessage,
-      };
-      const warnSwitch = {
-        mutate: {
-          proccode: warnProc,
-        },
-        msg: warnMessage,
-      };
-      const errorSwitch = {
-        mutate: {
-          proccode: errorProc,
-        },
-        msg: errorMessage,
-      };
-      procedureSwitches[logProc] = [
-        {
-          msg: logMessage,
-          isNoop: true,
-        },
-        warnSwitch,
-        errorSwitch,
-      ];
-      procedureSwitches[warnProc] = [
-        logSwitch,
-        {
-          msg: warnMessage,
-          isNoop: true,
-        },
-        errorSwitch,
-      ];
-      procedureSwitches[errorProc] = [
-        logSwitch,
-        warnSwitch,
-        {
-          msg: errorMessage,
-          isNoop: true,
-        },
-      ];
-    }
-
     // Switching for these is implemented by Scratch. We only define them here to optionally add a border.
     // Because we don't implement the switching ourselves, this is not controlled by the data category option.
     blockSwitches["data_variable"] = [];

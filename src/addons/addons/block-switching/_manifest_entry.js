@@ -91,18 +91,6 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "Addon blocks",
-      "id": "sa",
-      "type": "boolean",
-      "default": true,
-      "if": {
-        "addonEnabled": [
-          "debugger"
-        ]
-      }
-    },
-    {
-      "dynamic": true,
       "name": "Custom block arguments",
       "id": "customargs",
       "type": "boolean",

@@ -305,23 +305,9 @@ const processAddon = (id, oldDirectory, newDirectory) => {
 };
 
 const SKIP_MESSAGES = [
-    'debugger/@description',
-    'debugger/@settings-name-log_max_list_length',
-    'debugger/log-msg-list-append-too-long',
-    'debugger/log-msg-list-insert-too-long',
-    'debugger/@settings-name-log_invalid_cloud_data',
-    'debugger/log-cloud-data-nan',
-    'debugger/log-cloud-data-too-long',
-    'debugger/tab-performance',
-    'debugger/performance-framerate-title',
-    'debugger/performance-framerate-graph-tooltip',
-    'debugger/performance-clonecount-title',
-    'debugger/performance-clonecount-graph-tooltip',
     'editor-devtools/extension-description-not-for-addon',
     'mediarecorder/added-by',
-    'editor-theme3/@settings-name-sa-color',
-    'editor-theme3/@settings-name-forums',
-    'block-switching/@settings-name-sa'
+    'editor-theme3/@settings-name-forums'
 ];
 
 const parseMessageDirectory = localeRoot => {

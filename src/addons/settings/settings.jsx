@@ -77,20 +77,12 @@ const postThrottledSettingsChange = store => {
 // Addons not listed here come last, in their original order.
 const addonOrder = [
     // Code area: finding and navigating
-    'find-bar',
     'middle-click-popup',
     'jump-to-def',
-    'editor-searchable-dropdowns',
-    'editor-devtools',
     // Code area: editing blocks and scripts
     'block-switching',
     'block-cherry-picking',
     'block-duplicate',
-    'editor-block-chomping',
-    'reorder-custom-inputs',
-    'swap-local-global',
-    'hide-new-variables',
-    'editor-extra-keys',
     'number-pad',
     'no-script-bumping',
     'script-snap',
@@ -105,60 +97,38 @@ const addonOrder = [
     'block-pins',
     'toolbox-full-blocks-on-hover',
     'hide-flyout',
-    'columns',
-    'block-palette-icons',
     // Block appearance
     'editor-theme3',
     'custom-block-shape',
     'custom-block-text',
     'zebra-striping',
     'editor-colored-context-menus',
-    'cat-blocks',
     // Editor look and layout
     'editor-tweaks',
     'editor-animations',
-    'editor-buttons-reverse-order',
     'block-count',
     'editor-sounds',
     // Stage and running the project
-    'vol-slider',
     'mute-project',
-    'fullscreen',
     'clones',
     'mouse-pos',
     'disable-stage-drag-select',
-    'copy-reporter',
     'gamepad',
-    'debugger',
-    'mediarecorder',
     // Sprite pane, costume and sound lists
-    'folders',
-    'search-sprites',
     'initialise-sprite-position',
     'remove-sprite-confirm',
     'hide-delete-button',
-    'move-to-top-bottom',
-    'drag-drop',
     'paint-by-default',
     'better-img-uploads',
     // Costume editor
     'paint-tool-panel',
-    'paint-gradient-maker',
-    'paint-rounded-rect-seperate',
     'paint-reshape-tweaks',
     'paint-snap',
     'onion-skinning',
-    'color-picker',
     '2d-color-picker',
-    'pick-colors-from-stage',
     'default-costume-editor-color',
     'paint-default-smoothing',
-    'disable-paste-offset',
-    'bitmap-copy',
-    // Sound editor
-    'waveform-chunk-size',
-    // Removing features
-    'tw-remove-backpack'
+    'disable-paste-offset'
 ];
 const addonRank = id => {
     const rank = addonOrder.indexOf(id);
@@ -171,6 +141,10 @@ const filterAddonsBySupport = () => {
     const sortedAddons = Object.entries(importedAddons)
         .sort(([a], [b]) => addonRank(a) - addonRank(b));
     for (const [id, manifest] of sortedAddons) {
+        if (manifest.builtIn) {
+            // part of the editor: no switch, no settings
+            continue;
+        }
         if (manifest.unsupported) {
             unsupported[id] = manifest;
         } else {

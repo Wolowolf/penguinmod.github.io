@@ -63,7 +63,7 @@ export default async function ({ addon, console }) {
       }
 
       proc.onChangeFn(true);
-      if (sourceBlock === null || sourceBlock === undefined || !addon.settings.get("InsertInputsAfter"))
+      if (sourceBlock === null || sourceBlock === undefined)
         return addInputFn.call(this, ...arguments);
 
       let newPosition = getFieldInputNameAndIndex(selectedField, proc.inputList).index + 1;
@@ -157,15 +157,6 @@ export default async function ({ addon, console }) {
     }
   }
 
-  function depolluteProcedureDeclaration(procedureDeclaration) {
-    procedureDeclaration.createAllInputs_ = originalCreateAllInputs;
-    procedureDeclaration.onChangeFn = originalUpdateDeclarationProcCode;
-    procedureDeclaration.removeFieldCallback = originalRemoveFieldCallback;
-
-    for (const [inputFnName, originalFn] of Object.entries(originalAddFns)) {
-      procedureDeclaration[inputFnName] = originalFn;
-    }
-  }
 
   function getExistingProceduresDeclarationBlock() {
     // Blockly.getMainWorkspace is required for this to work.
@@ -192,18 +183,6 @@ export default async function ({ addon, console }) {
     };
   }
 
-  function disableAddon() {
-    // depollute the procedures_declaration prototype
-    depolluteProcedureDeclaration(Blockly.Blocks["procedures_declaration"]);
-
-    // if custom procedures modal is already open we also directly depollute the existing procedures_declaration block
-    if (addon.tab.redux.state.scratchGui.customProcedures.active) {
-      depolluteProcedureDeclaration(getExistingProceduresDeclarationBlock());
-    }
-
-    Blockly.FieldTextInputRemovable.prototype.showEditor_ = originalShowEditor;
-    Blockly.WidgetDiv.DIV.querySelectorAll(".blocklyTextShiftArrow").forEach((e) => e.remove());
-  }
 
   const Blockly = await addon.tab.traps.getBlockly();
   const originalCreateAllInputs = Blockly.Blocks["procedures_declaration"].createAllInputs_;
@@ -213,7 +192,5 @@ export default async function ({ addon, console }) {
   let originalAddFns = {};
   let selectedField = null;
 
-  addon.self.addEventListener("disabled", disableAddon);
-  addon.self.addEventListener("reenabled", enableAddon);
   enableAddon();
 }

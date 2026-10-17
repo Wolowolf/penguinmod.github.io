@@ -2,7 +2,6 @@
 // applied in. Items later in this list are given higher precedence. Addons not listed
 // here are implied to have the lowest possible precedence.
 const addonPrecedence = [
-    'columns',
     'editor-theme3'
 ];
 

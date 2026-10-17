@@ -1,4 +1,3 @@
-import { getRunningThread } from "../debugger/module.js";
 import Highlighter from "./highlighter.js";
 
 export default async function ({ addon, console }) {
@@ -17,9 +16,8 @@ export default async function ({ addon, console }) {
   vm.runtime._step = function (...args) {
     oldStep.call(this, ...args);
     if (!addon.self.disabled) {
-      const runningThread = getRunningThread();
       const threads = vm.runtime.threads.filter(
-        (thread) => thread !== runningThread && !thread.target.blocks.forceNoGlow && !thread.isCompiled
+        (thread) => !thread.target.blocks.forceNoGlow && !thread.isCompiled
       );
       highlighter.setGlowingThreads(threads);
     }
