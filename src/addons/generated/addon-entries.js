@@ -26,6 +26,7 @@ export default {
   "better-img-uploads": () => import(/* webpackChunkName: "addon-entry-better-img-uploads" */ "../addons/better-img-uploads/_runtime_entry.js"),
   "pick-colors-from-stage": () => import(/* webpackChunkName: "addon-default-entry" */ "../addons/pick-colors-from-stage/_runtime_entry.js"),
   "custom-block-shape": () => import(/* webpackChunkName: "addon-entry-custom-block-shape" */ "../addons/custom-block-shape/_runtime_entry.js"),
+  "custom-styles": () => import(/* webpackChunkName: "addon-entry-custom-styles" */ "../addons/custom-styles/_runtime_entry.js"),
   "zebra-striping": () => import(/* webpackChunkName: "addon-entry-zebra-striping" */ "../addons/zebra-striping/_runtime_entry.js"),
   "editor-theme3": () => import(/* webpackChunkName: "addon-entry-editor-theme3" */ "../addons/editor-theme3/_runtime_entry.js"),
   "custom-block-text": () => import(/* webpackChunkName: "addon-entry-custom-block-text" */ "../addons/custom-block-text/_runtime_entry.js"),

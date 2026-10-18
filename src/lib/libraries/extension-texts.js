@@ -89,7 +89,6 @@ const textsByKey = {
     'Popup-Phoenix.js': ['Popups', 'Custom popup windows.', 'Labels, text, number, slider and dropdown inputs and button rows; position, fonts, borders, shadows, effects; wait for and read answers.'],
     'MubiLop/toastnotifs.js': ['Toasts', 'Small pop-up messages.', 'Title, image, position, custom style and sound.'],
     'mdwalters/notifications.js': ['System Notifications', 'Desktop notifications.', 'Ask permission, then show or close operating-system notifications.'],
-    'TheShovel/CustomStyles.js': ['Monitor Styles', 'Restyle monitors and ask boxes.', 'Colors, gradients, images, borders and roundness of variable and list monitors and the ask box; monitor positions; list scrolling.'],
     // Pause / Scenes / Runtime
     'Scenes.js': ['Scenes', 'Save and switch project states.', 'Save the whole project state as named scenes and switch between them; hat on switch.'],
     'runtime-options.js': ['Runtime Options', 'Change project settings.', 'Turbo mode, frame rate, stage size, username, run the green flag, hat when they change. Clone limit, fencing, limits, pen quality and interpolation are fixed in this app.'],
@@ -140,7 +139,6 @@ const textsByKey = {
     'Geolocation.js': ['Geolocation', 'Where the user is.', 'Device position (with permission) or location from an IP, watch for changes, country names, real-world distances.'],
     // Browser / Device
     'clipboard.js': ['Clipboard', 'Copy and paste text.', 'Copy text, read the clipboard and the last pasted text, copy and paste hats.'],
-    'XmerOriginals/closecontrol.js': ['Confirm Close', 'Ask before closing.', 'Ask before the window is closed.'],
     'DNin/wake-lock.js': ['Keep Awake', 'Keep the screen on.', 'Stop the screen from going to sleep.'],
     'sharkpoolPrinting': ['Printing', 'Print to paper.', 'Text, images, the stage or HTML with fonts, colors, positions and backgrounds.'],
     'navigator.js': ['Device Info', 'System and user preferences.', 'Operating system, browser, memory, and dark mode, reduced motion and contrast preferences.'],

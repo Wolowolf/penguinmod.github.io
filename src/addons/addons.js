@@ -25,6 +25,7 @@ const addons = [
     'pick-colors-from-stage',
     'custom-block-shape',
     'zebra-striping',
+    'custom-styles',
     'editor-theme3',
     'custom-block-text',
     'editor-colored-context-menus',

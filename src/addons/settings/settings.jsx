@@ -112,6 +112,7 @@ const addonOrder = [
     'mute-project',
     'clones',
     'mouse-pos',
+    'custom-styles',
     'disable-stage-drag-select',
     'gamepad',
     // Sprite pane, costume and sound lists

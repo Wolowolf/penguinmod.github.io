@@ -44,7 +44,6 @@ const networkByKey = {
     'SharkPool/Font-Manager.js': 'optional',
     'Speech-Bubbles.js': 'optional',
     'MubiLop/toastnotifs.js': 'optional',
-    'TheShovel/CustomStyles.js': 'optional',
     'Files-Expanded.js': 'optional',
     'CST1229/zip.js': 'optional',
     'Variables-Expanded.js': 'optional',

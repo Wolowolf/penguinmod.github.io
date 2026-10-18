@@ -25,6 +25,7 @@ import _2d_color_picker from "../addons/2d-color-picker/_manifest_entry.js";
 import _better_img_uploads from "../addons/better-img-uploads/_manifest_entry.js";
 import _pick_colors_from_stage from "../addons/pick-colors-from-stage/_manifest_entry.js";
 import _custom_block_shape from "../addons/custom-block-shape/_manifest_entry.js";
+import _custom_styles from "../addons/custom-styles/_manifest_entry.js";
 import _zebra_striping from "../addons/zebra-striping/_manifest_entry.js";
 import _editor_theme3 from "../addons/editor-theme3/_manifest_entry.js";
 import _custom_block_text from "../addons/custom-block-text/_manifest_entry.js";
@@ -88,6 +89,7 @@ export default {
   "better-img-uploads": _better_img_uploads,
   "pick-colors-from-stage": _pick_colors_from_stage,
   "custom-block-shape": _custom_block_shape,
+  "custom-styles": _custom_styles,
   "zebra-striping": _zebra_striping,
   "editor-theme3": _editor_theme3,
   "custom-block-text": _custom_block_text,

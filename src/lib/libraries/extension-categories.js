@@ -120,8 +120,7 @@ const keysByTag = {
     cat_ui: [
         'Popup-Phoenix.js',
         'MubiLop/toastnotifs.js',
-        'mdwalters/notifications.js',
-        'TheShovel/CustomStyles.js'
+        'mdwalters/notifications.js'
     ],
     // saving progress, save states (scenes) and files
     cat_storage: [
@@ -188,7 +187,6 @@ const keysByTag = {
     ],
     cat_browser: [
         'clipboard.js',
-        'XmerOriginals/closecontrol.js',
         'DNin/wake-lock.js',
         'sharkpoolPrinting',
         'navigator.js',

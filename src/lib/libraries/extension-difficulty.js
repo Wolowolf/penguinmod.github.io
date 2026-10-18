@@ -89,7 +89,6 @@ const difficultyByKey = {
     'Popup-Phoenix.js': 3,
     'MubiLop/toastnotifs.js': 2,
     'mdwalters/notifications.js': 1,
-    'TheShovel/CustomStyles.js': 2,
     // Pause / Scenes / Runtime
     'Scenes.js': 3,
     'runtime-options.js': 2,
@@ -140,7 +139,6 @@ const difficultyByKey = {
     'Geolocation.js': 2,
     // Browser / Device
     'clipboard.js': 1,
-    'XmerOriginals/closecontrol.js': 1,
     'DNin/wake-lock.js': 1,
     'sharkpoolPrinting': 2,
     'navigator.js': 1,
