@@ -156,6 +156,15 @@ const collectCredits = runtime => {
             }
         }
     }
+    // Credits an extension adds for what the project uses (e.g. Text To Speech: engine and voices);
+    // it emits PM_CREDITS_CHANGED when they change.
+    for (const provider of runtime.pmCreditProviders || []) {
+        try {
+            for (const c of provider() || []) if (c && c.needsCredit) credits.push(Object.assign({}, c));
+        } catch (e) {
+            console.warn('credit provider failed', e); // eslint-disable-line no-console
+        }
+    }
     return credits;
 };
 
@@ -603,6 +612,7 @@ export default function installCredits (vm) {
 
     vm.on('targetsUpdate', schedule); // sprites, costumes or sounds were added, removed or loaded
     runtime.on('STAGE_SIZE_CHANGED', schedule); // the pages are made for the stage size
+    runtime.on('PM_CREDITS_CHANGED', schedule); // an extension's credits changed
 
     // Editing a credited asset marks it as modified (licences like CC BY ask you to say so).
     const markModified = list => index => {

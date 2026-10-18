@@ -12,7 +12,6 @@ import {extensionKeyOf} from './extension-categories.js';
 // Keys as in extension-categories.js. No entry: no internet use, no symbol.
 const networkByKey = {
     // red: needs the internet
-    'PuzzlingGGG/ttsrV2.js': 'required', // ttstool.com voices
     'pooiod/Dictation.js': 'required', // the browser's speech recognition runs on Google's servers
     'cloudlink.js': 'required',
     'godslayerakp/ws.js': 'required',
