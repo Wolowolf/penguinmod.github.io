@@ -195,6 +195,8 @@ module.exports = [
                 title: 'PenguinMod & TurboWarp Credits', noSplash: true, ...htmlWebpackPluginCommon
             }),
             new CopyWebpackPlugin({ patterns: [{ from: 'static', to: '' }] }),
+            // Desktop fork: the list of shipped gallery extensions, read by the packager.
+            new CopyWebpackPlugin({ patterns: [{ from: 'node_modules/scratch-vm/src/extension-support/shipped-extensions.json', to: 'shipped-extensions.json' }] }),
             new CopyWebpackPlugin({ patterns: [{ from: 'node_modules/scratch-blocks/media', to: 'static/blocks-media' }] }),
             new CopyWebpackPlugin({ patterns: [{ from: 'extensions/**', to: 'static', context: 'src/examples' }] }),
             new TWGenerateServiceWorkerPlugin()

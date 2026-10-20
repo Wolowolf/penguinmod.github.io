@@ -46,17 +46,12 @@ const messages = defineMessages({
     }
 });
 
-// Only trust loading extension links from these origins.
-// For user-made libraries.
+// Only trust loading extension links from these origins: the app's own offline gallery pages
+// (desktop fork; the VM still loads only the extensions that ship with the app).
 const TRUSTED_LOADEXT_ORIGINS = [
-    'https://studio.penguinmod.com', // for development
     'https://extensions.penguinmod.com',
-    'https://extensions.turbowarp.org', // the offline TurboWarp gallery ("Open Extension")
-    'https://sharkpools-extensions.vercel.app',
-    'https://raw.githubusercontent.com/SharkPool-SP/SharkPools-Extensions/main', // Some people cant connect to vercel
-    'https://pen-group.github.io',
-    'http://localhost:5173', // for development
-    'http://localhost:3000', // for development
+    'https://extensions.turbowarp.org',
+    'https://sharkpools-extensions.vercel.app'
 ];
 
 class ExtensionLibrary extends React.PureComponent {
@@ -88,7 +83,7 @@ class ExtensionLibrary extends React.PureComponent {
         // Only trust loading extension links from these origins.
         let foundTrustedOrigin = false;
         for (const trustedOrigin of TRUSTED_LOADEXT_ORIGINS) {
-            if (e.origin.startsWith(trustedOrigin)) {
+            if (e.origin === trustedOrigin) {
                 foundTrustedOrigin = true;
                 break;
             }
@@ -176,10 +171,6 @@ class ExtensionLibrary extends React.PureComponent {
         // }
         
         const extensionId = item.extensionId;
-        if (extensionId === 'special_penguinmodExtensionLibrary') {
-            window.open('https://extensions.penguinmod.com/?editor=true');
-            return;
-        }
         const url = (item.extensionURL ? item.extensionURL : extensionId);
         if (!item.disabled) {
             if (this.props.vm.extensionManager.isExtensionLoaded(extensionId)) {
