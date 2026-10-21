@@ -153,11 +153,6 @@ let rememberEmbedSitesDecision = false;
 let rememberEmbedSitesAllAllowed = false;
 let rememberDownloadDecision = false;
 let rememberDownloadAllAllowed = false;
-let rememberLoadingExtensions = false;
-let rememberLoadingExtensionsInfo = {
-    unsandboxed: false,
-    loaded: false
-};
 
 /**
  * A list of developer defined names that are not allowed to ask for unsandboxing.
@@ -166,8 +161,6 @@ let rememberLoadingExtensionsInfo = {
 const notAllowedToAskUnsandbox = new Set();
 
 const SECURITY_MANAGER_METHODS = [
-    'getSandboxMode',
-    'canLoadExtensionFromProject',
     'canFetch',
     'canOpenWindow',
     'canRedirect',
@@ -208,11 +201,6 @@ class TWSecurityManagerComponent extends React.Component {
         rememberEmbedSitesAllAllowed = false;
         rememberDownloadDecision = false;
         rememberDownloadAllAllowed = false;
-        rememberLoadingExtensions = false;
-        rememberLoadingExtensionsInfo = {
-            unsandboxed: false,
-            loaded: false
-        };
     }
     componentDidMount() {
         const vmSecurityManager = this.props.vm.extensionManager.securityManager;
@@ -285,28 +273,6 @@ class TWSecurityManagerComponent extends React.Component {
         this.state.callback(false);
     }
 
-    /**
-     * @param {string} url The extension's URL
-     * @returns {string} The VM worker mode to use
-     */
-    getSandboxMode(url) {
-        if (isTrustedExtension(url)) {
-            log.info(`Loading extension ${url} unsandboxed`);
-            return 'unsandboxed';
-        }
-        return 'iframe';
-    }
-
-    handleChangeUnsandboxed(e) {
-        const checked = e.target.checked;
-        this.setState(oldState => ({
-            data: {
-                ...oldState.data,
-                unsandboxed: checked
-            }
-        }));
-    }
-
     handleChangeRemember(e) {
         const checked = e.target.checked;
         this.setState(oldState => ({
@@ -315,53 +281,6 @@ class TWSecurityManagerComponent extends React.Component {
                 remember: checked
             }
         }));
-    }
-
-    /**
-     * @param {string} url The extension's URL
-     * @returns {Promise<boolean>} Whether the extension can be loaded
-     */
-    async canLoadExtensionFromProject(url) {
-        if (isTrustedExtension(url)) {
-            log.info(`Loading extension ${url} automatically`);
-            return true;
-        }
-        const { showModal, releaseLock } = await this.acquireModalLock();
-        if (rememberLoadingExtensions) {
-            releaseLock();
-            if (!rememberLoadingExtensionsInfo.loaded) {
-                log.info('An unseen extension was automatically not loaded');
-                return false;
-            }
-            if (rememberLoadingExtensionsInfo.unsandboxed) {
-                log.warn('An unseen extension was automatically loaded unsandboxed');
-                manuallyTrustExtension(url);
-            }
-            return true;
-        }
-
-        // we allow all urls to be unsandboxed.
-        // its very likely that people would load any file unsandboxed anyways, theres no safety in blocking it for urls only.
-        // when a file is unsandboxed it can request any website anyways, so its not like its preventing remote updates either.
-        const allowed = await showModal(SecurityModals.LoadExtension, {
-            url,
-            unsandboxed: true,
-            remember: false,
-            onChangeUnsandboxed: this.handleChangeUnsandboxed.bind(this),
-            onChangeRemember: this.handleChangeRemember.bind(this),
-        });
-        if (!allowed) return allowed;
-        if (this.state.data.unsandboxed) {
-            manuallyTrustExtension(url);
-        }
-        if (this.state.data.remember) {
-            rememberLoadingExtensions = true;
-            rememberLoadingExtensionsInfo = {
-                unsandboxed: this.state.data.unsandboxed,
-                loaded: allowed
-            };
-        }
-        return allowed;
     }
 
     /**

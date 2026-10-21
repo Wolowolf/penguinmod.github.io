@@ -29,16 +29,8 @@ export default async function({ addon }) {
     const loadedExts = manager._loadedExtensions;
     loadedExts.keys().forEach((id) => {
       if (pins.some(b => b.startsWith(id))) {
-        const meta = loadedExts.get(id);
-
-        if (meta.startsWith("extension_")) {
-          // built-in extension
-          extUrls.push(id);
-        } else {
-          // external extension
-          const index = parseInt(meta.split(".")[1]);
-          extUrls.push(manager.workerURLs[index]);
-        }
+        // Desktop fork: every extension is built in
+        extUrls.push(id);
       }
     });
     return extUrls;
@@ -54,15 +46,8 @@ export default async function({ addon }) {
         // load required extensions
         const manager = vm.extensionManager;
         for (const ext of testPins.exts) {
-          try {
-            const isURL = new URL(ext);
-            manager.securityManager.canLoadExtensionFromProject(ext).then(isUnsandbox => {
-              manager.loadExtensionURL(ext);
-            });
-          } catch {
-            // not a URL, must be a built-in
-            manager.loadExtensionIdSync(ext);
-          }
+          // Desktop fork: a built-in ID, or a gallery address of an extension moved into the VM
+          manager.loadExtensionURL(ext).catch(e => console.warn("Block Pins: could not load", ext, e));
         }
         return testPins.blocks;
       } else {
