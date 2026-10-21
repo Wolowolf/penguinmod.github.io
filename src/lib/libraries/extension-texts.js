@@ -74,7 +74,7 @@ const textsByKey = {
     'MIDI-Tools.js': ['MIDI Files', 'Play and read MIDI songs.', 'Load from a URL, file, list or base64; play with speed, transpose and track muting; note hats, notes at a time, BPM, note names and frequencies.'],
     'Recording-V2.js': ['Microphone Recording', 'Record the microphone.', 'Loudness, save the recording as a sound or download it.'],
     'PuzzlingGGG/ttsrV2.js': ['Text to Speech', 'Speak text aloud, offline.', 'Pocket TTS (6 languages) and Supertonic 3 (31 languages) voices made on this computer: speak, stop, speaking?, voice and language, speed, pitch, voice cloning; "Make a speech sound" also with Loudkit; credits added.'],
-    'pooiod/Dictation.js': ['Speech to Text', 'Type with your voice.', 'Turn spoken words into text and wait for them.'],
+    'pooiod/Dictation.js': ['Speech to Text', 'Type with your voice, offline.', 'English speech turned into text on this computer with Moonshine: listen and wait, last recognized speech. The microphone is on only while a block listens; credits added.'],
     // Video / Webcam
     'Lily/Video.js': ['Video Player', 'Play videos on sprites.', 'Load videos from URLs onto sprites or the stage: play, pause, loop, seek, volume, speed, time, size, screenshots.'],
     'videoSensing': ['Video Sensing', 'Detect camera motion.', 'Motion and direction on sprites or the stage, motion hat, show the camera with transparency.'],
