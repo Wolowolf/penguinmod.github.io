@@ -74,7 +74,7 @@ const textsByKey = {
     'MIDI-Tools.js': ['MIDI Files', 'Play and read MIDI songs.', 'Load from a URL, file, list or base64; play with speed, transpose and track muting; note hats, notes at a time, BPM, note names and frequencies.'],
     'Recording-V2.js': ['Microphone Recording', 'Record the microphone.', 'Loudness, save the recording as a sound or download it.'],
     'PuzzlingGGG/ttsrV2.js': ['Text to Speech', 'Speak text aloud, offline.', 'Pocket TTS (6 languages) and Supertonic 3 (31 languages) voices made on this computer: speak, stop, speaking?, voice and language, speed, pitch, voice cloning; "Make a speech sound" also with Loudkit; credits added.'],
-    'pooiod/Dictation.js': ['Speech to Text', 'Type with your voice, offline.', 'Speech in 40 languages turned into text on this computer (Moonshine for English, Whisper for others): listen and wait, live text, "When I hear" hat, language. Microphone on only while listening; credits added.'],
+    'pooiod/Dictation.js': ['Speech to Text', 'Type with your voice, offline.', 'Speech in 40 languages turned into text on this computer (Moonshine for English, Whisper for others): listen, live text, "When I hear" hat, language, high accuracy (Parakeet). Mic on only while listening; credits.'],
     // Video / Webcam
     'Lily/Video.js': ['Video Player', 'Play videos on sprites.', 'Load videos from URLs onto sprites or the stage: play, pause, loop, seek, volume, speed, time, size, screenshots.'],
     'videoSensing': ['Video Sensing', 'Detect camera motion.', 'Motion and direction on sprites or the stage, motion hat, show the camera with transparency.'],
