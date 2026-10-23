@@ -51,7 +51,7 @@ const fix = n => +n.toFixed(3);
 const screenSvg = (width, height) => `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" ` +
     `viewBox="0 0 ${width} ${height}"><rect width="${width}" height="${height}" fill="#000000"/></svg>`;
 
-/* The text pages: white Sans Serif (the costume font every player has) at 1/25 of the stage height,
+/* The text pages: white Atkinson Hyperlegible Next (a costume font every player has) at 1/25 of the stage height,
    wrapped to 95% of the stage width, so the text keeps its size relative to any stage size. Pages
    are at most one stage high, so the renderer keeps them sharp (it shrinks costume textures bigger
    than 2048 pixels). Each page has an empty margin of 16 units above and below the text: fencing
@@ -85,7 +85,7 @@ const wrapLines = (text, maxWidth, measure) => {
 const pageSvgs = async (text, width, height) => {
     const lineHeight = height / 20; // 20 lines: a full page's text is exactly one stage high
     const fontSize = lineHeight / 1.25;
-    const font = `${fix(fontSize)}px "Sans Serif"`;
+    const font = `${fix(fontSize)}px "Atkinson Hyperlegible Next"`;
     try {
         await document.fonts.load(font);
     } catch (e) {
@@ -99,7 +99,7 @@ const pageSvgs = async (text, width, height) => {
         const pageLines = lines.slice(first, first + 20);
         const pageHeight = pageLines.length === 20 ? height + (MARGIN * 2) : fix((MARGIN * 2) + (pageLines.length * lineHeight));
         const texts = pageLines.map((line, k) => (line ? `<text x="${fix(width / 2)}" ` +
-            `y="${fix(MARGIN + (k * lineHeight) + (lineHeight / 2) + (fontSize * 0.35))}" font-family="Sans Serif" ` +
+            `y="${fix(MARGIN + (k * lineHeight) + (lineHeight / 2) + (fontSize * 0.35))}" font-family="Atkinson Hyperlegible Next" ` +
             `font-size="${fix(fontSize)}" fill="#ffffff" text-anchor="middle" xml:space="preserve">${escapeXml(line)}</text>` : ''));
         pages.push(`<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${pageHeight}" ` +
             `viewBox="0 0 ${width} ${pageHeight}">${texts.join('')}</svg>`);
@@ -408,7 +408,7 @@ const askToContinue = () => new Promise(resolve => {
     const box = document.createElement('div');
     box.setAttribute('role', 'alertdialog');
     box.style.cssText = 'max-width:480px;margin:16px;padding:20px;background:#ffffff;color:#222222;' +
-        'border:3px solid #ffa200;font:15px/1.5 Helvetica, Arial, sans-serif;';
+        'border:3px solid #ffa200;font:15px/1.5 var(--pm-font, "Atkinson Hyperlegible Next", sans-serif);';
     const text = document.createElement('p');
     text.textContent = WARNING_TEXT;
     text.style.cssText = 'margin:0 0 16px;white-space:pre-wrap;';

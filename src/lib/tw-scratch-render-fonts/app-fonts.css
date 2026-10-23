@@ -1,0 +1,17 @@
+/* Section 117: the fonts of the editor's own text. The "App font" addon chooses between them. */
+@font-face { font-family: "Atkinson Hyperlegible Next"; src: url("./AtkinsonHyperlegibleNext.ttf"); font-weight: 200 800; font-style: normal; }
+@font-face { font-family: "Atkinson Hyperlegible Next"; src: url("./AtkinsonHyperlegibleNext-Italic.ttf"); font-weight: 200 800; font-style: italic; }
+@font-face { font-family: "Atkinson Hyperlegible Mono"; src: url("./AtkinsonHyperlegibleMono.ttf"); font-weight: 200 800; font-style: normal; }
+@font-face { font-family: "Atkinson Hyperlegible Mono"; src: url("./AtkinsonHyperlegibleMono-Italic.ttf"); font-weight: 200 800; font-style: italic; }
+@font-face { font-family: "Lexend"; src: url("./Lexend.ttf"); font-weight: 100 900; }
+@font-face { font-family: "Lexend Deca"; src: url("./LexendDeca.ttf"); font-weight: 100 900; }
+@font-face { font-family: "Lexend Exa"; src: url("./LexendExa.ttf"); font-weight: 100 900; }
+@font-face { font-family: "Lexend Giga"; src: url("./LexendGiga.ttf"); font-weight: 100 900; }
+@font-face { font-family: "Lexend Mega"; src: url("./LexendMega.ttf"); font-weight: 100 900; }
+@font-face { font-family: "Lexend Peta"; src: url("./LexendPeta.ttf"); font-weight: 100 900; }
+@font-face { font-family: "Lexend Tera"; src: url("./LexendTera.ttf"); font-weight: 100 900; }
+@font-face { font-family: "Lexend Zetta"; src: url("./LexendZetta.ttf"); font-weight: 100 900; }
+@font-face { font-family: "OpenDyslexic"; src: url("./OpenDyslexic-Regular.otf"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "OpenDyslexic"; src: url("./OpenDyslexic-Bold.woff2"); font-weight: 700; font-style: normal; }
+@font-face { font-family: "OpenDyslexic"; src: url("./OpenDyslexic-Italic.woff2"); font-weight: 400; font-style: italic; }
+@font-face { font-family: "OpenDyslexic"; src: url("./OpenDyslexic-Bold-Italic.woff2"); font-weight: 700; font-style: italic; }

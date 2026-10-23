@@ -1,5 +1,5 @@
 .url {
-    font-family: monospace;
+    font-family: var(--pm-font-mono, "Atkinson Hyperlegible Mono", monospace);
     user-select: text;
     word-wrap: break-word;
 }

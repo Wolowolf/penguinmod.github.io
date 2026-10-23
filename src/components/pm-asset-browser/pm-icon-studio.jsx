@@ -14,9 +14,11 @@ import {
     tagNeighbours, textureDataUrl, textureItems
 } from '../../lib/pm-asset-sources.js';
 
+import VanillaFonts from 'scratch-paint/src/lib/fonts';
+
 const SECTIONS = [['background', 'background'], ['foreground', 'foreground'], ['text', 'text'], ['badge', 'badge'],
     ['size', 'size & preset']];
-const FONTS = ['Sans Serif', 'Serif', 'Handwriting', 'Marker', 'Curly', 'Pixel'];
+const FONTS = Object.values(VanillaFonts);
 const SIZES = [16, 32, 64, 128, 256, 512];
 
 const clone = o => JSON.parse(JSON.stringify(o));

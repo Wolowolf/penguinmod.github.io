@@ -32,7 +32,7 @@ export const defaultSettings = () => ({
         flipX: false, flipY: false, rotate: 0, scale: 1, x: 0, y: 0, skewX: 0, skewY: 0, clip: false,
         broken: false, parts: []
     }, effects()),
-    text: {content: '', font: 'Sans Serif', size: 96, color: '#ffffff', bold: true, x: 0, y: 160,
+    text: {content: '', font: 'Atkinson Hyperlegible Next', size: 96, color: '#ffffff', bold: true, x: 0, y: 160,
         outline: {enabled: true, color: '#000000', width: 6}},
     badge: {id: '', size: 160, x: 160, y: 160, bg: '#000000', fg: '#ffffff', label: ''}
 });
@@ -389,7 +389,7 @@ const badgeMarkup = (badgeSvg, b) => {
         .join('');
     if (b.label) {
         inner += `<text x="${icon.viewBox[2] / 2}" y="${icon.viewBox[3] / 2}" text-anchor="middle" dominant-baseline="central" ` +
-            `font-family="Sans Serif" font-weight="bold" font-size="${icon.viewBox[2] * 0.45}" fill="${b.fg}">${esc(b.label)}</text>`;
+            `font-family="Atkinson Hyperlegible Next" font-weight="bold" font-size="${icon.viewBox[2] * 0.45}" fill="${b.fg}">${esc(b.label)}</text>`;
     }
     return `<g data-drag="badge" transform="translate(${r3(C + b.x - b.size / 2)} ${r3(C + b.y - b.size / 2)}) scale(${r3(k)})">${inner}</g>`;
 };

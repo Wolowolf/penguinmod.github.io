@@ -11,7 +11,7 @@
     border-radius: 0.25rem;
     padding: 0.25rem;
     font-size: 0.875rem;
-    font-family: monospace;
+    font-family: var(--pm-font-mono, "Atkinson Hyperlegible Mono", monospace);
     margin: 0.5rem 0;
 }
 [theme="dark"] .code {

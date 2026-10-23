@@ -28,6 +28,7 @@ const addons = [
     'custom-styles',
     'editor-theme3',
     'custom-block-text',
+    'pm-app-font',
     'editor-colored-context-menus',
     'variable-manager',
     'search-sprites',

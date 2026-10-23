@@ -1,3 +1,4 @@
 This is basically https://github.com/LLK/scratch-render-fonts except the fonts are loaded as files instead of as base64 URIs in the JS.
 
-All PenguinMod fonts have their own license files (if the download included them), regardless of if they use the OF License (Open Font License) or not.
+Since Section 117 the only bundled fonts are Atkinson Hyperlegible Next, Atkinson Hyperlegible Mono, Lexend (with its widths Deca to Zetta) and OpenDyslexic, all under the SIL Open Font License 1.1 (each has its *-OFL.txt). They come unchanged from github.com/google/fonts (ofl/atkinsonhyperlegiblenext, ofl/atkinsonhyperlegiblemono, ofl/lexend*) and github.com/antijingoist/opendyslexic (compiled/).
+index.js gives the costume fonts (one face each); app-fonts.css gives the editor's own text every weight, italic and Lexend width.

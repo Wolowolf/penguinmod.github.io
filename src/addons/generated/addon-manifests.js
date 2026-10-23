@@ -29,6 +29,7 @@ import _custom_styles from "../addons/custom-styles/_manifest_entry.js";
 import _zebra_striping from "../addons/zebra-striping/_manifest_entry.js";
 import _editor_theme3 from "../addons/editor-theme3/_manifest_entry.js";
 import _custom_block_text from "../addons/custom-block-text/_manifest_entry.js";
+import _pm_app_font from "../addons/pm-app-font/_manifest_entry.js";
 import _editor_colored_context_menus from "../addons/editor-colored-context-menus/_manifest_entry.js";
 import _search_sprites from "../addons/search-sprites/_manifest_entry.js";
 import _gamepad from "../addons/gamepad/_manifest_entry.js";
@@ -93,6 +94,7 @@ export default {
   "zebra-striping": _zebra_striping,
   "editor-theme3": _editor_theme3,
   "custom-block-text": _custom_block_text,
+  "pm-app-font": _pm_app_font,
   "editor-colored-context-menus": _editor_colored_context_menus,
   "search-sprites": _search_sprites,
   "gamepad": _gamepad,

@@ -30,6 +30,7 @@ export default {
   "zebra-striping": () => import(/* webpackChunkName: "addon-entry-zebra-striping" */ "../addons/zebra-striping/_runtime_entry.js"),
   "editor-theme3": () => import(/* webpackChunkName: "addon-entry-editor-theme3" */ "../addons/editor-theme3/_runtime_entry.js"),
   "custom-block-text": () => import(/* webpackChunkName: "addon-entry-custom-block-text" */ "../addons/custom-block-text/_runtime_entry.js"),
+  "pm-app-font": () => import(/* webpackChunkName: "addon-entry-pm-app-font" */ "../addons/pm-app-font/_runtime_entry.js"),
   "editor-colored-context-menus": () => import(/* webpackChunkName: "addon-entry-editor-colored-context-menus" */ "../addons/editor-colored-context-menus/_runtime_entry.js"),
   "search-sprites": () => import(/* webpackChunkName: "addon-entry-search-sprites" */ "../addons/search-sprites/_runtime_entry.js"),
   "gamepad": () => import(/* webpackChunkName: "addon-entry-gamepad" */ "../addons/gamepad/_runtime_entry.js"),

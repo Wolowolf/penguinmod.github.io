@@ -35,5 +35,5 @@
     font-weight: bold;
 }
 .error-message {
-    font-family: monospace;
+    font-family: var(--pm-font-mono, "Atkinson Hyperlegible Mono", monospace);
 }

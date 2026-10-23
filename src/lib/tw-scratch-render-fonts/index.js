@@ -1,41 +1,22 @@
 /* eslint-disable import/no-commonjs */
 
-const SansSerif = require('./NotoSans-Medium.ttf');
-const Serif = require('./SourceSerifPro-Regular.otf');
-const Handwriting = require('./handlee-regular.ttf');
-const Marker = require('./Knewave.ttf');
-const Curly = require('./Griffy-Regular.ttf');
-const Pixel = require('./Grand9K-Pixel.ttf');
-// Xtraflexidisc is saved as Scratch for backwards-compat, this needs visual renaming
-const Scratch = require('./Xtraflexidisc.otf');
+// The costume fonts (Section 117). Arial, Verdana and Comic Sans MS are Windows fonts: costumes
+// name them but they are not bundled (their licences do not allow it).
+const AtkinsonHyperlegibleNext = require('./AtkinsonHyperlegibleNext.ttf');
+const AtkinsonHyperlegibleMono = require('./AtkinsonHyperlegibleMono.ttf');
+const Lexend = require('./Lexend.ttf');
+const OpenDyslexic = require('./OpenDyslexic-Regular.otf');
 
-/* PenguinMod Fonts */
-const Technological = require('./MonospaceBold.ttf');
-const Bubbly = require('./QTKooper.otf');
-const Playful = require('./BadComic-Regular.ttf');
-const BitsAndBytes = require('./freecam-v2.ttf');
-const Arcade = require('./PressStart2P.ttf');
-const Archivo = require('./Archivo-Regular.ttf');
-const ArchivoBlack = require('./Archivo-Black.ttf');
+// Every weight and style of these fonts (and Lexend's widths) for the editor's own text
+require('./app-fonts.css');
 
 const log = require('../log').default;
 
 const fontSource = {
-    'Sans Serif': SansSerif,
-    'Serif': Serif,
-    'Handwriting': Handwriting,
-    'Marker': Marker,
-    'Curly': Curly,
-    'Pixel': Pixel,
-    // Xtraflexidisc is saved as Scratch for backwards-compat, this needs visual renaming
-    'Scratch': Scratch,
-    'Technological': Technological,
-    'Bubbly': Bubbly,
-    'Bits and Bytes': BitsAndBytes,
-    'Playful': Playful,
-    'Arcade': Arcade,
-    'Archivo': Archivo,
-    'Archivo Black': ArchivoBlack
+    'Atkinson Hyperlegible Next': AtkinsonHyperlegibleNext,
+    'Atkinson Hyperlegible Mono': AtkinsonHyperlegibleMono,
+    'Lexend': Lexend,
+    'OpenDyslexic': OpenDyslexic
 };
 
 const fontData = {};

@@ -4,7 +4,7 @@ export default async function ({ addon, console, msg }) {
     style.textContent = `
     .blocklyText {
         fill: #fff;
-        font-family: "Helvetica Neue", Helvetica, sans-serif;
+        font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif);
         font-size: 12pt;
         font-weight: 500;
     }

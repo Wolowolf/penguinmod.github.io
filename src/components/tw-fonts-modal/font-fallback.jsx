@@ -19,15 +19,6 @@ class FontFallbackButton extends React.Component {
     }
 
     formatName () {
-        // keep in sync with scratch-paint/src/containers/font-dropdown.jsx
-        switch (this.props.family) {
-        case VanillaFonts.CHINESE:
-            return '中文';
-        case VanillaFonts.KOREAN:
-            return '한국어';
-        case VanillaFonts.JAPANESE:
-            return '日本語';
-        }
         return this.props.family;
     }
 
@@ -75,7 +66,7 @@ const FontFallback = props => (
     </div>
 );
 
-FontFallback.DEFAULT = 'Sans Serif';
+FontFallback.DEFAULT = VanillaFonts.ATKINSON_NEXT;
 
 FontFallback.propTypes = {
     fallback: PropTypes.string.isRequired,
