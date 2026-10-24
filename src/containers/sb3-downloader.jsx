@@ -15,8 +15,8 @@ import log from '../lib/log';
 const getProjectTitleFromFilename = fileInputFilename => {
     if (!fileInputFilename) return '';
     // only parse title with valid scratch project extensions
-    // (.sb, .sb2, .sb3, and .pm)
-    const matches = fileInputFilename.match(/^(.*)(\.sb[23]?|\.pm|\.pmp)$/);
+    // (.sb3, .pm and .pmp; Scratch 1.4 and 2.0 files are not supported)
+    const matches = fileInputFilename.match(/^(.*)(\.sb3|\.pm|\.pmp)$/);
     if (!matches) return '';
     return matches[1].substring(0, 100); // truncate project title to max 100 chars
 };

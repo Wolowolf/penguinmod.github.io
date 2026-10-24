@@ -111,7 +111,7 @@ const SBFileUploaderHOC = function (WrappedComponent) {
                 
                 // pm: Some bad browsers block any file type (Safari) so we need to only add .accept for those which can handle it properly
                 if (isTypeFilterAvailable()) {
-                    this.inputElement.accept = '.sb,.sb2,.sb3,.pm,.pmp';
+                    this.inputElement.accept = '.sb3,.pm,.pmp';
                 }
 
                 this.inputElement.style = 'display: none;';
@@ -267,8 +267,8 @@ const SBFileUploaderHOC = function (WrappedComponent) {
         getProjectTitleFromFilename (fileInputFilename) {
             if (!fileInputFilename) return '';
             // only parse title with valid scratch project extensions
-            // (.sb, .sb2, and .sb3)
-            const matches = fileInputFilename.match(/^(.*)(\.sb[23]?|\.pm|\.pmp)$/);
+            // (.sb3, .pm and .pmp; Scratch 1.4 and 2.0 files are not supported)
+            const matches = fileInputFilename.match(/^(.*)(\.sb3|\.pm|\.pmp)$/);
             if (!matches) return '';
             return matches[1].substring(0, 100); // truncate project title to max 100 chars
         }

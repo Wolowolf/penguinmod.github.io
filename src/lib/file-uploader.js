@@ -275,7 +275,7 @@ const costumesForJSON = function (storage, vmCostumes) {
 const spriteUpload = function (fileData, fileType, spriteName, vm, handleSprite, handleError = () => {}) {
     switch (fileType) {
     case '':
-    case 'application/zip': { // We think this is a .sprite2 or .sprite3 file
+    case 'application/zip': { // We think this is a .sprite3 file
         handleSprite(new Uint8Array(fileData));
         return;
     }

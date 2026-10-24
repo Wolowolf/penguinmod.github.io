@@ -26,7 +26,7 @@ const showOpenFilePicker = async () => {
                 {
                     description: 'Supported Files',
                     accept: {
-                        'application/x.scratch.sb3': ['.pmp', '.pm', '.sb3', '.sb2', '.sb']
+                        'application/x.scratch.sb3': ['.pmp', '.pm', '.sb3']
                     }
                 },
                 {
@@ -38,7 +38,7 @@ const showOpenFilePicker = async () => {
                 {
                     description: 'Scratch Project',
                     accept: {
-                        'application/x.scratch.sb3': ['.sb3', '.sb2', '.sb']
+                        'application/x.scratch.sb3': ['.sb3']
                     }
                 }
             ]
