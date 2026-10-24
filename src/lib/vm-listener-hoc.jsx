@@ -72,7 +72,7 @@ const vmListenerHOC = function (WrappedComponent) {
             this.props.vm.on('COMPILE_ERROR', this.handleCompileError);
             this.props.vm.on('RUNTIME_STARTED', this.props.onClearCompileErrors);
             this.props.vm.on('STAGE_SIZE_CHANGED', this.props.onStageSizeChanged);
-            this.props.vm.on('CREATE_UNSANDBOXED_EXTENSION_API', implementGuiAPI);
+            this.props.vm.on('EXTENSION_API_CREATED', implementGuiAPI);
         }
         componentDidMount () {
             if (this.props.attachKeyboardEvents) {

@@ -1,8 +1,8 @@
 import LazyScratchBlocks from './tw-lazy-scratch-blocks';
 
 /**
- * Implements Scratch.gui API for unsandboxed extensions.
- * @param {any} Scratch window.Scratch, mutated in place.
+ * Implements Scratch.gui API for the gallery extensions built into the VM.
+ * @param {any} Scratch the Scratch object of one extension (VM desktop-gallery-extension.js), mutated in place.
  */
 const implementGuiAPI = Scratch => {
     Scratch.gui = {
