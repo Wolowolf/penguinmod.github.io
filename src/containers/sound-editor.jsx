@@ -75,7 +75,10 @@ class SoundEditor extends React.Component {
                 chunkLevels: computeChunkedRMS(newProps.samples, newProps.waveformChunkSize),
             });
         }
-        if (newProps.soundId !== this.props.soundId) { // A different sound has been selected
+        // Desktop fork (section 162): a sound is decoded when first needed, so its audio can arrive after the editor
+        // opened it; it is then treated like a newly selected sound
+        if (newProps.soundId !== this.props.soundId || (newProps.hasBuffer && !this.props.hasBuffer)) {
+            // A different sound has been selected
             this.redoStack = [];
             this.undoStack = [];
             this.resetState(newProps.samples, newProps.sampleRate);
@@ -151,6 +154,8 @@ class SoundEditor extends React.Component {
         });
     }
     submitNewSamples(samples, sampleRate, skipUndo) {
+        // Desktop fork (section 162): nothing to edit before the sound's audio arrived
+        if (!this.props.hasBuffer) return Promise.resolve(false);
         return downsampleIfNeeded({ samples, sampleRate }, this.resampleBufferToRate)
             .then(({ samples: newSamples, sampleRate: newSampleRate }) =>
                 WavEncoder.encode({
@@ -758,6 +763,7 @@ SoundEditor.propTypes = {
     name: PropTypes.string.isRequired,
     sampleRate: PropTypes.number,
     samples: PropTypes.instanceOf(Float32Array),
+    hasBuffer: PropTypes.bool,
     soundId: PropTypes.string,
     soundIndex: PropTypes.number,
     vm: PropTypes.instanceOf(VM).isRequired,
@@ -771,6 +777,7 @@ const mapStateToProps = (state, { soundIndex }) => {
     const sound = sprite.sounds[index] ?? {};
     const audioBuffer = state.scratchGui.vm.getSoundBuffer(index);
     return {
+        hasBuffer: !!audioBuffer,
         isStereo: audioBuffer?.numberOfChannels !== 1,
         duration: sound.sampleCount / sound.rate,
         size: sound.asset ? sound.asset.data.byteLength : 0,
