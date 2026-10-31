@@ -1,4 +1,5 @@
 const SET_FRAMERATE = 'tw/SET_FRAMERATE';
+const SET_INTERPOLATION = 'tw/SET_INTERPOLATION';
 const SET_COMPILER_OPTIONS = 'tw/SET_COMPILER_OPTIONS';
 const SET_RUNTIME_OPTIONS = 'tw/SET_RUNTIME_OPTIONS';
 const SET_USERNAME = 'tw/SET_USERNAME';
@@ -19,6 +20,7 @@ const SET_HAS_CLOUD_VARIABLES = 'tw/SET_HAS_CLOUD_VARIABLES';
 const SET_CLOUD_HOST = 'tw/SET_CLOUD_HOST';
 
 export const initialState = {
+    interpolation: false,
     framerate: 60, // PMDESKTOP_STAGE_PATCH: defaults of section 21
     cloud: true,
     username: '',
@@ -70,6 +72,10 @@ export const initialState = {
 const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
     switch (action.type) {
+    case SET_INTERPOLATION:
+        return Object.assign({}, state, {
+            interpolation: action.interpolation
+        });
     case SET_FRAMERATE:
         return Object.assign({}, state, {
             framerate: action.framerate
@@ -152,6 +158,13 @@ const reducer = function (state, action) {
     default:
         return state;
     }
+};
+
+const setInterpolationState = function (interpolation) {
+    return {
+        type: SET_INTERPOLATION,
+        interpolation: interpolation
+    };
 };
 
 const setFramerateState = function (framerate) {
@@ -290,6 +303,7 @@ export {
     reducer as default,
     initialState as twInitialState,
     setFramerateState,
+    setInterpolationState,
     setCompilerOptionsState,
     setRuntimeOptionsState,
     setUsername,

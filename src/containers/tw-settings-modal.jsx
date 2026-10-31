@@ -15,6 +15,8 @@ class UsernameModal extends React.Component {
         super(props);
         bindAll(this, [
             'handleFramerateChange',
+            'handleFollowScreenChange',
+            'handleInterpolationChange',
             'handleWarpTimerChange',
             'handleStageSizeChange',
             'handleDisableCompilerChange',
@@ -29,6 +31,12 @@ class UsernameModal extends React.Component {
         if (framerate >= 1) {
             this.props.vm.setFramerate(Math.min(250, framerate));
         }
+    }
+    handleFollowScreenChange (e) {
+        this.props.vm.setFramerate(e.target.checked ? 0 : 30);
+    }
+    handleInterpolationChange (e) {
+        this.props.vm.setInterpolation(e.target.checked);
     }
     handleDisableOffscreenRenderingChange (e) {
         this.props.vm.setRuntimeOptions({
@@ -68,6 +76,8 @@ class UsernameModal extends React.Component {
             <SettingsModalComponent
                 onClose={this.props.onClose}
                 onFramerateChange={this.handleFramerateChange}
+                onFollowScreenChange={this.handleFollowScreenChange}
+                onInterpolationChange={this.handleInterpolationChange}
                 onDisableOffscreenRenderingChange={this.handleDisableOffscreenRenderingChange}
                 onDisableDirectionClamping={this.handleDisableDirectionClamping}
                 onWarpTimerChange={this.handleWarpTimerChange}
@@ -87,6 +97,7 @@ UsernameModal.propTypes = {
     onClose: PropTypes.func,
     vm: PropTypes.shape({
         setFramerate: PropTypes.func,
+        setInterpolation: PropTypes.func,
         setCompilerOptions: PropTypes.func,
         setRuntimeOptions: PropTypes.func,
         setStageSize: PropTypes.func,
@@ -94,6 +105,7 @@ UsernameModal.propTypes = {
     }),
     isEmbedded: PropTypes.bool,
     framerate: PropTypes.number,
+    interpolation: PropTypes.bool,
     disableOffscreenRendering: PropTypes.bool,
     disableDirectionClamping: PropTypes.bool,
     warpTimer: PropTypes.bool,
@@ -108,6 +120,7 @@ const mapStateToProps = state => ({
     vm: state.scratchGui.vm,
     isEmbedded: state.scratchGui.mode.isEmbedded,
     framerate: state.scratchGui.tw.framerate,
+    interpolation: state.scratchGui.tw.interpolation,
     disableOffscreenRendering: state.scratchGui.tw.runtimeOptions.disableOffscreenRendering,
     disableDirectionClamping: state.scratchGui.tw.runtimeOptions.disableDirectionClamping,
     warpTimer: state.scratchGui.tw.compilerOptions.warpTimer,

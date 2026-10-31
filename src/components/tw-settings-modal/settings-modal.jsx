@@ -124,6 +124,25 @@ BooleanSetting.propTypes = {
     label: PropTypes.node.isRequired
 };
 
+const SmoothMovement = props => (
+    <BooleanSetting
+        {...props}
+        label={
+            <FormattedMessage
+                defaultMessage="Smooth Movement"
+                description="Setting that draws sprites between script runs"
+                id="pmdesktop.settingsModal.smoothMovement"
+            />
+        }
+        help={
+            <FormattedMessage
+                defaultMessage="Draws sprites between script runs, at the screen's refresh rate. Only the picture changes: scripts and touching stay exact, and the game's speed stays the same on every screen. The picture is up to one script run behind, and pen drawings and speech bubbles aren't smoothed."
+                description="Smooth movement setting help"
+                id="pmdesktop.settingsModal.smoothMovementHelp"
+            />
+        }
+    />
+);
 const DisableOffscreenRendering = props => (
     <BooleanSetting
         {...props}
@@ -241,7 +260,14 @@ const SettingsModalComponent = props => (
             <FramerateSetting
                 framerate={props.framerate}
                 onChange={props.onFramerateChange}
+                onFollowScreenChange={props.onFollowScreenChange}
             />
+            {props.framerate !== 0 && (
+                <SmoothMovement
+                    value={props.interpolation}
+                    onChange={props.onInterpolationChange}
+                />
+            )}
             <WarpTimer
                 value={props.warpTimer}
                 onChange={props.onWarpTimerChange}
@@ -271,6 +297,9 @@ SettingsModalComponent.propTypes = {
     isEmbedded: PropTypes.bool,
     framerate: PropTypes.number,
     onFramerateChange: PropTypes.func,
+    onFollowScreenChange: PropTypes.func,
+    interpolation: PropTypes.bool,
+    onInterpolationChange: PropTypes.func,
     warpTimer: PropTypes.bool,
     onWarpTimerChange: PropTypes.func,
     disableCompiler: PropTypes.bool,

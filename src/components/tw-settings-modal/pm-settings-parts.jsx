@@ -5,13 +5,14 @@ import React from 'react';
 import classNames from 'classnames';
 import {FormattedMessage} from 'react-intl';
 import Input from '../forms/input.jsx';
+import FancyCheckbox from '../tw-fancy-checkbox/checkbox.jsx';
 import BufferedInputHOC from '../forms/buffered-input-hoc.jsx';
 import styles from './settings-modal.css';
 
 const BufferedInput = BufferedInputHOC(Input);
 
 // FPS: a number box (the container keeps it between 1 and 250) and a note that is always shown.
-const FramerateSetting = ({framerate, onChange}) => (
+const FramerateSetting = ({framerate, onChange, onFollowScreenChange}) => (
     <div className={styles.setting}>
         <div className={styles.label}>
             <FormattedMessage
@@ -19,16 +20,39 @@ const FramerateSetting = ({framerate, onChange}) => (
                 description="Frames per second setting"
                 id="pmdesktop.settingsModal.fps"
             />
-            <BufferedInput
-                className={styles.customStageSizeInput}
-                type="number"
-                min="1"
-                max="250"
-                step="1"
-                value={framerate}
-                onSubmit={onChange}
-            />
+            {framerate !== 0 && (
+                <BufferedInput
+                    className={styles.customStageSizeInput}
+                    type="number"
+                    min="1"
+                    max="250"
+                    step="1"
+                    value={framerate}
+                    onSubmit={onChange}
+                />
+            )}
         </div>
+        <label className={styles.label}>
+            <FancyCheckbox
+                className={styles.checkbox}
+                checked={framerate === 0}
+                onChange={onFollowScreenChange}
+            />
+            <FormattedMessage
+                defaultMessage="Run scripts at the screen's refresh rate"
+                description="Setting that runs one script step per screen refresh"
+                id="pmdesktop.settingsModal.followScreen"
+            />
+        </label>
+        {framerate === 0 ? (
+            <div className={styles.pmSettingNote}>
+                <FormattedMessage
+                    defaultMessage="⚠ The game runs at a different speed on each screen: twice as fast at 120 Hz as at 60 Hz. Players with a faster screen get a faster game unless you multiply movement by the “delta time” block (Sensing Expansion)."
+                    description="Warning shown while scripts follow the screen's refresh rate"
+                    id="pmdesktop.settingsModal.followScreenWarning"
+                />
+            </div>
+        ) : (
         <div className={styles.pmSettingNote}>
             <FormattedMessage
                 defaultMessage="Runs scripts {framerate, plural, one {# time} other {# times}} per second."
@@ -43,11 +67,13 @@ const FramerateSetting = ({framerate, onChange}) => (
                 id="pmdesktop.settingsModal.fpsWarning"
             />
         </div>
+        )}
     </div>
 );
 FramerateSetting.propTypes = {
     framerate: PropTypes.number,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    onFollowScreenChange: PropTypes.func
 };
 
 const RATIO_KEY = 'pmdesktop:stageRatioLocked';
