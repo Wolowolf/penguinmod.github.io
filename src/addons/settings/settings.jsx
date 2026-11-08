@@ -105,6 +105,7 @@ const addonOrder = [
     'editor-colored-context-menus',
     // Editor look and layout
     'editor-tweaks',
+    'pm-app-font',
     'editor-animations',
     'block-count',
     'editor-sounds',
@@ -161,11 +162,6 @@ const { supported: supportedAddons, unsupported: unsupportedAddons } = filterAdd
 
 const groupAddons = () => {
     const groups = {
-        new: {
-            label: settingsTranslations.groupNew,
-            open: true,
-            addons: []
-        },
         others: {
             label: settingsTranslations.groupOthers,
             open: true,
@@ -180,9 +176,7 @@ const groupAddons = () => {
     const manifests = Object.values(supportedAddons);
     for (let index = 0; index < manifests.length; index++) {
         const manifest = manifests[index];
-        if (manifest.tags.includes('new')) {
-            groups.new.addons.push(index);
-        } else if (manifest.tags.includes('danger') || manifest.noCompiler) {
+        if (manifest.tags.includes('danger') || manifest.noCompiler) {
             groups.danger.addons.push(index);
         } else {
             groups.others.addons.push(index);
