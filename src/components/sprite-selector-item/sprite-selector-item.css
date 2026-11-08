@@ -23,7 +23,6 @@
 }
 
 .sprite-selector-item.is-selected {
-    box-shadow: 0px 0px 0px 4px $motion-transparent;
     border: 2px solid $motion-primary;
     background: $ui-white;
 }
@@ -100,16 +99,16 @@
 
 .delete-button {
     position: absolute;
-    top: -.625rem;
+    top: calc(-.625rem + 2px);
     z-index: auto;
 }
 
 [dir="ltr"] .delete-button {
-    right: -.625rem;
+    right: calc(-.625rem + 2px);
 }
 
 [dir="rtl"] .delete-button {
-    left: -.625rem;
+    left: calc(-.625rem + 2px);
 }
 
 .number {

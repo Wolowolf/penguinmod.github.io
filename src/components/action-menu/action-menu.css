@@ -46,19 +46,24 @@ button::-moz-focus-inner {
     border-radius: 100%;
     width: $main-button-size;
     height: $main-button-size;
-    box-shadow: 0 0 0 4px $motion-transparent;
     z-index: $z-index-add-button;
-    transition: transform, box-shadow 0.5s;
+    transition: transform;
+}
+
+/* desktop: no translucent ring; the button is drawn 4px larger on each side instead (same layout place) */
+.button.main-button {
+    width: calc($main-button-size + 8px);
+    height: calc($main-button-size + 8px);
+    margin: -4px;
 }
 
 .main-button:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 0 6px $motion-transparent;
 }
 
 .main-icon {
-    width: calc($main-button-size - 1rem);
-    height: calc($main-button-size - 1rem);
+    width: calc($main-button-size + 8px - 1rem);
+    height: calc($main-button-size + 8px - 1rem);
 }
 
 [dir="rtl"] .main-icon {

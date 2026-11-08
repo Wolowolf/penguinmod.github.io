@@ -2,7 +2,7 @@
 @import "../../css/units.css";
 
 .modal-content {
-    width: 700px;
+    width: 708px;
     margin: 50px auto; /* This modal is taller than most, reduce top margin */
 }
 
@@ -91,15 +91,10 @@
 /* Preset color options */
 .preset-color {
     border: 2.5px solid rgba(0, 0, 0, 0.13);
-    box-shadow: 0 0 0 2px hsla(0, 0%, 0%, 0.2);
-    margin: 4px;
+    margin: 2px;
     border-radius: 100%;
-    width: 2.5em;
-    height: 2.5em;
-}
-/* prevent soft-looking colors */
-[theme="dark"] .preset-color {
-    box-shadow: rgb(52, 52, 52) 0px 0px 0px 2.5px;
+    width: calc(2.5em + 4px);
+    height: calc(2.5em + 4px);
 }
 
 .parent-custom {
@@ -177,7 +172,6 @@
 
 .option-card:hover {
     border: 2px solid $motion-primary;
-    box-shadow: 0px 0px 0px 4px $motion-transparent;
 }
 
 .option-card + .option-card {

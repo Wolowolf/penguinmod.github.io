@@ -40,6 +40,12 @@
     height: 100%;
 }
 
+/* desktop: the selected tile has no translucent ring; it fills the ring's place instead */
+.sprite.sprite-selected {
+    margin: -4px;
+    height: calc(100% + 8px);
+}
+
 
 .scroll-wrapper {
     /*

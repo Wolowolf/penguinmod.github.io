@@ -176,8 +176,8 @@ const createModal = (type, data) => new Promise(resolve => {
         'position: fixed; z-index: 9999; top: 50%; left: 50%; transform: translate(-50%, -50%);');
 
     const modalContent = document.createElement('div');
-    modalContent.setAttribute('style', 'width: 350px; height: auto; background-color: #262626; text-align: center; ' +
-        'border-radius: 15px; box-shadow: rgba(125, 125, 125, 0.5) 0px 0px 0px 5px;');
+    modalContent.setAttribute('style', 'width: 360px; height: auto; background-color: #262626; text-align: center; ' +
+        'border-radius: 15px;');
     modal.appendChild(modalContent);
 
     const header = document.createElement('div');

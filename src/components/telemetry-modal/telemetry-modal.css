@@ -22,11 +22,10 @@ $ui-gray: hsla(0, 0%, 95%, 1);
 .modal-content {
     margin: 100px auto;
     outline: none;
-    border: .25rem solid $ui-white-transparent;
     padding: 0;
     border-radius: $space;
     user-select: none;
-    width: 640px;
+    width: 648px;
 
     color: $text-primary;
     overflow: hidden;
@@ -83,13 +82,14 @@ $ui-gray: hsla(0, 0%, 95%, 1);
     vertical-align: middle;
 }
 
-.radio-buttons input[type="radio"]:checked,
 .radio-buttons input[type="radio"]:focus {
-    box-shadow: 0 0 0 2px $ui-blue-25percent;
     outline: none;
 }
 
 .radio-buttons input[type="radio"]:checked {
+    width: calc(1rem + 4px);
+    height: calc(1rem + 4px);
+    margin: -3px calc(0.75rem - 2px) -1px;
     transition: all .25s ease;
     background-color: $ui-white;
     border: 1px solid $motion-primary;
@@ -139,7 +139,6 @@ $ui-gray: hsla(0, 0%, 95%, 1);
 
 .button-row button:hover {
     background: $extensions-primary;
-    box-shadow: 0 0 0 6px $motion-transparent;
 }
 
 .button-row button:disabled {

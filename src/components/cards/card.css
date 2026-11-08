@@ -55,14 +55,13 @@
 .left-button, .right-button {
     position: absolute;
     top: 50%;
-    margin-top: -15px;
+    margin: -19px -4px 0;
     z-index: 20;
     user-select: none;
     cursor: pointer;
     background: $extensions-primary;
-    box-shadow: 0 0 0 4px $extensions-transparent;
-    height: 44px;
-    width: 44px;
+    height: 52px;
+    width: 52px;
     border-radius: 100%;
     display: flex;
     justify-content: center;
@@ -71,7 +70,6 @@
 }
 
 .left-button:hover, .right-button:hover {
-    box-shadow: 0 0 0 6px $extensions-transparent;
     transform: scale(1.125);
 }
 
@@ -298,7 +296,9 @@
 
 .active-step-pip {
     background: $ui-white;
-    box-shadow: 0px 0px 0px 2px $ui-black-transparent-default;
+    width: calc(0.5rem + 4px);
+    height: calc(0.5rem + 4px);
+    margin: -2px calc(0.25rem - 2px);
 }
 
 .hidden {

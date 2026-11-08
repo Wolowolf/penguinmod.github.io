@@ -70,9 +70,6 @@
     padding: 0 .75rem 0 2rem; /* To make room for the submit button */
 }
 
-.question-input > input:focus {
-    box-shadow: 0px 0px 0px 3px $motion-transparent;
-}
 
 .question-submit-button-icon {
     width: calc(2rem - $space);

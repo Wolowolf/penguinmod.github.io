@@ -66,6 +66,7 @@ const Selector = props => {
                         <SpriteSelectorItem
                             asset={item.asset}
                             className={classNames(styles.listItem, {
+                                [styles.listItemSelected]: index === selectedItemIndex,
                                 [styles.placeholder]: isRelevantDrag && index === draggingIndex
                             })}
                             costumeURL={item.url}

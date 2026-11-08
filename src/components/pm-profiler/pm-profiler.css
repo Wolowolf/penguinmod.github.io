@@ -109,15 +109,15 @@
 /* ---- the profiler window ---- */
 
 .modal-content {
-    max-width: max(60%, 750px);
+    max-width: calc(max(60%, 750px) + 8px);
 }
 
 .body {
     background: $ui-white;
     color: $text-primary;
     padding: 1.25rem 2rem;
-    min-height: 150px;
-    max-height: calc(100vh - 250px);
+    min-height: 158px;
+    max-height: calc(100vh - 242px);
     overflow-y: auto;
 }
 [theme="dark"] .body {

@@ -74,6 +74,13 @@ $fade-out-distance: 100px;
     margin: 0.5rem auto;
 }
 
+/* desktop: the selected tile has no translucent ring; it fills the ring's place instead */
+.list-item.list-item-selected {
+    width: calc(5rem + 8px);
+    height: calc(5rem + 8px);
+    margin: calc(0.5rem - 4px) auto;
+}
+
 @media only screen and (max-width: $full-size-paint) {
     .wrapper {
         width: 80px;
@@ -82,6 +89,10 @@ $fade-out-distance: 100px;
 
     .list-item {
         width: 4rem;
+    }
+
+    .list-item.list-item-selected {
+        width: calc(4rem + 8px);
     }
 }
 

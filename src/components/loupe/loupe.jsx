@@ -78,8 +78,8 @@ class LoupeComponent extends React.Component {
                 height={colorInfo.height}
                 style={{
                     transform: `translate(${x}px, ${y}px)`,
-                    width: colorInfo.width * zoomScale,
-                    height: colorInfo.height * zoomScale
+                    width: (colorInfo.width * zoomScale) + 8,
+                    height: (colorInfo.height * zoomScale) + 8
                 }}
                 width={colorInfo.width}
             />

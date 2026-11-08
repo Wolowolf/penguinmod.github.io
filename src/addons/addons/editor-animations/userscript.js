@@ -88,12 +88,9 @@ export default async function({ addon }) {
 
 /* Custom Extension Button (Library) */
 .${addonKey}custom-ext-hover {
-  transition: transform ${getAnim(.2)}, border ${getAnim(.5)};
+  transition: transform ${getAnim(.2)};
   justify-content: center;
   border: none;
-}
-.${addonKey}custom-ext-hover:hover {
-  border: solid 3px #00000050;
 }
 .${addonKey}custom-ext-hover:active {
   transform: scale(.95);

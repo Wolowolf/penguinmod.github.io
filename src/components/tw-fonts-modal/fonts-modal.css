@@ -2,14 +2,14 @@
 @import "../../css/z-index.css";
 
 .modal-content {
-    max-width: 550px;
+    max-width: 558px;
     margin-top: 50px;
 }
 
 .body {
     background: $ui-white;
     padding: 1.5rem 2.25rem;
-    max-height: calc(100vh - 150px);
+    max-height: calc(100vh - 142px);
     overflow: auto;
     display: flex;
     flex-direction: column;

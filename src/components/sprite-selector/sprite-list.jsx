@@ -80,6 +80,7 @@ const SpriteList = function (props) {
                             <ThrottledSpriteSelectorItem
                                 asset={sprite.costume && sprite.costume.asset}
                                 className={classNames(styles.sprite, {
+                                    [styles.spriteSelected]: sprite.id === selectedId,
                                     [styles.raised]: isRaised,
                                     [styles.receivedBlocks]: receivedBlocks
                                 })}

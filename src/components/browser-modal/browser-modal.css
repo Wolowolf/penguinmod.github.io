@@ -16,11 +16,10 @@
 .modal-content {
     margin: 100px auto;
     outline: none;
-    border: .25rem solid $ui-white-transparent;
     padding: 0;
     border-radius: $space;
     user-select: none;
-    width: 500px;
+    width: 508px;
 
     color: $text-primary-light;
     overflow: hidden;
