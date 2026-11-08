@@ -179,11 +179,6 @@
     transition: transform 0.5s;
 }
 
-.message {
-    height: 20px;
-    margin: 5px 0;
-}
-
 .tw-progress-outer {
     position: relative;
     width: 250px;

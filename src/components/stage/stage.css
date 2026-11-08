@@ -29,10 +29,6 @@
     color-scheme: light;
 }
 
-.stage.full-screen {
-    /* tw: remove fullscreen border */
-}
-
 .with-color-picker {
     cursor: none;
     z-index: $z-index-stage-with-color-picker;

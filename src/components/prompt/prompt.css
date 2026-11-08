@@ -98,10 +98,6 @@
     border-color: $ui-edge;
 }
 
-.cloud-option-text {
-    opacity: .5;
-}
-
 .cancel-button {
     color: black;
 }

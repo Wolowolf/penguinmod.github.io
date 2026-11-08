@@ -36,12 +36,6 @@
     padding-bottom: $space;
 }
 
-.embed-scratch-logo img {
-    height:  1.6rem;
-    vertical-align: middle;
-    opacity: .6;
-}
-
 .stage-size-row {
     display: flex;
 }
@@ -103,11 +97,6 @@
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
-
-.stage-button-toggled-off {
-    filter: saturate(0);
-}
-[theme="dark"] .stage-button-toggled-off img,
 /* for the fullscreen button */
 [theme="dark"] .stage-button:not(.stage-button-first):not(.stage-button-last) img {
     filter: brightness(0) invert(1);

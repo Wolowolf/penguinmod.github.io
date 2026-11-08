@@ -11,6 +11,3 @@
     fill: hsl(300, 54%, 72%);
     stroke: $sound-tertiary;
 }
-.baseline {
-    stroke: $sound-tertiary;
-}

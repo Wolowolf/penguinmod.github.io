@@ -98,12 +98,6 @@ $sides: 20rem;
     margin-left: 0.5rem;
 }
 
-.header-item-filter {
-    display: flex;
-    flex-basis: $sides;
-    justify-content: flex-start;
-}
-
 .header-item-title {
     flex-grow: 1;
     flex-shrink: 0;

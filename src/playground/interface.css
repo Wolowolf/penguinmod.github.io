@@ -107,8 +107,7 @@ a {
     color: #4af;
 }
 
-.unshared-update,
-.infobox {
+.unshared-update {
     line-height: 1.5em;
     padding: 0.5rem;
     margin: 5px 0 8px 0;
@@ -117,17 +116,6 @@ a {
     border-radius: 0.5rem;
     border: 1px solid #b9d6ff;
     background-color: #dbebff;
-}
-[theme="dark"] .infobox {
-    border-color: #203652;
-    background-color: #16202c;
-}
-.infobox p {
-    margin: 4px 0;
-}
-.infobox a {
-    font-weight: bold;
-    text-decoration: none;
 }
 
 /* .unshared-update {
@@ -241,35 +229,4 @@ a {
 }
 [theme="dark"] .share-link > img {
     filter: brightness(0.7921568627);
-}
-
-.remixList {
-    overflow-x: auto;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 100%;
-    height: 128px;
-    background-color: rgba(0, 0, 0, 10%);
-}
-.remixProject {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: white;
-    margin-left: 3px;
-    margin-right: 3px;
-    text-decoration: none;
-    color: black;
-    font-size: 0.8em;
-}
-[theme="dark"] .remixProject {
-    background-color: #111;
-    color: white;
-}
-.remixProject:hover {
-    background-color: hsl(0, 0%, 95%);
-}
-[theme="dark"] .remixProject:hover {
-    background-color: rgba(0, 0, 0, 5%);
 }

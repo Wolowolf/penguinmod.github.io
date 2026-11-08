@@ -189,21 +189,6 @@
     height: calc(100%);
 }
 
-.library-scroll-grid.withFilterBar {
-    height: calc(100% - $library-header-height - $library-filter-bar-height - 2rem);
-}
-
-.filter-bar {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    height: calc($library-filter-bar-height + 2rem); /* padding */
-    background-color: $motion-transparent;
-    padding: 0 1rem;
-    font-size: .875rem;
-}
-
 .filter-bar-item {
     border: 1px solid $ui-edge;
 }
@@ -256,14 +241,6 @@
     border: 0;
     border-bottom: 1px dashed $ui-edge;
     margin: 6px 0;
-}
-
-.tag-wrapper {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    height: $library-filter-bar-height;
-    overflow: hidden;
 }
 
 .spinner-wrapper {

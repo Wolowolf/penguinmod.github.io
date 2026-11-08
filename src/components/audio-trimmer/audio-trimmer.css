@@ -5,7 +5,6 @@ $trim-handle-width: 30px;
 $trim-handle-height: 30px;
 $trim-handle-border: 3px;
 $stripe-size: 10px;
-$hover-scale: 1.25;
 
 .absolute {
     position: absolute;

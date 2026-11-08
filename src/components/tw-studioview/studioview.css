@@ -106,7 +106,7 @@ Further modifications made for PenguinMod (like featured projects)
   width: 100%;
 }
 
-.studioview-thumbnail, .studioview-placeholder-thumbnail {
+.studioview-thumbnail {
   position: relative;
   width: 144px;
   height: 108px;

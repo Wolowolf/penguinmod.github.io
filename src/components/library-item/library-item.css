@@ -179,51 +179,6 @@
     width: 100%;
 }
 
-.library-item-inset-image-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: -2.5rem;
-    align-self: flex-start;
-    background-color: $pen-primary;
-    width: 3.5rem;
-    height: 3.5rem;
-    border-radius: 0.5rem;
-    border: 0.25rem solid $ui-white;
-}
-
-.library-item-inset-image-container-no-bg {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: -2.5rem;
-    align-self: flex-start;
-    width: 3.5rem;
-    height: 3.5rem;
-    border-radius: 0.5rem;
-    border: 0.25rem solid $ui-white;
-}
-
-[theme="dark"] .library-item-inset-image-container-no-bg,
-[theme="dark"] .library-item-inset-image-container {
-    border: 0.25rem solid #111;
-}
-
-.tw-library-item-inset-image-container {
-    background-color: hsla(0, 100%, 65%, 1);
-}
-
-[dir="ltr"] .library-item-inset-image-container-no-bg,
-[dir="ltr"] .library-item-inset-image-container {
-    margin-left: 1rem;
-}
-[dir="rtl"] .library-item-inset-image-container-no-bg,
-[dir="rtl"] .library-item-inset-image-container {
-    margin-right: 1rem;
-}
-
 .library-item-image {
     max-width: 100%;
     max-height: 100%;
@@ -246,10 +201,6 @@
 [dir="rtl"] .library-item-waveform {
     left: initial;
     right: 0;
-}
-
-.library-item-inset-image {
-    width: 2.5rem;
 }
 
 .library-item-name {
@@ -461,20 +412,6 @@
     height: 20px;
 }
 
-.extension-links {
-    width: 300px;
-    padding: 0 1.25rem 1rem 1.25rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    opacity: 0.75;
-    text-align: left;
-}
-.extension-links a {
-    color: inherit !important;
-    text-decoration: underline;
-}
-
 .coming-soon-text {
     position: absolute;
     background-color: $data-primary;
@@ -492,23 +429,4 @@
 
 [dir="rtl"] .coming-soon-text {
     transform: translate(calc(-2 * $space), calc(2 * $space));
-}
-
-.favorite-container {
-    display: none;
-    background: none;
-    border: none;
-    padding: 0;
-    margin: 0;
-    position: absolute;
-    top: 0.5rem;
-    left: 0.5rem;
-}
-.favorite-icon {
-    width: 32px;
-    height: 32px;
-}
-.favorite-container.active,
-.library-item:hover .favorite-container {
-    display: block;
 }

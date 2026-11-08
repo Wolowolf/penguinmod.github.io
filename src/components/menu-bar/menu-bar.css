@@ -118,19 +118,6 @@
     z-index: $z-index-menu-bar;
 }
 
-.feedback-link {
-    color: $motion-primary !important;
-    text-decoration: none;
-}
-[theme="dark"] .feedback-link {
-    color: $motion-primary-dark !important;
-}
-
-.feedback-button {
-    background-color: $ui-white;
-    height: 34px;
-}
-
 .divider {
     margin: 0 .5rem;
     height: 34px;
@@ -139,18 +126,6 @@
 .author-info {
     margin-left: .25rem;
     margin-right: .6875rem;
-}
-
-.menu-bar-button {
-    height: $menu-bar-button-size;
-}
-
-.remix-button {
-    background-color: $pen-primary
-}
-
-.remix-button-icon {
-    height: 1.25rem;
 }
 
 .coming-soon >:not(.coming-soon-tooltip) {
@@ -167,72 +142,6 @@
     padding: 0 0.75rem;
 }
 
-.mystuff-icon {
-    margin: 0 .25rem;
-    height: 1rem;
-}
-
-.help-icon {
-    margin-right: 0.35rem;
-}
-
-.account-nav-menu, .mystuff-button {
-    padding: 0 .25rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.profile-icon {
-    margin: 0 .25rem;
-    width: $menu-bar-button-size;
-    border-radius: $form-radius;
-}
-
-.dropdown-caret-icon {
-    width: 0.5rem;
-    height: 0.5rem;
-}
-
-[dir="ltr"] .dropdown-caret-icon {
-    margin-left: .5rem;
-}
-
-[dir="rtl"] .dropdown-caret-icon {
-    margin-right: .5rem;
-}
-
 .disabled {
     opacity: 0.5;
-}
-
-.mystuff > a {
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 45%;
-  padding-right: 10px;
-  padding-left: 10px;
-  width: 30px;
-  overflow: hidden;
-  text-indent: 50px;
-  white-space: nowrap;
-}
-.mystuff > a:hover {
-  background-size: 50%;
-}
-
-.mystuff > a {
-  /* background-image: url("/images/mystuff.png"); */
-}
-
-.about-icon {
-    height: 1.25rem;
-    margin: 0.5rem;
-    vertical-align: middle;
-}
-
-/* tw: styles to override <a> styles */
-.menu-item-link {
-    color: $ui-white !important;
-    text-decoration: none;
 }

@@ -1,9 +1,7 @@
 @import "../../css/colors.css";
 
-.code,
 .unsandboxed-container,
-.unsandboxed-warning,
-.sandboxed {
+.unsandboxed-warning {
     margin: 8px 0;
 }
 

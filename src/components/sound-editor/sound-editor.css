@@ -127,27 +127,6 @@ $border-radius: 0.25rem;
     transform: scaleX(-1);
 }
 
-.trim-button {
-    display: flex;
-    align-items: center;
-    color: $text-primary;
-    font-size: 0.625rem;
-    user-select: none;
-
-}
-
-[dir="ltr"] .trim-button {
-    margin-left: 1rem;
-}
-
-[dir="rtl"] .trim-button {
-    margin-right: 1rem;
-}
-
-.trim-button > img {
-    width: 1.25rem;
-}
-
 .effects {
     display: flex;
     flex-wrap: wrap;

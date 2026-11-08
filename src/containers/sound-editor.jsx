@@ -16,7 +16,6 @@ import AudioEffects from '../lib/audio/audio-effects.js';
 import SoundEditorComponent from '../components/sound-editor/sound-editor.jsx';
 import AudioBufferPlayer from '../lib/audio/audio-buffer-player.js';
 import log from '../lib/log.js';
-import confirmStyles from '../css/confirm-dialog.css';
 
 const UNDO_STACK_SIZE = 250;
 

@@ -20,7 +20,6 @@ $stage-full-screen-stage-padding: 0.1875rem;
 $form-radius: calc($space / 2);
 
 /* layout contants from `layout-constants.js` */
-$full-size: 1095px;
 $full-size-paint: 1249px;
 
 $menu-bar-standard-font-size: 0.75rem;

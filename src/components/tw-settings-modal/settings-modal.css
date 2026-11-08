@@ -86,49 +86,13 @@
 [theme="dark"] .help-icon {
     background-image: url("./help-white.svg");
 }
-
-.custom-stage-size {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    height: initial;
-}
 .custom-stage-size-container {
     display: flex;
     align-items: center;
 }
-.custom-stage-size > * {
-    margin-right: 0.5rem;
-}
-.custom-stage-size-button {
-    margin: 8px;
-    background: white;
-    border-radius: 10px;
-    font-size: 40px;
-    width: 168px;
-    height: 126px;
-    outline: 4px white solid;
-}
-[theme="dark"] .custom-stage-size-button {
-    outline-color: $ui-primary;
-    background: $ui-primary;
-}
-.custom-stage-size-button[data-widescreen="true"] {
-    width: 224px;
-}
-.custom-stage-size-button[data-square="true"] {
-    width: 126px;
-}
-.custom-stage-size-button[data-selected="true"] {
-    border-color: $motion-primary;
-}
 .custom-stage-size-input {
     width: 80px;
     margin: 3px 8px;
-}
-
-.info {
-    margin-bottom: 0.25rem;
 }
 
 .header {
@@ -156,28 +120,6 @@
     cursor: pointer;
     font-family: inherit;
     font-weight: bold;
-}
-
-.warning {
-    padding: 0.5rem 1rem;
-    margin: 0.25rem 0;
-    border-radius: 4px;
-    background: rgb(255, 197, 38);
-    color: black;
-}
-[theme="dark"] .warning {
-    background: rgb(114, 65, 0);
-    color: $text-primary;
-}
-
-.summary {
-    cursor: pointer;
-}
-.dropdown {
-    margin-right: 4px;
-}
-details[open] .dropdown {
-    transform: rotate(90deg);
 }
 /* PMDESKTOP_STAGE_PATCH: the note under FPS and the stage size chain link (section 21) */
 /* no up / down arrows in the FPS and stage size boxes */

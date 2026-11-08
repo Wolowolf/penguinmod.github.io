@@ -39,14 +39,3 @@
 .username {
     font-weight: bold;
 }
-
-.link {
-    text-decoration: none;
-    color: $ui-white !important;
-}
-.link:hover {
-    text-decoration: underline;
-}
-.link .author-info {
-    cursor: pointer;
-}
