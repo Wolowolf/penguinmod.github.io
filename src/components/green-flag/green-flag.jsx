@@ -2,7 +2,6 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import greenFlagIcon from '../stage-header/stagecontrols/flag.svg';
 import styles from './green-flag.css';
 
 const GreenFlagComponent = function (props) {
@@ -14,7 +13,7 @@ const GreenFlagComponent = function (props) {
         ...componentProps
     } = props;
     return (
-        <img
+        <svg
             className={classNames(
                 className,
                 styles.greenFlag,
@@ -22,14 +21,15 @@ const GreenFlagComponent = function (props) {
                     [styles.isActive]: active
                 }
             )}
-            draggable={false}
-            src={greenFlagIcon}
-            title={title}
+            viewBox="0 0 20 20"
             onClick={onClick}
             // tw: also fire click when opening context menu (right click on all systems and alt+click on chromebooks)
             onContextMenu={onClick}
             {...componentProps}
-        />
+        >
+            <title>{title}</title>
+            <polygon points="3.07,2 3.07,18 16.93,10" />
+        </svg>
     );
 };
 GreenFlagComponent.propTypes = {

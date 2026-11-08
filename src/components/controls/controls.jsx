@@ -54,7 +54,7 @@ const Controls = function (props) {
                 onClick={onGreenFlagClick}
             />
             <PauseButton
-                disabled={!active && !paused}
+                running={active && !paused}
                 paused={paused}
                 title={intl.formatMessage(messages.pauseTitle)}
                 onClick={onPauseButtonClick}

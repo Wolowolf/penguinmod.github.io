@@ -2,7 +2,6 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import stopAllIcon from '../stage-header/stagecontrols/stop.svg';
 import styles from './stop-all.css';
 
 const StopAllComponent = function (props) {
@@ -14,7 +13,7 @@ const StopAllComponent = function (props) {
         ...componentProps
     } = props;
     return (
-        <img
+        <svg
             className={classNames(
                 className,
                 styles.stopAll,
@@ -22,12 +21,18 @@ const StopAllComponent = function (props) {
                     [styles.isActive]: active
                 }
             )}
-            draggable={false}
-            src={stopAllIcon}
-            title={title}
+            viewBox="0 0 20 20"
             onClick={onClick}
             {...componentProps}
-        />
+        >
+            <title>{title}</title>
+            <rect
+                x="3"
+                y="3"
+                width="14"
+                height="14"
+            />
+        </svg>
     );
 };
 

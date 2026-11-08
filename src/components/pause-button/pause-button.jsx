@@ -2,13 +2,11 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import pauseIcon from '../stage-header/stagecontrols/pause.svg';
-import playIcon from '../stage-header/stagecontrols/play.svg';
 import styles from './pause-button.css';
 
 const PauseButtonComponent = function (props) {
     const {
-        disabled,
+        running,
         paused,
         className,
         onClick,
@@ -16,35 +14,54 @@ const PauseButtonComponent = function (props) {
         ...componentProps
     } = props;
     return (
-        <img
+        <svg
             className={classNames(
                 className,
                 styles.pauseBtn,
                 {
-                    [styles.isActive]: paused,
-                    [styles.isDisabled]: disabled
+                    [styles.isRunning]: running
                 }
             )}
-            aria-disabled={disabled}
-            draggable={false}
-            src={paused ? playIcon : pauseIcon}
-            title={title}
+            viewBox="0 0 20 20"
             onClick={onClick}
             // tw: also fire click when opening context menu (right click on all systems and alt+click on chromebooks)
             onContextMenu={onClick}
             {...componentProps}
-        />
+        >
+            <title>{title}</title>
+            {paused ? (
+                <polygon
+                    className={styles.hollow}
+                    points="4,5 4,15 12.66,10"
+                />
+            ) : (
+                <React.Fragment>
+                    <rect
+                        x="3"
+                        y="2"
+                        width="5"
+                        height="16"
+                    />
+                    <rect
+                        x="12"
+                        y="2"
+                        width="5"
+                        height="16"
+                    />
+                </React.Fragment>
+            )}
+        </svg>
     );
 };
 PauseButtonComponent.propTypes = {
-    disabled: PropTypes.bool,
+    running: PropTypes.bool,
     paused: PropTypes.bool,
     className: PropTypes.string,
     onClick: PropTypes.func.isRequired,
     title: PropTypes.string
 };
 PauseButtonComponent.defaultProps = {
-    disabled: false,
+    running: false,
     paused: false,
     title: 'Pause'
 };
