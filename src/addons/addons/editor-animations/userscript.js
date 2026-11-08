@@ -94,7 +94,6 @@ export default async function({ addon }) {
 }
 .${addonKey}custom-ext-hover:active {
   transform: scale(.95);
-  border: none;
 }
 
 /* Library Items */

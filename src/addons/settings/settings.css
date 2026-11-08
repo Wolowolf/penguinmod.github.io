@@ -102,8 +102,6 @@ a:active, a:focus {
 [theme="dark"] .button:hover {
     background: #151515;
 }
-.button:active, .button:focus-within {
-}
 
 .search-container {
     display: flex;
@@ -111,8 +109,6 @@ a:active, a:focus {
     color: #222;
     border: 1px solid #cecece;
     border-radius: 4px;
-}
-.search-container:focus-within {
 }
 .search-input {
     color: inherit;
@@ -166,8 +162,6 @@ a:active, a:focus {
 [theme="dark"] .feedback-button-outer {
     background-color: white;
     border-color: white;
-}
-.feedback-button-outer:active, .feedback-button-outer:focus-within {
 }
 .feedback-button-inner {
     text-decoration: none;

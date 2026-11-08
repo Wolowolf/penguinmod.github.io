@@ -42,19 +42,14 @@ button::-moz-focus-inner {
     background: $data-primary;
 }
 
+/* desktop: no translucent ring; the button is drawn 4px larger on each side instead (same layout place) */
 .main-button {
     border-radius: 100%;
-    width: $main-button-size;
-    height: $main-button-size;
-    z-index: $z-index-add-button;
-    transition: transform;
-}
-
-/* desktop: no translucent ring; the button is drawn 4px larger on each side instead (same layout place) */
-.button.main-button {
     width: calc($main-button-size + 8px);
     height: calc($main-button-size + 8px);
     margin: -4px;
+    z-index: $z-index-add-button;
+    transition: none; /* hover colour and size change at once, as before */
 }
 
 .main-button:hover {
