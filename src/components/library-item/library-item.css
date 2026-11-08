@@ -17,7 +17,7 @@
     background: white;
     border-width: 2px;
     border-style: solid;
-    border-color: $ui-black-transparent;
+    border-color: $ui-edge;
     border-radius: $space;
     text-align: center;
     cursor: pointer;
@@ -160,7 +160,7 @@
 }
 
 .disabled:hover {
-    border-color: $ui-black-transparent;
+    border-color: $ui-edge;
 }
 
 .small-bottom-margin {

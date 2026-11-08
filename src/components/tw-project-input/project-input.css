@@ -20,10 +20,10 @@
 .tooltip {
     opacity: 1 !important;
     background-color: $extensions-primary !important;
-    border: 1px solid hsla(0, 0%, 0%, .1) !important;
+    border: 1px solid $ui-edge !important;
     box-shadow: 0 0 .5rem hsla(0, 0%, 0%, .25) !important;
     font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif) !important;
-    border: 1px solid hsla(0, 0%, 0%, .1) !important;
+    border: 1px solid $ui-edge !important;
     z-index: $z-index-menu-bar !important;
 }
 

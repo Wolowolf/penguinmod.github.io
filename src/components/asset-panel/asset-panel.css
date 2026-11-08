@@ -4,7 +4,7 @@
 .wrapper {
     display: flex;
     flex-grow: 1;
-    border: 1px solid $ui-black-transparent;
+    border: 1px solid $ui-edge;
     background: white;
     font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif);
     font-size: 0.85rem;
@@ -31,9 +31,9 @@
 }
 
 [dir="ltr"] .detail-area {
-    border-left: 1px solid $ui-black-transparent;
+    border-left: 1px solid $ui-edge;
 }
 
 [dir="rtl"] .detail-area {
-    border-right: 1px solid $ui-black-transparent;
+    border-right: 1px solid $ui-edge;
 }

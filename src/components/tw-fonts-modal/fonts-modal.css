@@ -33,7 +33,7 @@
     background: none;
     padding: 0.5rem;
     margin: 0;
-    border: 2px solid $ui-black-transparent;
+    border: 2px solid $ui-edge;
     border-radius: 0.5rem;
 }
 .open-button:hover {
@@ -72,7 +72,7 @@
 }
 .font-input {
     width: 100%;
-    border: 1px solid $ui-black-transparent;
+    border: 1px solid $ui-edge;
     border-radius: 0.25rem;
     padding: 0 1rem;
     height: 3rem;
@@ -87,7 +87,7 @@
     border-radius: 0.25rem;
     overflow: auto;
     max-height: 300px;
-    border: 1px solid $ui-black-transparent;
+    border: 1px solid $ui-edge;
     box-sizing: border-box;
     box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, .3);
 }
@@ -116,7 +116,7 @@
     width: 100%;
     height: 100px;
     font-size: 1.5rem;
-    border: 1px solid $ui-black-transparent;
+    border: 1px solid $ui-edge;
     border-radius: 0.25rem;
 }
 
@@ -125,7 +125,7 @@
     font-weight: bold;
     padding: 0.75rem 1rem;
     border-radius: 0.25rem;
-    border: 1px solid $ui-black-transparent;
+    border: 1px solid $ui-edge;
     background-color: $motion-primary;
     color: $ui-white;
 }
@@ -164,7 +164,7 @@
 }
 
 .fonts-outer {
-    border-top: 2px solid $ui-black-transparent;
+    border-top: 2px solid $ui-edge;
     padding-top: 1rem;
 }
 .fonts-outer p {
@@ -181,7 +181,7 @@
     width: 100%;
     display: flex;
     align-items: center;
-    border: 2px solid $ui-black-transparent;
+    border: 2px solid $ui-edge;
     border-radius: 0.5rem;
     padding: 0.5rem;
     gap: 0.5rem;

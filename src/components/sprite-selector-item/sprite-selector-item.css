@@ -13,7 +13,7 @@
     color: $text-primary;
     border-width: 2px;
     border-style: solid;
-    border-color: $ui-black-transparent;
+    border-color: $ui-edge;
     border-radius: $space;
 
     text-align: center;

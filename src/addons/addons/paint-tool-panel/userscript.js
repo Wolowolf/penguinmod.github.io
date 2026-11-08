@@ -419,13 +419,13 @@ export default async function () {
         modalStorage.id = paper.project.selectedItems.map(i => i.id).join(".");
         modalStorage.toolDiv.innerHTML = ""; // reset
 
-        const titleStyle =  `display: block; text-align: center; border-bottom: solid 2px var(--ui-black-transparent, hsla(0, 0%, 0%, 0.15)); padding-bottom: 5px; margin: 0 25px 0 25px; font-size: 14px; font-weight: 600;`;
+        const titleStyle =  `display: block; text-align: center; border-bottom: solid 2px var(--ui-edge, #c6cdd6); padding-bottom: 5px; margin: 0 25px 0 25px; font-size: 14px; font-weight: 600;`;
         const subTitleStyle = `margin: 5px; font-size: 12px;`;
         const inputDivStyle = `display: flex; flex-wrap: wrap; justify-content: center; align-items: center; padding: 5px 10px 5px 10px;`;
-        const inputStyle = `text-align: center; font-size: 13px; width: 60px; height: 25px; margin: 5px; border: solid 2px var(--ui-black-transparent, hsla(0, 0%, 0%, 0.15)); border-radius: 15px;`;
-        const selectStyle = `text-align: center; font-size: 13px; height: 25px; margin: 5px; border: solid 2px var(--ui-black-transparent, hsla(0, 0%, 0%, 0.15)); border-radius: 5px;`;
+        const inputStyle = `text-align: center; font-size: 13px; width: 60px; height: 25px; margin: 5px; border: solid 2px var(--ui-edge, #c6cdd6); border-radius: 15px;`;
+        const selectStyle = `text-align: center; font-size: 13px; height: 25px; margin: 5px; border: solid 2px var(--ui-edge, #c6cdd6); border-radius: 5px;`;
         const togglerStyle = `background: transparent; border: none; margin-left: 3px; padding: 5px 0 0 0;`;
-        const monitorStyle = `text-align: center; font-size: 13px; margin: 5px; padding: 5px; border: solid 2px var(--ui-black-transparent, hsla(0, 0%, 0%, 0.15)); border-radius: 5px;`;
+        const monitorStyle = `text-align: center; font-size: 13px; margin: 5px; padding: 5px; border: solid 2px var(--ui-edge, #c6cdd6); border-radius: 5px;`;
 
         const selectedItems = getRealSelection();
         const center = getCenter(selectedItems);
@@ -571,11 +571,11 @@ export default async function () {
 
         const modal = document.createElement("div");
         modal.classList.add("costume-tool-modal");
-        modal.setAttribute("style", `color: var(--paint-text-primary, #575e75); width: 275px; height: 350px; z-index: 99999; display: block; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: var(--ui-secondary, hsla(215, 75%, 95%, 1)); border: solid 2px var(--ui-black-transparent, hsla(0, 0%, 0%, 0.15)); border-radius: 5px; padding: 15px;`);
+        modal.setAttribute("style", `color: var(--paint-text-primary, #575e75); width: 275px; height: 350px; z-index: 99999; display: block; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: var(--ui-secondary, hsla(215, 75%, 95%, 1)); border: solid 2px var(--ui-edge, #c6cdd6); border-radius: 5px; padding: 15px;`);
         modal.id = "draggable";
 
         const title = document.createElement("span");
-        title.setAttribute("style", `display: block; text-align: center; justify-content: center; border-bottom: solid 2px var(--ui-black-transparent, hsla(0, 0%, 0%, 0.15)); padding-bottom: 10px; margin: 0 25px 0 25px; font-weight: 600;`);
+        title.setAttribute("style", `display: block; text-align: center; justify-content: center; border-bottom: solid 2px var(--ui-edge, #c6cdd6); padding-bottom: 10px; margin: 0 25px 0 25px; font-weight: 600;`);
         title.id = "draggable";
         title.textContent = "Object Editor";
 

@@ -58,7 +58,7 @@
   overflow-y: hidden;
   user-select: none;
   background-color: var(--ui-primary, hsla(215, 100%, 95%, 1));
-  border: 1px solid var(--ui-black-transparent, hsla(0, 0%, 0%, 0.15));
+  border: 1px solid var(--ui-edge, #c6cdd6);
   color: var(--text-primary, hsla(225, 15%, 40%, 1));
   border-top: none;
   transition: height 100ms ease-in, color 100ms ease-in;

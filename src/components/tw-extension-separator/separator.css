@@ -3,6 +3,6 @@
 .separator {
   width: 100%;
   border: none;
-  border-top: 2px solid $ui-black-transparent;
+  border-top: 2px solid $ui-edge;
   margin: 0.5rem 0;
 }

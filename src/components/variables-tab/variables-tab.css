@@ -17,7 +17,7 @@
     background: white;
     border-top-right-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
-    border: 1px solid $ui-black-transparent;
+    border: 1px solid $ui-edge;
     padding: calc(2 * $space);
 }
 [theme="dark"] .editor-container {
@@ -95,7 +95,7 @@
 }
   
 .editor-container td {
-    border: 1px solid rgba(0, 0, 0, 0.15);
+    border: 1px solid $ui-edge;
     text-align: left;
 }
 [theme="dark"] .editor-container td {

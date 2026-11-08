@@ -1,5 +1,5 @@
 .u-dropdown-searchbar {
-  border-color: rgba(255, 255, 255, 0.15);
+  border-color: var(--ui-edge, #c6cdd6);
 }
 .u-dropdown-searchbar:focus {
   background-color: var(--editorTheme3-hoveredItem);

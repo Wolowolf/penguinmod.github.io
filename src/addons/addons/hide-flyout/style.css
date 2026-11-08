@@ -27,7 +27,7 @@
   border-left: 1px solid var(--ui-primary, hsla(215, 100%, 95%, 1));
 }
 .sa-flyout-border-2 {
-  border-left: 1px solid var(--ui-black-transparent, rgba(0, 0, 0, 0.15));
+  border-left: 1px solid var(--ui-edge, #c6cdd6);
 }
 
 .blocklyFlyout,
@@ -80,7 +80,7 @@
   justify-content: center;
   align-items: center;
   background-color: var(--ui-primary, white);
-  border: 1px solid var(--ui-black-transparent, rgba(0, 0, 0, 0.15));
+  border: 1px solid var(--ui-edge, #c6cdd6);
   border-radius: 4px;
 }
 

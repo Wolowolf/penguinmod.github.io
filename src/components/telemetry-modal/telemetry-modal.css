@@ -143,7 +143,7 @@ $ui-gray: hsla(0, 0%, 95%, 1);
 
 .button-row button:disabled {
     background: $text-primary;
-    border-color: $ui-black-transparent;
+    border-color: $ui-edge;
     box-shadow: none;
     opacity: 0.25;
 }

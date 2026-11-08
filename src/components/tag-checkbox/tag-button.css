@@ -39,7 +39,7 @@
     height: 24px;
     margin: 4px 0;
     margin-right: 4px;
-    border: 2px solid $ui-black-transparent;
+    border: 2px solid $ui-edge;
     border-radius: 4px;
     cursor: pointer;
 }

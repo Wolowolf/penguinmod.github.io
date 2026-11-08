@@ -35,7 +35,7 @@
 }
 [theme="dark"] .gamepadlib-keyinput {
   background-color: var(--ui-tertiary);
-  border-color: var(--ui-black-transparent);
+  border-color: var(--ui-edge, #c6cdd6);
   color: var(--text-primary);
 }
 .gamepadlib-mapping[data-value="1"] .gamepadlib-keyinput {
@@ -67,7 +67,7 @@
   overflow: hidden;
 }
 [theme="dark"] .gamepadlib-axis-circle {
-  border-color: var(--ui-black-transparent);
+  border-color: var(--ui-edge, #c6cdd6);
 }
 .gamepadlib-axis-dot {
   position: absolute;

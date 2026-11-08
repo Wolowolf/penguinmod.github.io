@@ -185,7 +185,7 @@
 .table th,
 .table td {
     padding: 0.3rem 0.4rem;
-    border-bottom: 1px solid $ui-black-transparent;
+    border-bottom: 1px solid $ui-edge;
     font-weight: normal;
 }
 .table thead th {

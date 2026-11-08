@@ -45,11 +45,11 @@ Further modifications made for PenguinMod (like featured projects)
   border-radius: 4px;
   border-style: solid;
   border-width: 1px;
-  border-color: rgba(0, 0, 0, 0.1);
+  border-color: var(--ui-edge, #c6cdd6);
 }
 [theme="dark"] .studioview-project,
 [theme="dark"] .studioview-placeholder {
-  border-color: #ffffff4d;
+  border-color: var(--ui-edge, #c6cdd6);
 }
 .featured-studioview-project {
   background-color: #ffc400;

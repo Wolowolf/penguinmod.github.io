@@ -20,7 +20,7 @@
 
 .meter-container, .waveform-container {
     background: $ui-primary;
-    border: 1px solid $ui-black-transparent;
+    border: 1px solid $ui-edge;
     border-radius: 5px;
     padding: 3px;
     /* Force these to be on their own render layer because they update often */
@@ -89,7 +89,7 @@
     padding: 0.75rem 1rem;
     border-radius: 0.25rem;
     background: white;
-    border: 1px solid $ui-black-transparent;
+    border: 1px solid $ui-edge;
     font-weight: 600;
     font-size: 0.85rem;
     color: $motion-primary;

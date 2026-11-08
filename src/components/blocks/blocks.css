@@ -24,7 +24,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    border: 1px solid $ui-black-transparent;
+    border: 1px solid $ui-edge;
     border-top-right-radius: $space;
     border-bottom-right-radius: $space;
 }
@@ -41,8 +41,8 @@
 }
 
 .blocks :global(.blocklyToolboxDiv) {
-    border-right: 1px solid $ui-black-transparent;
-    border-bottom: 1px solid $ui-black-transparent;
+    border-right: 1px solid $ui-edge;
+    border-bottom: 1px solid $ui-edge;
     box-sizing: content-box;
     /* PMDESKTOP_ADD_BUTTON: full height; the small ADD box (gui.css) sits over its bottom */
     height: calc(100% - 1px) !important;
@@ -59,7 +59,7 @@
 
 [dir="rtl"] .blocks :global(.blocklyToolboxDiv) {
     border-right: none;
-    border-left: 1px solid $ui-black-transparent;
+    border-left: 1px solid $ui-edge;
 }
 
 .blocks :global(.blocklyToolboxDiv::-webkit-scrollbar) {
@@ -67,13 +67,13 @@
 }
 
 .blocks :global(.blocklyFlyout) {
-    border-right: 1px solid $ui-black-transparent;
+    border-right: 1px solid $ui-edge;
     box-sizing: content-box;
 }
 
 [dir="rtl"] .blocks :global(.blocklyFlyout) {
     border-right: none;
-    border-left: 1px solid $ui-black-transparent;
+    border-left: 1px solid $ui-edge;
 }
 
 

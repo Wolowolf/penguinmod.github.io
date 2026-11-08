@@ -32,7 +32,7 @@
     margin-top: 15px;
     margin-bottom: 15px;
     border-radius: 10px;
-    border: 2px solid var(--ui-black-transparent, hsla(0, 0%, 0%, 0.15));
+    border: 2px solid $ui-edge;
 }
 .color-picker-area > div:nth-child(1),
 .color-picker-area > div:nth-child(2) {
@@ -60,14 +60,14 @@
 ::-webkit-color-swatch {
     margin: 0;
     border-radius: 100%;
-    border: 2px solid rgba(0, 0, 0, 0.2);
+    border: 2px solid $ui-edge;
     overflow: none;
     padding: 0;
 }
 ::-moz-color-swatch {
     margin: 0;
     border-radius: 100%;
-    border: 2px solid rgba(0, 0, 0, 0.2);
+    border: 2px solid $ui-edge;
     overflow: none;
     padding: 0;
 }
@@ -90,7 +90,7 @@
 
 /* Preset color options */
 .preset-color {
-    border: 2.5px solid rgba(0, 0, 0, 0.13);
+    border: 2.5px solid $ui-edge;
     margin: 2px;
     border-radius: 100%;
     width: calc(2.5em + 4px);
@@ -157,7 +157,7 @@
 
 .option-card {
     background: white;
-    border: 2px solid $ui-black-transparent;
+    border: 2px solid $ui-edge;
     border-radius: $space;
     padding: calc($space * 2);
     text-align: center;
@@ -200,7 +200,7 @@
 }
 
 .button-row button {
-    border: 1px solid $ui-black-transparent;
+    border: 1px solid $ui-edge;
     border-radius: 0.25rem;
     padding: 0.75rem 1rem;
     background: white;

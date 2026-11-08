@@ -10,7 +10,7 @@
 
 .coming-soon {
     background-color: $data-primary !important;
-    border: 1px solid $ui-black-transparent !important;
+    border: 1px solid $ui-edge !important;
     border-radius: $form-radius !important;
     box-shadow: 0 0 .5rem $ui-black-transparent-default !important;
     padding: .75rem 1rem !important;
@@ -22,10 +22,10 @@
 
 .coming-soon:after {
     content: "";
-    border-top: 1px solid $ui-black-transparent !important;
+    border-top: 1px solid $ui-edge !important;
     border-left: 0 !important;
     border-bottom: 0 !important;
-    border-right: 1px solid $ui-black-transparent !important;
+    border-right: 1px solid $ui-edge !important;
     border-radius: $form-radius;
     background-color: $data-primary !important;
     height: 1rem !important;

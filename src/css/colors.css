@@ -12,6 +12,10 @@ $ui-transparent: hsla(0, 100%, 100%, 0); /* 25% transparent version of ui-white 
 $ui-black-transparent-default: hsla(0, 0%, 0%, 0.15); /* 15% transparent version of black */
 $ui-black-transparent: var(--ui-black-transparent, $ui-black-transparent-default);
 
+/* desktop: solid edge colours (no transparency) for every border and outline */
+$ui-edge-default: #c6cdd6; /* what 15% black looked like on ui-secondary */
+$ui-edge: var(--ui-edge, $ui-edge-default);
+
 $text-primary: var(--text-primary, hsla(225, 15%, 40%, 1)); /* #575E75 */
 $text-primary-transparent: hsla(225, 15%, 40%, 0.75);
 
@@ -19,6 +23,7 @@ $motion-primary: hsla(194, 100%, 50%, 1); /* #00c3ff */
 $motion-tertiary: hsla(203, 100%, 39%, 1); /* #007bc7 */
 $motion-transparent: hsla(194, 100%, 50%, 0.35); /* 35% transparent version of motion-primary */
 $motion-light-transparent: hsla(203, 100%, 39%, 0.15); /* 15% transparent version of motion-primary */
+$motion-edge: var(--motion-edge, #a6eaff); /* solid: what motion-transparent looked like on white */
 
 /* opt-in theme overrides */
 $motion-primary-dark: #009CCC; /*top bar color when in dark mode*/

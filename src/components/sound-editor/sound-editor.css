@@ -37,19 +37,19 @@
 
 [dir="ltr"] .input-group {
     padding-right: calc(2 * $space);
-    border-right: 1px dashed $ui-black-transparent;
+    border-right: 1px dashed $ui-edge;
 }
 
 [dir="rtl"] .input-group {
     padding-left: calc(2 * $space);
-    border-left: 1px dashed $ui-black-transparent;
+    border-left: 1px dashed $ui-edge;
 }
 
 [dir="rtl"] .row-reverse > .input-group {
     padding-left: 0;
     padding-right: calc(2 * $space);
     border-left: none;
-    border-right: 1px dashed $ui-black-transparent;
+    border-right: 1px dashed $ui-edge;
 }
 
 .name-input {
@@ -65,7 +65,7 @@
     position: relative;
 
     background: hsla(300, 53%, 60%, 0.15);
-    border: 1px solid $ui-black-transparent;
+    border: 1px solid $ui-edge;
     border-radius: 5px;
 
     margin-top: 20px;
@@ -80,7 +80,7 @@ $border-radius: 0.25rem;
     outline: none;
     background: white;
     border-radius: $border-radius;
-    border: 1px solid $ui-black-transparent;
+    border: 1px solid $ui-edge;
     cursor: pointer;
     font-size: 0.85rem;
     transition: 0.2s;
@@ -223,7 +223,7 @@ $border-radius: 0.25rem;
 }
 
 [dir="ltr"] .button-group .button:first-of-type {
-    border-left: 1px solid $ui-black-transparent;
+    border-left: 1px solid $ui-edge;
     border-top-left-radius: $border-radius;
     border-bottom-left-radius: $border-radius;
 }
@@ -234,7 +234,7 @@ $border-radius: 0.25rem;
 }
 
 [dir="rtl"] .button-group .button:first-of-type {
-    border-right: 1px solid $ui-black-transparent;
+    border-right: 1px solid $ui-edge;
     border-top-right-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
 }

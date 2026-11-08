@@ -349,7 +349,7 @@ export default async function () {
         color.setAttribute("style", `width: 25px; height: 25px; border-radius: 4px; background: #fff; display: flex; justify-content: center; align-items: center; flex-direction: column;`);
 
         const colorContainer = document.createElement("div");
-        colorContainer.setAttribute("style", `width: 16px; height: 16px; border-radius: 5px; background: ${rngHex}; border: solid 2px rgba(0,0,0,.2); opacity: ${opacity}; margin-bottom: 2px;`);
+        colorContainer.setAttribute("style", `width: 16px; height: 16px; border-radius: 5px; background: ${rngHex}; border: solid 2px var(--ui-edge, #c6cdd6); opacity: ${opacity}; margin-bottom: 2px;`);
 
         const colorInput = document.createElement("input");
         colorInput.setAttribute("type", "color");
@@ -428,9 +428,9 @@ export default async function () {
     }
 
     function genSettingsTable(div) {
-        const btnStyle = `width: 35px; height: 35px; border: solid 2px var(--ui-black-transparent, hsla(0, 0%, 0%, 0.15)); border-radius: 5px; background: var(--paint-input-background, --ui-primary, #fff); transition: transform 0.2s;`;
-        const selectStlye = `cursor: pointer; height: 30px; margin: 5px; border: solid 2px var(--ui-black-transparent, hsla(0, 0%, 0%, 0.15)); border-radius: 5px; background: var(--ui-secondary, #fff);`;
-        const directionStyle = `text-align: center; width: 50px; height: 25px; margin: 5px; border: solid 2px var(--ui-black-transparent, hsla(0, 0%, 0%, 0.15)); border-radius: 5px; background: var(--ui-secondary, #fff);`;
+        const btnStyle = `width: 35px; height: 35px; border: solid 2px var(--ui-edge, #c6cdd6); border-radius: 5px; background: var(--paint-input-background, --ui-primary, #fff); transition: transform 0.2s;`;
+        const selectStlye = `cursor: pointer; height: 30px; margin: 5px; border: solid 2px var(--ui-edge, #c6cdd6); border-radius: 5px; background: var(--ui-secondary, #fff);`;
+        const directionStyle = `text-align: center; width: 50px; height: 25px; margin: 5px; border: solid 2px var(--ui-edge, #c6cdd6); border-radius: 5px; background: var(--ui-secondary, #fff);`;
 
         const createBtn = document.createElement("button");
         createBtn.setAttribute("style", btnStyle);
@@ -498,7 +498,7 @@ export default async function () {
 
     function genButtonTable(div) {
         const themeHex = isPM ? "#00c3ff" : document.documentElement.style.getPropertyValue("--looks-secondary") || "#ff4c4c";
-        const btnStyle = `color: #fff; font-weight: 600; text-align: center; padding: 10px; margin: 10px 5px; border: solid 2px var(--ui-black-transparent, hsla(0, 0%, 0%, 0.15)); border-radius: 5px; background: ${themeHex}; transition: transform 0.2s;`;
+        const btnStyle = `color: #fff; font-weight: 600; text-align: center; padding: 10px; margin: 10px 5px; border: solid 2px var(--ui-edge, #c6cdd6); border-radius: 5px; background: ${themeHex}; transition: transform 0.2s;`;
 
         const enterBtn = document.createElement("button");
         enterBtn.id = "enter";
@@ -538,11 +538,11 @@ export default async function () {
 
         const modal = document.createElement("div");
         modal.classList.add("gradient-modal");
-        modal.setAttribute("style", `pointer-events: auto; color: var(--paint-text-primary, #575e75); width: 450px; height: 260px; display: block; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: var(--ui-secondary, hsla(215, 75%, 95%, 1)); border: solid 2px var(--ui-black-transparent, hsla(0, 0%, 0%, 0.15)); border-radius: 5px; padding: 15px;`);
+        modal.setAttribute("style", `pointer-events: auto; color: var(--paint-text-primary, #575e75); width: 450px; height: 260px; display: block; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); background: var(--ui-secondary, hsla(215, 75%, 95%, 1)); border: solid 2px var(--ui-edge, #c6cdd6); border-radius: 5px; padding: 15px;`);
         modalStorage.modal = modal;
 
         const title = document.createElement("span");
-        title.setAttribute("style", `display: block; text-align: center; justify-content: center; border-bottom: solid 2px var(--ui-black-transparent, hsla(0, 0%, 0%, 0.15)); padding-bottom: 10px; margin: 0 25px 0 25px; font-weight: 600;"`);
+        title.setAttribute("style", `display: block; text-align: center; justify-content: center; border-bottom: solid 2px var(--ui-edge, #c6cdd6); padding-bottom: 10px; margin: 0 25px 0 25px; font-weight: 600;"`);
         title.textContent = "Gradient Maker";
 
         const display = document.createElement("div");
@@ -555,7 +555,7 @@ export default async function () {
 
         const settings = document.createElement("div");
         settings.classList.add("settings");
-        settings.setAttribute("style", `border-top: dashed 2px var(--ui-black-transparent, hsla(0, 0%, 0%, 0.15)); padding-top: 10px; display: flex; justify-content: center; align-items: center;`);
+        settings.setAttribute("style", `border-top: dashed 2px var(--ui-edge, #c6cdd6); padding-top: 10px; display: flex; justify-content: center; align-items: center;`);
         genSettingsTable(settings);
 
         const buttons = document.createElement("div");

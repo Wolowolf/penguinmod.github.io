@@ -141,7 +141,7 @@ button::-moz-focus-inner {
 .tooltip {
     background-color: $extensions-primary !important;
     opacity: 1 !important;
-    border: 1px solid hsla(0, 0%, 0%, .1) !important;
+    border: 1px solid $ui-edge !important;
     box-shadow: 0 0 .5rem hsla(0, 0%, 0%, .25) !important;
     font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif) !important;
 }
@@ -159,7 +159,7 @@ button::-moz-focus-inner {
 }
 
 .tooltip {
-    border: 1px solid hsla(0, 0%, 0%, .1) !important;
+    border: 1px solid $ui-edge !important;
     border-radius: $form-radius !important;
     box-shadow: 0 0 .5rem hsla(0, 0%, 0%, .25) !important;
     font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif) !important;
@@ -172,10 +172,10 @@ $arrow-rounding: 0.125rem;
 
 .tooltip:after {
     content: "";
-    border-top: 1px solid hsla(0, 0%, 0%, .1) !important;
+    border-top: 1px solid $ui-edge !important;
     border-left: 0 !important;
     border-bottom: 0 !important;
-    border-right: 1px solid hsla(0, 0%, 0%, .1) !important;
+    border-right: 1px solid $ui-edge !important;
     border-radius: $arrow-rounding;
     height: $arrow-size !important;
     width: $arrow-size !important;

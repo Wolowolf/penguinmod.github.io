@@ -29,12 +29,12 @@
 .box {
     margin: 0 0 1rem 0;
     padding: 0.8rem 1rem;
-    border: 2px solid $ui-black-transparent;
+    border: 2px solid $ui-edge;
     background: $ui-white;
 }
 .fields { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 0.6rem; }
 .field { display: flex; flex-direction: column; gap: 0.2rem; font-size: 0.85rem; flex: 1 1 240px; }
-.input { height: 2.2rem; padding: 0 0.6rem; border: 2px solid $ui-black-transparent; font-size: 0.95rem; }
+.input { height: 2.2rem; padding: 0 0.6rem; border: 2px solid $ui-edge; font-size: 0.95rem; }
 .input:focus { outline: none; border-color: $motion-primary; }
 .primary, .secondary, .danger {
     height: 2.2rem;

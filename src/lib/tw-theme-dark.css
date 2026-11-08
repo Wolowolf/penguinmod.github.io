@@ -9,11 +9,14 @@
     --ui-tertiary: rgb(46, 46, 46);
     --ui-modal-overlay: #333a;
     --ui-black-transparent: rgba(255, 255, 255, 0.15);
+    /* desktop: solid edge colours, what the 15% white / 35% blue edges looked like on ui-secondary */
+    --ui-edge: #404040;
+    --motion-edge: #14586d;
     --text-primary: #eee;
     /* scratch-paint */
-    --paint-ui-pane-border: var(--ui-black-transparent);
+    --paint-ui-pane-border: var(--ui-edge);
     --paint-text-primary: #eee;
-    --paint-form-border: var(--ui-black-transparent);
+    --paint-form-border: var(--ui-edge);
 }
 
 /* Blockly */
@@ -73,7 +76,7 @@
 }
 .blocklyWidgetDiv .goog-menu {
     background: var(--ui-primary);
-    border-color: var(--ui-black-transparent);
+    border-color: var(--ui-edge);
 }
 .blocklyWidgetDiv .goog-menuitem {
     color: var(--text-primary);
@@ -82,7 +85,7 @@
     color: hsla(0, 0%, 100%, .35) !important;
 }
 .sa-blockly-menu-item-border {
-    border-top-color: var(--ui-black-transparent) !important;
+    border-top-color: var(--ui-edge) !important;
 }
 .blocklyWidgetDiv .goog-menuitem.goog-menuitem-highlight {
     background-color: var(--ui-tertiary);
@@ -102,10 +105,10 @@
 }
 .Popover-body {
     background: var(--ui-secondary);
-    border-color: var(--ui-black-transparent);
+    border-color: var(--ui-edge);
     color: var(--text-primary);
 }
 .Popover-tipShape {
     fill: var(--ui-secondary);
-    stroke: var(--ui-black-transparent);
+    stroke: var(--ui-edge);
 }

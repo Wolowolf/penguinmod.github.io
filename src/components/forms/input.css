@@ -12,7 +12,7 @@
 
     border-width: 1px;
     border-style: solid;
-    border-color: $ui-black-transparent;
+    border-color: $ui-edge;
     border-radius: 2rem;
 
     outline: none;

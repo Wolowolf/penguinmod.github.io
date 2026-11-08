@@ -6,7 +6,7 @@
     position: absolute;
     background: $ui-primary-light; /* tw: do not look different in dark mode */
     z-index: $z-index-monitor;
-    border: 1px solid $ui-black-transparent-default;
+    border: 1px solid $ui-edge-default;
     border-radius: calc($space / 2);
     font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif);
     font-size: 0.75rem;
@@ -79,7 +79,7 @@
 
 .list-header {
     background: $ui-white;
-    border-bottom: 1px solid $ui-black-transparent-default;
+    border-bottom: 1px solid $ui-edge-default;
     text-align: center;
     padding: 3px;
     font-size: 0.75rem;
@@ -119,7 +119,7 @@
     color: white;
     margin: 0 3px;
     border-radius: calc($space / 2);
-    border: 1px solid $ui-black-transparent-default;
+    border: 1px solid $ui-edge-default;
     flex-grow: 1;
     height: 22px;
 }
@@ -132,7 +132,7 @@
     padding: 3px;
     font-size: 0.75rem;
     font-weight: bold;
-    border-top: 1px solid $ui-black-transparent-default;
+    border-top: 1px solid $ui-edge-default;
     color: $text-primary-light; /* tw: do not look different in dark mode */
 }
 
