@@ -2,10 +2,7 @@ import classNames from 'classnames';
 import omit from 'lodash.omit';
 import PropTypes from 'prop-types';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Draggable from "react-draggable";
-import {ContextMenuTrigger} from 'react-contextmenu';
-import {BorderedMenuItem, ContextMenu, DangerousMenuItem, MenuItem} from '../context-menu/context-menu.jsx';
 import {defineMessages, FormattedMessage, injectIntl, intlShape} from 'react-intl';
 import {connect} from 'react-redux';
 import MediaQuery from 'react-responsive';
@@ -50,13 +47,10 @@ import StageResizeHandle from '../stage-resize-handle/stage-resize-handle.jsx';
 import {isRendererSupported, isBrowserSupported} from '../../lib/tw-environment-support-prober';
 
 import styles from './gui.css';
-import plusIcon from './add-tab.svg';
-import addExtensionIcon from './icon--extensions.svg';
 import codeIcon from './icon--code.svg';
 import costumesIcon from './icon--costumes.svg';
 import soundsIcon from './icon--sounds.svg';
 import variablesIcon from './icon--variables.svg';
-import filesIcon from './icon--files.svg';
 
 const urlParams = new URLSearchParams(location.search);
 
@@ -80,16 +74,6 @@ const getFullscreenBackgroundColor = () => {
         return '#111';
     }
     return 'white';
-};
-
-const safeJSONParse = (json, defaul, mustBeArray) => {
-    try {
-        const parsed = JSON.parse(json);
-        if (mustBeArray && !Array.isArray(parsed)) throw 'Not array';
-        return parsed;
-    } catch {
-        return defaul;
-    }
 };
 
 const fullscreenBackgroundColor = getFullscreenBackgroundColor();
@@ -193,183 +177,85 @@ const GUIComponent = props => {
         tabSelected: classNames(tabStyles.reactTabsTabSelected, styles.isSelected)
     };
 
-    // We can't move this into it's own component or it'll break the selected tab styles & disable switching to the code tab
-    // Moving the whole TabList element will also break the code panel from resizing properly
-    const getTabOrder = () => {
-        const tabOrderStr = localStorage.getItem('pm:taborder') || '["code", "costume", "sound"]';
-        const tabOrder = safeJSONParse(tabOrderStr, [], true);
-
-        return tabOrder;
-    };
-    const tabOrder = getTabOrder();
-    
-    const ContextMenuWrapTab = ({ children, ...props }) => {
-        const {tabId} = props;
-        const disabled = tabId === 'code';
-
-        return (<><ContextMenuTrigger disable={disabled} id={`remove-editor-tab-${tabId}`}>
-                {children}
-            </ContextMenuTrigger>
-            {ReactDOM.createPortal(<ContextMenu id={`remove-editor-tab-${tabId}`}>
-                <DangerousMenuItem onClick={() => removeTabFromEditor(tabId)}>
-                    <FormattedMessage
-                        defaultMessage="delete"
-                        description="Menu item to delete in the right click menu"
-                        id="gui.spriteSelectorItem.contextMenuDelete"
-                    />
-                </DangerousMenuItem>
-            </ContextMenu>, document.body)}
-        </>);
-    };
-
-    // currently each tab can decide whether or not its hidden, remove this once rearranging tabs is supported
-    const codeTab = (<Tab className={classNames(tabClassNames.tab, tabOrder.includes('code') ? null : styles.tabDisabled)}>
-            <ContextMenuWrapTab tabId="code">
-                <img
-                    draggable={false}
-                    src={codeIcon}
+    // PMDESKTOP_TABS: the Code, Costumes, Sounds and Variables tabs are always there (no "+" button,
+    // no right-click "delete"). An extension that adds a tab of its own (Scenes) puts it after them.
+    const organizedTabs = [
+        <Tab
+            className={tabClassNames.tab}
+            key="code"
+        >
+            <img
+                draggable={false}
+                src={codeIcon}
+            />
+            <span className={styles.tabLabel}>
+                <FormattedMessage
+                    defaultMessage="Code"
+                    description="Button to get to the code panel"
+                    id="gui.gui.codeTab"
                 />
-                <span className={styles.tabLabel}>
+            </span>
+        </Tab>,
+        <Tab
+            className={tabClassNames.tab}
+            key="costume"
+            onClick={onActivateCostumesTab}
+        >
+            <img
+                draggable={false}
+                src={costumesIcon}
+            />
+            <span className={styles.tabLabel}>
+                {targetIsStage ? (
                     <FormattedMessage
-                        defaultMessage="Code"
-                        description="Button to get to the code panel"
-                        id="gui.gui.codeTab"
+                        defaultMessage="Backdrops"
+                        description="Button to get to the backdrops panel"
+                        id="gui.gui.backdropsTab"
                     />
-                </span>
-            </ContextMenuWrapTab>
-        </Tab>);
-    const costumesTab = (<Tab className={classNames(tabClassNames.tab, tabOrder.includes('costume') ? null : styles.tabDisabled)} onClick={onActivateCostumesTab}>
-            <ContextMenuWrapTab tabId="costume">
-                <img
-                    draggable={false}
-                    src={costumesIcon}
-                />
-                <span className={styles.tabLabel}>
-                    {targetIsStage ? (
-                        <FormattedMessage
-                            defaultMessage="Backdrops"
-                            description="Button to get to the backdrops panel"
-                            id="gui.gui.backdropsTab"
-                        />
-                    ) : (
-                        <FormattedMessage
-                            defaultMessage="Costumes"
-                            description="Button to get to the costumes panel"
-                            id="gui.gui.costumesTab"
-                        />
-                    )}
-                </span>
-            </ContextMenuWrapTab>
-        </Tab>);
-    const soundsTab = (<Tab className={classNames(tabClassNames.tab, tabOrder.includes('sound') ? null : styles.tabDisabled)} onClick={onActivateSoundsTab}>
-            <ContextMenuWrapTab tabId="sound">
-                <img
-                    draggable={false}
-                    src={soundsIcon}
-                />
-                <span className={styles.tabLabel}>
+                ) : (
                     <FormattedMessage
-                        defaultMessage="Sounds"
-                        description="Button to get to the sounds panel"
-                        id="gui.gui.soundsTab"
+                        defaultMessage="Costumes"
+                        description="Button to get to the costumes panel"
+                        id="gui.gui.costumesTab"
                     />
-                </span>
-            </ContextMenuWrapTab>
-        </Tab>);
-    const variablesTab = (<Tab className={classNames(tabClassNames.tab, tabOrder.includes('variable') ? null : styles.tabDisabled)} onClick={onActivateVariablesTab}>
-            <ContextMenuWrapTab tabId="variable">
-                <img
-                    draggable={false}
-                    src={variablesIcon}
+                )}
+            </span>
+        </Tab>,
+        <Tab
+            className={tabClassNames.tab}
+            key="sound"
+            onClick={onActivateSoundsTab}
+        >
+            <img
+                draggable={false}
+                src={soundsIcon}
+            />
+            <span className={styles.tabLabel}>
+                <FormattedMessage
+                    defaultMessage="Sounds"
+                    description="Button to get to the sounds panel"
+                    id="gui.gui.soundsTab"
                 />
-                <span className={styles.tabLabel}>
-                    <FormattedMessage
-                        defaultMessage="Variables"
-                        description="Button to get to the variables panel"
-                        id="pm.gui.variablesTab"
-                    />
-                </span>
-            </ContextMenuWrapTab>
-        </Tab>);
-    const filesTab = (<Tab className={classNames(tabClassNames.tab, tabOrder.includes('file') ? null : styles.tabDisabled)} onClick={onActivateFilesTab}>
-            <ContextMenuWrapTab tabId="file">
-                <img
-                    draggable={false}
-                    src={filesIcon}
+            </span>
+        </Tab>,
+        <Tab
+            className={tabClassNames.tab}
+            key="variable"
+            onClick={onActivateVariablesTab}
+        >
+            <img
+                draggable={false}
+                src={variablesIcon}
+            />
+            <span className={styles.tabLabel}>
+                <FormattedMessage
+                    defaultMessage="Variables"
+                    description="Button to get to the variables panel"
+                    id="pm.gui.variablesTab"
                 />
-                <span className={styles.tabLabel}>
-                    <FormattedMessage
-                        defaultMessage="Files"
-                        description="Button to get to the files panel"
-                        id="pm.gui.filesTab"
-                    />
-                </span>
-            </ContextMenuWrapTab>
-        </Tab>);
-
-    const tabPairs = {
-        code: codeTab,
-        costume: costumesTab,
-        sound: soundsTab,
-        variable: variablesTab,
-        // file: filesTab,
-    };
-
-    // For now, rearranging tabs is not supported
-    const organizedTabs = Object.values(tabPairs);
-    // const organizedTabs = (() => {
-    //     const enabledTabs = [];
-    //     // Either add in rearranged order
-    //     // for (const tabId of tabOrder) {
-    //     //     enabledTabs.push(tabPairs[tabId] || codeTab)
-    //     // }
-    //     // or we can add tabs in order of table inclusion
-    //     // for (const key in tabPairs) {
-    //     //     const tab = tabPairs[key];
-    //     //     if (tabOrder.includes(key)) {
-    //     //         enabledTabs.push(tab);
-    //     //     }
-    //     // }
-
-    //     return enabledTabs;
-    // })();
-    const addTabButtonDisabled = tabOrder.length >= Object.keys(tabPairs).length;
-
-    const addTabToEditor = (tabId) => {
-        const tabOrder = getTabOrder();
-        tabOrder.push(tabId);
-        localStorage.setItem('pm:taborder', JSON.stringify(tabOrder));
-
-        const tabKeys = Object.keys(tabPairs);
-        const tabIndex = tabKeys.indexOf(tabId);
-        if (tabIndex === -1) {
-            return onActivateTab(0);
-        }
-
-        onActivateTab(tabIndex);
-    };
-    const removeTabFromEditor = (tabId) => {
-        setTimeout(() => { // sometimes clicking delete will switch to the deleted tab
-            const tabOrder = getTabOrder();
-            const idx = tabOrder.indexOf(tabId);
-            if (idx === -1) return;
-    
-            tabOrder.splice(idx, 1);
-            localStorage.setItem('pm:taborder', JSON.stringify(tabOrder));
-
-            if (tabId !== 'code') {
-                return onActivateTab(0);
-            }
-
-            const tabKeys = Object.keys(tabPairs);
-            const firstTab = tabOrder[0];
-            const firstTabIdx = tabKeys.indexOf(firstTab);
-            
-            if (firstTabIdx !== -1) {
-                onActivateTab(firstTabIdx);
-            }
-        });
-    };
+            </span>
+        </Tab>
+    ];
 
     const minWidth = layout.fullSizeMinWidth + Math.max(0, customStageSize.width - layout.referenceWidth);
     return (<MediaQuery minWidth={minWidth}>{isFullSize => {
@@ -519,86 +405,6 @@ const GUIComponent = props => {
                                 <TabList className={tabClassNames.tabList}>
                                     {organizedTabs}
 
-                                    <ContextMenuTrigger
-                                        disable={addTabButtonDisabled}
-                                        holdToDisplay={0}
-                                        id={`add-editor-tab-button`}
-                                    >
-                                        <button className={classNames(styles.addTabButton, addTabButtonDisabled ? styles.addTabButtonDisabled : null)}>
-                                            <img
-                                                draggable={false}
-                                                src={plusIcon}
-                                            />
-                                        </button>
-                                    </ContextMenuTrigger>
-                                    
-                                    <ContextMenu id={`add-editor-tab-button`}>
-                                        {!tabOrder.includes('code') && <MenuItem onClick={() => addTabToEditor('code')}>
-                                            <div className={styles.tabAdditionItem}>
-                                                <img
-                                                    draggable={false}
-                                                    src={codeIcon}
-                                                />
-                                                <FormattedMessage
-                                                    defaultMessage="Code"
-                                                    description="Button to get to the code panel"
-                                                    id="gui.gui.codeTab"
-                                                />
-                                            </div>
-                                        </MenuItem>}
-                                        {!tabOrder.includes('costume') && <MenuItem onClick={() => addTabToEditor('costume')}>
-                                            <div className={styles.tabAdditionItem}>
-                                                <img
-                                                    draggable={false}
-                                                    src={costumesIcon}
-                                                />
-                                                <FormattedMessage
-                                                    defaultMessage="Costumes"
-                                                    description="Button to get to the costumes panel"
-                                                    id="gui.gui.costumesTab"
-                                                />
-                                            </div>
-                                        </MenuItem>}
-                                        {!tabOrder.includes('sound') && <MenuItem onClick={() => addTabToEditor('sound')}>
-                                            <div className={styles.tabAdditionItem}>
-                                                <img
-                                                    draggable={false}
-                                                    src={soundsIcon}
-                                                />
-                                                <FormattedMessage
-                                                    defaultMessage="Sounds"
-                                                    description="Button to get to the sounds panel"
-                                                    id="gui.gui.soundsTab"
-                                                />
-                                            </div>
-                                        </MenuItem>}
-                                        {!tabOrder.includes('variable') && <MenuItem onClick={() => addTabToEditor('variable')}>
-                                            <div className={styles.tabAdditionItem}>
-                                                <img
-                                                    draggable={false}
-                                                    src={variablesIcon}
-                                                />
-                                                <FormattedMessage
-                                                    defaultMessage="Variables"
-                                                    description="Button to get to the variables panel"
-                                                    id="pm.gui.variablesTab"
-                                                />
-                                            </div>
-                                        </MenuItem>}
-                                        {/* {!tabOrder.includes('file') && <MenuItem onClick={() => addTabToEditor('file')}>
-                                            <div className={styles.tabAdditionItem}>
-                                                <img
-                                                    draggable={false}
-                                                    src={filesIcon}
-                                                />
-                                                <FormattedMessage
-                                                    defaultMessage="Files"
-                                                    description="Button to get to the files panel"
-                                                    id="pm.gui.filesTab"
-                                                />
-                                            </div>
-                                        </MenuItem>} */}
-                                    </ContextMenu>
 
                                     <div id="sa_addons_after_add_tab_anchor" />
                                 </TabList>
@@ -621,11 +427,7 @@ const GUIComponent = props => {
                                             title={intl.formatMessage(messages.addExtension)}
                                             onClick={onExtensionButtonClick}
                                         >
-                                            <img
-                                                className={styles.extensionButtonIcon}
-                                                draggable={false}
-                                                src={addExtensionIcon}
-                                            />
+                                            ADD
                                         </button>
                                     </Box>
                                     <Box className={styles.watermark}>

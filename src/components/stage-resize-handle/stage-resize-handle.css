@@ -1,43 +1,37 @@
 @import "../../css/units.css";
 @import "../../css/colors.css";
 
-/* Sits in the gutter on the left edge of the stage column, full height. */
+/* A thin line on the left edge of the stage column, dragged like the edge of a window.
+   The area that reacts to the mouse is 6 px wide (3 px on each side of the line); the
+   column itself has no gutter for it. */
 .handle {
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 0;
-    width: $space;
+    left: -3px;
+    width: 6px;
     z-index: 10;
     cursor: ew-resize;
     touch-action: none;
     user-select: none;
-
-    /* the grip sits at the bottom-left corner */
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
 }
 
 [dir="rtl"] .handle {
     left: auto;
-    right: 0;
+    right: -3px;
 }
 
-.handle:hover,
-.handle.active {
+.handle::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 2.5px;
+    width: 1px;
     background: $ui-black-transparent;
 }
 
-.grip {
-    width: 4px;
-    height: 36px;
-    margin-bottom: 12px;
-    border-radius: 2px;
-    background: rgba(128, 128, 128, 0.6);
-}
-
-.handle:hover .grip,
-.handle.active .grip {
-    background: rgba(128, 128, 128, 0.95);
+.handle:hover::before,
+.handle.active::before {
+    background: $motion-primary;
 }

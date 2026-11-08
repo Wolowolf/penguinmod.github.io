@@ -105,9 +105,7 @@ class StageResizeHandle extends React.Component {
                 onPointerDown={this.handlePointerDown}
                 onPointerMove={this.handlePointerMove}
                 onPointerUp={this.handlePointerUp}
-            >
-                <div className={styles.grip} />
-            </div>
+            />
         );
     }
 }

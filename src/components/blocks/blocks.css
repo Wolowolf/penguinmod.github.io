@@ -44,7 +44,8 @@
     border-right: 1px solid $ui-black-transparent;
     border-bottom: 1px solid $ui-black-transparent;
     box-sizing: content-box;
-    height: calc(100% - 3.25rem) !important;
+    /* PMDESKTOP_ADD_BUTTON: full height; the small ADD box (gui.css) sits over its bottom */
+    height: calc(100% - 1px) !important;
     overflow-x: hidden;
 
     /*
@@ -105,10 +106,17 @@
     width: 4.5rem;
     box-sizing: border-box;
     padding: 2px;
+    /* room for the ADD box at the bottom, so a scrolled menu never hides a category behind it */
+    padding-bottom: calc(1.2rem + 4px);
 }
 
+/* The gap under each box is a transparent border, not a margin: the browser rounds border
+   widths down to whole screen pixels, so every gap is equally thick. A 2px margin is 2.8
+   screen pixels at 140% Windows scaling and was drawn as 2 or 3 depending on where the box
+   fell. 2.15px gives 3 screen pixels at 140% and 150%, 2 at 100% and 125%. */
 .blocks :global(.scratchCategoryMenuRow) {
-    margin: 0 0 2px;
+    margin: 0;
+    border-bottom: 2.15px solid transparent;
 }
 
 .blocks :global(.scratchCategoryMenuItem) {
