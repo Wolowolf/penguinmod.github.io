@@ -38,6 +38,8 @@ class Controls extends React.Component {
     }
     handlePauseButtonClick (e) {
         e.preventDefault();
+        // Desktop fork: nothing to pause while no script runs (the button is dimmed then)
+        if (!this.props.paused && !(this.props.projectRunning && this.props.isStarted)) return;
         if (!this.props.paused) {
             this.props.vm.pause();
             return;

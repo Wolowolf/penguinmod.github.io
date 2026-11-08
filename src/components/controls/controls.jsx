@@ -49,17 +49,18 @@ const Controls = function (props) {
             {...componentProps}
         >
             <GreenFlag
-                active={active}
+                active={active && !paused}
                 title={intl.formatMessage(messages.goTitle)}
                 onClick={onGreenFlagClick}
             />
             <PauseButton
+                disabled={!active && !paused}
                 paused={paused}
                 title={intl.formatMessage(messages.pauseTitle)}
                 onClick={onPauseButtonClick}
             />
             <StopAll
-                active={active}
+                active={active || paused}
                 title={intl.formatMessage(messages.stopTitle)}
                 onClick={onStopAllClick}
             />

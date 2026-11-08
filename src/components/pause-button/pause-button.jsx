@@ -8,6 +8,7 @@ import styles from './pause-button.css';
 
 const PauseButtonComponent = function (props) {
     const {
+        disabled,
         paused,
         className,
         onClick,
@@ -18,8 +19,13 @@ const PauseButtonComponent = function (props) {
         <img
             className={classNames(
                 className,
-                styles.pauseBtn
+                styles.pauseBtn,
+                {
+                    [styles.isActive]: paused,
+                    [styles.isDisabled]: disabled
+                }
             )}
+            aria-disabled={disabled}
             draggable={false}
             src={paused ? playIcon : pauseIcon}
             title={title}
@@ -31,12 +37,14 @@ const PauseButtonComponent = function (props) {
     );
 };
 PauseButtonComponent.propTypes = {
+    disabled: PropTypes.bool,
     paused: PropTypes.bool,
     className: PropTypes.string,
     onClick: PropTypes.func.isRequired,
     title: PropTypes.string
 };
 PauseButtonComponent.defaultProps = {
+    disabled: false,
     paused: false,
     title: 'Pause'
 };

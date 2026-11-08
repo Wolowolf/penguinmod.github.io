@@ -9,7 +9,7 @@
     cursor: pointer;
 }
 
-.stop-all:hover {
+.stop-all.is-active:hover {
     background-color: $motion-light-transparent;
 }
 

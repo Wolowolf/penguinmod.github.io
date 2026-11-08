@@ -13,3 +13,11 @@
 .pause-btn:hover {
     background-color: $motion-light-transparent;
 }
+.pause-btn.is-active {
+    background-color: $motion-transparent;
+}
+.pause-btn.is-disabled {
+    opacity: 0.5;
+    cursor: default;
+    background-color: transparent;
+}
