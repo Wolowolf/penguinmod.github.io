@@ -302,6 +302,9 @@ export default async function({ addon }) {
     if (optLibrary) {
       const collapser = document.querySelector(`button[class^="library_library-filter-collapse"]`);
       const filterDiv = document.querySelector(`div[class^="library_library-filter-bar"]`);
+      // Desktop fork (section 213): this app's libraries have no filter bar; without it this threw on every library
+      // opened and the library tiles missed their effect below
+      if (collapser && filterDiv) {
       collapser.style.transform = "rotateY(180deg)";
       collapser.addEventListener("click", (e) => {
         e.preventDefault();
@@ -328,6 +331,7 @@ export default async function({ addon }) {
 
         e.stopPropagation();
       });
+      }
 
       if (optLibrary === "extensionLibrary") {
         classMapper.set("custom-ext-hover", [document.querySelector(`span[class*="button_outlined-button"][class*="tag-button_tag-button"]`)]);
@@ -357,7 +361,8 @@ export default async function({ addon }) {
         ...document.querySelectorAll(`button[class*="sound-editor_round-button"]`),
         ...document.querySelectorAll(`span[class*="tool-select-base_mod-tool-select"]`),
         /* Project Controls */
-        ...document.querySelectorAll(`div[class^="controls_controls-container"] img`),
+        // Desktop fork (section 213): the flag, pause and stop buttons are inline svg shapes since section 209
+        ...document.querySelectorAll(`div[class^="controls_controls-container"] img, div[class^="controls_controls-container"] svg`),
         /* Blockly Zoom */
         ...document.querySelectorAll(`g[class="blocklyZoom"] image`),
       ]);
