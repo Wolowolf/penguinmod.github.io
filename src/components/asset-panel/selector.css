@@ -8,7 +8,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background: $ui-tertiary;
+    /* desktop (section 218): the costume / sound list is a panel you take things from */
+    background: $ui-secondary;
 }
 
 .new-buttons {
@@ -35,13 +36,13 @@ $fade-out-distance: 100px;
     bottom: 0;
     left: 0;
     right:0;
-    background: linear-gradient(transparent, $ui-primary);
+    background: linear-gradient(transparent, $ui-secondary);
     height: $fade-out-distance;
     width: 100%;
     pointer-events: none;
 }
 [theme="dark"] .new-buttons:before {
-    background: linear-gradient(transparent, $ui-primary);
+    background: linear-gradient(transparent, $ui-secondary);
 }
 
 .new-buttons > button + button {
@@ -98,6 +99,6 @@ $fade-out-distance: 100px;
 
 
 .list-item.placeholder {
-    background: white;
+    background: $ui-surface;
     filter: opacity(15%) brightness(0%);
 }

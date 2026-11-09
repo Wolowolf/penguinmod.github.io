@@ -1,32 +1,49 @@
 // Desktop fork (section 217): the one list of colours the light and dark themes are made of.
-// Every UI colour that differs between the themes (and the accent) is a CSS variable from here;
+// Every UI colour of the themes is a CSS variable from here (7 chosen, the rest worked out from them);
 // the "Theme colors" addon (src/addons/addons/theme-colors) overrides them per theme.
 // Light values are on :root, dark values on :root when <body theme="dark">, so every page that
 // sets the body's theme attribute (editor, addon settings, credits) gets them.
 
 import themeUsesCSS from '!raw-loader!./pm-theme-uses.css';
 
+// Grouped by what each area is used for (Session 238):
+// background = the app's frame; panels = where you take things from (block palette, category menu,
+// sprite / costume / sound lists); workspace = where things come together and the focus is (code area,
+// costume editor around the drawing, sound editor waveform); raised = what sits on top (buttons, inputs,
+// tiles, menus, dialogs); lines = borders, scrollbars, grid; text; accent = selection, links, focus and
+// the menu bar. In dark mode the workspace is darker than the panels, in light mode lighter: both put
+// the most contrast with the text where the focus is.
 const THEME_COLORS = [
     {id: 'background', variable: '--ui-primary', name: 'Background', light: '#e5f0ff', dark: '#111111'},
-    {id: 'panel', variable: '--ui-secondary', name: 'Panels', light: '#e9f1fc', dark: '#1e1e1e'},
-    {id: 'hover', variable: '--ui-tertiary', name: 'Hover and selected', light: '#d9e3f2', dark: '#2e2e2e'},
-    {id: 'surface', variable: '--ui-surface', name: 'Buttons, inputs and tiles', light: '#ffffff', dark: '#1e1e1e'},
-    {id: 'edge', variable: '--ui-edge', name: 'Borders and scrollbars', light: '#c6cdd6', dark: '#404040'},
-    {id: 'text', variable: '--text-primary', name: 'Text', light: '#575e75', dark: '#eeeeee'},
-    {id: 'text-dim', variable: '--text-secondary', name: 'Dim text and inactive icons', light: '#81869a', dark: '#aaaaaa'},
-    {id: 'code-area', variable: '--ui-code-area', name: 'Code area', light: '#f9f9f9', dark: '#1e1e1e'},
-    {id: 'palette', variable: '--ui-palette', name: 'Block palette and category menu', light: '#f9f9f9', dark: '#111111'},
-    {id: 'menu-bar', variable: '--ui-menu-bar', name: 'Menu bar and window headers', light: '#00c3ff', dark: '#009ccc'},
-    {id: 'accent', variable: '--ui-accent', name: 'Accent (selection, links, focus)', light: '#00c3ff', dark: '#00c3ff'}
+    {id: 'panel', variable: '--ui-secondary', name: 'Panels (block palette, category menu, sprite, costume and sound lists)', light: '#e9f1fc', dark: '#1e1e1e'},
+    {id: 'workspace', variable: '--ui-workspace', name: 'Workspace (code area, costume and sound editing)', light: '#f9f9f9', dark: '#181818'},
+    {id: 'surface', variable: '--ui-surface', name: 'Buttons, inputs, tiles, menus and dialogs', light: '#ffffff', dark: '#262626'},
+    {id: 'edge', variable: '--ui-edge', name: 'Borders, scrollbars and grid', light: '#c6cdd6', dark: '#404040'},
+    {id: 'text', variable: '--text-primary', name: 'Text (dim text and inactive icons follow it)', light: '#575e75', dark: '#eeeeee'},
+    {id: 'accent', variable: '--ui-accent', name: 'Accent and menu bar (selection, links, focus)', light: '#00c3ff', dark: '#00c3ff'}
 ];
 
-// colours made from the ones above (not chosen in the addon)
-const DERIVED_LIGHT = {
+// colours worked out from the ones above (not chosen in the addon)
+const DERIVED_BOTH = {
+    // hover and selected: a light tint of the text over what is hovered
+    '--ui-tertiary': 'color-mix(in srgb, var(--text-primary) 10%, var(--ui-surface))',
+    // dim text and inactive icons: weaker text
+    '--text-secondary': 'color-mix(in srgb, var(--text-primary) 75%, var(--ui-surface))',
+    // the block palette and category menu are panels
+    '--ui-palette': 'var(--ui-secondary)',
+    // the costume editor (scratch-paint) reads these
+    '--paint-text-primary': 'var(--text-primary)',
+    '--paint-ui-pane-border': 'var(--ui-edge)',
+    '--paint-form-border': 'var(--ui-edge)'
+};
+const DERIVED_LIGHT = Object.assign({}, DERIVED_BOTH, {
+    '--ui-menu-bar': 'var(--ui-accent)',
     '--ui-modal-overlay': 'hsl(from var(--ui-accent) h s calc(l + 15) / 0.9)'
-};
-const DERIVED_DARK = {
+});
+const DERIVED_DARK = Object.assign({}, DERIVED_BOTH, {
+    '--ui-menu-bar': 'hsl(from var(--ui-accent) h s calc(l * 0.8))',
     '--ui-modal-overlay': 'color-mix(in srgb, var(--ui-tertiary) 67%, transparent)'
-};
+});
 
 const LIGHT_SELECTOR = ':root';
 const DARK_SELECTOR = ':root:has(> body[theme="dark"])';

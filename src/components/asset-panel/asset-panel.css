@@ -5,12 +5,10 @@
     display: flex;
     flex-grow: 1;
     border: 1px solid $ui-edge;
-    background: white;
+    /* desktop (section 218): the costume / sound editor is where you build */
+    background: $ui-workspace;
     font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif);
     font-size: 0.85rem;
-}
-[theme="dark"] .wrapper {
-    background: $ui-primary;
 }
 
 [dir="ltr"] .wrapper {

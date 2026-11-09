@@ -9,6 +9,8 @@ export default async function ({ addon }) {
 
   const apply = () => {
     stylesheet.textContent = addon.self.disabled ? "" : themeColorsCSS((id) => addon.settings.get(id));
+    // parts drawn on a canvas (the costume editor) read the colours again
+    document.dispatchEvent(new CustomEvent("pm-theme-colors-changed"));
   };
   apply();
   addon.settings.addEventListener("change", apply);

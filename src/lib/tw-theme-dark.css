@@ -6,10 +6,6 @@
     color: var(--text-primary);
     color-scheme: dark;
     --ui-black-transparent: rgba(255, 255, 255, 0.15);
-    /* scratch-paint */
-    --paint-ui-pane-border: var(--ui-edge);
-    --paint-text-primary: var(--text-primary);
-    --paint-form-border: var(--ui-edge);
 }
 
 /* Blockly */

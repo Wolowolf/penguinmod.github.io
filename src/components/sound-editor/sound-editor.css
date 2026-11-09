@@ -64,7 +64,8 @@
 
     position: relative;
 
-    background: hsla(300, 53%, 60%, 0.15);
+    /* desktop (section 218): the workspace colour with the Sound category's tint */
+    background: color-mix(in srgb, hsl(300, 53%, 60%) 15%, $ui-workspace);
     border: 1px solid $ui-edge;
     border-radius: 5px;
 
@@ -78,7 +79,7 @@ $border-radius: 0.25rem;
     height: 2rem;
     padding: 0.35rem;
     outline: none;
-    background: white;
+    background: $ui-surface;
     border-radius: $border-radius;
     border: 1px solid $ui-edge;
     cursor: pointer;
@@ -86,9 +87,6 @@ $border-radius: 0.25rem;
     transition: 0.2s;
     user-select: none;
     margin: 0px;
-}
-[theme="dark"] .button {
-    background-color: $ui-primary;
 }
 
 .button > img {

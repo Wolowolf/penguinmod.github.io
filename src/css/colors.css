@@ -7,7 +7,7 @@ $ui-modal-overlay: var(--ui-modal-overlay, hsla(194, 100%, 65%, 0.9)); /* set by
 
 $ui-white: hsla(0, 100%, 100%, 1); /* #FFFFFF */
 $ui-surface: var(--ui-surface, #ffffff); /* buttons, inputs and tiles */
-$ui-code-area: var(--ui-code-area, #f9f9f9);
+$ui-workspace: var(--ui-workspace, #f9f9f9);
 $ui-palette: var(--ui-palette, #f9f9f9);
 $ui-menu-bar: var(--ui-menu-bar, #00c3ff);
 $ui-accent: var(--ui-accent, #00c3ff);

@@ -4,14 +4,11 @@
 .sprite-info {
     padding: 0.75rem;
     font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif);
-    background-color: white;
+    background-color: $ui-secondary; /* desktop (section 218): part of the sprite panel */
     color: $text-primary;
     border-top-left-radius: $space;
     border-top-right-radius: $space;
     border-bottom: 1px solid $ui-edge;
-}
-[theme="dark"] .sprite-info {
-    background-color: $ui-primary;
 }
 
 .row {

@@ -4,7 +4,7 @@ const manifest = {
   "editorOnly": true,
   "noTranslations": true,
   "name": "Theme colors",
-  "description": "Changes the colors the light and dark themes are made of: backgrounds, panels, buttons, borders and scrollbars, text, the code area, the block palette, the menu bar and the accent. Every part of the editor uses one of these colors. Turn on a theme to show its colors; \"Reset\" on a color goes back to the theme's own.",
+  "description": "Changes the 7 colors the light and dark themes are made of, grouped by what each area is used for: the background, the panels you take things from, the workspace where you build, buttons and tiles, lines, text and the accent. Hover colors, dim text and the menu bar are made from them. Turn on a theme to show its colors.",
   "userscripts": [
     {
       "url": "userscript.js"
@@ -20,7 +20,7 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "Light: Background",
+      "name": "Background",
       "id": "light-background",
       "type": "color",
       "default": "#e5f0ff",
@@ -32,7 +32,7 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "Light: Panels",
+      "name": "Panels (block palette, category menu, sprite, costume and sound lists)",
       "id": "light-panel",
       "type": "color",
       "default": "#e9f1fc",
@@ -44,10 +44,10 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "Light: Hover and selected",
-      "id": "light-hover",
+      "name": "Workspace (code area, costume and sound editing)",
+      "id": "light-workspace",
       "type": "color",
-      "default": "#d9e3f2",
+      "default": "#f9f9f9",
       "if": {
         "settings": {
           "light": true
@@ -56,7 +56,7 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "Light: Buttons, inputs and tiles",
+      "name": "Buttons, inputs, tiles, menus and dialogs",
       "id": "light-surface",
       "type": "color",
       "default": "#ffffff",
@@ -68,7 +68,7 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "Light: Borders and scrollbars",
+      "name": "Borders, scrollbars and grid",
       "id": "light-edge",
       "type": "color",
       "default": "#c6cdd6",
@@ -80,7 +80,7 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "Light: Text",
+      "name": "Text (dim text and inactive icons follow it)",
       "id": "light-text",
       "type": "color",
       "default": "#575e75",
@@ -92,55 +92,7 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "Light: Dim text and inactive icons",
-      "id": "light-text-dim",
-      "type": "color",
-      "default": "#81869a",
-      "if": {
-        "settings": {
-          "light": true
-        }
-      }
-    },
-    {
-      "dynamic": true,
-      "name": "Light: Code area",
-      "id": "light-code-area",
-      "type": "color",
-      "default": "#f9f9f9",
-      "if": {
-        "settings": {
-          "light": true
-        }
-      }
-    },
-    {
-      "dynamic": true,
-      "name": "Light: Block palette and category menu",
-      "id": "light-palette",
-      "type": "color",
-      "default": "#f9f9f9",
-      "if": {
-        "settings": {
-          "light": true
-        }
-      }
-    },
-    {
-      "dynamic": true,
-      "name": "Light: Menu bar and window headers",
-      "id": "light-menu-bar",
-      "type": "color",
-      "default": "#00c3ff",
-      "if": {
-        "settings": {
-          "light": true
-        }
-      }
-    },
-    {
-      "dynamic": true,
-      "name": "Light: Accent (selection, links, focus)",
+      "name": "Accent and menu bar (selection, links, focus)",
       "id": "light-accent",
       "type": "color",
       "default": "#00c3ff",
@@ -159,7 +111,7 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "Dark: Background",
+      "name": "Background",
       "id": "dark-background",
       "type": "color",
       "default": "#111111",
@@ -171,7 +123,7 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "Dark: Panels",
+      "name": "Panels (block palette, category menu, sprite, costume and sound lists)",
       "id": "dark-panel",
       "type": "color",
       "default": "#1e1e1e",
@@ -183,10 +135,10 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "Dark: Hover and selected",
-      "id": "dark-hover",
+      "name": "Workspace (code area, costume and sound editing)",
+      "id": "dark-workspace",
       "type": "color",
-      "default": "#2e2e2e",
+      "default": "#181818",
       "if": {
         "settings": {
           "dark": true
@@ -195,10 +147,10 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "Dark: Buttons, inputs and tiles",
+      "name": "Buttons, inputs, tiles, menus and dialogs",
       "id": "dark-surface",
       "type": "color",
-      "default": "#1e1e1e",
+      "default": "#262626",
       "if": {
         "settings": {
           "dark": true
@@ -207,7 +159,7 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "Dark: Borders and scrollbars",
+      "name": "Borders, scrollbars and grid",
       "id": "dark-edge",
       "type": "color",
       "default": "#404040",
@@ -219,7 +171,7 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "Dark: Text",
+      "name": "Text (dim text and inactive icons follow it)",
       "id": "dark-text",
       "type": "color",
       "default": "#eeeeee",
@@ -231,55 +183,7 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "Dark: Dim text and inactive icons",
-      "id": "dark-text-dim",
-      "type": "color",
-      "default": "#aaaaaa",
-      "if": {
-        "settings": {
-          "dark": true
-        }
-      }
-    },
-    {
-      "dynamic": true,
-      "name": "Dark: Code area",
-      "id": "dark-code-area",
-      "type": "color",
-      "default": "#1e1e1e",
-      "if": {
-        "settings": {
-          "dark": true
-        }
-      }
-    },
-    {
-      "dynamic": true,
-      "name": "Dark: Block palette and category menu",
-      "id": "dark-palette",
-      "type": "color",
-      "default": "#111111",
-      "if": {
-        "settings": {
-          "dark": true
-        }
-      }
-    },
-    {
-      "dynamic": true,
-      "name": "Dark: Menu bar and window headers",
-      "id": "dark-menu-bar",
-      "type": "color",
-      "default": "#009ccc",
-      "if": {
-        "settings": {
-          "dark": true
-        }
-      }
-    },
-    {
-      "dynamic": true,
-      "name": "Dark: Accent (selection, links, focus)",
+      "name": "Accent and menu bar (selection, links, focus)",
       "id": "dark-accent",
       "type": "color",
       "default": "#00c3ff",

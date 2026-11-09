@@ -2,9 +2,9 @@
    variables of pm-theme-colors.js in both themes. Put at the start of <body>, after Blockly's own
    styles in <head>, so these win. */
 
-/* code area */
+/* code area (workspace) */
 .blocklySvg {
-    background-color: var(--ui-code-area) !important;
+    background-color: var(--ui-workspace) !important;
 }
 [id^="blocklyGridPattern"] > line {
     stroke: var(--ui-edge);
@@ -16,6 +16,7 @@
 /* block palette and category menu */
 .blocklyFlyoutBackground {
     fill: var(--ui-palette);
+    fill-opacity: 1;
 }
 .blocklyToolboxDiv,
 .scratchCategoryMenu {
