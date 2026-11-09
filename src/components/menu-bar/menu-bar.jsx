@@ -24,7 +24,6 @@ import TurboMode from '../../containers/turbo-mode.jsx';
 import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 
 import FramerateChanger from '../../containers/tw-framerate-changer.jsx';
-import TWSaveStatus from './tw-save-status.jsx';
 
 import { openTipsLibrary, openSettingsModal, openRestorePointModal, openProfilerModal } from '../../reducers/modals';
 import { setPlayer } from '../../reducers/mode';
@@ -729,12 +728,7 @@ class MenuBar extends React.Component {
                     {/* PMDESKTOP_STAGE_PATCH: "See Project Page" and "Upload" buttons removed */}
                     {/* PMDESKTOP_STAGE_PATCH: "Back to Home" button removed */}
                 </div>
-
-                <div className={styles.accountInfoGroup}>
-                    <div className={styles.menuBarItem}>
-                        <TWSaveStatus />
-                    </div>
-                </div>
+                {/* PMDESKTOP: save status and its messages removed from the menu bar */}
             </Box>
         );
     }

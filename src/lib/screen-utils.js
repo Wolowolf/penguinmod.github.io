@@ -42,7 +42,7 @@ const STAGE_DIMENSION_DEFAULTS = {
     fullScreenSpacingBorderAdjustment: 12,
     // referencing css/units.css,
     // menuHeightAdjustment = $stage-menu-height
-    menuHeightAdjustment: 44
+    menuHeightAdjustment: 32
 };
 
 /**

@@ -80,7 +80,6 @@ const SpriteList = function (props) {
                             <ThrottledSpriteSelectorItem
                                 asset={sprite.costume && sprite.costume.asset}
                                 className={classNames(styles.sprite, {
-                                    [styles.spriteSelected]: sprite.id === selectedId,
                                     [styles.raised]: isRaised,
                                     [styles.receivedBlocks]: receivedBlocks
                                 })}
@@ -92,6 +91,7 @@ const SpriteList = function (props) {
                                 name={sprite.name}
                                 selected={sprite.id === selectedId}
                                 onClick={onSelectSprite}
+                                noDeleteButton
                                 onDeleteButtonClick={onDeleteSprite}
                                 onDuplicateButtonClick={onDuplicateSprite}
                                 onExportButtonClick={onExportSprite}

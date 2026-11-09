@@ -23,8 +23,6 @@ const GreenFlagComponent = function (props) {
             )}
             viewBox="0 0 20 20"
             onClick={onClick}
-            // tw: also fire click when opening context menu (right click on all systems and alt+click on chromebooks)
-            onContextMenu={onClick}
             {...componentProps}
         >
             <title>{title}</title>

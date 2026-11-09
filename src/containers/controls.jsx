@@ -17,18 +17,9 @@ class Controls extends React.Component {
     }
     handleGreenFlagClick (e) {
         e.preventDefault();
-        // tw: implement alt+click and right click to toggle FPS
-        if (e.shiftKey || e.altKey || e.type === 'contextmenu') {
-            if (e.shiftKey) {
-                this.props.vm.setTurboMode(!this.props.turbo);
-            }
-            if (e.altKey || e.type === 'contextmenu') {
-                if (this.props.framerate === 30) {
-                    this.props.vm.setFramerate(60);
-                } else {
-                    this.props.vm.setFramerate(30);
-                }
-            }
+        // tw: shift+click toggles turbo mode (desktop: no frame rate toggle on the flag)
+        if (e.shiftKey) {
+            this.props.vm.setTurboMode(!this.props.turbo);
         } else {
             if (!this.props.isStarted) {
                 this.props.vm.start();
@@ -77,7 +68,6 @@ Controls.propTypes = {
     isStarted: PropTypes.bool.isRequired,
     projectRunning: PropTypes.bool.isRequired,
     turbo: PropTypes.bool.isRequired,
-    framerate: PropTypes.number.isRequired,
     isSmall: PropTypes.bool,
     paused: PropTypes.bool,
     vm: PropTypes.instanceOf(VM)
@@ -86,7 +76,6 @@ Controls.propTypes = {
 const mapStateToProps = state => ({
     isStarted: state.scratchGui.vmStatus.started,
     projectRunning: state.scratchGui.vmStatus.running,
-    framerate: state.scratchGui.tw.framerate,
     turbo: state.scratchGui.vmStatus.turbo,
     paused: state.scratchGui.vmStatus.paused
 });

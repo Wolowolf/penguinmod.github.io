@@ -57,10 +57,11 @@
 }
 
 .tab-list {
+    position: relative;
     height: $stage-menu-height;
     width: 250px; /* Match width of the toolbox */
     display: flex;
-    align-items: flex-end;
+    align-items: stretch;
     flex-shrink: 0;
 
     font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif);
@@ -76,11 +77,12 @@
     flex-grow: 1;
     height: auto;
     margin-bottom: 0;
+    bottom: 0; /* react-tabs moves tabs 1px down */
 
     border-radius: 1rem 1rem 0 0;
     border: 1px solid $ui-edge;
 
-    padding: 0.125rem 0.3125rem;
+    padding: 0 0.3125rem;
     font-size: 0.75rem;
 
     background-color: $ui-tertiary;
@@ -136,9 +138,6 @@
 }
 
 .tab.is-selected {
-    height: auto;
-    padding-top: 0.2rem;
-    padding-bottom: 0.2rem;
     color: $motion-primary;
     background-color: $ui-white;
     z-index: 4; /* Make sure selected is always above */
@@ -378,4 +377,9 @@
 :global(*::-webkit-scrollbar-thumb),
 :global(*::-webkit-scrollbar-track) {
     border-radius: 0 !important;
+}
+/* the code area's scrollbars are SVG rectangles rounded by their rx / ry */
+:global(.blocklyScrollbarHandle) {
+    rx: 0 !important;
+    ry: 0 !important;
 }

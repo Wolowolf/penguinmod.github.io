@@ -16,34 +16,14 @@
 }
 
 .sprite-wrapper {
-    /*
-        Our goal is to fit sprites evenly in a row without leftover space.
-        Flexbox's `space between` property gets us close, but doesn't flow
-        well when the # of items per row > 1 and less than the max per row.
-
-        Solving by explicitly calc'ing the width of each sprite. Setting
-        `border-box` simplifies things, because content, padding and
-        border-width all are included in the width, leaving us only to subtract
-        the left + right margins.
-
-        @todo: make room for the scrollbar
-    */
+    /* desktop: tiles fill the grid cell, no gaps; square */
     box-sizing: border-box;
-    width: calc((100% / $sprites-per-row ) - $space);
-    max-width: 6rem;
-    min-width: 4rem;
-    min-height: 4rem; /* @todo: calc height same as width */
-    margin: calc($space / 2);
+    min-width: 0;
+    aspect-ratio: 1 / 1;
 }
 
 .sprite {
     height: 100%;
-}
-
-/* desktop: the selected tile has no translucent ring; it fills the ring's place instead */
-.sprite.sprite-selected {
-    margin: -4px;
-    height: calc(100% + 8px);
 }
 
 
@@ -65,14 +45,10 @@
 }
 
 .items-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-
-    padding-top: calc($space / 2);
-    padding-left: calc($space / 2);
-    padding-right: calc($space / 2);
-    padding-bottom: $space;
+    /* desktop: a gapless grid; tiles grow with the pane until one more fits in each row */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(4rem, 1fr));
+    padding: 0;
 
     overflow: hidden;
 }

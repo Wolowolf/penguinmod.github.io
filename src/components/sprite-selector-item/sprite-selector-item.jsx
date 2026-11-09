@@ -47,7 +47,7 @@ const SpriteSelectorItem = props => (
                 <div className={styles.spriteDetails}>{props.details}</div>
             ) : null}
         </div>
-        {(props.selected && props.onDeleteButtonClick) ? (
+        {(props.selected && props.onDeleteButtonClick && !props.noDeleteButton) ? (
             <DeleteButton
                 className={styles.deleteButton}
                 onClick={props.onDeleteButtonClick}
@@ -106,6 +106,7 @@ SpriteSelectorItem.propTypes = {
     number: PropTypes.number,
     onClick: PropTypes.func,
     onDeleteButtonClick: PropTypes.func,
+    noDeleteButton: PropTypes.bool,
     onDuplicateButtonClick: PropTypes.func,
     onExportButtonClick: PropTypes.func,
     onRenameButtonClick: PropTypes.func,
