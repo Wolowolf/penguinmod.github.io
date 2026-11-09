@@ -14,7 +14,7 @@
     height: 100%;
     overflow: auto;
     
-    background: white;
+    background: $ui-surface;
     border-top-right-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
     border: 1px solid $ui-edge;
@@ -99,5 +99,5 @@
     text-align: left;
 }
 [theme="dark"] .editor-container td {
-    border-color: #333;
+    border-color: $ui-edge;
 }

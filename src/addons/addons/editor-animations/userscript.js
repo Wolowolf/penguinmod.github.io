@@ -364,7 +364,8 @@ export default async function({ addon }) {
         // Desktop fork (section 213): the flag, pause and stop buttons are inline svg shapes since section 209
         ...document.querySelectorAll(`div[class^="controls_controls-container"] img, div[class^="controls_controls-container"] svg`),
         /* Blockly Zoom */
-        ...document.querySelectorAll(`g[class="blocklyZoom"] image`),
+        // Desktop fork (section 217): each zoom button is a group of shapes over its (invisible) picture
+        ...document.querySelectorAll(`g[class="blocklyZoom"] > g`),
       ]);
     }
 

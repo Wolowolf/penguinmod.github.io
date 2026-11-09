@@ -1,10 +1,16 @@
+/* desktop (section 217): every theme colour is a variable from src/lib/pm-theme-colors.js */
 $ui-primary: var(--ui-primary, hsla(215, 100%, 95%, 1)); /* #E5F0FF */
 $ui-secondary: var(--ui-secondary, hsla(215, 75%, 95%, 1)); /* #E9F1FC */
 $ui-tertiary: var(--ui-tertiary, hsla(215, 50%, 90%, 1)); /* #D9E3F2 */
 
-$ui-modal-overlay: var(--ui-modal-overlay, hsla(194, 100%, 65%, 0.9)); /* 90% transparent version of motion-primary */
+$ui-modal-overlay: var(--ui-modal-overlay, hsla(194, 100%, 65%, 0.9)); /* set by pm-theme-colors.js from the accent (light) or hover colour (dark) */
 
 $ui-white: hsla(0, 100%, 100%, 1); /* #FFFFFF */
+$ui-surface: var(--ui-surface, #ffffff); /* buttons, inputs and tiles */
+$ui-code-area: var(--ui-code-area, #f9f9f9);
+$ui-palette: var(--ui-palette, #f9f9f9);
+$ui-menu-bar: var(--ui-menu-bar, #00c3ff);
+$ui-accent: var(--ui-accent, #00c3ff);
 $ui-white-dim: hsla(0, 100%, 100%, 0.75); /* 25% transparent version of ui-white */
 $ui-white-transparent: hsla(0, 100%, 100%, 0.25); /* 25% transparent version of ui-white */
 $ui-transparent: hsla(0, 100%, 100%, 0); /* 25% transparent version of ui-white */
@@ -17,23 +23,25 @@ $ui-edge-default: #c6cdd6; /* what 15% black looked like on ui-secondary */
 $ui-edge: var(--ui-edge, $ui-edge-default);
 
 $text-primary: var(--text-primary, hsla(225, 15%, 40%, 1)); /* #575E75 */
-$text-primary-transparent: hsla(225, 15%, 40%, 0.75);
+$text-primary-transparent: color-mix(in srgb, $text-primary 75%, transparent);
+$text-secondary: var(--text-secondary, #81869a); /* dim text and inactive icons */
 
-$motion-primary: hsla(194, 100%, 50%, 1); /* #00c3ff */
-$motion-tertiary: hsla(203, 100%, 39%, 1); /* #007bc7 */
-$motion-transparent: hsla(194, 100%, 50%, 0.35); /* 35% transparent version of motion-primary */
-$motion-light-transparent: hsla(203, 100%, 39%, 0.15); /* 15% transparent version of motion-primary */
-$motion-edge: var(--motion-edge, #a6eaff); /* solid: what motion-transparent looked like on white */
+$motion-primary: $ui-accent; /* #00c3ff */
+/* shades of the accent: relative colours give the old values for the default accent */
+$motion-tertiary: hsl(from $ui-accent calc(h + 9) s calc(l * 0.78)); /* #007bc7 */
+$motion-transparent: color-mix(in srgb, $ui-accent 35%, transparent); /* 35% transparent version of motion-primary */
+$motion-light-transparent: color-mix(in srgb, $motion-tertiary 15%, transparent); /* 15% transparent version of motion-tertiary */
+$motion-edge: color-mix(in srgb, $ui-accent 35%, $ui-surface); /* solid: what motion-transparent looks like on a tile (#a6eaff light, #14586d dark) */
 
 /* opt-in theme overrides */
-$motion-primary-dark: #009CCC; /*top bar color when in dark mode*/
+$motion-primary-dark: $ui-menu-bar; /* menu bar and window headers (#009CCC in dark mode) */
 $ui-primary-light: hsla(215, 100%, 95%, 1);
 $ui-secondary-light: hsla(215, 75%, 95%, 1);
 $ui-tertiary-light: hsla(215, 50%, 90%, 1);
 $text-primary-light: hsla(225, 15%, 40%, 1);
 
-$red-primary: hsla(194, 100%, 50%, 1); /* #00c3ff */
-$red-tertiary: hsla(203, 100%, 39%, 1); /* #007bc7 */
+$red-primary: $motion-primary; /* #00c3ff */
+$red-tertiary: $motion-tertiary; /* #007bc7 */
 
 $sound-primary: hsla(300, 53%, 60%, 1); /* #CF63CF */
 $sound-tertiary: hsla(300, 48%, 50%, 1); /* #BD42BD */
@@ -46,8 +54,8 @@ $error-primary: hsla(30, 100%, 55%, 1); /* #FF8C1A */
 $error-light: hsla(30, 100%, 70%, 1); /* #FFB366 */
 $error-transparent: hsla(30, 100%, 55%, 0.25); /* #FF8C1A */
 
-$extensions-primary: hsla(194, 100%, 50%, 1);
-$extensions-tertiary: hsla(203, 100%, 39%, 1);
-$extensions-transparent: hsla(194, 100%, 50%, 0.35); /* 35% transparent version of extensions-primary */
+$extensions-primary: $motion-primary;
+$extensions-tertiary: $motion-tertiary;
+$extensions-transparent: $motion-transparent; /* 35% transparent version of extensions-primary */
 
-$drop-highlight: hsla(194, 100%, 77%, 1); /* lighter than motion-primary */
+$drop-highlight: hsl(from $ui-accent h s calc(l + 27)); /* lighter than motion-primary */

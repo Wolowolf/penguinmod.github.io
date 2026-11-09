@@ -14,7 +14,7 @@
     padding: 6px;
     margin-left: 4px;
     border-radius: 8px;
-    background: white;
+    background: $ui-surface;
     overflow: auto;
     border: 2px solid $ui-edge;
 }
@@ -34,7 +34,7 @@
     margin-left: 4px;
 }
 [theme="dark"] .library-header {
-    color: white;
+    color: $text-primary;
 }
 [dir="rtl"] .library-header {
     margin-left: initial;
@@ -214,11 +214,11 @@
     justify-content: space-between;
 }
 [theme="dark"] .tag-checkbox-wrapper {
-    color: white;
+    color: $text-primary;
 }
 
 [theme="dark"] .white-text-in-dark-mode {
-    color: white;
+    color: $text-primary;
 }
 
 .library-filter-collapse {

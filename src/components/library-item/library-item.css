@@ -359,14 +359,14 @@
     display: block;
 }
 [theme="dark"] .featured-description-summary {
-    color: white;
+    color: $text-primary;
 }
 .featured-description-details {
     display: block;
-    color: #6e6e6e;
+    color: $text-secondary;
 }
 [theme="dark"] .featured-description-details {
-    color: #b8b8b8;
+    color: $text-secondary;
 }
 
 .featured-extension-metadata {

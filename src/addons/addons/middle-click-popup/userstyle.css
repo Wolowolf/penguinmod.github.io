@@ -7,7 +7,7 @@
 
   position: absolute;
   min-width: 100px;
-  background-color: white;
+  background-color: var(--ui-surface);
   border-radius: 4px;
   box-shadow:
     rgba(0, 0, 0, 0.3) 0 0 3px,
@@ -23,14 +23,14 @@
   z-index: 100;
   position: absolute;
   box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.3);
-  background-color: white;
+  background-color: var(--ui-surface);
   border: none;
   border-radius: 4px;
   overflow: auto;
   resize: both;
 }
 [theme="dark"] .sa-mcp-container {
-  background-color: #222;
+  background-color: var(--ui-surface);
 }
 
 .sa-mcp-input-wrapper {

@@ -68,7 +68,7 @@ $sides: 20rem;
 
     box-sizing: border-box;
     width: 100%;
-    background-color: $motion-primary;
+    background-color: $ui-menu-bar;
     
     font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif);
     font-size: 1rem;

@@ -26,6 +26,7 @@ import settingsTranslationsOther from './translations.json';
 import upstreamMeta from '../generated/upstream-meta.json';
 import { detectLocale } from '../../lib/detect-locale';
 import { getInitialDarkMode } from '../../lib/tw-theme-hoc.jsx';
+import { themeColorsCSS } from '../../lib/pm-theme-colors.js';
 import SettingsStore from '../settings-store-singleton';
 import Channels from '../channels';
 import extensionImage from './icons/extension.svg';
@@ -59,6 +60,17 @@ document.title = `${settingsTranslations.title} - PenguinMod`;
 
 const theme = getInitialDarkMode() ? 'dark' : 'light';
 document.body.setAttribute('theme', theme);
+
+// Desktop fork (section 217): this page uses the "Theme colors" addon's colours too
+const themeColorsStylesheet = document.createElement('style');
+document.head.appendChild(themeColorsStylesheet);
+const applyThemeColors = () => {
+    themeColorsStylesheet.textContent = SettingsStore.getAddonEnabled('theme-colors') ?
+        themeColorsCSS(id => SettingsStore.getAddonSetting('theme-colors', id)) : '';
+};
+applyThemeColors();
+SettingsStore.addEventListener('setting-changed', applyThemeColors);
+SettingsStore.addEventListener('addon-changed', applyThemeColors);
 
 let _throttleTimeout;
 const postThrottledSettingsChange = store => {
@@ -104,6 +116,7 @@ const addonOrder = [
     'zebra-striping',
     'editor-colored-context-menus',
     // Editor look and layout
+    'theme-colors',
     'editor-tweaks',
     'pm-app-font',
     'editor-animations',

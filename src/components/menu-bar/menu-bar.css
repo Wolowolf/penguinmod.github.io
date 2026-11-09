@@ -27,7 +27,7 @@
     font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif);
     font-size: $menu-bar-standard-font-size;
     font-weight: bold;
-    background-color: $motion-primary;
+    background-color: $ui-menu-bar;
     color: $ui-white;
 }
 [theme="dark"] .menu-bar {

@@ -72,10 +72,10 @@
     padding: 0;
 }
 [theme="dark"] ::-webkit-color-swatch {
-    border-color: white;
+    border-color: $text-primary;
 }
 [theme="dark"] ::-moz-color-swatch {
-    border-color: white;
+    border-color: $text-primary;
 }
 
 ::-moz-focus-inner {
@@ -156,7 +156,7 @@
 }
 
 .option-card {
-    background: white;
+    background: $ui-surface;
     border: 2px solid $ui-edge;
     border-radius: $space;
     padding: calc($space * 2);

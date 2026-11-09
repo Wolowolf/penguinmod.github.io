@@ -1,0 +1,95 @@
+/* Desktop fork (section 217): parts drawn by Blockly and other libraries, coloured with the theme
+   variables of pm-theme-colors.js in both themes. Put at the start of <body>, after Blockly's own
+   styles in <head>, so these win. */
+
+/* code area */
+.blocklySvg {
+    background-color: var(--ui-code-area) !important;
+}
+[id^="blocklyGridPattern"] > line {
+    stroke: var(--ui-edge);
+}
+.blocklyScrollbarHandle {
+    fill: var(--ui-edge) !important;
+}
+
+/* block palette and category menu */
+.blocklyFlyoutBackground {
+    fill: var(--ui-palette);
+}
+.blocklyToolboxDiv,
+.scratchCategoryMenu {
+    background: var(--ui-palette) !important;
+}
+.scratchCategoryMenu {
+    color: var(--text-primary);
+}
+.scratchCategoryMenuItem.categorySelected {
+    background: var(--ui-tertiary);
+}
+.blocklyFlyoutLabelText,
+.blocklyFlyoutButton .blocklyText {
+    fill: var(--text-primary);
+}
+.blocklyFlyoutButtonBackground {
+    stroke: var(--ui-edge);
+}
+.blocklyFlyoutButton:hover {
+    fill: var(--ui-surface);
+}
+/* the checkbox's tick is drawn in the box's own colour while unchecked */
+.blocklyFlyoutCheckbox {
+    fill: var(--ui-surface);
+    stroke: var(--ui-edge);
+}
+.blocklyFlyoutCheckboxPath {
+    stroke: var(--ui-surface);
+}
+
+/* zoom buttons: shapes drawn by src/lib/pm-zoom-buttons.js over Blockly's pictures */
+.pm-zoom-ring {
+    fill: var(--ui-edge);
+}
+.pm-zoom-face {
+    fill: var(--ui-surface);
+}
+.pm-zoom-glyph {
+    fill: none;
+    stroke: var(--text-secondary);
+    stroke-width: 1.5px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* context menus */
+.blocklyWidgetDiv .goog-menu {
+    background: var(--ui-surface);
+    border-color: var(--ui-edge);
+}
+.blocklyWidgetDiv .goog-menuitem {
+    color: var(--text-primary);
+}
+.blocklyWidgetDiv .goog-menuitem.goog-menuitem-highlight,
+.blocklyWidgetDiv .goog-menuitem-hover {
+    background-color: var(--ui-tertiary);
+    border-color: transparent;
+}
+.sa-blockly-menu-item-border {
+    border-top-color: var(--ui-edge) !important;
+}
+
+/* popovers (colour and direction pickers) */
+.Popover-body {
+    background: var(--ui-surface) !important;
+    border-color: var(--ui-edge) !important;
+    color: var(--text-primary);
+}
+.Popover-tipShape {
+    fill: var(--ui-surface) !important;
+    stroke: var(--ui-edge) !important;
+}
+
+/* scrollbars of the page's scrolling areas */
+* {
+    scrollbar-color: var(--ui-edge) transparent;
+}

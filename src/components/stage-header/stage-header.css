@@ -8,7 +8,7 @@
 
 .stage-header-wrapper-overlay {
     position: fixed;
-    background-color: rgb(232, 237, 241);
+    background-color: $ui-primary;
     top: 0;
     left: 0;
     right: 0;
@@ -17,7 +17,7 @@
 
 /* tw: support dark mode */
 [theme="dark"] .stage-header-wrapper-overlay {
-    background-color: #111;
+    background-color: $ui-primary;
 }
 
 /* tw: do not show color in header when embedded */
@@ -58,7 +58,7 @@
     border-radius: $form-radius;
     width: $stage-menu-height;
     height: $stage-menu-height;
-    background: $ui-white;
+    background: $ui-surface;
     padding: 0.375rem;
     user-select: none;
     cursor: pointer;

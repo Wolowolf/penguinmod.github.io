@@ -1,5 +1,9 @@
 import React from 'react';
 import darkModeCSS from '!raw-loader!./tw-theme-dark.css';
+import {installThemeColors} from './pm-theme-colors.js';
+
+// Desktop fork (section 217): the theme colour variables, on every page that imports this file
+installThemeColors();
 
 const THEME_KEY = 'tw:theme';
 

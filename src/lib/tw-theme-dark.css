@@ -1,50 +1,20 @@
 /* GUI */
+/* Desktop fork (section 217): the colours are the variables of src/lib/pm-theme-colors.js
+   (dark values set there); this file only says where the dark theme differs in what it uses. */
 :root {
-    background: #111;
-    color: #eee;
+    background: var(--ui-primary);
+    color: var(--text-primary);
     color-scheme: dark;
-    /* see colors.csss */
-    --ui-primary: rgb(17, 17, 17);
-    --ui-secondary: rgb(30, 30, 30);
-    --ui-tertiary: rgb(46, 46, 46);
-    --ui-modal-overlay: #333a;
     --ui-black-transparent: rgba(255, 255, 255, 0.15);
-    /* desktop: solid edge colours, what the 15% white / 35% blue edges looked like on ui-secondary */
-    --ui-edge: #404040;
-    --motion-edge: #14586d;
-    --text-primary: #eee;
     /* scratch-paint */
     --paint-ui-pane-border: var(--ui-edge);
-    --paint-text-primary: #eee;
+    --paint-text-primary: var(--text-primary);
     --paint-form-border: var(--ui-edge);
 }
 
 /* Blockly */
 .blocklySvg {
-    background-color: var(--ui-secondary) !important;
     color-scheme: light;
-}
-[id^="blocklyGridPattern"] > line {
-    stroke: #484848;
-}
-.blocklyFlyoutBackground {
-    fill: #111;
-}
-.blocklyFlyoutLabelText {
-    fill: #ccc;
-}
-.blocklyFlyoutButton .blocklyText {
-    fill: #ccc;
-}
-.blocklyFlyoutButton:hover {
-    fill: #111;
-}
-/* blocklyFlyoutCheckboxPath stroke and blocklyFlyoutCheckbox fill must match */
-.blocklyFlyoutCheckboxPath {
-    stroke: #111;
-}
-.blocklyFlyoutCheckbox {
-    fill: #111;
 }
 .checked > .blocklyFlyoutCheckbox {
     stroke: #a1c6fa;
@@ -52,63 +22,24 @@
 .checked > .blocklyFlyoutCheckboxPath {
     stroke: white;
 }
-.scratchCategoryMenu {
-    color: #ccc;
-}
-.blocklyToolboxDiv,
-.scratchCategoryMenu {
-    background: #111 !important;
-}
-.blocklyScrollbarHandle {
-    fill: #666;
-}
-.blocklyZoom {
-    filter: invert(100%);
-}
-.scratchCategoryMenuItem.categorySelected {
-    background: var(--ui-secondary);
-}
 .valueReportBox {
     color: black;
 }
 .blocklyWidgetDiv {
     color-scheme: light;
 }
-.blocklyWidgetDiv .goog-menu {
-    background: var(--ui-primary);
-    border-color: var(--ui-edge);
-}
-.blocklyWidgetDiv .goog-menuitem {
-    color: var(--text-primary);
-}
 .blocklyWidgetDiv .goog-menuitem-disabled .goog-menuitem-content {
     color: hsla(0, 0%, 100%, .35) !important;
-}
-.sa-blockly-menu-item-border {
-    border-top-color: var(--ui-edge) !important;
-}
-.blocklyWidgetDiv .goog-menuitem.goog-menuitem-highlight {
-    background-color: var(--ui-tertiary);
-    border-color: transparent; /* remove border */
 }
 .scratchCommentText {
     color: black;
 }
 .blocklyInsertionMarker > .blocklyPath {
-    fill: #ccc;
+    fill: var(--text-secondary);
 }
 
 /* Other / Multipurpose */
 .Popover {
     /* weird Chrome bug displays white bar above popovers with color-scheme: dark */
     color-scheme: light;
-}
-.Popover-body {
-    background: var(--ui-secondary);
-    border-color: var(--ui-edge);
-    color: var(--text-primary);
-}
-.Popover-tipShape {
-    fill: var(--ui-secondary);
-    stroke: var(--ui-edge);
 }

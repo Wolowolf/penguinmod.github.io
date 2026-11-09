@@ -25,7 +25,7 @@
     width: 100%;
     padding: 0.6rem 0.75rem;
     border: 2px solid $ui-edge;
-    background: $ui-white;
+    background: $ui-surface;
     color: $text-primary;
     font-size: 0.95rem;
     font-weight: bold;
@@ -73,7 +73,7 @@
     border: 2px solid $ui-edge;
     font-size: 0.95rem;
     color: $text-primary;
-    background: $ui-white;
+    background: $ui-surface;
 }
 .search:focus { outline: none; border-color: $motion-primary; }
 .search-button, .more, .generator-button {
@@ -89,7 +89,7 @@
     height: 2.2rem;
     max-width: 260px;
     border: 2px solid $ui-edge;
-    background: $ui-white;
+    background: $ui-surface;
     color: $text-primary;
 }
 .count {
@@ -138,7 +138,7 @@
     flex-direction: column;
     align-items: center;
     padding: 8px 6px 4px 6px;
-    background: $ui-white;
+    background: $ui-surface;
     border: 2px solid $ui-edge;
     color: $text-primary;
     cursor: pointer;
@@ -274,7 +274,7 @@
     gap: 6px;
     padding: 6px 4px;
 }
-.generator-button { background: $ui-white; color: $text-primary; border: 2px solid $ui-edge; }
+.generator-button { background: $ui-surface; color: $text-primary; border: 2px solid $ui-edge; }
 .generator-button.active { background: $motion-primary; color: $ui-white; border-color: $motion-primary; }
 .generator-hint {
     flex: 1 1 300px;
@@ -285,7 +285,7 @@
     flex-grow: 1;
     width: 100%;
     border: 2px solid $ui-edge;
-    background: white;
+    background: $ui-surface;
 }
 
 .busy {
@@ -306,9 +306,9 @@
 [theme="dark"] .select,
 [theme="dark"] .tile,
 [theme="dark"] .generator-button {
-    background: #222;
-    color: #eee;
-    border-color: #444;
+    background: $ui-surface;
+    color: $text-primary;
+    border-color: $ui-edge;
 }
 [theme="dark"] .source-button.active,
 [theme="dark"] .generator-button.active {
@@ -316,13 +316,13 @@
     border-color: $motion-primary;
     color: white;
 }
-[theme="dark"] .grid { background: #111; }
+[theme="dark"] .grid { background: $ui-primary; }
 [theme="dark"] .sidebar-note,
 [theme="dark"] .notice,
 [theme="dark"] .limits,
 [theme="dark"] .count,
 [theme="dark"] .empty,
-[theme="dark"] .generator-hint { color: #ddd; }
+[theme="dark"] .generator-hint { color: $text-primary; }
 [theme="dark"] .thumb {
     background-color: #333;
     background-image:

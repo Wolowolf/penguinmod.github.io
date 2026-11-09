@@ -42,7 +42,7 @@ $header-height: calc(2.75rem - 2px);
     align-items: center;
     justify-content: center;
     height: $header-height;
-    background-color: white;
+    background-color: $ui-surface;
     color: $text-primary;
     border-top-left-radius: $space;
     border-top-right-radius: $space;

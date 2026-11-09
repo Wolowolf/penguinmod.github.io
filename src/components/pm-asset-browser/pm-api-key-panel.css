@@ -30,7 +30,7 @@
     margin: 0 0 1rem 0;
     padding: 0.8rem 1rem;
     border: 2px solid $ui-edge;
-    background: $ui-white;
+    background: $ui-surface;
 }
 .fields { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 0.6rem; }
 .field { display: flex; flex-direction: column; gap: 0.2rem; font-size: 0.85rem; flex: 1 1 240px; }
@@ -45,7 +45,7 @@
 }
 .primary { background: $motion-primary; color: $ui-white; }
 .primary:disabled { opacity: 0.6; cursor: default; }
-.secondary { background: #666; color: $ui-white; }
+.secondary { background: $text-secondary; color: $ui-white; }
 .danger { background: #c62828; color: $ui-white; }
 .actions { display: flex; gap: 0.6rem; }
 .note { margin: 0.4rem 0 0 0; font-size: 0.8rem; opacity: 0.8; }
@@ -53,6 +53,6 @@
 .success { margin: 0 0 1rem 0; padding: 0.6rem 1rem; background: #d9f7e3; color: #0b5a26; }
 .success p { margin: 0 0 0.4rem 0; }
 
-[theme="dark"] .panel { color: #eee; }
-[theme="dark"] .box { background: #222; border-color: #444; }
-[theme="dark"] .input { background: #111; color: #eee; border-color: #555; }
+[theme="dark"] .panel { color: $text-primary; }
+[theme="dark"] .box { background: $ui-surface; border-color: $ui-edge; }
+[theme="dark"] .input { background: $ui-primary; color: $text-primary; border-color: $ui-edge; }

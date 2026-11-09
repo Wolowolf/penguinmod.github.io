@@ -40,7 +40,7 @@
 }
 [theme="dark"] .variable-name-text-input {
     background: $ui-secondary;
-    color: white;
+    color: $text-primary;
 }
 
 .info-message {

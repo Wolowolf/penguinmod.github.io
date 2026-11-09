@@ -4,7 +4,7 @@
     padding: 0.375rem;
     user-select: none;
     cursor: pointer;
-    fill: #9a9a9a;
+    fill: var(--text-secondary); /* desktop (section 217): theme colour, was #9a9a9a */
 }
 
 .green-flag.is-active {

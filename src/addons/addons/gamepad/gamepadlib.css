@@ -26,9 +26,9 @@
   width: 75px;
   height: 25px;
   border-radius: 0;
-  border: 1px solid black;
-  background: white;
-  color: black;
+  border: 1px solid var(--ui-edge);
+  background: var(--ui-surface);
+  color: var(--text-primary);
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -51,7 +51,7 @@
   background: hsl(171, 100%, 20%);
 }
 .gamepadlib-keyinput[data-empty="true"]:not([data-accepting-input="true"]) {
-  color: #aaa;
+  color: var(--text-secondary);
   font-style: italic;
 }
 
@@ -63,7 +63,7 @@
   position: relative;
   width: 150px;
   height: 150px;
-  border: 1px solid black;
+  border: 1px solid var(--ui-edge);
   overflow: hidden;
 }
 [theme="dark"] .gamepadlib-axis-circle {

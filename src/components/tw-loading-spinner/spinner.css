@@ -16,7 +16,7 @@
     animation: spinner 1.2s linear infinite;
 }
 [theme="dark"] .spinner {
-    border-color: #fff transparent #fff transparent;
+    border-color: $text-primary transparent $text-primary transparent;
 }
 @keyframes spinner {
     0% {

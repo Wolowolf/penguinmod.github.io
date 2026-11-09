@@ -26,6 +26,7 @@ const addons = [
     'custom-block-shape',
     'zebra-striping',
     'custom-styles',
+    'theme-colors',
     'editor-theme3',
     'custom-block-text',
     'pm-app-font',

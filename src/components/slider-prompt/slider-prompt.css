@@ -31,7 +31,7 @@
 }
 [theme="dark"] .min-input, [theme="dark"] .max-input {
     background: $ui-secondary;
-    color: white;
+    color: $text-primary;
 }
 
 .button-row {

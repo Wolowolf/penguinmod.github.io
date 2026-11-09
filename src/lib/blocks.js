@@ -1,4 +1,5 @@
 import LazyScratchBlocks from './tw-lazy-scratch-blocks';
+import patchZoomButtons from './pm-zoom-buttons.js';
 
 /**
  * Connect scratch blocks with the vm
@@ -7,6 +8,9 @@ import LazyScratchBlocks from './tw-lazy-scratch-blocks';
  */
 export default function (vm) {
     const ScratchBlocks = LazyScratchBlocks.get();
+
+    // Desktop fork (section 217): zoom buttons in the theme's colours
+    patchZoomButtons(ScratchBlocks);
 
     // PMDESKTOP_STAGE_PATCH: give every category menu entry its colour as a CSS variable
     const pmCategory = ScratchBlocks.Toolbox && ScratchBlocks.Toolbox.Category;

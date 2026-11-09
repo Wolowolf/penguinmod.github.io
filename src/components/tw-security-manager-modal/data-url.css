@@ -16,5 +16,5 @@
 }
 [theme="dark"] .code {
     background: $ui-secondary;
-    color: white;
+    color: $text-primary;
 }

@@ -35,13 +35,13 @@ $fade-out-distance: 100px;
     bottom: 0;
     left: 0;
     right:0;
-    background: linear-gradient(rgba(232,237,241, 0),rgba(232,237,241, 1));
+    background: linear-gradient(transparent, $ui-primary);
     height: $fade-out-distance;
     width: 100%;
     pointer-events: none;
 }
 [theme="dark"] .new-buttons:before {
-    background: linear-gradient(rgba(94, 96, 97, 0),rgb(59, 59, 59));
+    background: linear-gradient(transparent, $ui-primary);
 }
 
 .new-buttons > button + button {

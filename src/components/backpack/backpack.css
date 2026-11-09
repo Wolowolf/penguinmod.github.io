@@ -8,7 +8,7 @@
 
 .backpack-header {
     border: 1px solid $ui-edge;
-    background: $ui-white;
+    background: $ui-surface;
     padding: 0.25rem;
     text-align: center;
     font-size: 0.85rem;

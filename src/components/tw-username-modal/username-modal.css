@@ -30,7 +30,7 @@
 }
 [theme="dark"] .text-input {
     background: $ui-secondary;
-    color: white;
+    color: $text-primary;
 }
 
 .button-row {

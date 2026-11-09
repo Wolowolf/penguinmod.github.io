@@ -139,7 +139,7 @@
 
 .tab.is-selected {
     color: $motion-primary;
-    background-color: $ui-white;
+    background-color: $ui-surface;
     z-index: 4; /* Make sure selected is always above */
 }
 [theme="dark"] .tab.is-selected {

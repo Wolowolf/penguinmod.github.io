@@ -1,6 +1,6 @@
 .modal-content {
-  background-color: white;
-  color: #575e75;
+  background-color: var(--ui-surface);
+  color: var(--text-primary);
 }
 [theme="dark"] .modal-content {
   background-color: var(--ui-primary);
