@@ -28,6 +28,10 @@
 }
 [theme="dark"] .sprite-selector-item.is-selected {
     background: $ui-primary;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-background);
+    --text-secondary: var(--text-dim-on-background);
+    --paint-text-primary: var(--text-on-background);
 }
 
 .sprite-selector-item:hover {
@@ -36,6 +40,10 @@
 }
 [theme="dark"] .sprite-selector-item:hover {
     background: $ui-primary;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-background);
+    --text-secondary: var(--text-dim-on-background);
+    --paint-text-primary: var(--text-on-background);
 }
 
 .sprite-selector-item:hover .sprite-image, .is-selected .sprite-image {

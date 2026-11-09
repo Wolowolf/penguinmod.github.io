@@ -13,6 +13,10 @@ body {
 body[theme="dark"] {
     background-color: $ui-primary;
     color: $text-primary;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-background);
+    --text-secondary: var(--text-dim-on-background);
+    --paint-text-primary: var(--text-on-background);
 }
 
 a {
@@ -60,9 +64,17 @@ a {
 }
 .user:link:hover {
     background: $ui-tertiary;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --paint-text-primary: var(--text-on-surface);
 }
 [theme="dark"] .user:link:hover {
     background: $ui-tertiary;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --paint-text-primary: var(--text-on-surface);
 }
 .user-info {
     width: 100%;

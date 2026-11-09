@@ -48,6 +48,7 @@ const MIN_TEXT = 4.5; // text against every surface it is drawn on
 const MIN_DIM_TEXT = 3; // dim text and inactive icons
 const MIN_ACCENT_SYMBOL = 1.7; // accent-coloured text and icons (selected tab, links, icons)
 const MIN_LINE = 1.35; // borders, scrollbars and the grid against what they separate
+const MIN_ACCENT_FILL = 1.7; // the accent as a fill (selections, buttons) against every surface
 
 const parse = hex => {
     const h = hex.replace('#', '').slice(0, 6);
@@ -72,16 +73,38 @@ const minContrast = (color, backgrounds) => Math.min(...backgrounds.map(b => con
 const WHITE = [255, 255, 255];
 const BLACK = [0, 0, 0];
 
-// moves the colour towards black or white (whichever reads better on the backgrounds) until it has
-// at least the minimum contrast with every one of them; unchanged when it already has
+// the smallest change that gives the colour at least the minimum contrast with every background:
+// moved step by step towards black and towards white; when the backgrounds are both light and dark
+// (section 220) a middle grey can be the only answer, so greys are tried too; when nothing reaches the
+// minimum, the most readable of all these
+const GREYS = Array.from({length: 86}, (unused, i) => [i * 3, i * 3, i * 3]);
 const ensureContrast = (color, backgrounds, minimum) => {
     if (minContrast(color, backgrounds) >= minimum) return color;
-    const target = minContrast(BLACK, backgrounds) >= minContrast(WHITE, backgrounds) ? BLACK : WHITE;
+    let best = color;
+    let bestContrast = minContrast(color, backgrounds);
+    const consider = candidate => {
+        const value = minContrast(candidate, backgrounds);
+        if (value > bestContrast) {
+            best = candidate;
+            bestContrast = value;
+        }
+        return value >= minimum;
+    };
     for (let step = 1; step <= 50; step++) {
-        const candidate = mix(target, color, step / 50);
-        if (minContrast(candidate, backgrounds) >= minimum) return candidate;
+        for (const target of [BLACK, WHITE]) {
+            const candidate = mix(target, color, step / 50);
+            if (consider(candidate)) return candidate;
+        }
     }
-    return target;
+    let grey = null;
+    for (const candidate of GREYS) {
+        if (minContrast(candidate, backgrounds) >= minimum && (!grey ||
+            Math.abs(luminance(candidate) - luminance(color)) < Math.abs(luminance(grey) - luminance(color)))) {
+            grey = candidate;
+        }
+        consider(candidate);
+    }
+    return grey || best;
 };
 
 // text and icons on a coloured background: white while it stays readable there (2:1 or more, as the
@@ -118,28 +141,41 @@ const fromHsl = ([h, s, l]) => {
     return [channel(h + (1 / 3)) * 255, channel(h) * 255, channel(h - (1 / 3)) * 255];
 };
 
+// the four surfaces things are drawn on; section 220: each has its own text colours, which every
+// area of that surface hands down to what is inside it (pm-theme-uses.css, and the style rules that
+// give an element one of these backgrounds), so text stays readable when the surfaces differ widely
+const SURFACES = ['background', 'panel', 'workspace', 'surface'];
+
 // every variable of one theme, from its 7 colours ({id: '#rrggbb'})
 const paletteVariables = (values, mode) => {
     const c = {};
     for (const color of THEME_COLORS) c[color.id] = parse(values[color.id]);
-    const surfaces = [c.background, c.panel, c.workspace, c.surface];
-    const text = ensureContrast(c.text, surfaces, MIN_TEXT);
-    // dim text: 75% text on the button colour, stronger when that is not readable enough
-    let amount = 0.75;
-    while (amount < 1 && minContrast(mix(text, c.surface, amount), surfaces) < MIN_DIM_TEXT) amount += 0.05;
-    const dim = ensureContrast(mix(text, c.surface, Math.min(1, amount)), surfaces, MIN_DIM_TEXT);
-    const edge = ensureContrast(c.edge, [c.panel, c.workspace, c.surface], MIN_LINE);
-    const accentSymbol = ensureContrast(c.accent, [c.panel, c.workspace, c.surface], MIN_ACCENT_SYMBOL);
-    const hsl = toHsl(c.accent);
-    const menuBar = mode === 'dark' ? fromHsl([hsl[0], hsl[1], hsl[2] * 0.8]) : c.accent;
-    const onAccent = onColor(c.accent);
-    const onMenuBar = onColor(menuBar);
+    const surfaces = SURFACES.map(id => c[id]);
     const result = {};
     for (const color of THEME_COLORS) result[color.variable] = toHex(c[color.id]);
+    for (const id of SURFACES) {
+        const text = ensureContrast(c.text, [c[id]], MIN_TEXT);
+        // dim text: 75% text on this surface, stronger when that is not readable enough
+        let amount = 0.75;
+        while (amount < 1 && contrast(mix(text, c[id], amount), c[id]) < MIN_DIM_TEXT) amount += 0.05;
+        const dim = ensureContrast(mix(text, c[id], Math.min(1, amount)), [c[id]], MIN_DIM_TEXT);
+        result[`--text-on-${id}`] = toHex(text);
+        result[`--text-dim-on-${id}`] = toHex(dim);
+    }
+    // the accent fills selections and buttons: it must stand out from every surface
+    const accent = ensureContrast(c.accent, surfaces, MIN_ACCENT_FILL);
+    const edge = ensureContrast(c.edge, [c.panel, c.workspace, c.surface], MIN_LINE);
+    const accentSymbol = ensureContrast(accent, [c.panel, c.workspace, c.surface], MIN_ACCENT_SYMBOL);
+    const hsl = toHsl(accent);
+    const menuBar = mode === 'dark' ? fromHsl([hsl[0], hsl[1], hsl[2] * 0.8]) : accent;
+    const onAccent = onColor(accent);
+    const onMenuBar = onColor(menuBar);
     Object.assign(result, {
-        '--text-primary': toHex(text),
+        // the page itself is the background
+        '--text-primary': result['--text-on-background'],
+        '--text-secondary': result['--text-dim-on-background'],
+        '--ui-accent': toHex(accent),
         '--ui-edge': toHex(edge),
-        '--text-secondary': toHex(dim),
         // the accent as the colour of text and symbols on the theme's surfaces
         '--ui-accent-symbol': toHex(accentSymbol),
         '--ui-menu-bar': toHex(menuBar),
@@ -230,5 +266,6 @@ export {
     installThemeColors,
     customCSS,
     themeColorsCSS,
-    paletteVariables
+    paletteVariables,
+    SURFACES
 };

@@ -122,6 +122,10 @@
 }
 [theme="dark"] .body {
     background: $ui-primary;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-background);
+    --text-secondary: var(--text-dim-on-background);
+    --paint-text-primary: var(--text-on-background);
 }
 
 @media (max-height: 600px) {
@@ -162,6 +166,10 @@
 }
 .tool-button:hover {
     background: $ui-tertiary;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --paint-text-primary: var(--text-on-surface);
 }
 .tool-button:focus-visible,
 .sort-button:focus-visible {
@@ -220,6 +228,10 @@
 }
 .sort-button:hover {
     background: $ui-tertiary;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --paint-text-primary: var(--text-on-surface);
 }
 
 .detail {

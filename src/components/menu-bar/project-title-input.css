@@ -46,6 +46,10 @@ can set a width for example or what it should do in a flex box (eg. grow).
     box-shadow: 0 0 0 calc($space * .5) $ui-white-transparent;
     background-color: $ui-surface;
     color: $text-primary;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --paint-text-primary: var(--text-on-surface);
 }
 [theme="dark"] .title-field:focus {
     background-color: rgba(0, 0, 0, 0.3);

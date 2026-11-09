@@ -14,6 +14,10 @@
     rgba(0, 0, 0, 0.2) 0 3px 10px;
 
   z-index: 999;
+  /* section 220: text colours of this surface for what is inside */
+  --text-primary: var(--text-on-surface);
+  --text-secondary: var(--text-dim-on-surface);
+  --paint-text-primary: var(--text-on-surface);
 }
 
 .sa-mcp-container {
@@ -28,9 +32,17 @@
   border-radius: 4px;
   overflow: auto;
   resize: both;
+  /* section 220: text colours of this surface for what is inside */
+  --text-primary: var(--text-on-surface);
+  --text-secondary: var(--text-dim-on-surface);
+  --paint-text-primary: var(--text-on-surface);
 }
 [theme="dark"] .sa-mcp-container {
   background-color: var(--ui-surface);
+  /* section 220: text colours of this surface for what is inside */
+  --text-primary: var(--text-on-surface);
+  --text-secondary: var(--text-dim-on-surface);
+  --paint-text-primary: var(--text-on-surface);
 }
 
 .sa-mcp-input-wrapper {

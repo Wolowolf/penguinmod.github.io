@@ -19,9 +19,17 @@
     border-bottom-right-radius: 0.5rem;
     border: 1px solid $ui-edge;
     padding: calc(2 * $space);
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --paint-text-primary: var(--text-on-surface);
 }
 [theme="dark"] .editor-container {
     background: $ui-primary;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-background);
+    --text-secondary: var(--text-dim-on-background);
+    --paint-text-primary: var(--text-on-background);
 }
 
 .search-bar {

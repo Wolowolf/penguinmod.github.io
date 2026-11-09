@@ -31,6 +31,10 @@
     padding: 0.8rem 1rem;
     border: 2px solid $ui-edge;
     background: $ui-surface;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --paint-text-primary: var(--text-on-surface);
 }
 .fields { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 0.6rem; }
 .field { display: flex; flex-direction: column; gap: 0.2rem; font-size: 0.85rem; flex: 1 1 240px; }
@@ -54,5 +58,15 @@
 .success p { margin: 0 0 0.4rem 0; }
 
 [theme="dark"] .panel { color: $text-primary; }
-[theme="dark"] .box { background: $ui-surface; border-color: $ui-edge; }
-[theme="dark"] .input { background: $ui-primary; color: $text-primary; border-color: $ui-edge; }
+[theme="dark"] .box { background: $ui-surface; border-color: $ui-edge;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --paint-text-primary: var(--text-on-surface);
+}
+[theme="dark"] .input { background: $ui-primary; color: $text-primary; border-color: $ui-edge;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-background);
+    --text-secondary: var(--text-dim-on-background);
+    --paint-text-primary: var(--text-on-background);
+}

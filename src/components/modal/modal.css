@@ -47,6 +47,10 @@
     /* Default modal resets */
     margin: 0;
     border-radius: 0;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-panel);
+    --text-secondary: var(--text-dim-on-panel);
+    --paint-text-primary: var(--text-on-panel);
 }
 
 

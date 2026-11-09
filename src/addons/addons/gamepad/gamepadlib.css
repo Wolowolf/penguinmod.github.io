@@ -32,11 +32,19 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  /* section 220: text colours of this surface for what is inside */
+  --text-primary: var(--text-on-surface);
+  --text-secondary: var(--text-dim-on-surface);
+  --paint-text-primary: var(--text-on-surface);
 }
 [theme="dark"] .gamepadlib-keyinput {
   background-color: var(--ui-surface);
   border-color: var(--ui-edge, #c6cdd6);
   color: var(--text-primary);
+  /* section 220: text colours of this surface for what is inside */
+  --text-primary: var(--text-on-surface);
+  --text-secondary: var(--text-dim-on-surface);
+  --paint-text-primary: var(--text-on-surface);
 }
 .gamepadlib-mapping[data-value="1"] .gamepadlib-keyinput {
   background: yellow;

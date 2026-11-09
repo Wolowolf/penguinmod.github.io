@@ -54,6 +54,10 @@
 [theme="dark"] .body {
     color: $text-primary;
     background: $ui-primary;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-background);
+    --text-secondary: var(--text-dim-on-background);
+    --paint-text-primary: var(--text-on-background);
 }
 
 .body a {

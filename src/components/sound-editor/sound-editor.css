@@ -87,6 +87,10 @@ $border-radius: 0.25rem;
     transition: 0.2s;
     user-select: none;
     margin: 0px;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --paint-text-primary: var(--text-on-surface);
 }
 
 .button > img {

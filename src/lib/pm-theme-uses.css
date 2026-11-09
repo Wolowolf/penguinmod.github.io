@@ -115,3 +115,21 @@ body [class*="paint-editor_bitmap-button"] img {
 [class*=" menu_menu_"] img {
     filter: var(--pm-on-menu-bar-filter);
 }
+
+/* Section 220: each surface hands its own text colours down to what is inside it */
+.blocklySvg {
+    --text-primary: var(--text-on-workspace);
+    --text-secondary: var(--text-dim-on-workspace);
+}
+.blocklyFlyout,
+.blocklyToolboxDiv,
+.scratchCategoryMenu {
+    --text-primary: var(--text-on-panel);
+    --text-secondary: var(--text-dim-on-panel);
+}
+.pm-zoom-button,
+.blocklyWidgetDiv .goog-menu,
+.Popover-body {
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+}

@@ -6,6 +6,10 @@
     color: var(--text-primary);
     color-scheme: dark;
     --ui-black-transparent: rgba(255, 255, 255, 0.15);
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-background);
+    --text-secondary: var(--text-dim-on-background);
+    --paint-text-primary: var(--text-on-background);
 }
 
 /* Blockly */

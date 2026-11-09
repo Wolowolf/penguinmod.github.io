@@ -39,11 +39,19 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --paint-text-primary: var(--text-on-surface);
 }
 
 /* tw: support dark mode */
 [theme="dark"] .stage-wrapper.full-screen {
     background-color: $ui-primary;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-background);
+    --text-secondary: var(--text-dim-on-background);
+    --paint-text-primary: var(--text-on-background);
 }
 
 /* tw: do not show color in embeds */

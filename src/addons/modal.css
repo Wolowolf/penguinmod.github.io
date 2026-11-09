@@ -1,8 +1,16 @@
 .modal-content {
   background-color: var(--ui-surface);
   color: var(--text-primary);
+  /* section 220: text colours of this surface for what is inside */
+  --text-primary: var(--text-on-surface);
+  --text-secondary: var(--text-dim-on-surface);
+  --paint-text-primary: var(--text-on-surface);
 }
 [theme="dark"] .modal-content {
   background-color: var(--ui-primary);
   color: var(--text-primary);
+  /* section 220: text colours of this surface for what is inside */
+  --text-primary: var(--text-on-background);
+  --text-secondary: var(--text-dim-on-background);
+  --paint-text-primary: var(--text-on-background);
 }

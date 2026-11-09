@@ -31,6 +31,10 @@
     font-weight: bold;
     cursor: pointer;
     text-align: left;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --paint-text-primary: var(--text-on-surface);
 }
 .source-button:hover { border-color: $motion-primary; }
 .source-button.active {
@@ -74,6 +78,10 @@
     font-size: 0.95rem;
     color: $text-primary;
     background: $ui-surface;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --paint-text-primary: var(--text-on-surface);
 }
 .search:focus { outline: none; border-color: $motion-primary; }
 .search-button, .more, .generator-button {
@@ -91,6 +99,10 @@
     border: 2px solid $ui-edge;
     background: $ui-surface;
     color: $text-primary;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --paint-text-primary: var(--text-on-surface);
 }
 .count {
     font-size: 0.8rem;
@@ -129,6 +141,10 @@
     gap: 8px;
     padding: 8px;
     background: $ui-secondary;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-panel);
+    --text-secondary: var(--text-dim-on-panel);
+    --paint-text-primary: var(--text-on-panel);
 }
 .tile {
     position: relative;
@@ -143,6 +159,10 @@
     color: $text-primary;
     cursor: pointer;
     text-align: center;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --paint-text-primary: var(--text-on-surface);
 }
 .tile:hover, .tile:focus { border-color: $motion-primary; outline: none; }
 .thumb {
@@ -274,7 +294,12 @@
     gap: 6px;
     padding: 6px 4px;
 }
-.generator-button { background: $ui-surface; color: $text-primary; border: 2px solid $ui-edge; }
+.generator-button { background: $ui-surface; color: $text-primary; border: 2px solid $ui-edge;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --paint-text-primary: var(--text-on-surface);
+}
 .generator-button.active { background: $motion-primary; color: $text-on-accent; border-color: $motion-primary; }
 .generator-hint {
     flex: 1 1 300px;
@@ -286,6 +311,10 @@
     width: 100%;
     border: 2px solid $ui-edge;
     background: $ui-surface;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --paint-text-primary: var(--text-on-surface);
 }
 
 .busy {
@@ -309,6 +338,10 @@
     background: $ui-surface;
     color: $text-primary;
     border-color: $ui-edge;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --paint-text-primary: var(--text-on-surface);
 }
 [theme="dark"] .source-button.active,
 [theme="dark"] .generator-button.active {
@@ -316,7 +349,12 @@
     border-color: $motion-primary;
     color: $text-on-accent;
 }
-[theme="dark"] .grid { background: $ui-primary; }
+[theme="dark"] .grid { background: $ui-primary;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-background);
+    --text-secondary: var(--text-dim-on-background);
+    --paint-text-primary: var(--text-on-background);
+}
 [theme="dark"] .sidebar-note,
 [theme="dark"] .notice,
 [theme="dark"] .limits,

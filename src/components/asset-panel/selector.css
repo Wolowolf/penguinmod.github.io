@@ -101,4 +101,8 @@ $fade-out-distance: 100px;
 .list-item.placeholder {
     background: $ui-surface;
     filter: opacity(15%) brightness(0%);
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --paint-text-primary: var(--text-on-surface);
 }

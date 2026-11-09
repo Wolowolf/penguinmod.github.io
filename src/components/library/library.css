@@ -17,9 +17,17 @@
     background: $ui-surface;
     overflow: auto;
     border: 2px solid $ui-edge;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --paint-text-primary: var(--text-on-surface);
 }
 [theme="dark"] .library-filter-bar {
     background: $ui-primary;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-background);
+    --text-secondary: var(--text-dim-on-background);
+    --paint-text-primary: var(--text-on-background);
 }
 
 .library-header {
@@ -187,6 +195,10 @@
     height: auto;
     padding: 0.5rem;
     height: calc(100%);
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-panel);
+    --text-secondary: var(--text-dim-on-panel);
+    --paint-text-primary: var(--text-on-panel);
 }
 
 .filter-bar-item {

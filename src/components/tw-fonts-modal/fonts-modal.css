@@ -18,6 +18,10 @@
 [theme="dark"] .body {
     color: $text-primary;
     background: $ui-primary;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-background);
+    --text-secondary: var(--text-dim-on-background);
+    --paint-text-primary: var(--text-on-background);
 }
 
 .open-buttons {
@@ -90,9 +94,17 @@
     border: 1px solid $ui-edge;
     box-sizing: border-box;
     box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, .3);
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --paint-text-primary: var(--text-on-surface);
 }
 [theme="dark"] .font-dropdown-outer {
     background-color: $ui-secondary;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-panel);
+    --text-secondary: var(--text-dim-on-panel);
+    --paint-text-primary: var(--text-on-panel);
 }
 .font-dropdown-item {
     display: flex;

@@ -32,6 +32,10 @@
 }
 [theme="dark"] .input-form {
     background-color: $ui-secondary;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-panel);
+    --text-secondary: var(--text-dim-on-panel);
+    --paint-text-primary: var(--text-on-panel);
 }
 
 .input-form:hover {

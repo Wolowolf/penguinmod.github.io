@@ -13,11 +13,19 @@
     left: 0;
     right: 0;
     z-index: $z-index-stage-header;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-background);
+    --text-secondary: var(--text-dim-on-background);
+    --paint-text-primary: var(--text-on-background);
 }
 
 /* tw: support dark mode */
 [theme="dark"] .stage-header-wrapper-overlay {
     background-color: $ui-primary;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-background);
+    --text-secondary: var(--text-dim-on-background);
+    --paint-text-primary: var(--text-on-background);
 }
 
 /* tw: do not show color in header when embedded */
@@ -62,9 +70,17 @@
     padding: 0.375rem;
     user-select: none;
     cursor: pointer;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --paint-text-primary: var(--text-on-surface);
 }
 [theme="dark"] .stage-button {
     background: $ui-secondary;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-panel);
+    --text-secondary: var(--text-dim-on-panel);
+    --paint-text-primary: var(--text-on-panel);
 }
 
 .stage-button-icon {

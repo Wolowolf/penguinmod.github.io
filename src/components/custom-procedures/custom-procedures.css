@@ -13,6 +13,10 @@
 [theme="dark"] .body {
     color: $text-primary;
     background: $ui-secondary;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-panel);
+    --text-secondary: var(--text-dim-on-panel);
+    --paint-text-primary: var(--text-on-panel);
 }
 
 .body input[type="checkbox"],
@@ -147,6 +151,10 @@
 
 .workspace :global(.blocklySvg) {
     background-color: $ui-primary;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-background);
+    --text-secondary: var(--text-dim-on-background);
+    --paint-text-primary: var(--text-on-background);
 }
 
 /* Row of "card" buttons for modifying custom procedures */
@@ -165,6 +173,10 @@
     cursor: pointer;
     transition: all 0.2s;
     flex-basis: 100px;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --paint-text-primary: var(--text-on-surface);
 }
 
 .option-card:hover {

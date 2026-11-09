@@ -12,6 +12,10 @@
 [theme="dark"] .body {
     color: $text-primary;
     background: $ui-primary;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-background);
+    --text-secondary: var(--text-dim-on-background);
+    --paint-text-primary: var(--text-on-background);
 }
 
 .body input[type="checkbox"],
@@ -41,6 +45,10 @@
 [theme="dark"] .variable-name-text-input {
     background: $ui-secondary;
     color: $text-primary;
+    /* section 220: text colours of this surface for what is inside */
+    --text-primary: var(--text-on-panel);
+    --text-secondary: var(--text-dim-on-panel);
+    --paint-text-primary: var(--text-on-panel);
 }
 
 .info-message {

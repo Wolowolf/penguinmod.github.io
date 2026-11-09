@@ -41,17 +41,17 @@ const loadSource = src => {
     return sources.get(src);
 };
 
-let colors = null;
-const readColors = () => {
-    const style = getComputedStyle(document.documentElement);
+// the colours where the icon is (section 220: each surface has its own text colour)
+const colorsAt = img => {
+    const style = getComputedStyle(img);
     const get = (name, fallback) => (style.getPropertyValue(name).trim() || fallback).replace('#', '');
-    colors = {
+    return {
         accent: get('--ui-accent-symbol', '#00c3ff'),
         text: get('--text-primary', '#575e75')
     };
 };
 
-const recolor = text => text.replace(HEX, (all, hex) => {
+const recolor = (text, colors) => text.replace(HEX, (all, hex) => {
     const lower = hex.toLowerCase();
     const rgb = lower.length === 8 ? lower.slice(0, 6) : lower;
     const alpha = lower.length === 8 ? lower.slice(6) : '';
@@ -61,7 +61,9 @@ const recolor = text => text.replace(HEX, (all, hex) => {
 });
 
 const apply = (img, original, text) => {
-    const applied = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(recolor(text))}`;
+    const applied = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(recolor(text, colorsAt(img)))}`;
+    const known = state.get(img);
+    if (known && known.original === original && known.applied === applied) return; // unchanged
     state.set(img, {original, applied});
     themed.add(img);
     img.setAttribute('data-pm-themed', '');
@@ -84,7 +86,6 @@ const handle = img => {
             if (known) forget(img);
             return;
         }
-        if (!colors) readColors();
         apply(img, src, text);
     });
 };
@@ -97,7 +98,6 @@ const forget = img => {
 };
 
 const refreshAll = () => {
-    readColors();
     for (const img of Array.from(themed)) {
         if (!img.isConnected) {
             themed.delete(img);
