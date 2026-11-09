@@ -57,5 +57,5 @@
 }
 
 .body a {
-    color: $motion-primary !important;
+    color: $ui-accent-symbol !important;
 }

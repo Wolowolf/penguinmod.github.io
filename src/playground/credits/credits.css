@@ -29,7 +29,7 @@ a {
 }
 
 .header-container {
-    color: white;
+    color: $text-on-accent;
     background-color: $motion-primary;
     padding: 20px 0;
     text-align: center;

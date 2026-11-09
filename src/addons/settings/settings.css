@@ -78,7 +78,7 @@ a:active, a:focus {
 
 .button {
     color: var(--text-primary);
-    background: var(--ui-tertiary);
+    background: var(--ui-surface);
     border: 1px solid var(--ui-edge);
     padding: 8px 12px;
     border-radius: 4px;
@@ -93,7 +93,7 @@ a:active, a:focus {
 }
 [theme="dark"] .button {
     color: var(--text-primary);
-    background: var(--ui-tertiary);
+    background: var(--ui-surface);
     border-color: var(--ui-edge);
 }
 .button:hover {
@@ -561,7 +561,7 @@ a:active, a:focus {
     border-right-width: 1px;
 }
 .select-option.selected {
-    color: white;
+    color: $text-on-accent;
     background: $motion-primary;
 }
 .select-option:active, .select-option:focus-within {

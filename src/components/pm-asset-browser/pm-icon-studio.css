@@ -92,7 +92,7 @@
     height: 2.4rem;
     padding: 2px;
     border: 2px solid transparent;
-    background: $ui-tertiary;
+    background: $ui-surface;
     font-size: 0.7rem;
     cursor: pointer;
 }
@@ -137,12 +137,12 @@
     font-weight: bold;
     cursor: pointer;
 }
-.add { background: $motion-primary; color: white; }
+.add { background: $motion-primary; color: $text-on-accent; }
 .add-alt { background: $text-primary; color: $ui-surface; }
 .add:disabled, .add-alt:disabled { opacity: 0.5; cursor: default; }
 .tags { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .tag-row { display: flex; align-items: center; gap: 6px; }
-.tag-thumb { width: 2.4rem; height: 2.4rem; background: $ui-tertiary; cursor: pointer; object-fit: contain; display: inline-block; }
+.tag-thumb { width: 2.4rem; height: 2.4rem; background: $ui-surface; cursor: pointer; object-fit: contain; display: inline-block; }
 .tag {
     min-width: 6rem;
     height: 2.4rem;

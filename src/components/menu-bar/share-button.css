@@ -14,7 +14,7 @@
 
 .share-button {
     background: $motion-primary;
-    color: $ui-white;
+    color: $text-on-accent;
     box-shadow: 0 0 0 1px $ui-black-transparent;
 }
 
@@ -31,7 +31,7 @@
 
 [theme="dark"] .share-button {
     background: transparent;
-    color: $ui-white;
+    color: $text-on-menu-bar;
     box-shadow: 0 0 0 1px $ui-black-transparent;
 }
 

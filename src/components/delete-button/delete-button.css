@@ -19,7 +19,7 @@
   width: calc(1.75rem + 4px);
   height: calc(1.75rem + 4px);
   background-color: $motion-primary;
-  color: $ui-white;
+  color: $text-on-accent;
   border-radius: 50%;
   font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif);
   user-select: none;

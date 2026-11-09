@@ -98,7 +98,7 @@
 
 .more {
     background: $motion-primary;
-    color: $ui-white;
+    color: $text-on-accent;
     border: none;
     outline: none;
     font-weight: bold;

@@ -125,7 +125,7 @@
 }
 .column-segment-active {
     background: $motion-primary;
-    color: white;
+    color: $text-on-accent;
 }
 /* difficulty switches (colours as the badges); a hidden level is dimmed and crossed out */
 .difficulty-bar {

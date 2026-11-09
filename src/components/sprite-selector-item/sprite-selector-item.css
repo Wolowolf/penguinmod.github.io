@@ -94,7 +94,7 @@
 
 .is-selected .sprite-info {
     background: $motion-primary;
-    color: $ui-white;
+    color: $text-on-accent;
 }
 
 .delete-button {

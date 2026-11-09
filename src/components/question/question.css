@@ -44,7 +44,7 @@
     border: none;
     border-radius: 100%;
 
-    color: white;
+    color: $text-on-accent;
     background: $motion-primary;
 }
 

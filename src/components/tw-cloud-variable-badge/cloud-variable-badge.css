@@ -39,5 +39,5 @@
 }
 .server.selected {
     background-color: $motion-primary;
-    color: $ui-white;
+    color: $text-on-accent;
 }

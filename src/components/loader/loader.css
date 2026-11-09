@@ -14,7 +14,7 @@
     background-color: $ui-menu-bar;
     font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif);
     text-align: center;
-    color: white;
+    color: $text-on-menu-bar;
 }
 [theme="dark"] .background {
     background-color: $motion-primary-dark;

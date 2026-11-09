@@ -6,7 +6,7 @@
     margin-bottom: 6px;
     background: $motion-primary;
     border-radius: 1.375rem;
-    color: $ui-white;
+    color: $text-on-accent;
     height: $library-filter-bar-height;
 }
 

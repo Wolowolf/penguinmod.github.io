@@ -40,13 +40,6 @@
 .setting:focus-within {
     background: $ui-tertiary;
 }
-[theme="dark"] .setting.active {
-    background: color-mix(in srgb, $ui-accent 15%, $ui-surface);
-}
-[theme="dark"] .setting:hover,
-[theme="dark"] .setting:focus-within {
-    background: $ui-tertiary;
-}
 
 .label {
     height: 32px;
@@ -66,7 +59,7 @@
 .setting th {
     padding: 0;
     margin: 0;
-    border: 1px solid $ui-tertiary;
+    border: 1px solid $ui-edge;
 }
 
 .checkbox {
@@ -105,14 +98,14 @@
 .divider {
     flex-grow: 1;
     margin-left: 1rem;
-    border-top: 1px dashed $ui-tertiary;
+    border-top: 1px dashed $ui-edge;
 }
 
 .button {
     font-family: inherit;
     font-size: 14px;
     background-color: $motion-primary;
-    color: white;
+    color: $text-on-accent;
     border: none;
     padding: 0.5rem 1rem;
     margin: 0;
@@ -160,6 +153,6 @@ input.custom-stage-size-input {
 }
 .pm-ratio-link-on,
 .pm-ratio-link-on:hover {
-    color: $motion-primary;
+    color: $ui-accent-symbol;
     opacity: 1;
 }

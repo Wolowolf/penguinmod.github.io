@@ -27,7 +27,7 @@
     width: 0.825rem;
     height: 0.825rem;
     background-color: $motion-primary;
-    color: $ui-white;
+    color: $text-on-accent;
 }
 
 .large {

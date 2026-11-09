@@ -24,7 +24,7 @@
     border-radius: 0.25rem;
     padding: 0.5rem 2rem;
     background: white;
-    color: $motion-primary;
+    color: $ui-accent-symbol;
     font-weight: bold;
     font-size: 0.875rem;
     cursor: pointer;

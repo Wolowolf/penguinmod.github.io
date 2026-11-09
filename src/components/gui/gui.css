@@ -85,8 +85,9 @@
     padding: 0 0.3125rem;
     font-size: 0.75rem;
 
-    background-color: $ui-tertiary;
-    color: $text-primary-transparent;
+    /* desktop (section 219): tabs are buttons: the button colour at rest, the hover tint on hover */
+    background-color: $ui-surface;
+    color: $text-secondary;
 
     display: flex;
     justify-content: center;
@@ -94,9 +95,6 @@
 
     user-select: none;
     white-space: nowrap;
-}
-[theme="dark"] .tab {
-    color: $text-primary;
 }
 .tab > div {
     display: flex;
@@ -131,24 +129,27 @@
 }
 
 .tab:hover {
-  background-color: $ui-primary;
-}
-[theme="dark"] .tab:hover {
-    background-color: $ui-secondary;
+    background-color: $ui-tertiary;
 }
 
 .tab.is-selected {
-    color: $motion-primary;
+    color: $ui-accent-symbol;
     background-color: $ui-surface;
+    box-shadow: inset 0 -2px 0 $ui-accent-symbol;
     z-index: 4; /* Make sure selected is always above */
-}
-[theme="dark"] .tab.is-selected {
-    background-color: $ui-secondary;
 }
 
 .tab img {
     width: 1.375rem;
-    filter: grayscale(100%);
+}
+/* the icon in one colour (pm-themed-icons.js): dim text, the accent when selected */
+.tab img[data-pm-themed] {
+    object-position: -10000px 0;
+    background-color: $text-secondary;
+    mask: var(--pm-icon) center / contain no-repeat;
+}
+.tab.is-selected img[data-pm-themed] {
+    background-color: $ui-accent-symbol;
 }
 
 [dir="ltr"] .tab img {
@@ -187,9 +188,6 @@
     transform: scaleX(-1);
 }
 
-.tab.is-selected img {
-    filter: none;
-}
 
 /* Tab style overrides from react-tabs */
 .tab.is-selected:after {
@@ -299,7 +297,7 @@
     font-size: 0.7rem;
     font-weight: 600;
     line-height: 1.1;
-    color: #ffffff;
+    color: $text-on-accent;
     /* the same outlined letters as the category names */
     text-shadow: -0.7px 0 0.6px #000000, 0.7px 0 0.6px #000000, 0 -0.7px 0.6px #000000,
         0 0.7px 0.6px #000000, 0 0 1px #000000;

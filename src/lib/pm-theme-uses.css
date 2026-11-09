@@ -94,3 +94,24 @@
 * {
     scrollbar-color: var(--ui-edge) transparent;
 }
+
+/* Section 219: icons redrawn in the theme's colours (pm-themed-icons.js) carry those colours, so the
+   costume editor's and stage header's dark-mode brightening filters are not needed on them */
+[theme="dark"] img[data-pm-themed][class*="mode-tools-icon"],
+[theme="dark"] img[data-pm-themed][class*="button-group-button-icon"],
+[theme="dark"] img[data-pm-themed][class*="tool-select-icon"],
+[theme="dark"] [class*="stage-header_stage-button"] img[data-pm-themed] {
+    filter: none !important;
+}
+/* icons on the accent (selected costume editor tool) and on the menu bar: black or white,
+   whichever reads there (--pm-on-*-filter from pm-theme-colors.js) */
+/* (one step more specific than the dark-mode rule above) */
+body [class*="tool-select-base_is-selected"] img[class*="tool-select-icon"],
+body [class*="paint-editor_bitmap-button"] img {
+    filter: var(--pm-on-accent-filter) !important;
+}
+[class*="menu-bar_menu-bar"] img,
+[class^="menu_menu_"] img,
+[class*=" menu_menu_"] img {
+    filter: var(--pm-on-menu-bar-filter);
+}

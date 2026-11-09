@@ -34,7 +34,7 @@
   margin: 0;
 }
 [theme="dark"] .gamepadlib-keyinput {
-  background-color: var(--ui-tertiary);
+  background-color: var(--ui-surface);
   border-color: var(--ui-edge, #c6cdd6);
   color: var(--text-primary);
 }

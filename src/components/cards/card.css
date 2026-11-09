@@ -21,7 +21,7 @@
     position: absolute;
     top: 5%;
     background: $ui-white;
-    border: 1px solid $ui-tertiary;
+    border: 1px solid $ui-edge;
     width: .75rem;
     z-index: 10;
     opacity: 0.9;
@@ -86,7 +86,7 @@
 }
 
 .card {
-    border: 1px solid $ui-tertiary;
+    border: 1px solid $ui-edge;
     border-radius: 0.75rem;
     display: flex;
     flex-direction: column;
@@ -212,7 +212,7 @@
 }
 
 .deck-name {
-    color: $motion-primary;
+    color: $ui-accent-symbol;
     font-weight: bold;
     font-size: 0.85rem;
     margin: .625rem 0px;
@@ -259,12 +259,12 @@
     cursor: pointer;
     padding: 0.5rem 1rem;
     background-color: $motion-primary;
-    color: white;
+    color: $text-on-accent;
     font-weight: bold;
     border-radius: 0.25rem;
     display: flex;
     align-items: center;
-    color: $ui-white;
+    color: $text-on-accent;
     font-size: .75rem;
     font-weight: bold;
     line-height: 1rem;

@@ -36,7 +36,7 @@
 .source-button.active {
     background: $motion-primary;
     border-color: $motion-primary;
-    color: $ui-white;
+    color: $text-on-accent;
 }
 .source-where {
     font-size: 0.7rem;
@@ -81,7 +81,7 @@
     padding: 0 0.9rem;
     border: none;
     background: $motion-primary;
-    color: $ui-white;
+    color: $text-on-accent;
     font-weight: bold;
     cursor: pointer;
 }
@@ -236,7 +236,7 @@
     height: 1.8rem;
     border: none;
     background: $motion-primary;
-    color: $ui-white;
+    color: $text-on-accent;
     font-size: 1.2rem;
     font-weight: bold;
     line-height: 1;
@@ -275,7 +275,7 @@
     padding: 6px 4px;
 }
 .generator-button { background: $ui-surface; color: $text-primary; border: 2px solid $ui-edge; }
-.generator-button.active { background: $motion-primary; color: $ui-white; border-color: $motion-primary; }
+.generator-button.active { background: $motion-primary; color: $text-on-accent; border-color: $motion-primary; }
 .generator-hint {
     flex: 1 1 300px;
     font-size: 0.8rem;
@@ -314,7 +314,7 @@
 [theme="dark"] .generator-button.active {
     background: $motion-primary;
     border-color: $motion-primary;
-    color: white;
+    color: $text-on-accent;
 }
 [theme="dark"] .grid { background: $ui-primary; }
 [theme="dark"] .sidebar-note,

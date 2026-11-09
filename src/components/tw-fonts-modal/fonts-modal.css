@@ -37,7 +37,7 @@
     border-radius: 0.5rem;
 }
 .open-button:hover {
-    color: $motion-primary;
+    color: $ui-accent-symbol;
     border-color: $motion-primary;
 }
 .open-button-image {
@@ -104,7 +104,7 @@
 }
 .font-dropdown-item:hover {
     background-color: $motion-primary;
-    color: #ffffff;
+    color: $text-on-accent;
 }
 
 .font-playground {
@@ -127,7 +127,7 @@
     border-radius: 0.25rem;
     border: 1px solid $ui-edge;
     background-color: $motion-primary;
-    color: $ui-white;
+    color: $text-on-accent;
 }
 .button:disabled {
     opacity: 0.8;
@@ -156,11 +156,11 @@
     justify-content: center;
 }
 .fallback-button:hover {
-    color: $motion-primary;
+    color: $ui-accent-symbol;
 }
 .fallback-container .fallback-button-selected {
     background-color: $motion-primary;
-    color: white;
+    color: $text-on-accent;
 }
 
 .fonts-outer {

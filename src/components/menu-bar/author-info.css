@@ -2,7 +2,7 @@
 @import "../../css/units.css";
 
 .author-info {
-    color: $ui-white;
+    color: $text-on-menu-bar;
     font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif);
     display: flex;
     justify-content: flex-start;

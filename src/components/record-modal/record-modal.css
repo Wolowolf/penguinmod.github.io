@@ -50,11 +50,11 @@
 }
 
 .playing-text {
-    color: $motion-primary;
+    color: $ui-accent-symbol;
 }
 
 .recording-text {
-    color: $red-primary;
+    color: $ui-accent-symbol;
 }
 
 .main-button-row {
@@ -92,13 +92,13 @@
     border: 1px solid $ui-edge;
     font-weight: 600;
     font-size: 0.85rem;
-    color: $motion-primary;
+    color: $ui-accent-symbol;
 }
 
 .button-row button.ok-button {
     background: $motion-primary;
     border: $motion-primary;
-    color: white;
+    color: $text-on-accent;
 }
 
 .button-row button + button {
