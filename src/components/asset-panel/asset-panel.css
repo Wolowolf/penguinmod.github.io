@@ -9,6 +9,12 @@
     background: $ui-workspace;
     font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif);
     font-size: 0.85rem;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-workspace);
+    --text-secondary: var(--text-dim-on-workspace);
+    --ui-accent-symbol: var(--accent-on-workspace);
+    --paint-text-primary: var(--text-on-workspace);
+    color: var(--text-primary); /* context */
 }
 
 [dir="ltr"] .wrapper {

@@ -17,17 +17,21 @@
     background: $ui-surface;
     overflow: auto;
     border: 2px solid $ui-edge;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
     --paint-text-primary: var(--text-on-surface);
+    color: var(--text-primary); /* context */
 }
 [theme="dark"] .library-filter-bar {
     background: $ui-primary;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-background);
     --text-secondary: var(--text-dim-on-background);
+    --ui-accent-symbol: var(--accent-on-background);
     --paint-text-primary: var(--text-on-background);
+    color: var(--text-primary); /* context */
 }
 
 .library-header {
@@ -133,7 +137,12 @@
 }
 .column-segment-active {
     background: $motion-primary;
-    color: $text-on-accent;
+    color: var(--text-primary);
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
 }
 /* difficulty switches (colours as the badges); a hidden level is dimmed and crossed out */
 .difficulty-bar {
@@ -195,10 +204,12 @@
     height: auto;
     padding: 0.5rem;
     height: calc(100%);
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-panel);
     --text-secondary: var(--text-dim-on-panel);
+    --ui-accent-symbol: var(--accent-on-panel);
     --paint-text-primary: var(--text-on-panel);
+    color: var(--text-primary); /* context */
 }
 
 .filter-bar-item {

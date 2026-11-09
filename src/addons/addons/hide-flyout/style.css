@@ -82,11 +82,23 @@
   background-color: var(--ui-primary, white);
   border: 1px solid var(--ui-edge, #c6cdd6);
   border-radius: 4px;
+  /* section 221: this background's text and symbol colours */
+  --text-primary: var(--text-on-background);
+  --text-secondary: var(--text-dim-on-background);
+  --ui-accent-symbol: var(--accent-on-background);
+  --paint-text-primary: var(--text-on-background);
+  color: var(--text-primary); /* context */
 }
 
 .sa-lock-object.locked .sa-lock-button {
-  background-color: #00c3ff;
+  background-color: var(--ui-accent, #00c3ff);
   border-color: #0099ff;
+  /* section 221: this background's text and symbol colours */
+  --text-primary: var(--text-on-accent);
+  --text-secondary: var(--text-dim-on-accent);
+  --ui-accent-symbol: var(--accent-on-accent);
+  --paint-text-primary: var(--text-on-accent);
+  color: var(--text-primary); /* context */
 }
 
 .sa-lock-button img {
@@ -108,6 +120,12 @@
   z-index: 43;
   padding-inline: 0.5rem;
   background-color: var(--ui-primary, hsl(215, 100%, 95%));
+  /* section 221: this background's text and symbol colours */
+  --text-primary: var(--text-on-background);
+  --text-secondary: var(--text-dim-on-background);
+  --ui-accent-symbol: var(--accent-on-background);
+  --paint-text-primary: var(--text-on-background);
+  color: var(--text-primary); /* context */
 }
 
 [class*="gui_stage-and-target-wrapper_"] {

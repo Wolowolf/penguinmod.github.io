@@ -87,10 +87,12 @@ $border-radius: 0.25rem;
     transition: 0.2s;
     user-select: none;
     margin: 0px;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
     --paint-text-primary: var(--text-on-surface);
+    color: var(--text-primary); /* context */
 }
 
 .button > img {
@@ -116,6 +118,12 @@ $border-radius: 0.25rem;
     cursor: pointer;
     padding: 0.75rem;
     user-select: none;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
+    color: var(--text-primary); /* context */
 }
 
 .round-button > img {

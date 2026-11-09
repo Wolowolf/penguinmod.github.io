@@ -21,7 +21,7 @@
     user-select: none;
     width: 508px;
 
-    color: $text-primary-light;
+    color: $text-primary;
     overflow: hidden;
 }
 
@@ -44,19 +44,26 @@
 }
 
 .body {
-    background: $ui-white;
+    background: $ui-surface;
     padding: 1.5rem 2.25rem;
     text-align: center;
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
+    --paint-text-primary: var(--text-on-surface);
+    color: var(--text-primary); /* context */
 }
 [theme="dark"] .body {
     color: $text-primary;
     background: $ui-primary;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-background);
     --text-secondary: var(--text-dim-on-background);
+    --ui-accent-symbol: var(--accent-on-background);
     --paint-text-primary: var(--text-on-background);
 }
 

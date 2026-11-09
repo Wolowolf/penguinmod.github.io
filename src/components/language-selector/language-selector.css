@@ -10,16 +10,22 @@
     user-select: none;
     font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif);
     font-size: .875rem;
-    color: $text-primary-light;
-    background: $ui-white;
+    color: $text-primary;
+    background: $ui-surface;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
+    --paint-text-primary: var(--text-on-surface);
 }
 [theme="dark"] .language-select {
-    color: $ui-white;
     background: $ui-primary;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-background);
     --text-secondary: var(--text-dim-on-background);
+    --ui-accent-symbol: var(--accent-on-background);
     --paint-text-primary: var(--text-on-background);
+    color: var(--text-primary); /* context */
 }
 
 [dir="ltr"] .language-select {

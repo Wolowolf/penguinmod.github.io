@@ -5,7 +5,8 @@
 // sets the body's theme attribute (editor, addon settings, credits) gets them.
 
 import themeUsesCSS from '!raw-loader!./pm-theme-uses.css';
-import startThemedIcons from './pm-themed-icons.js';
+import startThemedIcons, {refreshIcons, iconInfo} from './pm-themed-icons.js';
+import startContrastGuard from './pm-contrast-guard.js';
 
 // Grouped by what each area is used for (Session 238):
 // background = the app's frame; panels = where you take things from (block palette, category menu,
@@ -26,8 +27,6 @@ const THEME_COLORS = [
 
 // colours worked out from the ones above in CSS (not chosen in the addon)
 const DERIVED_BOTH = {
-    // hover and selected: a light tint of the text over what is hovered
-    '--ui-tertiary': 'color-mix(in srgb, var(--text-primary) 10%, var(--ui-surface))',
     // the block palette and category menu are panels
     '--ui-palette': 'var(--ui-secondary)',
     // the costume editor (scratch-paint) reads these
@@ -46,7 +45,10 @@ const DERIVED_DARK = Object.assign({}, DERIVED_BOTH, {
 // WCAG contrast ratios; the default colours meet them, so only chosen colours get corrected.
 const MIN_TEXT = 4.5; // text against every surface it is drawn on
 const MIN_DIM_TEXT = 3; // dim text and inactive icons
-const MIN_ACCENT_SYMBOL = 1.7; // accent-coloured text and icons (selected tab, links, icons)
+// accent-coloured text and icons (selected tab, links, icons): a colourful one reads at a lower
+// contrast than a grey one, so the minimum goes from 3 (grey) down to 1.7 (pure colour)
+const chroma = rgb => (Math.max(...rgb) - Math.min(...rgb)) / 255;
+const MIN_ACCENT_SYMBOL = color => 3 - (1.3 * chroma(color));
 const MIN_LINE = 1.35; // borders, scrollbars and the grid against what they separate
 const MIN_ACCENT_FILL = 1.7; // the accent as a fill (selections, buttons) against every surface
 
@@ -79,7 +81,9 @@ const BLACK = [0, 0, 0];
 // minimum, the most readable of all these
 const GREYS = Array.from({length: 86}, (unused, i) => [i * 3, i * 3, i * 3]);
 const ensureContrast = (color, backgrounds, minimum) => {
-    if (minContrast(color, backgrounds) >= minimum) return color;
+    // the minimum may depend on the colour tried
+    const needed = typeof minimum === 'function' ? minimum : () => minimum;
+    if (minContrast(color, backgrounds) >= needed(color)) return color;
     let best = color;
     let bestContrast = minContrast(color, backgrounds);
     const consider = candidate => {
@@ -88,7 +92,7 @@ const ensureContrast = (color, backgrounds, minimum) => {
             best = candidate;
             bestContrast = value;
         }
-        return value >= minimum;
+        return value >= needed(candidate);
     };
     for (let step = 1; step <= 50; step++) {
         for (const target of [BLACK, WHITE]) {
@@ -98,7 +102,7 @@ const ensureContrast = (color, backgrounds, minimum) => {
     }
     let grey = null;
     for (const candidate of GREYS) {
-        if (minContrast(candidate, backgrounds) >= minimum && (!grey ||
+        if (minContrast(candidate, backgrounds) >= needed(candidate) && (!grey ||
             Math.abs(luminance(candidate) - luminance(color)) < Math.abs(luminance(grey) - luminance(color)))) {
             grey = candidate;
         }
@@ -107,9 +111,10 @@ const ensureContrast = (color, backgrounds, minimum) => {
     return grey || best;
 };
 
-// text and icons on a coloured background: white while it stays readable there (2:1 or more, as the
-// default accent has), otherwise black or white, whichever reads better (like CSS contrast-color())
-const onColor = background => (contrast(WHITE, background) >= 2 ||
+// text and icons on a coloured background: white while it stays readable there (2:1 or more on a
+// pure colour, as the default accent has, up to 3:1 on a grey), otherwise black or white, whichever
+// reads better (like CSS contrast-color())
+const onColor = background => (contrast(WHITE, background) >= 3 - chroma(background) ||
     contrast(WHITE, background) >= contrast(BLACK, background) ? WHITE : BLACK);
 
 const toHsl = rgb => {
@@ -141,50 +146,74 @@ const fromHsl = ([h, s, l]) => {
     return [channel(h + (1 / 3)) * 255, channel(h) * 255, channel(h - (1 / 3)) * 255];
 };
 
-// the four surfaces things are drawn on; section 220: each has its own text colours, which every
-// area of that surface hands down to what is inside it (pm-theme-uses.css, and the style rules that
-// give an element one of these backgrounds), so text stays readable when the surfaces differ widely
+// Section 221: every kind of background something can be drawn on is a "context" with its own text,
+// dim text and accent-for-symbols colours, each corrected against that background alone. A style rule
+// that gives an element one of these backgrounds also sets --text-primary, --text-secondary,
+// --ui-accent-symbol and color to that context's (written into the rules by script: the four
+// surfaces, the hover tint, the selected tint, the accent and the menu bar), so nothing inside can
+// keep the colours of the area around it.
 const SURFACES = ['background', 'panel', 'workspace', 'surface'];
+const CONTEXTS = SURFACES.concat(['hover', 'selected', 'accent', 'menu-bar']);
 
 // every variable of one theme, from its 7 colours ({id: '#rrggbb'})
 const paletteVariables = (values, mode) => {
     const c = {};
     for (const color of THEME_COLORS) c[color.id] = parse(values[color.id]);
-    const surfaces = SURFACES.map(id => c[id]);
     const result = {};
     for (const color of THEME_COLORS) result[color.variable] = toHex(c[color.id]);
-    for (const id of SURFACES) {
-        const text = ensureContrast(c.text, [c[id]], MIN_TEXT);
-        // dim text: 75% text on this surface, stronger when that is not readable enough
-        let amount = 0.75;
-        while (amount < 1 && contrast(mix(text, c[id], amount), c[id]) < MIN_DIM_TEXT) amount += 0.05;
-        const dim = ensureContrast(mix(text, c[id], Math.min(1, amount)), [c[id]], MIN_DIM_TEXT);
-        result[`--text-on-${id}`] = toHex(text);
-        result[`--text-dim-on-${id}`] = toHex(dim);
-    }
     // the accent fills selections and buttons: it must stand out from every surface
-    const accent = ensureContrast(c.accent, surfaces, MIN_ACCENT_FILL);
-    const edge = ensureContrast(c.edge, [c.panel, c.workspace, c.surface], MIN_LINE);
-    const accentSymbol = ensureContrast(accent, [c.panel, c.workspace, c.surface], MIN_ACCENT_SYMBOL);
+    const accent = ensureContrast(c.accent, SURFACES.map(id => c[id]), MIN_ACCENT_FILL);
     const hsl = toHsl(accent);
     const menuBar = mode === 'dark' ? fromHsl([hsl[0], hsl[1], hsl[2] * 0.8]) : accent;
-    const onAccent = onColor(accent);
-    const onMenuBar = onColor(menuBar);
+    // Where the chosen text does not read, it is not just nudged to the minimum (dim grey on black):
+    // it becomes as strong there as the choice is on the surface it reads best on (black text chosen
+    // for white buttons turns white on black panels).
+    const strongest = color => Math.max(...SURFACES.map(id => contrast(color, c[id])));
+    const textWanted = Math.max(MIN_TEXT, strongest(c.text));
+    const textOn = background => (contrast(c.text, background) >= MIN_TEXT ? c.text :
+        ensureContrast(c.text, [background], textWanted));
+    const accentWanted = Math.min(7, strongest(accent));
+    const accentOn = background => ensureContrast(accent, [background], color =>
+        (contrast(accent, background) >= MIN_ACCENT_SYMBOL(accent) ? 0 : Math.max(MIN_ACCENT_SYMBOL(color), accentWanted)));
+    const backgrounds = {};
+    for (const id of SURFACES) backgrounds[id] = c[id];
+    // hover: a light tint of the buttons' text over the button colour
+    backgrounds.hover = mix(textOn(c.surface), c.surface, 0.1);
+    // selected (not hovered) rows: a tint of the accent over the button colour
+    backgrounds.selected = mix(accent, c.surface, 0.15);
+    for (const id of Object.keys(backgrounds)) {
+        const background = backgrounds[id];
+        const text = textOn(background);
+        // dim text: 75% text on this background, stronger when that is not readable enough
+        let amount = 0.75;
+        while (amount < 1 && contrast(mix(text, background, amount), background) < MIN_DIM_TEXT) amount += 0.05;
+        const dim = ensureContrast(mix(text, background, Math.min(1, amount)), [background], MIN_DIM_TEXT);
+        result[`--text-on-${id}`] = toHex(text);
+        result[`--text-dim-on-${id}`] = toHex(dim);
+        // the accent as the colour of text and symbols there
+        result[`--accent-on-${id}`] = toHex(accentOn(background));
+    }
+    // on the accent and the menu bar everything is black or white
+    for (const [id, background] of [['accent', accent], ['menu-bar', menuBar]]) {
+        const on = toHex(onColor(background));
+        result[`--text-on-${id}`] = on;
+        result[`--text-dim-on-${id}`] = on;
+        result[`--accent-on-${id}`] = on;
+    }
+    const edge = ensureContrast(c.edge, [c.panel, c.workspace, c.surface], MIN_LINE);
     Object.assign(result, {
         // the page itself is the background
         '--text-primary': result['--text-on-background'],
         '--text-secondary': result['--text-dim-on-background'],
+        '--ui-accent-symbol': result['--accent-on-background'],
         '--ui-accent': toHex(accent),
         '--ui-edge': toHex(edge),
-        // the accent as the colour of text and symbols on the theme's surfaces
-        '--ui-accent-symbol': toHex(accentSymbol),
         '--ui-menu-bar': toHex(menuBar),
-        // text and icons drawn on the accent / menu bar: black or white
-        '--text-on-accent': toHex(onAccent),
-        '--text-on-menu-bar': toHex(onMenuBar),
-        // turns a white picture icon into that black or white
-        '--pm-on-accent-filter': onAccent === WHITE ? 'brightness(0) invert(1)' : 'brightness(0)',
-        '--pm-on-menu-bar-filter': onMenuBar === WHITE ? 'brightness(0) invert(1)' : 'brightness(0)'
+        '--ui-tertiary': toHex(backgrounds.hover),
+        '--ui-selected': toHex(backgrounds.selected),
+        // turns a one-colour picture icon into the black or white of text on the accent / menu bar
+        '--pm-on-accent-filter': onColor(accent) === WHITE ? 'brightness(0) invert(1)' : 'brightness(0)',
+        '--pm-on-menu-bar-filter': onColor(menuBar) === WHITE ? 'brightness(0) invert(1)' : 'brightness(0)'
     });
     return result;
 };
@@ -230,6 +259,15 @@ const installThemeColors = () => {
     else document.addEventListener('DOMContentLoaded', addUses, {once: true});
     // section 219: picture icons in the theme's colours
     startThemedIcons();
+    // section 221: corrects what still does not read while a theme has chosen colours
+    startContrastGuard({contrast, ensureContrast}, {refreshIcons, iconInfo});
+};
+
+// puts the addon's colours (CSS from themeColorsCSS, '' for none) into its style element and tells
+// the icons and the contrast guard
+const applyThemeColors = (styleElement, css) => {
+    styleElement.textContent = css;
+    document.dispatchEvent(new CustomEvent('pm-theme-colors-changed', {detail: {custom: css !== ''}}));
 };
 
 const isColor = value => typeof value === 'string' && /^#[0-9a-f]{6}([0-9a-f]{2})?$/i.test(value);
@@ -266,6 +304,10 @@ export {
     installThemeColors,
     customCSS,
     themeColorsCSS,
+    applyThemeColors,
     paletteVariables,
-    SURFACES
+    SURFACES,
+    CONTEXTS,
+    contrast,
+    ensureContrast
 };

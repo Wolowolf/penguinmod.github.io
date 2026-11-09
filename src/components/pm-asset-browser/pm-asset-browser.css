@@ -31,16 +31,22 @@
     font-weight: bold;
     cursor: pointer;
     text-align: left;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
     --paint-text-primary: var(--text-on-surface);
 }
 .source-button:hover { border-color: $motion-primary; }
 .source-button.active {
     background: $motion-primary;
     border-color: $motion-primary;
-    color: $text-on-accent;
+    color: var(--text-primary);
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
 }
 .source-where {
     font-size: 0.7rem;
@@ -78,9 +84,10 @@
     font-size: 0.95rem;
     color: $text-primary;
     background: $ui-surface;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
     --paint-text-primary: var(--text-on-surface);
 }
 .search:focus { outline: none; border-color: $motion-primary; }
@@ -89,9 +96,14 @@
     padding: 0 0.9rem;
     border: none;
     background: $motion-primary;
-    color: $text-on-accent;
+    color: var(--text-primary);
     font-weight: bold;
     cursor: pointer;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
 }
 .select {
     height: 2.2rem;
@@ -99,9 +111,10 @@
     border: 2px solid $ui-edge;
     background: $ui-surface;
     color: $text-primary;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
     --paint-text-primary: var(--text-on-surface);
 }
 .count {
@@ -141,10 +154,12 @@
     gap: 8px;
     padding: 8px;
     background: $ui-secondary;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-panel);
     --text-secondary: var(--text-dim-on-panel);
+    --ui-accent-symbol: var(--accent-on-panel);
     --paint-text-primary: var(--text-on-panel);
+    color: var(--text-primary); /* context */
 }
 .tile {
     position: relative;
@@ -159,9 +174,10 @@
     color: $text-primary;
     cursor: pointer;
     text-align: center;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
     --paint-text-primary: var(--text-on-surface);
 }
 .tile:hover, .tile:focus { border-color: $motion-primary; outline: none; }
@@ -256,12 +272,17 @@
     height: 1.8rem;
     border: none;
     background: $motion-primary;
-    color: $text-on-accent;
+    color: var(--text-primary);
     font-size: 1.2rem;
     font-weight: bold;
     line-height: 1;
     cursor: pointer;
     z-index: 1;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
 }
 .quick-add:hover { filter: brightness(1.1); }
 .link-button {
@@ -295,12 +316,19 @@
     padding: 6px 4px;
 }
 .generator-button { background: $ui-surface; color: $text-primary; border: 2px solid $ui-edge;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
     --paint-text-primary: var(--text-on-surface);
 }
-.generator-button.active { background: $motion-primary; color: $text-on-accent; border-color: $motion-primary; }
+.generator-button.active { background: $motion-primary; color: $text-on-accent; border-color: $motion-primary;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
+}
 .generator-hint {
     flex: 1 1 300px;
     font-size: 0.8rem;
@@ -311,10 +339,12 @@
     width: 100%;
     border: 2px solid $ui-edge;
     background: $ui-surface;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
     --paint-text-primary: var(--text-on-surface);
+    color: var(--text-primary); /* context */
 }
 
 .busy {
@@ -338,22 +368,30 @@
     background: $ui-surface;
     color: $text-primary;
     border-color: $ui-edge;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
     --paint-text-primary: var(--text-on-surface);
 }
 [theme="dark"] .source-button.active,
 [theme="dark"] .generator-button.active {
     background: $motion-primary;
     border-color: $motion-primary;
-    color: $text-on-accent;
+    color: var(--text-primary);
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
 }
 [theme="dark"] .grid { background: $ui-primary;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-background);
     --text-secondary: var(--text-dim-on-background);
+    --ui-accent-symbol: var(--accent-on-background);
     --paint-text-primary: var(--text-on-background);
+    color: var(--text-primary); /* context */
 }
 [theme="dark"] .sidebar-note,
 [theme="dark"] .notice,

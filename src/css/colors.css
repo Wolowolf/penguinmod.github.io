@@ -11,6 +11,7 @@ $ui-workspace: var(--ui-workspace, #f9f9f9);
 $ui-palette: var(--ui-palette, #f9f9f9);
 $ui-menu-bar: var(--ui-menu-bar, #00c3ff);
 $ui-accent: var(--ui-accent, #00c3ff);
+$ui-selected: var(--ui-selected, #d9f6ff); /* selected rows, information boxes: accent tint on the button colour */
 /* section 219: worked out in pm-theme-colors.js so text and symbols stay readable */
 $ui-accent-symbol: var(--ui-accent-symbol, #00c3ff); /* accent as the colour of text and icons */
 $text-on-accent: var(--text-on-accent, #ffffff); /* text and icons drawn on the accent */

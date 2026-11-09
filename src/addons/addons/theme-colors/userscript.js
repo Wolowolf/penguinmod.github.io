@@ -1,6 +1,6 @@
 // Desktop fork (section 217): the chosen colours replace the theme colour variables of
 // src/lib/pm-theme-colors.js, which every part of the editor uses.
-import {themeColorsCSS} from "../../../lib/pm-theme-colors.js";
+import {themeColorsCSS, applyThemeColors} from "../../../lib/pm-theme-colors.js";
 
 export default async function ({ addon }) {
   const stylesheet = document.createElement("style");
@@ -8,9 +8,7 @@ export default async function ({ addon }) {
   document.head.appendChild(stylesheet);
 
   const apply = () => {
-    stylesheet.textContent = addon.self.disabled ? "" : themeColorsCSS((id) => addon.settings.get(id));
-    // parts drawn on a canvas (the costume editor) read the colours again
-    document.dispatchEvent(new CustomEvent("pm-theme-colors-changed"));
+    applyThemeColors(stylesheet, addon.self.disabled ? "" : themeColorsCSS((id) => addon.settings.get(id)));
   };
   apply();
   addon.settings.addEventListener("change", apply);

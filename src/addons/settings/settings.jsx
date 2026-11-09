@@ -26,7 +26,7 @@ import settingsTranslationsOther from './translations.json';
 import upstreamMeta from '../generated/upstream-meta.json';
 import { detectLocale } from '../../lib/detect-locale';
 import { getInitialDarkMode } from '../../lib/tw-theme-hoc.jsx';
-import { themeColorsCSS } from '../../lib/pm-theme-colors.js';
+import { themeColorsCSS, applyThemeColors } from '../../lib/pm-theme-colors.js';
 import SettingsStore from '../settings-store-singleton';
 import Channels from '../channels';
 import extensionImage from './icons/extension.svg';
@@ -64,13 +64,13 @@ document.body.setAttribute('theme', theme);
 // Desktop fork (section 217): this page uses the "Theme colors" addon's colours too
 const themeColorsStylesheet = document.createElement('style');
 document.head.appendChild(themeColorsStylesheet);
-const applyThemeColors = () => {
-    themeColorsStylesheet.textContent = SettingsStore.getAddonEnabled('theme-colors') ?
-        themeColorsCSS(id => SettingsStore.getAddonSetting('theme-colors', id)) : '';
+const applyPageThemeColors = () => {
+    applyThemeColors(themeColorsStylesheet, SettingsStore.getAddonEnabled('theme-colors') ?
+        themeColorsCSS(id => SettingsStore.getAddonSetting('theme-colors', id)) : '');
 };
-applyThemeColors();
-SettingsStore.addEventListener('setting-changed', applyThemeColors);
-SettingsStore.addEventListener('addon-changed', applyThemeColors);
+applyPageThemeColors();
+SettingsStore.addEventListener('setting-changed', applyPageThemeColors);
+SettingsStore.addEventListener('addon-changed', applyPageThemeColors);
 
 let _throttleTimeout;
 const postThrottledSettingsChange = store => {

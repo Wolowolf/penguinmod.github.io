@@ -14,10 +14,12 @@
     rgba(0, 0, 0, 0.2) 0 3px 10px;
 
   z-index: 999;
-  /* section 220: text colours of this surface for what is inside */
+  /* section 221: this background's text and symbol colours */
   --text-primary: var(--text-on-surface);
   --text-secondary: var(--text-dim-on-surface);
+  --ui-accent-symbol: var(--accent-on-surface);
   --paint-text-primary: var(--text-on-surface);
+  color: var(--text-primary); /* context */
 }
 
 .sa-mcp-container {
@@ -32,17 +34,21 @@
   border-radius: 4px;
   overflow: auto;
   resize: both;
-  /* section 220: text colours of this surface for what is inside */
+  /* section 221: this background's text and symbol colours */
   --text-primary: var(--text-on-surface);
   --text-secondary: var(--text-dim-on-surface);
+  --ui-accent-symbol: var(--accent-on-surface);
   --paint-text-primary: var(--text-on-surface);
+  color: var(--text-primary); /* context */
 }
 [theme="dark"] .sa-mcp-container {
   background-color: var(--ui-surface);
-  /* section 220: text colours of this surface for what is inside */
+  /* section 221: this background's text and symbol colours */
   --text-primary: var(--text-on-surface);
   --text-secondary: var(--text-dim-on-surface);
+  --ui-accent-symbol: var(--accent-on-surface);
   --paint-text-primary: var(--text-on-surface);
+  color: var(--text-primary); /* context */
 }
 
 .sa-mcp-input-wrapper {

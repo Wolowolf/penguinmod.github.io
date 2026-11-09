@@ -19,12 +19,17 @@
   width: calc(1.75rem + 4px);
   height: calc(1.75rem + 4px);
   background-color: $motion-primary;
-  color: $text-on-accent;
+  color: var(--text-primary);
   border-radius: 50%;
   font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif);
   user-select: none;
   cursor: pointer;
   transition: all 0.15s ease-out;
+  /* section 221: this background's text and symbol colours */
+  --text-primary: var(--text-on-accent);
+  --text-secondary: var(--text-dim-on-accent);
+  --ui-accent-symbol: var(--accent-on-accent);
+  --paint-text-primary: var(--text-on-accent);
 }
 
 .delete-icon {

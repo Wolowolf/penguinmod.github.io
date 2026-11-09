@@ -5,18 +5,25 @@
 }
 
 .body {
-    background: $ui-white;
+    background: $ui-surface;
     padding: 1.5rem 2.25rem;
     min-height: 158px;
     max-height: calc(100vh - 242px);
     overflow-y: auto;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
+    --paint-text-primary: var(--text-on-surface);
+    color: var(--text-primary); /* context */
 }
 [theme="dark"] .body {
     color: $text-primary;
     background: $ui-primary;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-background);
     --text-secondary: var(--text-dim-on-background);
+    --ui-accent-symbol: var(--accent-on-background);
     --paint-text-primary: var(--text-on-background);
 }
 
@@ -38,15 +45,23 @@
     border-radius: 4px;
 }
 .setting.active {
-    background: color-mix(in srgb, $ui-accent 15%, $ui-surface);
+    background: $ui-selected;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-selected);
+    --text-secondary: var(--text-dim-on-selected);
+    --ui-accent-symbol: var(--accent-on-selected);
+    --paint-text-primary: var(--text-on-selected);
+    color: var(--text-primary); /* context */
 }
 .setting:hover,
 .setting:focus-within {
     background: $ui-tertiary;
-    /* section 220: text colours of this surface for what is inside */
-    --text-primary: var(--text-on-surface);
-    --text-secondary: var(--text-dim-on-surface);
-    --paint-text-primary: var(--text-on-surface);
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-hover);
+    --text-secondary: var(--text-dim-on-hover);
+    --ui-accent-symbol: var(--accent-on-hover);
+    --paint-text-primary: var(--text-on-hover);
+    color: var(--text-primary); /* context */
 }
 
 .label {
@@ -113,7 +128,7 @@
     font-family: inherit;
     font-size: 14px;
     background-color: $motion-primary;
-    color: $text-on-accent;
+    color: var(--text-primary);
     border: none;
     padding: 0.5rem 1rem;
     margin: 0;
@@ -121,6 +136,11 @@
     cursor: pointer;
     font-family: inherit;
     font-weight: bold;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
 }
 /* PMDESKTOP_STAGE_PATCH: the note under FPS and the stage size chain link (section 21) */
 /* no up / down arrows in the FPS and stage size boxes */

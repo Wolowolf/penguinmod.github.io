@@ -43,6 +43,12 @@
   width: 16em;
   box-shadow: 0px 0px 8px 1px var(--ui-black-transparent, rgba(0, 0, 0, 0.3));
   background-color: var(--ui-primary, white);
+  /* section 221: this background's text and symbol colours */
+  --text-primary: var(--text-on-background);
+  --text-secondary: var(--text-dim-on-background);
+  --ui-accent-symbol: var(--accent-on-background);
+  --paint-text-primary: var(--text-on-background);
+  color: var(--text-primary); /* context */
 }
 
 /* We need to modify Scratch styles so that the place where the find bar is injected */

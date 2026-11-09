@@ -14,8 +14,13 @@
 
 .share-button {
     background: $motion-primary;
-    color: $text-on-accent;
+    color: var(--text-primary);
     box-shadow: 0 0 0 1px $ui-black-transparent;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
 }
 
 .disabled {

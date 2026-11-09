@@ -30,9 +30,15 @@
 
     padding: 0.25rem;
     border: 2px solid $motion-primary;
-    background: $ui-white;
+    background: $ui-surface;
     border-radius: 0.5rem;
 
     /* Use the same drop shadow as stage dragging */
     box-shadow: 5px 5px 5px $ui-black-transparent-default;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
+    --paint-text-primary: var(--text-on-surface);
+    color: var(--text-primary); /* context */
 }

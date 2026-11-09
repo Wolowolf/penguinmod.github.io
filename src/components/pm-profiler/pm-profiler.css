@@ -113,19 +113,26 @@
 }
 
 .body {
-    background: $ui-white;
+    background: $ui-surface;
     color: $text-primary;
     padding: 1.25rem 2rem;
     min-height: 158px;
     max-height: calc(100vh - 242px);
     overflow-y: auto;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
+    --paint-text-primary: var(--text-on-surface);
 }
 [theme="dark"] .body {
     background: $ui-primary;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-background);
     --text-secondary: var(--text-dim-on-background);
+    --ui-accent-symbol: var(--accent-on-background);
     --paint-text-primary: var(--text-on-background);
+    color: var(--text-primary); /* context */
 }
 
 @media (max-height: 600px) {
@@ -166,10 +173,12 @@
 }
 .tool-button:hover {
     background: $ui-tertiary;
-    /* section 220: text colours of this surface for what is inside */
-    --text-primary: var(--text-on-surface);
-    --text-secondary: var(--text-dim-on-surface);
-    --paint-text-primary: var(--text-on-surface);
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-hover);
+    --text-secondary: var(--text-dim-on-hover);
+    --ui-accent-symbol: var(--accent-on-hover);
+    --paint-text-primary: var(--text-on-hover);
+    color: var(--text-primary); /* context */
 }
 .tool-button:focus-visible,
 .sort-button:focus-visible {
@@ -228,10 +237,12 @@
 }
 .sort-button:hover {
     background: $ui-tertiary;
-    /* section 220: text colours of this surface for what is inside */
-    --text-primary: var(--text-on-surface);
-    --text-secondary: var(--text-dim-on-surface);
-    --paint-text-primary: var(--text-on-surface);
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-hover);
+    --text-secondary: var(--text-dim-on-hover);
+    --ui-accent-symbol: var(--accent-on-hover);
+    --paint-text-primary: var(--text-on-hover);
+    color: var(--text-primary); /* context */
 }
 
 .detail {

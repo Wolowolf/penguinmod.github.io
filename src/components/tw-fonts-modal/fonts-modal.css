@@ -7,20 +7,27 @@
 }
 
 .body {
-    background: $ui-white;
+    background: $ui-surface;
     padding: 1.5rem 2.25rem;
     max-height: calc(100vh - 142px);
     overflow: auto;
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
+    --paint-text-primary: var(--text-on-surface);
+    color: var(--text-primary); /* context */
 }
 [theme="dark"] .body {
     color: $text-primary;
     background: $ui-primary;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-background);
     --text-secondary: var(--text-dim-on-background);
+    --ui-accent-symbol: var(--accent-on-background);
     --paint-text-primary: var(--text-on-background);
 }
 
@@ -94,17 +101,20 @@
     border: 1px solid $ui-edge;
     box-sizing: border-box;
     box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, .3);
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
     --paint-text-primary: var(--text-on-surface);
 }
 [theme="dark"] .font-dropdown-outer {
     background-color: $ui-secondary;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-panel);
     --text-secondary: var(--text-dim-on-panel);
+    --ui-accent-symbol: var(--accent-on-panel);
     --paint-text-primary: var(--text-on-panel);
+    color: var(--text-primary); /* context */
 }
 .font-dropdown-item {
     display: flex;
@@ -116,7 +126,12 @@
 }
 .font-dropdown-item:hover {
     background-color: $motion-primary;
-    color: $text-on-accent;
+    color: var(--text-primary);
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
 }
 
 .font-playground {
@@ -139,7 +154,12 @@
     border-radius: 0.25rem;
     border: 1px solid $ui-edge;
     background-color: $motion-primary;
-    color: $text-on-accent;
+    color: var(--text-primary);
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
 }
 .button:disabled {
     opacity: 0.8;
@@ -172,7 +192,12 @@
 }
 .fallback-container .fallback-button-selected {
     background-color: $motion-primary;
-    color: $text-on-accent;
+    color: var(--text-primary);
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
 }
 
 .fonts-outer {

@@ -11,11 +11,22 @@
     /* tw: no max width */
     /* max-width: 260px; */
     overflow: visible;
-    color: $text-on-menu-bar;
+    color: var(--text-primary);
     box-shadow: 0 8px 8px 0 $ui-black-transparent-default;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-menu-bar);
+    --text-secondary: var(--text-dim-on-menu-bar);
+    --ui-accent-symbol: var(--accent-on-menu-bar);
+    --paint-text-primary: var(--text-on-menu-bar);
 }
 [theme="dark"] .menu {
     background-color: $motion-primary-dark;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-menu-bar);
+    --text-secondary: var(--text-dim-on-menu-bar);
+    --ui-accent-symbol: var(--accent-on-menu-bar);
+    --paint-text-primary: var(--text-on-menu-bar);
+    color: var(--text-primary); /* context */
 }
 
 .menu.left {

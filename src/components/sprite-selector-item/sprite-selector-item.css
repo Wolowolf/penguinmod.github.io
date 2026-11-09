@@ -24,26 +24,42 @@
 
 .sprite-selector-item.is-selected {
     border: 2px solid $motion-primary;
-    background: $ui-white;
+    background: $ui-surface;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
+    --paint-text-primary: var(--text-on-surface);
+    color: var(--text-primary); /* context */
 }
 [theme="dark"] .sprite-selector-item.is-selected {
     background: $ui-primary;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-background);
     --text-secondary: var(--text-dim-on-background);
+    --ui-accent-symbol: var(--accent-on-background);
     --paint-text-primary: var(--text-on-background);
+    color: var(--text-primary); /* context */
 }
 
 .sprite-selector-item:hover {
     border: 2px solid $motion-primary;
-    background: $ui-white;
+    background: $ui-surface;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
+    --paint-text-primary: var(--text-on-surface);
+    color: var(--text-primary); /* context */
 }
 [theme="dark"] .sprite-selector-item:hover {
     background: $ui-primary;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-background);
     --text-secondary: var(--text-dim-on-background);
+    --ui-accent-symbol: var(--accent-on-background);
     --paint-text-primary: var(--text-on-background);
+    color: var(--text-primary); /* context */
 }
 
 .sprite-selector-item:hover .sprite-image, .is-selected .sprite-image {
@@ -102,7 +118,12 @@
 
 .is-selected .sprite-info {
     background: $motion-primary;
-    color: $text-on-accent;
+    color: var(--text-primary);
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
 }
 
 .delete-button {

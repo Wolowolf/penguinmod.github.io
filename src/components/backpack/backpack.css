@@ -16,17 +16,20 @@
     transition: 0.2s;
     cursor: pointer;
     user-select: none;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
     --paint-text-primary: var(--text-on-surface);
 }
 [theme="dark"] .backpack-header {
     background: $ui-primary;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-background);
     --text-secondary: var(--text-dim-on-background);
+    --ui-accent-symbol: var(--accent-on-background);
     --paint-text-primary: var(--text-on-background);
+    color: var(--text-primary); /* context */
 }
 
 [dir="ltr"] .backpack-header {
@@ -95,6 +98,12 @@
 .backpack-item > div {
     /* Need to set the background to get blend-mode below to work */
     background: $ui-primary;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-background);
+    --text-secondary: var(--text-dim-on-background);
+    --ui-accent-symbol: var(--accent-on-background);
+    --paint-text-primary: var(--text-on-background);
+    color: var(--text-primary); /* context */
 }
 
 .backpack-item img {
@@ -106,7 +115,7 @@
 
 .more {
     background: $motion-primary;
-    color: $text-on-accent;
+    color: var(--text-primary);
     border: none;
     outline: none;
     font-weight: bold;
@@ -115,4 +124,9 @@
     padding: 0.5rem;
     margin: 0.5rem;
     cursor: pointer;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
 }

@@ -6,15 +6,23 @@
 }
 
 .body {
-    background: $ui-white;
+    background: $ui-surface;
     padding: 1.5rem 2.25rem;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
+    --paint-text-primary: var(--text-on-surface);
+    color: var(--text-primary); /* context */
 }
 [theme="dark"] .body {
     background: $ui-secondary;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-panel);
     --text-secondary: var(--text-dim-on-panel);
+    --ui-accent-symbol: var(--accent-on-panel);
     --paint-text-primary: var(--text-on-panel);
+    color: var(--text-primary); /* context */
 }
 
 .visualization-container {
@@ -29,10 +37,12 @@
     padding: 3px;
     /* Force these to be on their own render layer because they update often */
     transform: translateZ(0);
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-background);
     --text-secondary: var(--text-dim-on-background);
+    --ui-accent-symbol: var(--accent-on-background);
     --paint-text-primary: var(--text-on-background);
+    color: var(--text-primary); /* context */
 }
 
 .meter-container {
@@ -96,17 +106,27 @@
 .button-row button {
     padding: 0.75rem 1rem;
     border-radius: 0.25rem;
-    background: white;
+    background: $ui-surface;
     border: 1px solid $ui-edge;
     font-weight: 600;
     font-size: 0.85rem;
     color: $ui-accent-symbol;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
+    --paint-text-primary: var(--text-on-surface);
 }
 
 .button-row button.ok-button {
     background: $motion-primary;
     border: $motion-primary;
-    color: $text-on-accent;
+    color: var(--text-primary);
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
 }
 
 .button-row button + button {

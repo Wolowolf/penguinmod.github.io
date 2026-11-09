@@ -13,10 +13,12 @@
     border-width: 1px;
     border-style: solid;
     border-bottom: 0;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-panel);
     --text-secondary: var(--text-dim-on-panel);
+    --ui-accent-symbol: var(--accent-on-panel);
     --paint-text-primary: var(--text-on-panel);
+    color: var(--text-primary); /* context */
 }
 
 .sprite-wrapper {

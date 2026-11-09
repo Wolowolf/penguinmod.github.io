@@ -6,8 +6,13 @@
     margin-bottom: 6px;
     background: $motion-primary;
     border-radius: 1.375rem;
-    color: $text-on-accent;
+    color: var(--text-primary);
     height: $library-filter-bar-height;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
 }
 
 .tag-button-icon {
@@ -59,4 +64,10 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
+    color: var(--text-primary); /* context */
 }

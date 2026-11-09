@@ -21,9 +21,10 @@ $header-height: calc(2.75rem - 2px);
     border-bottom: 0;
     cursor: pointer;
     transition: all 0.25s ease;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-panel);
     --text-secondary: var(--text-dim-on-panel);
+    --ui-accent-symbol: var(--accent-on-panel);
     --paint-text-primary: var(--text-on-panel);
 }
 
@@ -50,9 +51,10 @@ $header-height: calc(2.75rem - 2px);
     border-bottom: 1px solid $ui-edge;
     width: 100%;
     transition: background-color 0.25s ease;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-panel);
     --text-secondary: var(--text-dim-on-panel);
+    --ui-accent-symbol: var(--accent-on-panel);
     --paint-text-primary: var(--text-on-panel);
 }
 
@@ -68,10 +70,16 @@ $header-height: calc(2.75rem - 2px);
 
 .stage-selector.is-selected .header {
     background-color: $motion-primary;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
+    color: var(--text-primary); /* context */
 }
 
 .stage-selector.is-selected .header-title {
-    color: $ui-white;
+    color: $text-primary;
 }
 
 .count {

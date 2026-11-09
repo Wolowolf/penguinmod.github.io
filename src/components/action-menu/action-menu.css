@@ -24,6 +24,12 @@ $more-button-size: 2.25rem;
     outline: none;
     border: none;
     transition: background-color 0.2s;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
+    color: var(--text-primary); /* context */
 }
 
 button::-moz-focus-inner {
@@ -32,6 +38,12 @@ button::-moz-focus-inner {
 
 .button:hover {
     background: $extensions-primary;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
+    color: var(--text-primary); /* context */
 }
 
 .button:active {
@@ -85,6 +97,12 @@ button::-moz-focus-inner {
 
     margin-bottom: calc($main-button-size / -2);
     padding-bottom: calc($main-button-size / 2);
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
+    color: var(--text-primary); /* context */
 }
 
 .more-buttons {
@@ -117,6 +135,12 @@ button::-moz-focus-inner {
     width: $more-button-size;
     height: $more-button-size;
     background: $motion-tertiary;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
+    color: var(--text-primary); /* context */
 }
 
 .more-icon {
@@ -139,10 +163,22 @@ button::-moz-focus-inner {
     border: 1px solid $ui-edge !important;
     box-shadow: 0 0 .5rem hsla(0, 0%, 0%, .25) !important;
     font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif) !important;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
+    color: var(--text-primary) !important; /* context */
 }
 
 .tooltip:after {
     background-color: $extensions-primary;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
+    color: var(--text-primary); /* context */
 }
 
 .coming-soon-tooltip {

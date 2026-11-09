@@ -27,7 +27,7 @@
     user-select: none;
 
     font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif);
-    color: $text-primary-light;
+    color: $text-primary;
     overflow: hidden;
 }
 
@@ -47,10 +47,12 @@
     /* Default modal resets */
     margin: 0;
     border-radius: 0;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-panel);
     --text-secondary: var(--text-dim-on-panel);
+    --ui-accent-symbol: var(--accent-on-panel);
     --paint-text-primary: var(--text-on-panel);
+    color: var(--text-primary); /* context */
 }
 
 
@@ -77,12 +79,30 @@ $sides: 20rem;
     font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif);
     font-size: 1rem;
     font-weight: normal;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-menu-bar);
+    --text-secondary: var(--text-dim-on-menu-bar);
+    --ui-accent-symbol: var(--accent-on-menu-bar);
+    --paint-text-primary: var(--text-on-menu-bar);
+    color: var(--text-primary); /* context */
 }
 [theme="dark"] .header {
     background-color: $motion-primary-dark;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-menu-bar);
+    --text-secondary: var(--text-dim-on-menu-bar);
+    --ui-accent-symbol: var(--accent-on-menu-bar);
+    --paint-text-primary: var(--text-on-menu-bar);
+    color: var(--text-primary); /* context */
 }
 [theme="dark"] .full-screen .header {
     background-color: $motion-primary;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
+    color: var(--text-primary); /* context */
 }
 
 .header-item {
@@ -90,7 +110,7 @@ $sides: 20rem;
     align-items: center;
     padding: 1rem;
     text-decoration: none;
-    color: $ui-white;
+    color: $text-primary;
     user-select: none;
 }
 

@@ -9,13 +9,25 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-menu-bar);
+    --text-secondary: var(--text-dim-on-menu-bar);
+    --ui-accent-symbol: var(--accent-on-menu-bar);
+    --paint-text-primary: var(--text-on-menu-bar);
+    color: var(--text-primary); /* context */
 }
 [theme="dark"] .crash-wrapper {
     background-color: $motion-primary-dark;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-menu-bar);
+    --text-secondary: var(--text-dim-on-menu-bar);
+    --ui-accent-symbol: var(--accent-on-menu-bar);
+    --paint-text-primary: var(--text-on-menu-bar);
+    color: var(--text-primary); /* context */
 }
 .body {
     width: 50%;
-    color: white;
+    color: $text-on-menu-bar;
     text-align: center;
 }
 
@@ -23,11 +35,16 @@
     border: 1px solid $motion-primary;
     border-radius: 0.25rem;
     padding: 0.5rem 2rem;
-    background: white;
+    background: $ui-surface;
     color: $ui-accent-symbol;
     font-weight: bold;
     font-size: 0.875rem;
     cursor: pointer;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
+    --paint-text-primary: var(--text-on-surface);
 }
 
 .header {

@@ -37,11 +37,23 @@ $ui-gray: hsla(0, 0%, 95%, 1);
     background-color: $motion-primary;
     background-image: url('./telemetry-modal-header.png');
     background-size: cover;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
+    color: var(--text-primary); /* context */
 }
 
 .body {
-    background: $ui-white;
+    background: $ui-surface;
     padding: 1.5rem 2.25rem;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
+    --paint-text-primary: var(--text-on-surface);
+    color: var(--text-primary); /* context */
 }
 
 .privacy-policy-link {
@@ -78,8 +90,14 @@ $ui-gray: hsla(0, 0%, 95%, 1);
     width: 1rem;
     height: 1rem;
     appearance: none;
-    background-color: $ui-white;
+    background-color: $ui-surface;
     vertical-align: middle;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
+    --paint-text-primary: var(--text-on-surface);
+    color: var(--text-primary); /* context */
 }
 
 .radio-buttons input[type="radio"]:focus {
@@ -91,8 +109,14 @@ $ui-gray: hsla(0, 0%, 95%, 1);
     height: calc(1rem + 4px);
     margin: -3px calc(0.75rem - 2px) -1px;
     transition: all .25s ease;
-    background-color: $ui-white;
+    background-color: $ui-surface;
     border: 1px solid $motion-primary;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
+    --paint-text-primary: var(--text-on-surface);
+    color: var(--text-primary); /* context */
 }
 
 .radio-buttons input[type="radio"]:checked::after {
@@ -103,6 +127,12 @@ $ui-gray: hsla(0, 0%, 95%, 1);
     width: .625rem;
     height: .625rem;
     content: "";
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
+    color: var(--text-primary); /* context */
 }
 
 /* Confirmation buttons at the bottom of the modal */
@@ -130,15 +160,26 @@ $ui-gray: hsla(0, 0%, 95%, 1);
     border: 1px solid $motion-primary;
     border-radius: 0.25rem;
     padding: 0.5rem 1.5rem;
-    color: $text-on-accent;
+    color: var(--text-primary);
     background: $motion-primary;
     font-weight: bold;
     font-size: .875rem;
     cursor: pointer;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
 }
 
 .button-row button:hover {
     background: $extensions-primary;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
+    color: var(--text-primary); /* context */
 }
 
 .button-row button:disabled {

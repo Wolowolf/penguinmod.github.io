@@ -21,27 +21,29 @@ body {
     color: var(--text-primary);
     font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif);
     margin: 0;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-background);
     --text-secondary: var(--text-dim-on-background);
+    --ui-accent-symbol: var(--accent-on-background);
     --paint-text-primary: var(--text-on-background);
 }
 body[theme="dark"] {
     background-color: var(--ui-primary);
     color: var(--text-primary);
     color-scheme: dark;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-background);
     --text-secondary: var(--text-dim-on-background);
+    --ui-accent-symbol: var(--accent-on-background);
     --paint-text-primary: var(--text-on-background);
 }
 
 a[href] {
-    color: #2a67eb;
+    color: var(--ui-accent-symbol);
     text-decoration: underline;
 }
 [theme="dark"] a[href] {
-    color: #6d9bff;
+    color: var(--ui-accent-symbol);
 }
 a:active, a:focus {
     outline: none;
@@ -68,17 +70,21 @@ a:active, a:focus {
     padding: 8px 20px;
     background-color: var(--ui-surface);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
     --paint-text-primary: var(--text-on-surface);
+    color: var(--text-primary); /* context */
 }
 [theme="dark"] .header {
     background-color: var(--ui-surface);
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
     --paint-text-primary: var(--text-on-surface);
+    color: var(--text-primary); /* context */
 }
 @media (max-width: 700px) {
     .header {
@@ -106,18 +112,20 @@ a:active, a:focus {
     transition-property: background;
     display: flex;
     align-items: center;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
     --paint-text-primary: var(--text-on-surface);
 }
 [theme="dark"] .button {
     color: var(--text-primary);
     background: var(--ui-surface);
     border-color: var(--ui-edge);
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
     --paint-text-primary: var(--text-on-surface);
 }
 .button:hover {
@@ -133,9 +141,10 @@ a:active, a:focus {
     color: var(--text-primary);
     border: 1px solid var(--ui-edge);
     border-radius: 4px;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
     --paint-text-primary: var(--text-on-surface);
 }
 .search-input {
@@ -167,9 +176,10 @@ a:active, a:focus {
     color: var(--text-primary);
     background-color: var(--ui-surface);
     border-color: var(--ui-edge);
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
     --paint-text-primary: var(--text-on-surface);
 }
 .search-input:not([value=""]) ~ .search-button {
@@ -190,18 +200,21 @@ a:active, a:focus {
     display: flex;
     align-items: center;
     text-decoration: none !important;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
     --paint-text-primary: var(--text-on-surface);
 }
 [theme="dark"] .feedback-button-outer {
     background-color: var(--ui-surface);
     border-color: var(--ui-edge);
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
     --paint-text-primary: var(--text-on-surface);
+    color: var(--text-primary); /* context */
 }
 .feedback-button-inner {
     text-decoration: none;
@@ -261,10 +274,12 @@ a:active, a:focus {
 }
 .addon-group-name:hover .addon-group-expand {
     background: var(--ui-tertiary);
-    /* section 220: text colours of this surface for what is inside */
-    --text-primary: var(--text-on-surface);
-    --text-secondary: var(--text-dim-on-surface);
-    --paint-text-primary: var(--text-on-surface);
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-hover);
+    --text-secondary: var(--text-dim-on-hover);
+    --ui-accent-symbol: var(--accent-on-hover);
+    --paint-text-primary: var(--text-on-hover);
+    color: var(--text-primary); /* context */
 }
 
 .addon {
@@ -274,24 +289,28 @@ a:active, a:focus {
     border-radius: 5px;
     margin: 10px 0 10px 0;
     font-size: 14px;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
     --paint-text-primary: var(--text-on-surface);
+    color: var(--text-primary); /* context */
 }
 .addon-dirty {
-    background: #ffeedf;
+    background: color-mix(in srgb, #ff8c1a 15%, var(--ui-surface));
 }
 [theme="dark"] .addon {
     background-color: var(--ui-surface);
     border-color: var(--ui-edge);
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
     --paint-text-primary: var(--text-on-surface);
+    color: var(--text-primary); /* context */
 }
 [theme="dark"] .addon-dirty {
-    background: rgb(39, 50, 53);
+    background: color-mix(in srgb, #ff8c1a 15%, var(--ui-surface));
 }
 
 .addon-header {
@@ -325,7 +344,7 @@ a:active, a:focus {
 
 .inline-description {
     margin-left: 10px;
-    color: gray;
+    color: var(--text-secondary);
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -346,7 +365,13 @@ a:active, a:focus {
     background-color: transparent;
 }
 .reset-button:hover {
-    background: rgba(0, 0, 0, 0.05);
+    background: var(--ui-tertiary);
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-hover);
+    --text-secondary: var(--text-dim-on-hover);
+    --ui-accent-symbol: var(--accent-on-hover);
+    --paint-text-primary: var(--text-on-hover);
+    color: var(--text-primary); /* context */
 }
 .reset-button:active, .reset-button:focus-within {
     outline: none;
@@ -357,7 +382,13 @@ a:active, a:focus {
     width: 16px;
 }
 [theme="dark"] .reset-button:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--ui-tertiary);
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-hover);
+    --text-secondary: var(--text-dim-on-hover);
+    --ui-accent-symbol: var(--accent-on-hover);
+    --paint-text-primary: var(--text-on-hover);
+    color: var(--text-primary); /* context */
 }
 
 .switch {
@@ -374,6 +405,12 @@ a:active, a:focus {
 }
 .switch[state="on"] {
     background: $motion-primary;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
+    color: var(--text-primary); /* context */
 }
 .switch::before {
     content: "";
@@ -387,25 +424,31 @@ a:active, a:focus {
     left: 5px;
     transition: 0.25s ease;
     transition-property: background, left;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
     --paint-text-primary: var(--text-on-surface);
+    color: var(--text-primary); /* context */
 }
 [theme="dark"] .switch::before {
     background: var(--ui-surface);
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
     --paint-text-primary: var(--text-on-surface);
+    color: var(--text-primary); /* context */
 }
 .switch[state="on"]::before {
     background: var(--ui-surface);
     left: 25px;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
     --paint-text-primary: var(--text-on-surface);
+    color: var(--text-primary); /* context */
 }
 .switch:active, .switch:focus-within {
     outline: none;
@@ -530,18 +573,20 @@ a:active, a:focus {
     border-radius: 4px;
     transition: 0.25s ease;
     transition-property: background;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-background);
     --text-secondary: var(--text-dim-on-background);
+    --ui-accent-symbol: var(--accent-on-background);
     --paint-text-primary: var(--text-on-background);
 }
 [theme="dark"] .setting input {
     color: var(--text-primary);
     background: var(--ui-primary);
     border: 1px solid var(--ui-edge);
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-background);
     --text-secondary: var(--text-dim-on-background);
+    --ui-accent-symbol: var(--accent-on-background);
     --paint-text-primary: var(--text-on-background);
 }
 .setting input:focus, .setting input:active {
@@ -558,15 +603,23 @@ a:active, a:focus {
     background-color: var(--ui-surface);
     background-size: 20px 20px;
     background-position: center center;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
     --paint-text-primary: var(--text-on-surface);
+    color: var(--text-primary); /* context */
 }
 .setting input[type="checkbox"]:checked {
     border-color: $motion-primary;
     background-color: $motion-primary;
     background-image: url("./icons/check.svg");
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
+    color: var(--text-primary); /* context */
 }
 .setting input[type="checkbox"]:hover:not(:focus) {
     border-color: $motion-tertiary;
@@ -621,18 +674,20 @@ a:active, a:focus {
     border-right-width: 0;
     transition: 0.25s ease;
     transition-property: color, background, border;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-background);
     --text-secondary: var(--text-dim-on-background);
+    --ui-accent-symbol: var(--accent-on-background);
     --paint-text-primary: var(--text-on-background);
 }
 [theme="dark"] .select-option {
     color: var(--text-primary);
     background: var(--ui-primary);
     border-color: var(--ui-edge);
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-background);
     --text-secondary: var(--text-dim-on-background);
+    --ui-accent-symbol: var(--accent-on-background);
     --paint-text-primary: var(--text-on-background);
 }
 .select-option:first-child {
@@ -645,8 +700,13 @@ a:active, a:focus {
     border-right-width: 1px;
 }
 .select-option.selected {
-    color: $text-on-accent;
+    color: var(--text-primary);
     background: $motion-primary;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
 }
 .select-option:active, .select-option:focus-within {
     outline: none;
@@ -715,7 +775,7 @@ a:active, a:focus {
 }
 .dirty-inner {
     padding: 8px;
-    background: #ffeedf;
+    background: color-mix(in srgb, #ff8c1a 15%, var(--ui-surface));
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border: 1px solid var(--ui-edge);
     border-radius: 4px;
@@ -725,7 +785,7 @@ a:active, a:focus {
     text-align: center;
 }
 [theme="dark"] .dirty-inner {
-    background: rgb(39, 50, 53);
+    background: color-mix(in srgb, #ff8c1a 15%, var(--ui-surface));
     border-color: var(--ui-edge);
 }
 

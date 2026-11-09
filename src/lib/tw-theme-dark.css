@@ -6,9 +6,10 @@
     color: var(--text-primary);
     color-scheme: dark;
     --ui-black-transparent: rgba(255, 255, 255, 0.15);
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-background);
     --text-secondary: var(--text-dim-on-background);
+    --ui-accent-symbol: var(--accent-on-background);
     --paint-text-primary: var(--text-on-background);
 }
 
@@ -27,9 +28,6 @@
 }
 .blocklyWidgetDiv {
     color-scheme: light;
-}
-.blocklyWidgetDiv .goog-menuitem-disabled .goog-menuitem-content {
-    color: hsla(0, 0%, 100%, .35) !important;
 }
 .scratchCommentText {
     color: black;

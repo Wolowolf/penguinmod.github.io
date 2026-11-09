@@ -28,10 +28,21 @@
     font-size: $menu-bar-standard-font-size;
     font-weight: bold;
     background-color: $ui-menu-bar;
-    color: $text-on-menu-bar;
+    color: var(--text-primary);
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-menu-bar);
+    --text-secondary: var(--text-dim-on-menu-bar);
+    --ui-accent-symbol: var(--accent-on-menu-bar);
+    --paint-text-primary: var(--text-on-menu-bar);
 }
 [theme="dark"] .menu-bar {
     background-color: $motion-primary-dark;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-menu-bar);
+    --text-secondary: var(--text-dim-on-menu-bar);
+    --ui-accent-symbol: var(--accent-on-menu-bar);
+    --paint-text-primary: var(--text-on-menu-bar);
+    color: var(--text-primary); /* context */
 }
 
 .main-menu {

@@ -8,10 +8,16 @@
   filter: brightness(0) invert(0.8);
 }
 .sa-onion-button[data-enabled="true"] .sa-onion-image {
-  filter: brightness(0) invert(1);
+  filter: var(--pm-on-accent-filter, brightness(0) invert(1));
 }
 .sa-onion-button[data-enabled="true"] {
-  background-color: #00c3ff;
+  background-color: var(--ui-accent, #00c3ff);
+  /* section 221: this background's text and symbol colours */
+  --text-primary: var(--text-on-accent);
+  --text-secondary: var(--text-dim-on-accent);
+  --ui-accent-symbol: var(--accent-on-accent);
+  --paint-text-primary: var(--text-on-accent);
+  color: var(--text-primary); /* context */
 }
 
 .sa-onion-group {
@@ -47,6 +53,12 @@
   display: flex;
   flex-direction: column;
   gap: 0.25em;
+  /* section 221: this background's text and symbol colours */
+  --text-primary: var(--text-on-background);
+  --text-secondary: var(--text-dim-on-background);
+  --ui-accent-symbol: var(--accent-on-background);
+  --paint-text-primary: var(--text-on-background);
+  color: var(--text-primary); /* context */
 }
 .sa-onion-settings[data-visible="true"] {
   bottom: calc(100% + 22px);

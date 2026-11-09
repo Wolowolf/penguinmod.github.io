@@ -20,12 +20,18 @@
     height: 90%;
     position: absolute;
     top: 5%;
-    background: $ui-white;
+    background: $ui-surface;
     border: 1px solid $ui-edge;
     width: .75rem;
     z-index: 10;
     opacity: 0.9;
     overflow: hidden;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
+    --paint-text-primary: var(--text-on-surface);
+    color: var(--text-primary); /* context */
 }
 
 .left-card {
@@ -50,6 +56,12 @@
     height: 2.5rem;
     width: 100%;
     background: $extensions-primary;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
+    color: var(--text-primary); /* context */
 }
 
 .left-button, .right-button {
@@ -67,6 +79,12 @@
     justify-content: center;
     align-items: center;
     transition: all 0.25s ease;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
+    color: var(--text-primary); /* context */
 }
 
 .left-button:hover, .right-button:hover {
@@ -108,6 +126,12 @@
     border-bottom: 1px solid $extensions-tertiary;
     font-size: 0.625rem;
     font-weight: bold;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
+    color: var(--text-primary); /* context */
 }
 
 .header-buttons-hidden {
@@ -161,7 +185,7 @@
 
 .step-body {
     width: 100%;
-    background: $ui-white;
+    background: $ui-surface;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -171,6 +195,12 @@
 
     /* Min height prevents layout changing when images change */
     min-height: 256px;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
+    --paint-text-primary: var(--text-on-surface);
+    color: var(--text-primary); /* context */
 }
 
 .step-video {
@@ -259,16 +289,21 @@
     cursor: pointer;
     padding: 0.5rem 1rem;
     background-color: $motion-primary;
-    color: $text-on-accent;
+    color: var(--text-primary);
     font-weight: bold;
     border-radius: 0.25rem;
     display: flex;
     align-items: center;
-    color: $text-on-accent;
+    color: var(--text-primary);
     font-size: .75rem;
     font-weight: bold;
     line-height: 1rem;
     text-align: center;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
 }
 
 [dir="ltr"] .see-all-button img {
@@ -295,10 +330,16 @@
 }
 
 .active-step-pip {
-    background: $ui-white;
+    background: $ui-surface;
     width: calc(0.5rem + 4px);
     height: calc(0.5rem + 4px);
     margin: -2px calc(0.25rem - 2px);
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
+    --paint-text-primary: var(--text-on-surface);
+    color: var(--text-primary); /* context */
 }
 
 .hidden {

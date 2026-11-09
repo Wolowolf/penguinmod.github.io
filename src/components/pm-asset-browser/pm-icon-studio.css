@@ -50,9 +50,10 @@
 .range { width: 7rem; }
 .color { width: 2.2rem; height: 1.8rem; padding: 0; border: 1px solid $ui-edge; background: none; cursor: pointer; }
 .select { height: 2rem; max-width: 100%; border: 1px solid $ui-edge; background: $ui-surface; color: $text-primary;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
     --paint-text-primary: var(--text-on-surface);
 }
 .text { width: 100%; height: 2rem; padding: 0 6px; border: 1px solid $ui-edge; }
@@ -69,7 +70,14 @@
     font-weight: bold;
     cursor: pointer;
 }
-.tool:hover { background: $motion-primary; }
+.tool:hover { background: $motion-primary;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
+    color: var(--text-primary); /* context */
+}
 .button {
     height: 2rem;
     padding: 0 0.8rem;
@@ -89,9 +97,10 @@
     color: $text-primary;
     font-size: 1.2rem;
     cursor: pointer;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
     --paint-text-primary: var(--text-on-surface);
 }
 .arrow:disabled { opacity: 0.35; cursor: default; }
@@ -104,10 +113,12 @@
     background: $ui-surface;
     font-size: 0.7rem;
     cursor: pointer;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
     --paint-text-primary: var(--text-on-surface);
+    color: var(--text-primary); /* context */
 }
 .badge-choice img { width: 100%; height: 100%; }
 .badge-choice.active { border-color: $motion-primary; }
@@ -150,16 +161,24 @@
     font-weight: bold;
     cursor: pointer;
 }
-.add { background: $motion-primary; color: $text-on-accent; }
+.add { background: $motion-primary; color: $text-on-accent;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-accent);
+    --text-secondary: var(--text-dim-on-accent);
+    --ui-accent-symbol: var(--accent-on-accent);
+    --paint-text-primary: var(--text-on-accent);
+}
 .add-alt { background: $text-primary; color: $ui-surface; }
 .add:disabled, .add-alt:disabled { opacity: 0.5; cursor: default; }
 .tags { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .tag-row { display: flex; align-items: center; gap: 6px; }
 .tag-thumb { width: 2.4rem; height: 2.4rem; background: $ui-surface; cursor: pointer; object-fit: contain; display: inline-block;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
     --paint-text-primary: var(--text-on-surface);
+    color: var(--text-primary); /* context */
 }
 .tag {
     min-width: 6rem;
@@ -179,9 +198,10 @@
 [theme="dark"] .number,
 [theme="dark"] .text,
 [theme="dark"] .arrow { background: $ui-surface; color: $text-primary; border-color: $ui-edge;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
     --paint-text-primary: var(--text-on-surface);
 }
 [theme="dark"] .tool,

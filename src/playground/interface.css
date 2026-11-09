@@ -99,10 +99,12 @@ a {
 
 [theme="dark"] .container {
     background-color: var(--ui-primary);
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-background);
     --text-secondary: var(--text-dim-on-background);
+    --ui-accent-symbol: var(--accent-on-background);
     --paint-text-primary: var(--text-on-background);
+    color: var(--text-primary); /* context */
 }
 [theme="dark"] .player-only {
     color: var(--text-primary);
@@ -115,11 +117,17 @@ a {
     line-height: 1.5em;
     padding: 0.5rem;
     margin: 5px 0 8px 0;
-    border: 1px solid #b9d6ff;
-    background-color: #dbebff;
+    border: 1px solid var(--ui-edge);
+    background-color: var(--ui-selected);
     border-radius: 0.5rem;
-    border: 1px solid #b9d6ff;
-    background-color: #dbebff;
+    border: 1px solid var(--ui-edge);
+    background-color: var(--ui-selected);
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-selected);
+    --text-secondary: var(--text-dim-on-selected);
+    --ui-accent-symbol: var(--accent-on-selected);
+    --paint-text-primary: var(--text-on-selected);
+    color: var(--text-primary); /* context */
 }
 
 /* .unshared-update {
@@ -128,8 +136,14 @@ a {
 } */
 
 [theme="dark"] .unshared-update {
-    border-color: #203652;
-    background-color: #16202c;
+    border-color: var(--ui-edge);
+    background-color: var(--ui-selected);
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-selected);
+    --text-secondary: var(--text-dim-on-selected);
+    --ui-accent-symbol: var(--accent-on-selected);
+    --paint-text-primary: var(--text-on-selected);
+    color: var(--text-primary); /* context */
 }
 .unshared-update p {
     margin: 4px 0;

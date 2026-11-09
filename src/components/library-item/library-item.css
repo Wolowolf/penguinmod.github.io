@@ -14,20 +14,27 @@
     padding: 1rem 1rem 0 1rem;
     font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif);
     color: $text-primary;
-    background: white;
+    background: $ui-surface;
     border-width: 2px;
     border-style: solid;
     border-color: $ui-edge;
     border-radius: $space;
     text-align: center;
     cursor: pointer;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
+    --paint-text-primary: var(--text-on-surface);
 }
 [theme="dark"] .library-item {
     background: $ui-primary;
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-background);
     --text-secondary: var(--text-dim-on-background);
+    --ui-accent-symbol: var(--accent-on-background);
     --paint-text-primary: var(--text-on-background);
+    color: var(--text-primary); /* context */
 }
 
 .library-item-sound {

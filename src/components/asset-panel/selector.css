@@ -10,6 +10,12 @@
     justify-content: space-between;
     /* desktop (section 218): the costume / sound list is a panel you take things from */
     background: $ui-secondary;
+    /* section 221: this background's text and symbol colours */
+    --text-primary: var(--text-on-panel);
+    --text-secondary: var(--text-dim-on-panel);
+    --ui-accent-symbol: var(--accent-on-panel);
+    --paint-text-primary: var(--text-on-panel);
+    color: var(--text-primary); /* context */
 }
 
 .new-buttons {
@@ -101,8 +107,10 @@ $fade-out-distance: 100px;
 .list-item.placeholder {
     background: $ui-surface;
     filter: opacity(15%) brightness(0%);
-    /* section 220: text colours of this surface for what is inside */
+    /* section 221: this background's text and symbol colours */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
     --paint-text-primary: var(--text-on-surface);
+    color: var(--text-primary); /* context */
 }
