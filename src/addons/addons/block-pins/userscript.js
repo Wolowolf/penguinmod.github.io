@@ -90,9 +90,16 @@ export default async function({ addon }) {
     return type;
   };
 
+  // Desktop fork: a pinned copy gets its own id, "<COPY_PREFIX><original id>". Copying the original's id made
+  // Blockly give the original a random id instead, so its checkbox made monitors under ids nothing knows.
+  const COPY_PREFIX = "blockpins-copy:";
+  const isCopyId = (id) => typeof id === "string" && id.startsWith(COPY_PREFIX);
+  const originalId = (id) => isCopyId(id) ? id.slice(COPY_PREFIX.length) : id;
+
   const getBlockByType = (type, ws) => {
     const typeMeta = type.split("||");
-    const blocks = Object.values(ws.blockDB_);
+    // never copy a copy: pins come from the block in its own category
+    const blocks = Object.values(ws.blockDB_).filter(b => !isCopyId(b.getRootBlock().id));
     if (typeMeta.length === 1) return blocks.find(b => b.type === type);
     else {
       const candidates = blocks.filter(b => b.type === typeMeta[0]);
@@ -119,7 +126,9 @@ export default async function({ addon }) {
         const block = getBlockByType(type, flyoutWS);
         if (block) {
           successes++;
-          blocksXML.push(Blockly.Xml.blockToDom(block));
+          const xml = Blockly.Xml.blockToDom(block, true); // no ids: inner blocks get fresh ones
+          xml.setAttribute("id", COPY_PREFIX + block.id);
+          blocksXML.push(xml);
         } else {
           console.warn("Pins Addon -- Could not find block with type: " + type);
         }
@@ -230,6 +239,76 @@ export default async function({ addon }) {
       menuItems[3].parentNode.style.borderTop = "1px solid rgba(0, 0, 0, 0.15)";
     };
   }
+
+  // Desktop fork: a pinned copy's checkbox is the original's checkbox. A click on either toggles the original
+  // (after giving it the copy's dropdown values, so the monitor matches what was clicked); both always show its state.
+  const flyoutProto = Blockly.VerticalFlyout.prototype;
+  const setCheckboxLook = (checkbox, checked) => {
+    checkbox.clicked = checked;
+    if (checked) Blockly.utils.addClass(checkbox.svgRoot, "checked");
+    else Blockly.utils.removeClass(checkbox.svgRoot, "checked");
+  };
+  const copyFields = (from, to) => {
+    for (const input of from.inputList) {
+      for (const field of input.fieldRow) {
+        if (!field.name) continue;
+        const target = to.getField(field.name);
+        if (target && target.getValue() !== field.getValue()) target.setValue(field.getValue());
+      }
+    }
+  };
+
+  // the monitor state in the VM, for this block's own dropdown values
+  const isMonitored = (realId, block) => !!Blockly.VerticalFlyout.getCheckboxState(realId, block.inputList);
+
+  // Set every pinned copy and its original from the VM, one tick later: Blockly fires its events (and the editor's
+  // own checkbox updates after dropdown changes) in a later tick, so this runs after all of them.
+  let resyncTimer = null;
+  const resyncPinnedCheckboxes = (flyout) => {
+    if (resyncTimer !== null) return;
+    resyncTimer = setTimeout(() => {
+      resyncTimer = null;
+      const checkboxes = flyout.checkboxes_ || {};
+      for (const id of Object.keys(checkboxes)) {
+        if (!isCopyId(id)) continue;
+        const realId = originalId(id);
+        for (const checkbox of [checkboxes[id], checkboxes[realId]]) {
+          if (checkbox && checkbox.block && checkbox.block.workspace) {
+            setCheckboxLook(checkbox, isMonitored(realId, checkbox.block));
+          }
+        }
+      }
+    }, 0);
+  };
+
+  const ogCreateCheckbox = flyoutProto.createCheckbox_;
+  flyoutProto.createCheckbox_ = function(block, ...args) {
+    ogCreateCheckbox.call(this, block, ...args);
+    const checkbox = this.checkboxes_[block.id];
+    if (checkbox && isCopyId(block.id)) setCheckboxLook(checkbox, isMonitored(originalId(block.id), block));
+    if (!this.workspace_.blockPinsListener) {
+      // a dropdown changed in the flyout (a copy's or an original's)
+      this.workspace_.blockPinsListener = (e) => {
+        if (e.element === "field" || e.element === "checkbox") resyncPinnedCheckboxes(this);
+      };
+      this.workspace_.addChangeListener(this.workspace_.blockPinsListener);
+    }
+  };
+
+  const ogSetCheckboxState = flyoutProto.setCheckboxState;
+  flyoutProto.setCheckboxState = function(id, value) {
+    const realId = originalId(id);
+    if (isCopyId(id)) {
+      const copy = this.checkboxes_[id];
+      const original = this.checkboxes_[realId];
+      // the original isn't in this toolbox (e.g. another sprite's local variable): nothing to monitor
+      if (!copy || !original) return;
+      copyFields(copy.block, original.block);
+      setCheckboxLook(original, isMonitored(realId, original.block));
+    }
+    ogSetCheckboxState.call(this, realId, value);
+    resyncPinnedCheckboxes(this);
+  };
 
   const ogPopulate = Blockly.Toolbox.CategoryMenu.prototype.populate;
   Blockly.Toolbox.CategoryMenu.prototype.populate = function(newTree) {
