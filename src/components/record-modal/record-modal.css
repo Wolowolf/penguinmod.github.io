@@ -59,7 +59,7 @@
 .help-text {
     margin: 10px auto 0;
     font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif);
-    color: rgb(167, 170, 181);
+    color: $text-secondary; /* section 223: quiet ink */
     font-size: 0.95rem;
     font-weight: 500;
 }

@@ -41,6 +41,17 @@
     align-items: center;
     border-right: 1px solid $ui-edge;
     min-height: 5.5rem;
+    /* section 223: the backpack's inside is a panel, like the header above it */
+    background: $ui-secondary;
+    /* section 222: this background's ink, accent and tints */
+    --text-primary: var(--text-on-panel);
+    --text-secondary: var(--text-dim-on-panel);
+    --text-disabled: var(--text-off-on-panel);
+    --ui-accent-symbol: var(--accent-on-panel);
+    --ui-tertiary: var(--hover-on-panel);
+    --ui-selected: var(--selected-on-panel);
+    --paint-text-primary: var(--text-on-panel);
+    color: var(--text-primary);
 }
 
 /* Absolute position the inner list to allow scrolling inside flex sized container */

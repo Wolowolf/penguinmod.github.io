@@ -150,8 +150,8 @@
     color: $text-primary;
     opacity: 0.85;
 }
-.limit-low { color: #e07800; font-weight: bold; }
-.limit-out { color: $error-primary; font-weight: bold; }
+.limit-low { color: var(--warn-on-panel); /* section 223 */ font-weight: bold; }
+.limit-out { color: var(--stop-on-panel); font-weight: bold; }
 .error, .status {
     margin: 0 4px 6px 4px;
     padding: 0.4rem 0.6rem;
@@ -233,7 +233,7 @@
 .wave { display: block; object-fit: fill; pointer-events: none; }
 /* a sound that is playing: its tile is outlined and a line moves over the waveform */
 .tile.playing-tile,
-[theme="dark"] .tile.playing-tile { border-color: $error-primary; }
+[theme="dark"] .tile.playing-tile { border-color: var(--warn-on-panel); }
 .playhead {
     position: absolute;
     top: 4px;

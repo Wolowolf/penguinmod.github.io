@@ -10,11 +10,11 @@
 
 .pause-btn.is-running {
     --pm-disabled: 0;
-    fill: #ffbf00;
+    fill: var(--pause-on-background, #ffbf00); /* section 223: status colour with 3:1 on the frame it sits on */
 }
 
 .pause-btn .hollow {
     fill: none;
-    stroke: #ffbf00;
+    stroke: var(--pause-on-background, #ffbf00);
     stroke-width: 3;
 }

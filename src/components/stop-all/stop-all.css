@@ -8,5 +8,5 @@
 }
 
 .stop-all.is-active {
-    fill: #e5403b;
+    fill: var(--stop-on-background, #e5403b); /* section 223: status colour with 3:1 on the frame it sits on */
 }

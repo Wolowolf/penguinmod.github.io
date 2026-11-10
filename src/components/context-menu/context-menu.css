@@ -52,4 +52,7 @@
 
 .menu-item-danger:hover {
     background: $error-primary;
+    /* section 223: a fixed fill carries fixed ink */
+    --text-primary: #000;
+    color: #000;
 }

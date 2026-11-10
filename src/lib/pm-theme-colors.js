@@ -56,6 +56,11 @@ const chroma = rgb => (Math.max(...rgb) - Math.min(...rgb)) / 255;
 const MIN_ACCENT_SYMBOL = color => 3 - (1.3 * chroma(color));
 const MIN_LINE = 1.35; // borders, scrollbars and the grid against what they separate
 const MIN_ACCENT_FILL = 1.7; // the accent as a fill (selections, buttons) against every surface
+// Section 223: colours that keep their meaning whatever the theme (go, pause, stop, warning) are
+// pushed darker or lighter until they have 3:1 on the background they are drawn on; per context as
+// --<name>-on-<context>
+const STATUS_COLORS = {go: '#2fbf4f', pause: '#ffbf00', stop: '#e5403b', warn: '#ff8c1a'};
+const MIN_STATUS = 3;
 
 const parse = hex => {
     const h = hex.replace('#', '').slice(0, 6);
@@ -172,6 +177,9 @@ const paletteVariables = values => {
         result[`--accent-on-${id}`] = toHex(fixedInk || accentOn(background));
         result[`--hover-on-${id}`] = toHex(hover);
         result[`--selected-on-${id}`] = toHex(selected);
+        for (const name of Object.keys(STATUS_COLORS)) {
+            result[`--${name}-on-${id}`] = toHex(ensureContrast(parse(STATUS_COLORS[name]), [background], MIN_STATUS));
+        }
     };
     for (const id of SURFACES) context(id, c[id]);
     // on the accent everything is black or white
@@ -239,12 +247,44 @@ const installThemeColors = () => {
     uses.className = 'pm-theme-uses';
     uses.textContent = themeUsesCSS;
     const addUses = () => document.body.insertBefore(uses, document.body.firstChild);
-    if (document.body) addUses();
-    else document.addEventListener('DOMContentLoaded', addUses, {once: true});
+    const started = () => {
+        addUses();
+        startSharing();
+    };
+    if (document.body) started();
+    else document.addEventListener('DOMContentLoaded', started, {once: true});
     // section 219: picture icons in the theme's colours
     startThemedIcons();
     // section 221: corrects what still does not read while a theme has chosen colours
     startContrastGuard({contrast, ensureContrast}, {isThemedIcon});
+};
+
+// Section 223: the packager (its own page on the same address) takes the editor's colours: every
+// variable as it is now on this page, and whether the theme is light or dark, in localStorage
+const SHARED_KEY = 'pm:theme-vars';
+const sharedNames = () => Object.keys(Object.assign(paletteVariables(defaultValues('light')), DERIVED_LIGHT));
+let shareTimer = null;
+const shareTheme = () => {
+    if (shareTimer || typeof document === 'undefined' || !document.body) return;
+    // after the styles of this change are applied
+    shareTimer = setTimeout(() => {
+        shareTimer = null;
+        try {
+            const computed = getComputedStyle(document.documentElement);
+            const vars = {};
+            for (const name of sharedNames()) vars[name] = computed.getPropertyValue(name).trim();
+            const mode = document.body.getAttribute('theme') === 'dark' ? 'dark' : 'light';
+            const value = JSON.stringify({mode, vars});
+            if (localStorage.getItem(SHARED_KEY) !== value) localStorage.setItem(SHARED_KEY, value);
+        } catch (e) {
+            // storage unavailable: the packager keeps its own colours
+        }
+    }, 50);
+};
+const startSharing = () => {
+    shareTheme();
+    new MutationObserver(shareTheme).observe(document.body, {attributes: true, attributeFilter: ['theme']});
+    document.addEventListener('pm-theme-colors-changed', shareTheme);
 };
 
 // puts the addon's colours (CSS from themeColorsCSS, '' for none) into its style element and tells

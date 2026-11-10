@@ -19,7 +19,7 @@
 }
 
 .warn {
-    color: $error-light;
+    color: var(--warn-on-background); /* section 223 */
 }
 
 .spinner {

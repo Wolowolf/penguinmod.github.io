@@ -2,16 +2,16 @@
 
 /* Copied from scratch-paint color-picker.css. */
 :global(.Popover-body) {
-    background: white;
-    border: 1px solid #ddd;
+    background: $ui-surface; /* section 223: linked to the theme */
+    border: 1px solid $ui-edge;
     padding: 4px;
     border-radius: 4px;
     padding: 4px;
     box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, .3);
 }
 :global(.Popover-tipShape) {
-    fill: white;
-    stroke: #ddd;
+    fill: $ui-surface;
+    stroke: $ui-edge;
 }
 
 .button-row {

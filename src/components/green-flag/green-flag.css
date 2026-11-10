@@ -8,5 +8,5 @@
 }
 
 .green-flag.is-active {
-    fill: #2fbf4f;
+    fill: var(--go-on-background, #2fbf4f); /* section 223: status colour with 3:1 on the frame it sits on */
 }

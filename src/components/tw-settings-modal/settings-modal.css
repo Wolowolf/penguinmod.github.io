@@ -73,16 +73,13 @@
 
 .help-icon {
     border: 0;
-    background-color: transparent;
-    background-image: url("./help-black.svg");
+    /* section 223: drawn in the ink of where it is, like every interface icon */
+    background-color: var(--text-primary);
+    mask: url("./help-black.svg") center / 100% no-repeat;
     width: 20px;
     height: 20px;
-    background-size: 100%;
     margin-left: 0.5rem;
     cursor: pointer;
-}
-[theme="dark"] .help-icon {
-    background-image: url("./help-white.svg");
 }
 .custom-stage-size-container {
     display: flex;
