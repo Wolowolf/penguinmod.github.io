@@ -5,31 +5,26 @@ import _middle_click_popup from "../addons/middle-click-popup/_manifest_entry.js
 import _editor_block_chomping from "../addons/editor-block-chomping/_manifest_entry.js";
 import _paint_gradient_maker from "../addons/paint-gradient-maker/_manifest_entry.js";
 import _paint_tool_panel from "../addons/paint-tool-panel/_manifest_entry.js";
-import _paint_default_smoothing from "../addons/paint-default-smoothing/_manifest_entry.js";
 import _jump_to_def from "../addons/jump-to-def/_manifest_entry.js";
 import _editor_searchable_dropdowns from "../addons/editor-searchable-dropdowns/_manifest_entry.js";
 import _hide_flyout from "../addons/hide-flyout/_manifest_entry.js";
 import _mediarecorder from "../addons/mediarecorder/_manifest_entry.js";
 import _drag_drop from "../addons/drag-drop/_manifest_entry.js";
 import _mute_project from "../addons/mute-project/_manifest_entry.js";
-import _clones from "../addons/clones/_manifest_entry.js";
-import _mouse_pos from "../addons/mouse-pos/_manifest_entry.js";
+import _editor_counters from "../addons/editor-counters/_manifest_entry.js";
 import _color_picker from "../addons/color-picker/_manifest_entry.js";
-import _remove_sprite_confirm from "../addons/remove-sprite-confirm/_manifest_entry.js";
-import _block_count from "../addons/block-count/_manifest_entry.js";
 import _onion_skinning from "../addons/onion-skinning/_manifest_entry.js";
 import _paint_snap from "../addons/paint-snap/_manifest_entry.js";
-import _default_costume_editor_color from "../addons/default-costume-editor-color/_manifest_entry.js";
+import _paint_tool_defaults from "../addons/paint-tool-defaults/_manifest_entry.js";
 import _bitmap_copy from "../addons/bitmap-copy/_manifest_entry.js";
 import _2d_color_picker from "../addons/2d-color-picker/_manifest_entry.js";
 import _better_img_uploads from "../addons/better-img-uploads/_manifest_entry.js";
 import _pick_colors_from_stage from "../addons/pick-colors-from-stage/_manifest_entry.js";
-import _custom_block_shape from "../addons/custom-block-shape/_manifest_entry.js";
+import _block_shape_text from "../addons/block-shape-text/_manifest_entry.js";
 import _custom_styles from "../addons/custom-styles/_manifest_entry.js";
 import _theme_colors from "../addons/theme-colors/_manifest_entry.js";
 import _zebra_striping from "../addons/zebra-striping/_manifest_entry.js";
 import _editor_theme3 from "../addons/editor-theme3/_manifest_entry.js";
-import _custom_block_text from "../addons/custom-block-text/_manifest_entry.js";
 import _pm_app_font from "../addons/pm-app-font/_manifest_entry.js";
 import _editor_colored_context_menus from "../addons/editor-colored-context-menus/_manifest_entry.js";
 import _search_sprites from "../addons/search-sprites/_manifest_entry.js";
@@ -42,22 +37,20 @@ import _initialise_sprite_position from "../addons/initialise-sprite-position/_m
 import _blocks2image from "../addons/blocks2image/_manifest_entry.js";
 import _transparent_orphans from "../addons/transparent-orphans/_manifest_entry.js";
 import _paint_by_default from "../addons/paint-by-default/_manifest_entry.js";
-import _block_cherry_picking from "../addons/block-cherry-picking/_manifest_entry.js";
+import _block_drag_keys from "../addons/block-drag-keys/_manifest_entry.js";
 import _hide_new_variables from "../addons/hide-new-variables/_manifest_entry.js";
 import _editor_extra_keys from "../addons/editor-extra-keys/_manifest_entry.js";
-import _hide_delete_button from "../addons/hide-delete-button/_manifest_entry.js";
+import _delete_protection from "../addons/delete-protection/_manifest_entry.js";
 import _no_script_bumping from "../addons/no-script-bumping/_manifest_entry.js";
 import _disable_stage_drag_select from "../addons/disable-stage-drag-select/_manifest_entry.js";
 import _move_to_top_bottom from "../addons/move-to-top-bottom/_manifest_entry.js";
 import _disable_paste_offset from "../addons/disable-paste-offset/_manifest_entry.js";
-import _block_duplicate from "../addons/block-duplicate/_manifest_entry.js";
 import _swap_local_global from "../addons/swap-local-global/_manifest_entry.js";
 import _toolbox_full_blocks_on_hover from "../addons/toolbox-full-blocks-on-hover/_manifest_entry.js";
 import _editor_comment_previews from "../addons/editor-comment-previews/_manifest_entry.js";
 import _number_pad from "../addons/number-pad/_manifest_entry.js";
 import _script_snap from "../addons/script-snap/_manifest_entry.js";
 import _tw_straighten_comments from "../addons/tw-straighten-comments/_manifest_entry.js";
-import _multi_tab_code from "../addons/multi-tab-code/_manifest_entry.js";
 import _editor_animations from "../addons/editor-animations/_manifest_entry.js";
 import _reorder_custom_inputs from "../addons/reorder-custom-inputs/_manifest_entry.js";
 import _paint_reshape_tweaks from "../addons/paint-reshape-tweaks/_manifest_entry.js";
@@ -71,31 +64,26 @@ export default {
   "editor-block-chomping": _editor_block_chomping,
   "paint-gradient-maker": _paint_gradient_maker,
   "paint-tool-panel": _paint_tool_panel,
-  "paint-default-smoothing": _paint_default_smoothing,
   "jump-to-def": _jump_to_def,
   "editor-searchable-dropdowns": _editor_searchable_dropdowns,
   "hide-flyout": _hide_flyout,
   "mediarecorder": _mediarecorder,
   "drag-drop": _drag_drop,
   "mute-project": _mute_project,
-  "clones": _clones,
-  "mouse-pos": _mouse_pos,
+  "editor-counters": _editor_counters,
   "color-picker": _color_picker,
-  "remove-sprite-confirm": _remove_sprite_confirm,
-  "block-count": _block_count,
   "onion-skinning": _onion_skinning,
   "paint-snap": _paint_snap,
-  "default-costume-editor-color": _default_costume_editor_color,
+  "paint-tool-defaults": _paint_tool_defaults,
   "bitmap-copy": _bitmap_copy,
   "2d-color-picker": _2d_color_picker,
   "better-img-uploads": _better_img_uploads,
   "pick-colors-from-stage": _pick_colors_from_stage,
-  "custom-block-shape": _custom_block_shape,
+  "block-shape-text": _block_shape_text,
   "custom-styles": _custom_styles,
   "theme-colors": _theme_colors,
   "zebra-striping": _zebra_striping,
   "editor-theme3": _editor_theme3,
-  "custom-block-text": _custom_block_text,
   "pm-app-font": _pm_app_font,
   "editor-colored-context-menus": _editor_colored_context_menus,
   "search-sprites": _search_sprites,
@@ -108,22 +96,20 @@ export default {
   "blocks2image": _blocks2image,
   "transparent-orphans": _transparent_orphans,
   "paint-by-default": _paint_by_default,
-  "block-cherry-picking": _block_cherry_picking,
+  "block-drag-keys": _block_drag_keys,
   "hide-new-variables": _hide_new_variables,
   "editor-extra-keys": _editor_extra_keys,
-  "hide-delete-button": _hide_delete_button,
+  "delete-protection": _delete_protection,
   "no-script-bumping": _no_script_bumping,
   "disable-stage-drag-select": _disable_stage_drag_select,
   "move-to-top-bottom": _move_to_top_bottom,
   "disable-paste-offset": _disable_paste_offset,
-  "block-duplicate": _block_duplicate,
   "swap-local-global": _swap_local_global,
   "toolbox-full-blocks-on-hover": _toolbox_full_blocks_on_hover,
   "editor-comment-previews": _editor_comment_previews,
   "number-pad": _number_pad,
   "script-snap": _script_snap,
   "tw-straighten-comments": _tw_straighten_comments,
-  "multi-tab-code": _multi_tab_code,
   "editor-animations": _editor_animations,
   "reorder-custom-inputs": _reorder_custom_inputs,
   "paint-reshape-tweaks": _paint_reshape_tweaks,

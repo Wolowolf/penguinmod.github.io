@@ -27,17 +27,6 @@ const migrateSettings = settings => {
         return settings;
     }
 
-    // Migrate 1 -> 2
-    // tw-project-info is now block-count
-    if (oldVersion < 2) {
-        const projectInfo = settings['tw-project-info'];
-        if (projectInfo && projectInfo.enabled) {
-            settings['block-count'] = {
-                enabled: true
-            };
-        }
-    }
-
     // Migrate 2 -> 3
     // The default value of hide-flyout's toggle setting changed from "hover" to "cathover"
     // We want to keep the old default value for existing users.

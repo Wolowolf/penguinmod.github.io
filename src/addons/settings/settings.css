@@ -186,7 +186,6 @@ a:active, a:focus {
 }
 
 [theme="dark"] .search-button,
-[theme="dark"] .addon-group-expand,
 [theme="dark"] .extension-image,
 [theme="dark"] .reset-button img,
 [theme="dark"] .reset-setting-button img {
@@ -204,36 +203,6 @@ a:active, a:focus {
         padding-left: 5px;
         padding-right: 5px;
     }
-}
-
-.addon-group {
-    margin: 0 0 10px 0;
-}
-.addon-group-name {
-    background: none;
-    border: none;
-    width: 100%;
-    display: flex;
-    align-items: center;
-}
-.addon-group-name::after {
-    margin-left: 16px;
-    content: '';
-    border-top: 1px solid var(--ui-edge);
-    width: 100px;
-    flex: 1;
-}
-.addon-group-expand {
-    width: 24px;
-    height: 24px;
-    margin-right: 8px;
-    border-radius: 5px;
-}
-.addon-group-expand[data-open="true"] {
-    transform: scaleY(-1);
-}
-.addon-group-name:hover .addon-group-expand {
-    background: var(--ui-tertiary);
 }
 
 .addon {
@@ -393,14 +362,8 @@ a:active, a:focus {
 .tag {
     border-radius: 4px;
     padding: 2px 5px;
-    margin-left: 10px;
     border-bottom: 2px solid var(--text-primary);
     white-space: nowrap;
-}
-.tag-recommended {
-    color: white;
-    background-color: #175ef8;
-    border-color: #0e44b8;
 }
 .tag-theme {
     color: black;
@@ -416,11 +379,6 @@ a:active, a:focus {
     color: black;
     background-color: #b9f38d;
     border-color: #8fce5e;
-}
-.tag-new {
-    color: white;
-    background: #b117f8;
-    border-color: #6f0073;
 }
 .tag-danger {
     color: white;
@@ -642,22 +600,6 @@ a:active, a:focus {
 }
 .preset-button {
     margin-right: 10px;
-}
-
-.footer {
-    color: var(--text-primary);
-}
-
-.unsupported-container {
-    margin-bottom: 10px;
-}
-.unsupported-addon {
-    padding-left: 5px;
-}
-
-.version {
-    margin-bottom: 10px;
-    cursor: pointer;
 }
 
 .footer-buttons {

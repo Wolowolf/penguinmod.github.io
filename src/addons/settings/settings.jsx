@@ -32,7 +32,6 @@ import Channels from '../channels';
 import extensionImage from './icons/extension.svg';
 import brushImage from './icons/brush.svg';
 import undoImage from './icons/undo.svg';
-import expandImageBlack from './icons/expand.svg';
 import infoImage from './icons/info.svg';
 import styles from './settings.css';
 import '../polyfill';
@@ -93,14 +92,12 @@ const addonOrder = [
     'jump-to-def',
     // Code area: editing blocks and scripts
     'block-switching',
-    'block-cherry-picking',
-    'block-duplicate',
+    'block-drag-keys',
     'number-pad',
     'no-script-bumping',
     'script-snap',
     'custom-zoom',
     'transparent-orphans',
-    'multi-tab-code',
     // Code area: comments and exporting
     'editor-comment-previews',
     'tw-straighten-comments',
@@ -111,8 +108,7 @@ const addonOrder = [
     'hide-flyout',
     // Block appearance
     'editor-theme3',
-    'custom-block-shape',
-    'custom-block-text',
+    'block-shape-text',
     'zebra-striping',
     'editor-colored-context-menus',
     // Editor look and layout
@@ -120,19 +116,16 @@ const addonOrder = [
     'editor-tweaks',
     'pm-app-font',
     'editor-animations',
-    'block-count',
     'editor-sounds',
     // Stage and running the project
     'mute-project',
-    'clones',
-    'mouse-pos',
+    'editor-counters',
     'custom-styles',
     'disable-stage-drag-select',
     'gamepad',
     // Sprite pane, costume and sound lists
     'initialise-sprite-position',
-    'remove-sprite-confirm',
-    'hide-delete-button',
+    'delete-protection',
     'paint-by-default',
     'better-img-uploads',
     // Costume editor
@@ -141,8 +134,7 @@ const addonOrder = [
     'paint-snap',
     'onion-skinning',
     '2d-color-picker',
-    'default-costume-editor-color',
-    'paint-default-smoothing',
+    'paint-tool-defaults',
     'disable-paste-offset'
 ];
 const addonRank = id => {
@@ -150,54 +142,12 @@ const addonRank = id => {
     return rank === -1 ? addonOrder.length : rank;
 };
 
-const filterAddonsBySupport = () => {
-    const supported = {};
-    const unsupported = {};
-    const sortedAddons = Object.entries(importedAddons)
-        .sort(([a], [b]) => addonRank(a) - addonRank(b));
-    for (const [id, manifest] of sortedAddons) {
-        if (manifest.builtIn) {
-            // part of the editor: no switch, no settings
-            continue;
-        }
-        if (manifest.unsupported) {
-            unsupported[id] = manifest;
-        } else {
-            supported[id] = manifest;
-        }
-    }
-    return {
-        supported,
-        unsupported
-    };
-};
-const { supported: supportedAddons, unsupported: unsupportedAddons } = filterAddonsBySupport();
-
-const groupAddons = () => {
-    const groups = {
-        others: {
-            label: settingsTranslations.groupOthers,
-            open: true,
-            addons: []
-        },
-        danger: {
-            label: settingsTranslations.groupDanger,
-            open: false,
-            addons: []
-        }
-    };
-    const manifests = Object.values(supportedAddons);
-    for (let index = 0; index < manifests.length; index++) {
-        const manifest = manifests[index];
-        if (manifest.tags.includes('danger') || manifest.noCompiler) {
-            groups.danger.addons.push(index);
-        } else {
-            groups.others.addons.push(index);
-        }
-    }
-    return groups;
-};
-const groupedAddons = groupAddons();
+// Built-in addons (part of the editor: no switch, no settings) and unsupported ones are not listed.
+const supportedAddons = Object.fromEntries(
+    Object.entries(importedAddons)
+        .filter(([, manifest]) => !manifest.builtIn && !manifest.unsupported)
+        .sort(([a], [b]) => addonRank(a) - addonRank(b))
+);
 
 const CreditList = ({ credits }) => (
     credits.map((author, index) => {
@@ -280,11 +230,6 @@ Select.propTypes = {
 
 const Tags = ({ manifest }) => (
     <span className={styles.tagContainer}>
-        {manifest.tags.includes('recommended') && (
-            <span className={classNames(styles.tag, styles.tagRecommended)}>
-                {settingsTranslations.tagRecommended}
-            </span>
-        )}
         {manifest.tags.includes('theme') && (
             <span className={classNames(styles.tag, styles.tagTheme)}>
                 {settingsTranslations.tagTheme}
@@ -293,11 +238,6 @@ const Tags = ({ manifest }) => (
         {manifest.tags.includes('beta') && (
             <span className={classNames(styles.tag, styles.tagBeta)}>
                 {settingsTranslations.tagBeta}
-            </span>
-        )}
-        {manifest.tags.includes('new') && (
-            <span className={classNames(styles.tag, styles.tagNew)}>
-                {settingsTranslations.tagNew}
             </span>
         )}
         {manifest.tags.includes('danger') && (
@@ -751,33 +691,6 @@ Dirty.propTypes = {
     onReloadNow: PropTypes.func
 };
 
-const UnsupportedAddons = ({ addons: addonList }) => (
-    <div className={styles.unsupportedContainer}>
-        <span className={styles.unsupportedText}>
-            {settingsTranslations.unsupported}
-        </span>
-        {addonList.map(({ id, manifest }, index) => (
-            <span
-                key={id}
-                className={styles.unsupportedAddon}
-            >
-                {addonTranslations[`${id}/@name`] || manifest.name}
-                {index !== addonList.length - 1 && (
-                    ', '
-                )}
-            </span>
-        ))}
-    </div>
-);
-UnsupportedAddons.propTypes = {
-    addons: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.string,
-        manifest: PropTypes.shape({
-            name: PropTypes.string
-        })
-    }))
-};
-
 const InternalAddonList = ({ addons, extended }) => (
     addons.map(({ id, manifest, state }) => (
         <Addon
@@ -790,55 +703,6 @@ const InternalAddonList = ({ addons, extended }) => (
     ))
 );
 
-class AddonGroup extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            open: props.open
-        };
-    }
-    render() {
-        if (this.props.addons.length === 0) {
-            return null;
-        }
-        return (
-            <div className={styles.addonGroup}>
-                <button
-                    className={styles.addonGroupName}
-                    onClick={() => {
-                        this.setState({
-                            open: !this.state.open
-                        });
-                    }}
-                >
-                    <img
-                        className={styles.addonGroupExpand}
-                        src={expandImageBlack}
-                        data-open={this.state.open}
-                        alt=""
-                    />
-                    {this.props.label.replace('{number}', this.props.addons.length)}
-                </button>
-                {this.state.open && (
-                    <InternalAddonList
-                        addons={this.props.addons}
-                        extended={this.props.extended}
-                    />
-                )}
-            </div>
-        );
-    }
-}
-AddonGroup.propTypes = {
-    label: PropTypes.string,
-    open: PropTypes.bool,
-    addons: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        state: PropTypes.shape({}).isRequired,
-        manifest: PropTypes.shape({}).isRequired
-    })).isRequired,
-    extended: PropTypes.bool.isRequired
-};
 
 const addonToSearchItem = ({ id, manifest }) => {
     const texts = new Set();
@@ -869,7 +733,7 @@ const addonToSearchItem = ({ id, manifest }) => {
             addText(0.1, addonTranslations[`${id}/@preset-description-${preset.id}`]);
         }
     }
-    for (const tag of manifest.tags) {
+    for (const tag of manifest.tags.filter(t => t !== 'recommended' && t !== 'new')) {
         const key = `tags.${tag}`;
         if (settingsTranslations[key]) {
             addText(0.25, settingsTranslations[key]);
@@ -888,7 +752,6 @@ class AddonList extends React.Component {
     constructor(props) {
         super(props);
         this.search = new Search(this.props.addons.map(addonToSearchItem));
-        this.groups = [];
     }
     render() {
         if (this.props.search) {
@@ -913,15 +776,10 @@ class AddonList extends React.Component {
         }
         return (
             <div>
-                {Object.entries(groupedAddons).map(([id, { label, addons, open }]) => (
-                    <AddonGroup
-                        key={id}
-                        label={label}
-                        open={open}
-                        addons={addons.map(index => this.props.addons[index])}
-                        extended={this.props.extended}
-                    />
-                ))}
+                <InternalAddonList
+                    addons={this.props.addons}
+                    extended={this.props.extended}
+                />
             </div>
         );
     }
@@ -947,7 +805,6 @@ class AddonSettingsComponent extends React.Component {
         this.handleKeyDown = this.handleKeyDown.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this.handleClickSearchButton = this.handleClickSearchButton.bind(this);
-        this.handleClickVersion = this.handleClickVersion.bind(this);
         this.searchRef = this.searchRef.bind(this);
         this.searchBar = null;
         this.state = {
@@ -1078,11 +935,6 @@ class AddonSettingsComponent extends React.Component {
         });
         this.searchBar.focus();
     }
-    handleClickVersion() {
-        this.setState({
-            extended: !this.state.extended
-        });
-    }
     searchRef(searchBar) {
         this.searchBar = searchBar;
     }
@@ -1103,10 +955,6 @@ class AddonSettingsComponent extends React.Component {
             id,
             manifest,
             state: this.state[id]
-        }));
-        const unsupported = Object.entries(unsupportedAddons).map(([id, manifest]) => ({
-            id,
-            manifest
         }));
         return (
             <div className={styles.container}>
@@ -1163,23 +1011,6 @@ class AddonSettingsComponent extends React.Component {
                                     {settingsTranslations.import}
                                 </button>
                             </div>
-                            <footer className={styles.footer}>
-                                {unsupported.length ? (
-                                    <UnsupportedAddons
-                                        addons={unsupported}
-                                    />
-                                ) : null}
-                                <span
-                                    className={styles.version}
-                                    onClick={this.handleClickVersion}
-                                >
-                                    {this.state.extended ?
-                                        // Don't bother translating, pretty much no one will ever see this.
-                                        // eslint-disable-next-line max-len
-                                        `You have enabled debug mode. (Addons version ${upstreamMeta.commit})` :
-                                        `Addons version ${upstreamMeta.commit}`}
-                                </span>
-                            </footer>
                         </div>
                     )}
                 </div>
