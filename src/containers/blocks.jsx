@@ -745,10 +745,9 @@ class Blocks extends React.Component {
         const monitorState = this.props.vm.runtime.getMonitorState();
         const id = args.blockId;
         const value = String(args.newValue);
-        const shouldCheck = (
-            monitorState.get(`${id}_${value}`) !== undefined ||
-            monitorState.get(`${id}_${value.toLowerCase()}`) !== undefined
-        );
+        // Desktop fork: a monitor that was shown once stays in the monitor state when hidden; only a visible one counts
+        const monitor = monitorState.get(`${id}_${value}`) || monitorState.get(`${id}_${value.toLowerCase()}`);
+        const shouldCheck = !!(monitor && monitor.get('visible'));
 
         const checkbox = flyout.checkboxes_[id];
         if (checkbox) {
