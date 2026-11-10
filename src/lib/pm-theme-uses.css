@@ -46,6 +46,14 @@
 .blocklyFlyoutCheckboxPath {
     stroke: var(--ui-surface);
 }
+/* section 225: a ticked box is switched on: accent, the tick in its ink (Blockly fills it with the Motion colour) */
+.blocklyFlyout .checked > .blocklyFlyoutCheckbox {
+    fill: var(--ui-accent);
+    stroke: var(--ui-accent);
+}
+.blocklyFlyout .checked > .blocklyFlyoutCheckboxPath {
+    stroke: var(--text-on-accent);
+}
 
 /* zoom buttons: shapes drawn by src/lib/pm-zoom-buttons.js over Blockly's pictures */
 .pm-zoom-ring {
@@ -175,4 +183,44 @@ img[data-pm-mono="text"] {
     --ui-tertiary: var(--hover-on-surface);
     --ui-selected: var(--selected-on-surface);
     color: var(--text-primary);
+}
+
+/* Section 225: native checkboxes, radio buttons and sliders are switched on in the accent (Chromium's own blue otherwise). */
+:root {
+    accent-color: var(--ui-accent);
+}
+/* Section 225: drop-down lists are drawn by the page (base-select), not by Windows, so they are a panel
+   with the theme's hover tint and the chosen entry in the accent instead of the system's blue. */
+select,
+::picker(select) {
+    appearance: base-select;
+}
+::picker(select) {
+    background-color: var(--ui-secondary);
+    color: var(--text-on-panel);
+    border: 1px solid var(--ui-edge);
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+    max-height: min(24rem, 70vh);
+    overflow-y: auto;
+}
+select option {
+    padding: 3px 8px;
+    background-color: transparent;
+    color: var(--text-on-panel);
+    border-radius: 0;
+    outline: none;
+}
+select option::checkmark {
+    display: none;
+}
+select option:hover,
+select option:focus-visible {
+    background-color: var(--hover-on-panel);
+    color: var(--text-on-panel);
+}
+select option:checked {
+    background-color: var(--ui-accent);
+    color: var(--text-on-accent);
 }

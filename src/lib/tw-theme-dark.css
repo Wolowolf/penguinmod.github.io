@@ -20,12 +20,6 @@
 .blocklySvg {
     color-scheme: light;
 }
-.checked > .blocklyFlyoutCheckbox {
-    stroke: #a1c6fa;
-}
-.checked > .blocklyFlyoutCheckboxPath {
-    stroke: white;
-}
 .valueReportBox {
     color: black;
 }

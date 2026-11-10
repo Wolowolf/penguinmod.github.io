@@ -147,13 +147,14 @@ a:active, a:focus {
     border: none;
     outline: none;
     cursor: pointer;
-    background-color: transparent;
-    background-image: url("./icons/search.svg");
-    background-repeat: no-repeat;
-    background-position: center;
+    /* section 225: the icon in the ink of where it is */
+    background-color: var(--text-primary);
+    -webkit-mask: url("./icons/search.svg") center / 24px no-repeat;
+    mask: url("./icons/search.svg") center / 24px no-repeat;
 }
 .search-input:not([value=""]) ~ .search-button {
-    background-image: url("./icons/clear.svg") !important;
+    -webkit-mask-image: url("./icons/clear.svg") !important;
+    mask-image: url("./icons/clear.svg") !important;
 }
 
 .feedback-button-outer {
@@ -185,12 +186,6 @@ a:active, a:focus {
     text-align: center;
 }
 
-[theme="dark"] .search-button,
-[theme="dark"] .extension-image,
-[theme="dark"] .reset-button img,
-[theme="dark"] .reset-setting-button img {
-    filter: invert(100%);
-}
 
 .addons {
     overflow-y: auto;
@@ -496,7 +491,6 @@ a:active, a:focus {
 .setting input[type="checkbox"]:checked {
     border-color: $motion-primary;
     background-color: $motion-primary;
-    background-image: url("./icons/check.svg");
     /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-accent);
     --text-secondary: var(--text-dim-on-accent);
@@ -506,6 +500,16 @@ a:active, a:focus {
     --ui-selected: var(--selected-on-accent);
     --paint-text-primary: var(--text-on-accent);
     color: var(--text-primary); /* context */
+}
+/* section 225: the tick in the ink on the accent (Chromium draws ::after on an appearance-less checkbox) */
+.setting input[type="checkbox"]:checked::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: var(--text-on-accent);
+    -webkit-mask: url("./icons/check.svg") center / 20px no-repeat;
+    mask: url("./icons/check.svg") center / 20px no-repeat;
 }
 .setting input[type="checkbox"]:hover:not(:focus) {
     border-color: $motion-tertiary;
