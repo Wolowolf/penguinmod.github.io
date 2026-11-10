@@ -13,10 +13,13 @@
     border-width: 1px;
     border-style: solid;
     border-bottom: 0;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-panel);
     --text-secondary: var(--text-dim-on-panel);
+    --text-disabled: var(--text-off-on-panel);
     --ui-accent-symbol: var(--accent-on-panel);
+    --ui-tertiary: var(--hover-on-panel);
+    --ui-selected: var(--selected-on-panel);
     --paint-text-primary: var(--text-on-panel);
     color: var(--text-primary); /* context */
 }

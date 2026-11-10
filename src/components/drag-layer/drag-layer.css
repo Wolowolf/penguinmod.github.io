@@ -35,10 +35,13 @@
 
     /* Use the same drop shadow as stage dragging */
     box-shadow: 5px 5px 5px $ui-black-transparent-default;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --text-disabled: var(--text-off-on-surface);
     --ui-accent-symbol: var(--accent-on-surface);
+    --ui-tertiary: var(--hover-on-surface);
+    --ui-selected: var(--selected-on-surface);
     --paint-text-primary: var(--text-on-surface);
     color: var(--text-primary); /* context */
 }

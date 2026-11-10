@@ -14,25 +14,19 @@
     height: 100%;
     overflow: auto;
     
-    background: $ui-surface;
+    background: $ui-workspace;
     border-top-right-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
     border: 1px solid $ui-edge;
     padding: calc(2 * $space);
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-surface);
-    --text-secondary: var(--text-dim-on-surface);
-    --ui-accent-symbol: var(--accent-on-surface);
-    --paint-text-primary: var(--text-on-surface);
-    color: var(--text-primary); /* context */
-}
-[theme="dark"] .editor-container {
-    background: $ui-primary;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-background);
-    --text-secondary: var(--text-dim-on-background);
-    --ui-accent-symbol: var(--accent-on-background);
-    --paint-text-primary: var(--text-on-background);
+    /* section 222: this background's ink, accent and tints */
+    --text-primary: var(--text-on-workspace);
+    --text-secondary: var(--text-dim-on-workspace);
+    --text-disabled: var(--text-off-on-workspace);
+    --ui-accent-symbol: var(--accent-on-workspace);
+    --ui-tertiary: var(--hover-on-workspace);
+    --ui-selected: var(--selected-on-workspace);
+    --paint-text-primary: var(--text-on-workspace);
     color: var(--text-primary); /* context */
 }
 
@@ -109,7 +103,4 @@
 .editor-container td {
     border: 1px solid $ui-edge;
     text-align: left;
-}
-[theme="dark"] .editor-container td {
-    border-color: $ui-edge;
 }

@@ -79,24 +79,30 @@
   padding: 0;
   justify-content: center;
   align-items: center;
-  background-color: var(--ui-primary, white);
+  background-color: var(--ui-surface);
   border: 1px solid var(--ui-edge, #c6cdd6);
   border-radius: 4px;
-  /* section 221: this background's text and symbol colours */
-  --text-primary: var(--text-on-background);
-  --text-secondary: var(--text-dim-on-background);
-  --ui-accent-symbol: var(--accent-on-background);
-  --paint-text-primary: var(--text-on-background);
+  /* section 222: this background's ink, accent and tints */
+  --text-primary: var(--text-on-surface);
+  --text-secondary: var(--text-dim-on-surface);
+  --text-disabled: var(--text-off-on-surface);
+  --ui-accent-symbol: var(--accent-on-surface);
+  --ui-tertiary: var(--hover-on-surface);
+  --ui-selected: var(--selected-on-surface);
+  --paint-text-primary: var(--text-on-surface);
   color: var(--text-primary); /* context */
 }
 
 .sa-lock-object.locked .sa-lock-button {
   background-color: var(--ui-accent, #00c3ff);
   border-color: #0099ff;
-  /* section 221: this background's text and symbol colours */
+  /* section 222: this background's ink, accent and tints */
   --text-primary: var(--text-on-accent);
   --text-secondary: var(--text-dim-on-accent);
+  --text-disabled: var(--text-off-on-accent);
   --ui-accent-symbol: var(--accent-on-accent);
+  --ui-tertiary: var(--hover-on-accent);
+  --ui-selected: var(--selected-on-accent);
   --paint-text-primary: var(--text-on-accent);
   color: var(--text-primary); /* context */
 }
@@ -120,10 +126,13 @@
   z-index: 43;
   padding-inline: 0.5rem;
   background-color: var(--ui-primary, hsl(215, 100%, 95%));
-  /* section 221: this background's text and symbol colours */
+  /* section 222: this background's ink, accent and tints */
   --text-primary: var(--text-on-background);
   --text-secondary: var(--text-dim-on-background);
+  --text-disabled: var(--text-off-on-background);
   --ui-accent-symbol: var(--accent-on-background);
+  --ui-tertiary: var(--hover-on-background);
+  --ui-selected: var(--selected-on-background);
   --paint-text-primary: var(--text-on-background);
   color: var(--text-primary); /* context */
 }

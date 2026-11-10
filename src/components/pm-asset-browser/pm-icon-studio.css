@@ -50,10 +50,13 @@
 .range { width: 7rem; }
 .color { width: 2.2rem; height: 1.8rem; padding: 0; border: 1px solid $ui-edge; background: none; cursor: pointer; }
 .select { height: 2rem; max-width: 100%; border: 1px solid $ui-edge; background: $ui-surface; color: $text-primary;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --text-disabled: var(--text-off-on-surface);
     --ui-accent-symbol: var(--accent-on-surface);
+    --ui-tertiary: var(--hover-on-surface);
+    --ui-selected: var(--selected-on-surface);
     --paint-text-primary: var(--text-on-surface);
 }
 .text { width: 100%; height: 2rem; padding: 0 6px; border: 1px solid $ui-edge; }
@@ -71,10 +74,13 @@
     cursor: pointer;
 }
 .tool:hover { background: $motion-primary;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-accent);
     --text-secondary: var(--text-dim-on-accent);
+    --text-disabled: var(--text-off-on-accent);
     --ui-accent-symbol: var(--accent-on-accent);
+    --ui-tertiary: var(--hover-on-accent);
+    --ui-selected: var(--selected-on-accent);
     --paint-text-primary: var(--text-on-accent);
     color: var(--text-primary); /* context */
 }
@@ -97,10 +103,13 @@
     color: $text-primary;
     font-size: 1.2rem;
     cursor: pointer;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --text-disabled: var(--text-off-on-surface);
     --ui-accent-symbol: var(--accent-on-surface);
+    --ui-tertiary: var(--hover-on-surface);
+    --ui-selected: var(--selected-on-surface);
     --paint-text-primary: var(--text-on-surface);
 }
 .arrow:disabled { opacity: 0.35; cursor: default; }
@@ -113,10 +122,13 @@
     background: $ui-surface;
     font-size: 0.7rem;
     cursor: pointer;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --text-disabled: var(--text-off-on-surface);
     --ui-accent-symbol: var(--accent-on-surface);
+    --ui-tertiary: var(--hover-on-surface);
+    --ui-selected: var(--selected-on-surface);
     --paint-text-primary: var(--text-on-surface);
     color: var(--text-primary); /* context */
 }
@@ -162,10 +174,13 @@
     cursor: pointer;
 }
 .add { background: $motion-primary; color: $text-on-accent;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-accent);
     --text-secondary: var(--text-dim-on-accent);
+    --text-disabled: var(--text-off-on-accent);
     --ui-accent-symbol: var(--accent-on-accent);
+    --ui-tertiary: var(--hover-on-accent);
+    --ui-selected: var(--selected-on-accent);
     --paint-text-primary: var(--text-on-accent);
 }
 .add-alt { background: $text-primary; color: $ui-surface; }
@@ -173,10 +188,13 @@
 .tags { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .tag-row { display: flex; align-items: center; gap: 6px; }
 .tag-thumb { width: 2.4rem; height: 2.4rem; background: $ui-surface; cursor: pointer; object-fit: contain; display: inline-block;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --text-disabled: var(--text-off-on-surface);
     --ui-accent-symbol: var(--accent-on-surface);
+    --ui-tertiary: var(--hover-on-surface);
+    --ui-selected: var(--selected-on-surface);
     --paint-text-primary: var(--text-on-surface);
     color: var(--text-primary); /* context */
 }
@@ -191,28 +209,9 @@
     font-size: 1rem;
     cursor: pointer;
 }
-
-[theme="dark"] .controls,
-[theme="dark"] .stage { color: $text-primary; }
-[theme="dark"] .select,
-[theme="dark"] .number,
-[theme="dark"] .text,
-[theme="dark"] .arrow { background: $ui-surface; color: $text-primary; border-color: $ui-edge;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-surface);
-    --text-secondary: var(--text-dim-on-surface);
-    --ui-accent-symbol: var(--accent-on-surface);
-    --paint-text-primary: var(--text-on-surface);
-}
-[theme="dark"] .tool,
-[theme="dark"] .button,
-[theme="dark"] .add-alt,
-[theme="dark"] .tag { background: $ui-edge; color: $text-primary; }
-[theme="dark"] .tag-thumb { background: $text-secondary; }
 [theme="dark"] .preview-box {
     background-color: #333;
     background-image:
         linear-gradient(45deg, #2a2a2a 25%, transparent 25%, transparent 75%, #2a2a2a 75%),
         linear-gradient(45deg, #2a2a2a 25%, transparent 25%, transparent 75%, #2a2a2a 75%);
 }
-[theme="dark"] .badge-choice { background: $ui-edge; }

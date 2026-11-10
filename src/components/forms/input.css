@@ -2,7 +2,7 @@
 @import "../../css/colors.css";
 
 .input-form {
-    background-color: $ui-surface; /* section 221: inputs are "Buttons, inputs, tiles" in both themes (the browser's own white otherwise) */
+    background-color: $ui-workspace; /* section 221: inputs are "Buttons, inputs, tiles" in both themes (the browser's own white otherwise) */
     height: 2rem;
     padding: 0 0.75rem;
 
@@ -30,34 +30,22 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     min-width: 0;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-surface);
-    --text-secondary: var(--text-dim-on-surface);
-    --ui-accent-symbol: var(--accent-on-surface);
-    --paint-text-primary: var(--text-on-surface);
-}
-[theme="dark"] .input-form {
-    background-color: $ui-surface;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-surface);
-    --text-secondary: var(--text-dim-on-surface);
-    --ui-accent-symbol: var(--accent-on-surface);
-    --paint-text-primary: var(--text-on-surface);
-    color: var(--text-primary); /* context */
+    /* section 222: this background's ink, accent and tints */
+    --text-primary: var(--text-on-workspace);
+    --text-secondary: var(--text-dim-on-workspace);
+    --text-disabled: var(--text-off-on-workspace);
+    --ui-accent-symbol: var(--accent-on-workspace);
+    --ui-tertiary: var(--hover-on-workspace);
+    --ui-selected: var(--selected-on-workspace);
+    --paint-text-primary: var(--text-on-workspace);
 }
 
 .input-form:hover {
     border-color: $motion-primary;
 }
-[theme="dark"] .input-form:hover {
-    border-color: $motion-primary-dark;
-}
 
 .input-form:focus {
     border-color: $motion-primary;
-}
-[theme="dark"] .input-form:focus {
-    border-color: $motion-primary-dark;
 }
 
 .input-small {

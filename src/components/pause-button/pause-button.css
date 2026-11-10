@@ -4,10 +4,12 @@
     padding: 0.375rem;
     user-select: none;
     cursor: pointer;
-    fill: var(--text-secondary); /* desktop (section 217): theme colour, was #9a9a9a */
+    fill: var(--text-disabled); /* section 222: nothing runs, so nothing can be paused = disabled ink */
+    --pm-disabled: 1; /* the contrast guard leaves disabled things weak */
 }
 
 .pause-btn.is-running {
+    --pm-disabled: 0;
     fill: #ffbf00;
 }
 

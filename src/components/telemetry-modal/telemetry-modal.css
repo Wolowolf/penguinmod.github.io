@@ -37,22 +37,28 @@ $ui-gray: hsla(0, 0%, 95%, 1);
     background-color: $motion-primary;
     background-image: url('./telemetry-modal-header.png');
     background-size: cover;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-accent);
     --text-secondary: var(--text-dim-on-accent);
+    --text-disabled: var(--text-off-on-accent);
     --ui-accent-symbol: var(--accent-on-accent);
+    --ui-tertiary: var(--hover-on-accent);
+    --ui-selected: var(--selected-on-accent);
     --paint-text-primary: var(--text-on-accent);
     color: var(--text-primary); /* context */
 }
 
 .body {
-    background: $ui-surface;
+    background: $ui-secondary;
     padding: 1.5rem 2.25rem;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-surface);
-    --text-secondary: var(--text-dim-on-surface);
-    --ui-accent-symbol: var(--accent-on-surface);
-    --paint-text-primary: var(--text-on-surface);
+    /* section 222: this background's ink, accent and tints */
+    --text-primary: var(--text-on-panel);
+    --text-secondary: var(--text-dim-on-panel);
+    --text-disabled: var(--text-off-on-panel);
+    --ui-accent-symbol: var(--accent-on-panel);
+    --ui-tertiary: var(--hover-on-panel);
+    --ui-selected: var(--selected-on-panel);
+    --paint-text-primary: var(--text-on-panel);
     color: var(--text-primary); /* context */
 }
 
@@ -92,10 +98,13 @@ $ui-gray: hsla(0, 0%, 95%, 1);
     appearance: none;
     background-color: $ui-surface;
     vertical-align: middle;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --text-disabled: var(--text-off-on-surface);
     --ui-accent-symbol: var(--accent-on-surface);
+    --ui-tertiary: var(--hover-on-surface);
+    --ui-selected: var(--selected-on-surface);
     --paint-text-primary: var(--text-on-surface);
     color: var(--text-primary); /* context */
 }
@@ -111,10 +120,13 @@ $ui-gray: hsla(0, 0%, 95%, 1);
     transition: all .25s ease;
     background-color: $ui-surface;
     border: 1px solid $motion-primary;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --text-disabled: var(--text-off-on-surface);
     --ui-accent-symbol: var(--accent-on-surface);
+    --ui-tertiary: var(--hover-on-surface);
+    --ui-selected: var(--selected-on-surface);
     --paint-text-primary: var(--text-on-surface);
     color: var(--text-primary); /* context */
 }
@@ -127,10 +139,13 @@ $ui-gray: hsla(0, 0%, 95%, 1);
     width: .625rem;
     height: .625rem;
     content: "";
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-accent);
     --text-secondary: var(--text-dim-on-accent);
+    --text-disabled: var(--text-off-on-accent);
     --ui-accent-symbol: var(--accent-on-accent);
+    --ui-tertiary: var(--hover-on-accent);
+    --ui-selected: var(--selected-on-accent);
     --paint-text-primary: var(--text-on-accent);
     color: var(--text-primary); /* context */
 }
@@ -165,19 +180,25 @@ $ui-gray: hsla(0, 0%, 95%, 1);
     font-weight: bold;
     font-size: .875rem;
     cursor: pointer;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-accent);
     --text-secondary: var(--text-dim-on-accent);
+    --text-disabled: var(--text-off-on-accent);
     --ui-accent-symbol: var(--accent-on-accent);
+    --ui-tertiary: var(--hover-on-accent);
+    --ui-selected: var(--selected-on-accent);
     --paint-text-primary: var(--text-on-accent);
 }
 
 .button-row button:hover {
     background: $extensions-primary;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-accent);
     --text-secondary: var(--text-dim-on-accent);
+    --text-disabled: var(--text-off-on-accent);
     --ui-accent-symbol: var(--accent-on-accent);
+    --ui-tertiary: var(--hover-on-accent);
+    --ui-selected: var(--selected-on-accent);
     --paint-text-primary: var(--text-on-accent);
     color: var(--text-primary); /* context */
 }

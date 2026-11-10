@@ -9,10 +9,13 @@
 .body-wrapper {
     height: calc(100% - $menu-bar-height);
     background-color: $ui-primary;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-background);
     --text-secondary: var(--text-dim-on-background);
+    --text-disabled: var(--text-off-on-background);
     --ui-accent-symbol: var(--accent-on-background);
+    --ui-tertiary: var(--hover-on-background);
+    --ui-selected: var(--selected-on-background);
     --paint-text-primary: var(--text-on-background);
     color: var(--text-primary); /* context */
 }
@@ -93,7 +96,7 @@
 
     /* desktop (section 219): tabs are buttons: the button colour at rest, the hover tint on hover */
     background-color: $ui-surface;
-    color: $text-secondary;
+    color: $text-primary;
 
     display: flex;
     justify-content: center;
@@ -101,10 +104,13 @@
 
     user-select: none;
     white-space: nowrap;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --text-disabled: var(--text-off-on-surface);
     --ui-accent-symbol: var(--accent-on-surface);
+    --ui-tertiary: var(--hover-on-surface);
+    --ui-selected: var(--selected-on-surface);
     --paint-text-primary: var(--text-on-surface);
 }
 .tab > div {
@@ -141,12 +147,6 @@
 
 .tab:hover {
     background-color: $ui-tertiary;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-hover);
-    --text-secondary: var(--text-dim-on-hover);
-    --ui-accent-symbol: var(--accent-on-hover);
-    --paint-text-primary: var(--text-on-hover);
-    color: var(--text-primary); /* context */
 }
 
 .tab.is-selected {
@@ -154,10 +154,13 @@
     background-color: $ui-surface;
     box-shadow: inset 0 -2px 0 $ui-accent-symbol;
     z-index: 4; /* Make sure selected is always above */;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --text-disabled: var(--text-off-on-surface);
     --ui-accent-symbol: var(--accent-on-surface);
+    --ui-tertiary: var(--hover-on-surface);
+    --ui-selected: var(--selected-on-surface);
     --paint-text-primary: var(--text-on-surface);
 }
 
@@ -167,7 +170,7 @@
 /* the icon in one colour (pm-themed-icons.js): dim text, the accent when selected */
 .tab img[data-pm-themed] {
     object-position: -10000px 0;
-    background-color: $text-secondary;
+    background-color: $text-primary;
     mask: var(--pm-icon) center / contain no-repeat;
 }
 .tab.is-selected img[data-pm-themed] {
@@ -323,10 +326,13 @@
     /* the same outlined letters as the category names */
     text-shadow: -0.7px 0 0.6px #000000, 0.7px 0 0.6px #000000, 0 -0.7px 0.6px #000000,
         0 0.7px 0.6px #000000, 0 0 1px #000000;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-accent);
     --text-secondary: var(--text-dim-on-accent);
+    --text-disabled: var(--text-off-on-accent);
     --ui-accent-symbol: var(--accent-on-accent);
+    --ui-tertiary: var(--hover-on-accent);
+    --ui-selected: var(--selected-on-accent);
     --paint-text-primary: var(--text-on-accent);
 }
 
@@ -383,7 +389,16 @@
     width: 100%;
     height: 100%;
     /* if the user-specified background color can't be understood by the browser, default to white */
-    background-color: white;
+    background-color: $ui-primary;
+    /* section 222: this background's ink, accent and tints */
+    --text-primary: var(--text-on-background);
+    --text-secondary: var(--text-dim-on-background);
+    --text-disabled: var(--text-off-on-background);
+    --ui-accent-symbol: var(--accent-on-background);
+    --ui-tertiary: var(--hover-on-background);
+    --ui-selected: var(--selected-on-background);
+    --paint-text-primary: var(--text-on-background);
+    color: var(--text-primary); /* context */
 }
 
 /* desktop patch: lets the stage resize handle be positioned against the stage column */

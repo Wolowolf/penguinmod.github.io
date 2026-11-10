@@ -30,7 +30,7 @@
     right: 0;
     bottom: 0;
     z-index: $z-index-stage-wrapper-overlay;
-    background-color: $ui-surface;
+    background-color: $ui-primary;
     /* spacing between stage and control bar (on the top), or between
     stage and window edges (on left/right/bottom) */
     padding: $stage-full-screen-stage-padding;
@@ -39,21 +39,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-surface);
-    --text-secondary: var(--text-dim-on-surface);
-    --ui-accent-symbol: var(--accent-on-surface);
-    --paint-text-primary: var(--text-on-surface);
-    color: var(--text-primary); /* context */
-}
-
-/* tw: support dark mode */
-[theme="dark"] .stage-wrapper.full-screen {
-    background-color: $ui-primary;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-background);
     --text-secondary: var(--text-dim-on-background);
+    --text-disabled: var(--text-off-on-background);
     --ui-accent-symbol: var(--accent-on-background);
+    --ui-tertiary: var(--hover-on-background);
+    --ui-selected: var(--selected-on-background);
     --paint-text-primary: var(--text-on-background);
     color: var(--text-primary); /* context */
 }

@@ -9,12 +9,15 @@
     background-color: $ui-surface;
     transition-property: background-color;
     background-size: 100%;
-    border: 1px solid rgb(92, 92, 92);
+    border: 1px solid $text-secondary; /* section 222: a clear edge in quiet ink on any panel */
     outline: none;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --text-disabled: var(--text-off-on-surface);
     --ui-accent-symbol: var(--accent-on-surface);
+    --ui-tertiary: var(--hover-on-surface);
+    --ui-selected: var(--selected-on-surface);
     --paint-text-primary: var(--text-on-surface);
     color: var(--text-primary); /* context */
 }
@@ -24,13 +27,13 @@
 .checkbox:checked {
     background-color: $motion-primary;
     background-image: url("./checkbox.svg");
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-accent);
     --text-secondary: var(--text-dim-on-accent);
+    --text-disabled: var(--text-off-on-accent);
     --ui-accent-symbol: var(--accent-on-accent);
+    --ui-tertiary: var(--hover-on-accent);
+    --ui-selected: var(--selected-on-accent);
     --paint-text-primary: var(--text-on-accent);
     color: var(--text-primary); /* context */
-}
-[theme="dark"] .checkbox {
-    border-color: transparent;
 }

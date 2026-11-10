@@ -7,28 +7,22 @@
 }
 
 .body {
-    background: $ui-surface;
+    background: $ui-secondary;
     padding: 1.5rem 2.25rem;
     max-height: calc(100vh - 142px);
     overflow: auto;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-surface);
-    --text-secondary: var(--text-dim-on-surface);
-    --ui-accent-symbol: var(--accent-on-surface);
-    --paint-text-primary: var(--text-on-surface);
+    /* section 222: this background's ink, accent and tints */
+    --text-primary: var(--text-on-panel);
+    --text-secondary: var(--text-dim-on-panel);
+    --text-disabled: var(--text-off-on-panel);
+    --ui-accent-symbol: var(--accent-on-panel);
+    --ui-tertiary: var(--hover-on-panel);
+    --ui-selected: var(--selected-on-panel);
+    --paint-text-primary: var(--text-on-panel);
     color: var(--text-primary); /* context */
-}
-[theme="dark"] .body {
-    color: $text-primary;
-    background: $ui-primary;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-background);
-    --text-secondary: var(--text-dim-on-background);
-    --ui-accent-symbol: var(--accent-on-background);
-    --paint-text-primary: var(--text-on-background);
 }
 
 .open-buttons {
@@ -93,7 +87,7 @@
 .font-dropdown-outer {
     position: absolute;
     z-index: $z-index-modal;
-    background-color: $ui-surface;
+    background-color: $ui-secondary;
     color: $text-primary;
     border-radius: 0.25rem;
     overflow: auto;
@@ -101,20 +95,14 @@
     border: 1px solid $ui-edge;
     box-sizing: border-box;
     box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, .3);
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-surface);
-    --text-secondary: var(--text-dim-on-surface);
-    --ui-accent-symbol: var(--accent-on-surface);
-    --paint-text-primary: var(--text-on-surface);
-}
-[theme="dark"] .font-dropdown-outer {
-    background-color: $ui-secondary;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-panel);
     --text-secondary: var(--text-dim-on-panel);
+    --text-disabled: var(--text-off-on-panel);
     --ui-accent-symbol: var(--accent-on-panel);
+    --ui-tertiary: var(--hover-on-panel);
+    --ui-selected: var(--selected-on-panel);
     --paint-text-primary: var(--text-on-panel);
-    color: var(--text-primary); /* context */
 }
 .font-dropdown-item {
     display: flex;
@@ -127,10 +115,13 @@
 .font-dropdown-item:hover {
     background-color: $motion-primary;
     color: var(--text-primary);
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-accent);
     --text-secondary: var(--text-dim-on-accent);
+    --text-disabled: var(--text-off-on-accent);
     --ui-accent-symbol: var(--accent-on-accent);
+    --ui-tertiary: var(--hover-on-accent);
+    --ui-selected: var(--selected-on-accent);
     --paint-text-primary: var(--text-on-accent);
 }
 
@@ -155,10 +146,13 @@
     border: 1px solid $ui-edge;
     background-color: $motion-primary;
     color: var(--text-primary);
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-accent);
     --text-secondary: var(--text-dim-on-accent);
+    --text-disabled: var(--text-off-on-accent);
     --ui-accent-symbol: var(--accent-on-accent);
+    --ui-tertiary: var(--hover-on-accent);
+    --ui-selected: var(--selected-on-accent);
     --paint-text-primary: var(--text-on-accent);
 }
 .button:disabled {
@@ -193,10 +187,13 @@
 .fallback-container .fallback-button-selected {
     background-color: $motion-primary;
     color: var(--text-primary);
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-accent);
     --text-secondary: var(--text-dim-on-accent);
+    --text-disabled: var(--text-off-on-accent);
     --ui-accent-symbol: var(--accent-on-accent);
+    --ui-tertiary: var(--hover-on-accent);
+    --ui-selected: var(--selected-on-accent);
     --paint-text-primary: var(--text-on-accent);
 }
 

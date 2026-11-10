@@ -21,29 +21,22 @@ body {
     color: var(--text-primary);
     font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif);
     margin: 0;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-background);
     --text-secondary: var(--text-dim-on-background);
+    --text-disabled: var(--text-off-on-background);
     --ui-accent-symbol: var(--accent-on-background);
+    --ui-tertiary: var(--hover-on-background);
+    --ui-selected: var(--selected-on-background);
     --paint-text-primary: var(--text-on-background);
 }
 body[theme="dark"] {
-    background-color: var(--ui-primary);
-    color: var(--text-primary);
     color-scheme: dark;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-background);
-    --text-secondary: var(--text-dim-on-background);
-    --ui-accent-symbol: var(--accent-on-background);
-    --paint-text-primary: var(--text-on-background);
 }
 
 a[href] {
     color: var(--ui-accent-symbol);
     text-decoration: underline;
-}
-[theme="dark"] a[href] {
-    color: var(--ui-accent-symbol);
 }
 a:active, a:focus {
     outline: none;
@@ -68,22 +61,16 @@ a:active, a:focus {
 .header {
     position: relative;
     padding: 8px 20px;
-    background-color: var(--ui-surface);
+    background-color: var(--ui-primary);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-surface);
-    --text-secondary: var(--text-dim-on-surface);
-    --ui-accent-symbol: var(--accent-on-surface);
-    --paint-text-primary: var(--text-on-surface);
-    color: var(--text-primary); /* context */
-}
-[theme="dark"] .header {
-    background-color: var(--ui-surface);
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-surface);
-    --text-secondary: var(--text-dim-on-surface);
-    --ui-accent-symbol: var(--accent-on-surface);
-    --paint-text-primary: var(--text-on-surface);
+    /* section 222: this background's ink, accent and tints */
+    --text-primary: var(--text-on-background);
+    --text-secondary: var(--text-dim-on-background);
+    --text-disabled: var(--text-off-on-background);
+    --ui-accent-symbol: var(--accent-on-background);
+    --ui-tertiary: var(--hover-on-background);
+    --ui-selected: var(--selected-on-background);
+    --paint-text-primary: var(--text-on-background);
     color: var(--text-primary); /* context */
 }
 @media (max-width: 700px) {
@@ -112,40 +99,33 @@ a:active, a:focus {
     transition-property: background;
     display: flex;
     align-items: center;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --text-disabled: var(--text-off-on-surface);
     --ui-accent-symbol: var(--accent-on-surface);
-    --paint-text-primary: var(--text-on-surface);
-}
-[theme="dark"] .button {
-    color: var(--text-primary);
-    background: var(--ui-surface);
-    border-color: var(--ui-edge);
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-surface);
-    --text-secondary: var(--text-dim-on-surface);
-    --ui-accent-symbol: var(--accent-on-surface);
+    --ui-tertiary: var(--hover-on-surface);
+    --ui-selected: var(--selected-on-surface);
     --paint-text-primary: var(--text-on-surface);
 }
 .button:hover {
     background: var(--ui-edge);
 }
-[theme="dark"] .button:hover {
-    background: var(--ui-edge);
-}
 
 .search-container {
     display: flex;
-    background-color: var(--ui-surface);
+    background-color: var(--ui-workspace);
     color: var(--text-primary);
     border: 1px solid var(--ui-edge);
     border-radius: 4px;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-surface);
-    --text-secondary: var(--text-dim-on-surface);
-    --ui-accent-symbol: var(--accent-on-surface);
-    --paint-text-primary: var(--text-on-surface);
+    /* section 222: this background's ink, accent and tints */
+    --text-primary: var(--text-on-workspace);
+    --text-secondary: var(--text-dim-on-workspace);
+    --text-disabled: var(--text-off-on-workspace);
+    --ui-accent-symbol: var(--accent-on-workspace);
+    --ui-tertiary: var(--hover-on-workspace);
+    --ui-selected: var(--selected-on-workspace);
+    --paint-text-primary: var(--text-on-workspace);
 }
 .search-input {
     color: inherit;
@@ -172,16 +152,6 @@ a:active, a:focus {
     background-repeat: no-repeat;
     background-position: center;
 }
-[theme="dark"] .search-container {
-    color: var(--text-primary);
-    background-color: var(--ui-surface);
-    border-color: var(--ui-edge);
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-surface);
-    --text-secondary: var(--text-dim-on-surface);
-    --ui-accent-symbol: var(--accent-on-surface);
-    --paint-text-primary: var(--text-on-surface);
-}
 .search-input:not([value=""]) ~ .search-button {
     background-image: url("./icons/clear.svg") !important;
 }
@@ -200,21 +170,14 @@ a:active, a:focus {
     display: flex;
     align-items: center;
     text-decoration: none !important;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --text-disabled: var(--text-off-on-surface);
     --ui-accent-symbol: var(--accent-on-surface);
+    --ui-tertiary: var(--hover-on-surface);
+    --ui-selected: var(--selected-on-surface);
     --paint-text-primary: var(--text-on-surface);
-}
-[theme="dark"] .feedback-button-outer {
-    background-color: var(--ui-surface);
-    border-color: var(--ui-edge);
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-surface);
-    --text-secondary: var(--text-dim-on-surface);
-    --ui-accent-symbol: var(--accent-on-surface);
-    --paint-text-primary: var(--text-on-surface);
-    color: var(--text-primary); /* context */
 }
 .feedback-button-inner {
     text-decoration: none;
@@ -260,9 +223,6 @@ a:active, a:focus {
     width: 100px;
     flex: 1;
 }
-[theme="dark"] .addon-group-name::after {
-    border-color: var(--ui-edge);
-}
 .addon-group-expand {
     width: 24px;
     height: 24px;
@@ -274,40 +234,27 @@ a:active, a:focus {
 }
 .addon-group-name:hover .addon-group-expand {
     background: var(--ui-tertiary);
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-hover);
-    --text-secondary: var(--text-dim-on-hover);
-    --ui-accent-symbol: var(--accent-on-hover);
-    --paint-text-primary: var(--text-on-hover);
-    color: var(--text-primary); /* context */
 }
 
 .addon {
-    background: var(--ui-surface);
+    background: var(--ui-secondary);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border: 1px solid var(--ui-edge);
     border-radius: 5px;
     margin: 10px 0 10px 0;
     font-size: 14px;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-surface);
-    --text-secondary: var(--text-dim-on-surface);
-    --ui-accent-symbol: var(--accent-on-surface);
-    --paint-text-primary: var(--text-on-surface);
+    /* section 222: this background's ink, accent and tints */
+    --text-primary: var(--text-on-panel);
+    --text-secondary: var(--text-dim-on-panel);
+    --text-disabled: var(--text-off-on-panel);
+    --ui-accent-symbol: var(--accent-on-panel);
+    --ui-tertiary: var(--hover-on-panel);
+    --ui-selected: var(--selected-on-panel);
+    --paint-text-primary: var(--text-on-panel);
     color: var(--text-primary); /* context */
 }
 .addon-dirty {
     background: color-mix(in srgb, #ff8c1a 15%, var(--ui-surface));
-}
-[theme="dark"] .addon {
-    background-color: var(--ui-surface);
-    border-color: var(--ui-edge);
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-surface);
-    --text-secondary: var(--text-dim-on-surface);
-    --ui-accent-symbol: var(--accent-on-surface);
-    --paint-text-primary: var(--text-on-surface);
-    color: var(--text-primary); /* context */
 }
 [theme="dark"] .addon-dirty {
     background: color-mix(in srgb, #ff8c1a 15%, var(--ui-surface));
@@ -366,12 +313,6 @@ a:active, a:focus {
 }
 .reset-button:hover {
     background: var(--ui-tertiary);
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-hover);
-    --text-secondary: var(--text-dim-on-hover);
-    --ui-accent-symbol: var(--accent-on-hover);
-    --paint-text-primary: var(--text-on-hover);
-    color: var(--text-primary); /* context */
 }
 .reset-button:active, .reset-button:focus-within {
     outline: none;
@@ -380,15 +321,6 @@ a:active, a:focus {
     padding: 1px 0;
     height: 16px;
     width: 16px;
-}
-[theme="dark"] .reset-button:hover {
-    background: var(--ui-tertiary);
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-hover);
-    --text-secondary: var(--text-dim-on-hover);
-    --ui-accent-symbol: var(--accent-on-hover);
-    --paint-text-primary: var(--text-on-hover);
-    color: var(--text-primary); /* context */
 }
 
 .switch {
@@ -405,10 +337,13 @@ a:active, a:focus {
 }
 .switch[state="on"] {
     background: $motion-primary;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-accent);
     --text-secondary: var(--text-dim-on-accent);
+    --text-disabled: var(--text-off-on-accent);
     --ui-accent-symbol: var(--accent-on-accent);
+    --ui-tertiary: var(--hover-on-accent);
+    --ui-selected: var(--selected-on-accent);
     --paint-text-primary: var(--text-on-accent);
     color: var(--text-primary); /* context */
 }
@@ -424,29 +359,26 @@ a:active, a:focus {
     left: 5px;
     transition: 0.25s ease;
     transition-property: background, left;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --text-disabled: var(--text-off-on-surface);
     --ui-accent-symbol: var(--accent-on-surface);
-    --paint-text-primary: var(--text-on-surface);
-    color: var(--text-primary); /* context */
-}
-[theme="dark"] .switch::before {
-    background: var(--ui-surface);
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-surface);
-    --text-secondary: var(--text-dim-on-surface);
-    --ui-accent-symbol: var(--accent-on-surface);
+    --ui-tertiary: var(--hover-on-surface);
+    --ui-selected: var(--selected-on-surface);
     --paint-text-primary: var(--text-on-surface);
     color: var(--text-primary); /* context */
 }
 .switch[state="on"]::before {
     background: var(--ui-surface);
     left: 25px;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --text-disabled: var(--text-off-on-surface);
     --ui-accent-symbol: var(--accent-on-surface);
+    --ui-tertiary: var(--hover-on-surface);
+    --ui-selected: var(--selected-on-surface);
     --paint-text-primary: var(--text-on-surface);
     color: var(--text-primary); /* context */
 }
@@ -506,9 +438,6 @@ a:active, a:focus {
     margin-bottom: 10px;
     color: var(--text-primary);
 }
-[theme="dark"] .addon-details {
-    color: var(--text-primary);
-}
 
 .credit-container {
 
@@ -562,32 +491,25 @@ a:active, a:focus {
     font-size: 12px;
     margin-right: 10px;
 }
-[theme="dark"] .setting-label {
-    color: var(--text-secondary);
-}
 .setting input {
     color: var(--text-primary);
-    background: var(--ui-primary);
+    background: var(--ui-workspace);
     border: 1px solid var(--ui-edge);
     padding: 8px 12px;
     border-radius: 4px;
     transition: 0.25s ease;
     transition-property: background;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-background);
-    --text-secondary: var(--text-dim-on-background);
-    --ui-accent-symbol: var(--accent-on-background);
-    --paint-text-primary: var(--text-on-background);
+    /* section 222: this background's ink, accent and tints */
+    --text-primary: var(--text-on-workspace);
+    --text-secondary: var(--text-dim-on-workspace);
+    --text-disabled: var(--text-off-on-workspace);
+    --ui-accent-symbol: var(--accent-on-workspace);
+    --ui-tertiary: var(--hover-on-workspace);
+    --ui-selected: var(--selected-on-workspace);
+    --paint-text-primary: var(--text-on-workspace);
 }
 [theme="dark"] .setting input {
-    color: var(--text-primary);
-    background: var(--ui-primary);
     border: 1px solid var(--ui-edge);
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-background);
-    --text-secondary: var(--text-dim-on-background);
-    --ui-accent-symbol: var(--accent-on-background);
-    --paint-text-primary: var(--text-on-background);
 }
 .setting input:focus, .setting input:active {
     outline: none;
@@ -603,10 +525,13 @@ a:active, a:focus {
     background-color: var(--ui-surface);
     background-size: 20px 20px;
     background-position: center center;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --text-disabled: var(--text-off-on-surface);
     --ui-accent-symbol: var(--accent-on-surface);
+    --ui-tertiary: var(--hover-on-surface);
+    --ui-selected: var(--selected-on-surface);
     --paint-text-primary: var(--text-on-surface);
     color: var(--text-primary); /* context */
 }
@@ -614,10 +539,13 @@ a:active, a:focus {
     border-color: $motion-primary;
     background-color: $motion-primary;
     background-image: url("./icons/check.svg");
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-accent);
     --text-secondary: var(--text-dim-on-accent);
+    --text-disabled: var(--text-off-on-accent);
     --ui-accent-symbol: var(--accent-on-accent);
+    --ui-tertiary: var(--hover-on-accent);
+    --ui-selected: var(--selected-on-accent);
     --paint-text-primary: var(--text-on-accent);
     color: var(--text-primary); /* context */
 }
@@ -666,7 +594,7 @@ a:active, a:focus {
     cursor: pointer;
     padding: 10px;
     margin: 0;
-    background: transparent;
+    background: var(--ui-surface);
     border: none;
     background: var(--ui-primary);
     color: var(--text-primary);
@@ -674,20 +602,13 @@ a:active, a:focus {
     border-right-width: 0;
     transition: 0.25s ease;
     transition-property: color, background, border;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-background);
     --text-secondary: var(--text-dim-on-background);
+    --text-disabled: var(--text-off-on-background);
     --ui-accent-symbol: var(--accent-on-background);
-    --paint-text-primary: var(--text-on-background);
-}
-[theme="dark"] .select-option {
-    color: var(--text-primary);
-    background: var(--ui-primary);
-    border-color: var(--ui-edge);
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-background);
-    --text-secondary: var(--text-dim-on-background);
-    --ui-accent-symbol: var(--accent-on-background);
+    --ui-tertiary: var(--hover-on-background);
+    --ui-selected: var(--selected-on-background);
     --paint-text-primary: var(--text-on-background);
 }
 .select-option:first-child {
@@ -702,10 +623,13 @@ a:active, a:focus {
 .select-option.selected {
     color: var(--text-primary);
     background: $motion-primary;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-accent);
     --text-secondary: var(--text-dim-on-accent);
+    --text-disabled: var(--text-off-on-accent);
     --ui-accent-symbol: var(--accent-on-accent);
+    --ui-tertiary: var(--hover-on-accent);
+    --ui-selected: var(--selected-on-accent);
     --paint-text-primary: var(--text-on-accent);
 }
 .select-option:active, .select-option:focus-within {
@@ -722,9 +646,6 @@ a:active, a:focus {
 
 .footer {
     color: var(--text-primary);
-}
-[theme="dark"] .footer {
-    color: var(--text-secondary);
 }
 
 .unsupported-container {
@@ -786,7 +707,6 @@ a:active, a:focus {
 }
 [theme="dark"] .dirty-inner {
     background: color-mix(in srgb, #ff8c1a 15%, var(--ui-surface));
-    border-color: var(--ui-edge);
 }
 
 .dirty-button {

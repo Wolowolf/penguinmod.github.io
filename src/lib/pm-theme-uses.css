@@ -64,7 +64,7 @@
 
 /* context menus */
 .blocklyWidgetDiv .goog-menu {
-    background: var(--ui-surface);
+    background: var(--ui-secondary);
     border-color: var(--ui-edge);
 }
 .blocklyWidgetDiv .goog-menuitem {
@@ -81,12 +81,12 @@
 
 /* popovers (colour and direction pickers) */
 .Popover-body {
-    background: var(--ui-surface) !important;
+    background: var(--ui-secondary) !important;
     border-color: var(--ui-edge) !important;
     color: var(--text-primary);
 }
 .Popover-tipShape {
-    fill: var(--ui-surface) !important;
+    fill: var(--ui-secondary) !important;
     stroke: var(--ui-edge) !important;
 }
 
@@ -107,9 +107,6 @@ img[data-pm-mono] {
     mask: var(--pm-icon) center / contain no-repeat content-box;
     -webkit-mask: var(--pm-icon) center / contain no-repeat content-box;
 }
-img[data-pm-mono="accent"] {
-    background-color: var(--ui-accent-symbol);
-}
 img[data-pm-mono="text"] {
     background-color: var(--text-primary);
 }
@@ -120,36 +117,62 @@ img[data-pm-mono="text"] {
     filter: var(--pm-on-menu-bar-filter);
 }
 
-/* Section 221: each background hands its own text and symbol colours down to what is inside it
-   (the editor's own style rules do the same, written into them by script) */
+/* Sections 221, 222: each background hands its own ink, accent and tints down to what is inside it
+   (the editor's own style rules do the same, written into them by bench\contexts.js) */
 .blocklySvg {
     --text-primary: var(--text-on-workspace);
     --text-secondary: var(--text-dim-on-workspace);
+    --text-disabled: var(--text-off-on-workspace);
     --ui-accent-symbol: var(--accent-on-workspace);
+    --ui-tertiary: var(--hover-on-workspace);
+    --ui-selected: var(--selected-on-workspace);
 }
 .blocklyFlyout,
 .blocklyToolboxDiv,
-.scratchCategoryMenu {
-    --text-primary: var(--text-on-panel);
-    --text-secondary: var(--text-dim-on-panel);
-    --ui-accent-symbol: var(--accent-on-panel);
-}
-.pm-zoom-button,
+.scratchCategoryMenu,
 .blocklyWidgetDiv .goog-menu,
 .Popover-body {
+    --text-primary: var(--text-on-panel);
+    --text-secondary: var(--text-dim-on-panel);
+    --text-disabled: var(--text-off-on-panel);
+    --ui-accent-symbol: var(--accent-on-panel);
+    --ui-tertiary: var(--hover-on-panel);
+    --ui-selected: var(--selected-on-panel);
+    color: var(--text-primary);
+}
+.pm-zoom-button {
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --text-disabled: var(--text-off-on-surface);
     --ui-accent-symbol: var(--accent-on-surface);
-    color: var(--text-primary);
+    --ui-tertiary: var(--hover-on-surface);
+    --ui-selected: var(--selected-on-surface);
 }
-.blocklyWidgetDiv .goog-menuitem.goog-menuitem-highlight,
-.blocklyWidgetDiv .goog-menuitem-hover {
-    --text-primary: var(--text-on-hover);
-    --text-secondary: var(--text-dim-on-hover);
-    --ui-accent-symbol: var(--accent-on-hover);
-    color: var(--text-primary);
-}
-/* menu entries that cannot be used: weaker text of the menu, whatever its colour */
+/* menu entries that cannot be used: the menu's disabled ink */
 .blocklyWidgetDiv .goog-menuitem-disabled .goog-menuitem-content {
-    color: color-mix(in srgb, var(--text-primary) 45%, transparent) !important;
+    color: var(--text-disabled) !important;
+}
+/* Section 222: a text field is a small workspace, whatever it is in; a drop-down is a control.
+   (:where() = no weight: any rule that names a background of its own wins.) */
+:where(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="file"]):not([type="button"]):not([type="submit"]), textarea) {
+    background-color: var(--ui-workspace);
+    border-color: var(--ui-edge);
+    --text-primary: var(--text-on-workspace);
+    --text-secondary: var(--text-dim-on-workspace);
+    --text-disabled: var(--text-off-on-workspace);
+    --ui-accent-symbol: var(--accent-on-workspace);
+    --ui-tertiary: var(--hover-on-workspace);
+    --ui-selected: var(--selected-on-workspace);
+    color: var(--text-primary);
+}
+:where(select) {
+    background-color: var(--ui-surface);
+    border-color: var(--ui-edge);
+    --text-primary: var(--text-on-surface);
+    --text-secondary: var(--text-dim-on-surface);
+    --text-disabled: var(--text-off-on-surface);
+    --ui-accent-symbol: var(--accent-on-surface);
+    --ui-tertiary: var(--hover-on-surface);
+    --ui-selected: var(--selected-on-surface);
+    color: var(--text-primary);
 }

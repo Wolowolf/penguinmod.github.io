@@ -80,18 +80,12 @@
     outline-offset: 1px;
 }
 .stage-toggle:focus-visible {
-    outline: 3px solid #0b57d0;
+    outline: 3px solid $ui-accent-symbol;
     outline-offset: 1px;
-}
-[theme="dark"] .stage-toggle:focus-visible {
-    outline-color: #ffd166;
 }
 
 .stage-toggle[aria-pressed="true"] {
-    box-shadow: inset 0 0 0 2px #0b57d0;
-}
-[theme="dark"] .stage-toggle[aria-pressed="true"] {
-    box-shadow: inset 0 0 0 2px #ffd166;
+    box-shadow: inset 0 0 0 2px $ui-accent-symbol;
 }
 
 .visually-hidden {
@@ -113,26 +107,20 @@
 }
 
 .body {
-    background: $ui-surface;
+    background: $ui-secondary;
     color: $text-primary;
     padding: 1.25rem 2rem;
     min-height: 158px;
     max-height: calc(100vh - 242px);
     overflow-y: auto;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-surface);
-    --text-secondary: var(--text-dim-on-surface);
-    --ui-accent-symbol: var(--accent-on-surface);
-    --paint-text-primary: var(--text-on-surface);
-}
-[theme="dark"] .body {
-    background: $ui-primary;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-background);
-    --text-secondary: var(--text-dim-on-background);
-    --ui-accent-symbol: var(--accent-on-background);
-    --paint-text-primary: var(--text-on-background);
-    color: var(--text-primary); /* context */
+    /* section 222: this background's ink, accent and tints */
+    --text-primary: var(--text-on-panel);
+    --text-secondary: var(--text-dim-on-panel);
+    --text-disabled: var(--text-off-on-panel);
+    --ui-accent-symbol: var(--accent-on-panel);
+    --ui-tertiary: var(--hover-on-panel);
+    --ui-selected: var(--selected-on-panel);
+    --paint-text-primary: var(--text-on-panel);
 }
 
 @media (max-height: 600px) {
@@ -173,21 +161,11 @@
 }
 .tool-button:hover {
     background: $ui-tertiary;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-hover);
-    --text-secondary: var(--text-dim-on-hover);
-    --ui-accent-symbol: var(--accent-on-hover);
-    --paint-text-primary: var(--text-on-hover);
-    color: var(--text-primary); /* context */
 }
 .tool-button:focus-visible,
 .sort-button:focus-visible {
-    outline: 3px solid #0b57d0;
+    outline: 3px solid $ui-accent-symbol;
     outline-offset: 1px;
-}
-[theme="dark"] .tool-button:focus-visible,
-[theme="dark"] .sort-button:focus-visible {
-    outline-color: #ffd166;
 }
 
 .table-wrap {
@@ -237,12 +215,6 @@
 }
 .sort-button:hover {
     background: $ui-tertiary;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-hover);
-    --text-secondary: var(--text-dim-on-hover);
-    --ui-accent-symbol: var(--accent-on-hover);
-    --paint-text-primary: var(--text-on-hover);
-    color: var(--text-primary); /* context */
 }
 
 .detail {

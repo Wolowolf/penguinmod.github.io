@@ -44,13 +44,16 @@ can set a width for example or what it should do in a flex box (eg. grow).
     border: 1px solid $ui-transparent;
     -webkit-box-shadow: 0 0 0 calc($space * .5) $ui-white-transparent;
     box-shadow: 0 0 0 calc($space * .5) $ui-white-transparent;
-    background-color: $ui-surface;
+    background-color: $ui-workspace;
     color: $text-primary;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-surface);
-    --text-secondary: var(--text-dim-on-surface);
-    --ui-accent-symbol: var(--accent-on-surface);
-    --paint-text-primary: var(--text-on-surface);
+    /* section 222: this background's ink, accent and tints */
+    --text-primary: var(--text-on-workspace);
+    --text-secondary: var(--text-dim-on-workspace);
+    --text-disabled: var(--text-off-on-workspace);
+    --ui-accent-symbol: var(--accent-on-workspace);
+    --ui-tertiary: var(--hover-on-workspace);
+    --ui-selected: var(--selected-on-workspace);
+    --paint-text-primary: var(--text-on-workspace);
 }
 [theme="dark"] .title-field:focus {
     background-color: rgba(0, 0, 0, 0.3);

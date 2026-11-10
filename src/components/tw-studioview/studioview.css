@@ -47,10 +47,6 @@ Further modifications made for PenguinMod (like featured projects)
   border-width: 1px;
   border-color: var(--ui-edge, #c6cdd6);
 }
-[theme="dark"] .studioview-project,
-[theme="dark"] .studioview-placeholder {
-  border-color: var(--ui-edge, #c6cdd6);
-}
 .featured-studioview-project {
   background-color: #ffc400;
   background: linear-gradient(

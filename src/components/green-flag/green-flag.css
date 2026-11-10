@@ -4,7 +4,7 @@
     padding: 0.375rem;
     user-select: none;
     cursor: pointer;
-    fill: var(--text-secondary); /* desktop (section 217): theme colour, was #9a9a9a */
+    fill: var(--text-primary); /* section 222: usable and idle = full ink; its status colour when active */
 }
 
 .green-flag.is-active {

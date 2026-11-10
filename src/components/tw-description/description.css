@@ -9,28 +9,11 @@
     border: 1px solid var(--ui-edge);
     background-color: var(--ui-selected);
     border-radius: 0.5rem;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-selected);
-    --text-secondary: var(--text-dim-on-selected);
-    --ui-accent-symbol: var(--accent-on-selected);
-    --paint-text-primary: var(--text-on-selected);
-    color: var(--text-primary); /* context */
 }
 
 .description a {
     font-weight: bold;
     text-decoration: none;
-}
-
-[theme="dark"] .description {
-    border-color: var(--ui-edge);
-    background-color: var(--ui-selected);
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-selected);
-    --text-secondary: var(--text-dim-on-selected);
-    --ui-accent-symbol: var(--accent-on-selected);
-    --paint-text-primary: var(--text-on-selected);
-    color: var(--text-primary); /* context */
 }
 
 .header {

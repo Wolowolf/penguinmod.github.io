@@ -21,10 +21,13 @@ $header-height: calc(2.75rem - 2px);
     border-bottom: 0;
     cursor: pointer;
     transition: all 0.25s ease;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-panel);
     --text-secondary: var(--text-dim-on-panel);
+    --text-disabled: var(--text-off-on-panel);
     --ui-accent-symbol: var(--accent-on-panel);
+    --ui-tertiary: var(--hover-on-panel);
+    --ui-selected: var(--selected-on-panel);
     --paint-text-primary: var(--text-on-panel);
 }
 
@@ -51,10 +54,13 @@ $header-height: calc(2.75rem - 2px);
     border-bottom: 1px solid $ui-edge;
     width: 100%;
     transition: background-color 0.25s ease;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-panel);
     --text-secondary: var(--text-dim-on-panel);
+    --text-disabled: var(--text-off-on-panel);
     --ui-accent-symbol: var(--accent-on-panel);
+    --ui-tertiary: var(--hover-on-panel);
+    --ui-selected: var(--selected-on-panel);
     --paint-text-primary: var(--text-on-panel);
 }
 
@@ -70,10 +76,13 @@ $header-height: calc(2.75rem - 2px);
 
 .stage-selector.is-selected .header {
     background-color: $motion-primary;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-accent);
     --text-secondary: var(--text-dim-on-accent);
+    --text-disabled: var(--text-off-on-accent);
     --ui-accent-symbol: var(--accent-on-accent);
+    --ui-tertiary: var(--hover-on-accent);
+    --ui-selected: var(--selected-on-accent);
     --paint-text-primary: var(--text-on-accent);
     color: var(--text-primary); /* context */
 }

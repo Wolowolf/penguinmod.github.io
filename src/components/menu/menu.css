@@ -4,7 +4,7 @@
     position: absolute;
     border: 1px solid $ui-edge;
     border-radius: 0 0 8px 8px;
-    background-color: $ui-menu-bar;
+    background-color: $ui-secondary;
     padding: 0;
     margin: 0;
     min-width: 186px;
@@ -13,20 +13,14 @@
     overflow: visible;
     color: var(--text-primary);
     box-shadow: 0 8px 8px 0 $ui-black-transparent-default;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-menu-bar);
-    --text-secondary: var(--text-dim-on-menu-bar);
-    --ui-accent-symbol: var(--accent-on-menu-bar);
-    --paint-text-primary: var(--text-on-menu-bar);
-}
-[theme="dark"] .menu {
-    background-color: $motion-primary-dark;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-menu-bar);
-    --text-secondary: var(--text-dim-on-menu-bar);
-    --ui-accent-symbol: var(--accent-on-menu-bar);
-    --paint-text-primary: var(--text-on-menu-bar);
-    color: var(--text-primary); /* context */
+    /* section 222: this background's ink, accent and tints */
+    --text-primary: var(--text-on-panel);
+    --text-secondary: var(--text-dim-on-panel);
+    --text-disabled: var(--text-off-on-panel);
+    --ui-accent-symbol: var(--accent-on-panel);
+    --ui-tertiary: var(--hover-on-panel);
+    --ui-selected: var(--selected-on-panel);
+    --paint-text-primary: var(--text-on-panel);
 }
 
 .menu.left {

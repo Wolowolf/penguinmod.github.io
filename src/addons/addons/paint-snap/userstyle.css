@@ -9,10 +9,13 @@
 }
 .sa-paint-snap-button[data-enabled="true"] {
   background-color: var(--ui-accent, #00c3ff);
-  /* section 221: this background's text and symbol colours */
+  /* section 222: this background's ink, accent and tints */
   --text-primary: var(--text-on-accent);
   --text-secondary: var(--text-dim-on-accent);
+  --text-disabled: var(--text-off-on-accent);
   --ui-accent-symbol: var(--accent-on-accent);
+  --ui-tertiary: var(--hover-on-accent);
+  --ui-selected: var(--selected-on-accent);
   --paint-text-primary: var(--text-on-accent);
   color: var(--text-primary); /* context */
 }
@@ -44,17 +47,20 @@
   transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
   opacity: 0;
   pointer-events: none;
-  background: var(--ui-primary, white);
+  background: var(--ui-secondary);
   min-height: 100%;
   min-width: 100%;
   display: flex;
   flex-direction: column;
   gap: 0.25em;
-  /* section 221: this background's text and symbol colours */
-  --text-primary: var(--text-on-background);
-  --text-secondary: var(--text-dim-on-background);
-  --ui-accent-symbol: var(--accent-on-background);
-  --paint-text-primary: var(--text-on-background);
+  /* section 222: this background's ink, accent and tints */
+  --text-primary: var(--text-on-panel);
+  --text-secondary: var(--text-dim-on-panel);
+  --text-disabled: var(--text-off-on-panel);
+  --ui-accent-symbol: var(--accent-on-panel);
+  --ui-tertiary: var(--hover-on-panel);
+  --ui-selected: var(--selected-on-panel);
+  --paint-text-primary: var(--text-on-panel);
   color: var(--text-primary); /* context */
 }
 .sa-paint-snap-settings[data-visible="true"] {

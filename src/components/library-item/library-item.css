@@ -21,20 +21,14 @@
     border-radius: $space;
     text-align: center;
     cursor: pointer;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --text-disabled: var(--text-off-on-surface);
     --ui-accent-symbol: var(--accent-on-surface);
+    --ui-tertiary: var(--hover-on-surface);
+    --ui-selected: var(--selected-on-surface);
     --paint-text-primary: var(--text-on-surface);
-}
-[theme="dark"] .library-item {
-    background: $ui-primary;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-background);
-    --text-secondary: var(--text-dim-on-background);
-    --ui-accent-symbol: var(--accent-on-background);
-    --paint-text-primary: var(--text-on-background);
-    color: var(--text-primary); /* context */
 }
 
 .library-item-sound {
@@ -369,14 +363,8 @@
 .featured-description-summary {
     display: block;
 }
-[theme="dark"] .featured-description-summary {
-    color: $text-primary;
-}
 .featured-description-details {
     display: block;
-    color: $text-secondary;
-}
-[theme="dark"] .featured-description-details {
     color: $text-secondary;
 }
 

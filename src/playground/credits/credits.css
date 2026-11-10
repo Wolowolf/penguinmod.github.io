@@ -9,27 +9,18 @@ body {
     margin: 0;
     padding: 0;
     background: $ui-primary;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-background);
     --text-secondary: var(--text-dim-on-background);
+    --text-disabled: var(--text-off-on-background);
     --ui-accent-symbol: var(--accent-on-background);
+    --ui-tertiary: var(--hover-on-background);
+    --ui-selected: var(--selected-on-background);
     --paint-text-primary: var(--text-on-background);
     color: var(--text-primary); /* context */
 }
-body[theme="dark"] {
-    background-color: $ui-primary;
-    color: $text-primary;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-background);
-    --text-secondary: var(--text-dim-on-background);
-    --ui-accent-symbol: var(--accent-on-background);
-    --paint-text-primary: var(--text-on-background);
-}
 
 a {
-    color: $ui-accent-symbol;
-}
-[theme="dark"] a {
     color: $ui-accent-symbol;
 }
 
@@ -45,10 +36,13 @@ a {
     padding: 20px 0;
     text-align: center;
     margin-bottom: 30px;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-accent);
     --text-secondary: var(--text-dim-on-accent);
+    --text-disabled: var(--text-off-on-accent);
     --ui-accent-symbol: var(--accent-on-accent);
+    --ui-tertiary: var(--hover-on-accent);
+    --ui-selected: var(--selected-on-accent);
     --paint-text-primary: var(--text-on-accent);
 }
 .header-text {
@@ -76,21 +70,6 @@ a {
 }
 .user:link:hover {
     background: $ui-tertiary;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-hover);
-    --text-secondary: var(--text-dim-on-hover);
-    --ui-accent-symbol: var(--accent-on-hover);
-    --paint-text-primary: var(--text-on-hover);
-    color: var(--text-primary); /* context */
-}
-[theme="dark"] .user:link:hover {
-    background: $ui-tertiary;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-hover);
-    --text-secondary: var(--text-dim-on-hover);
-    --ui-accent-symbol: var(--accent-on-hover);
-    --paint-text-primary: var(--text-on-hover);
-    color: var(--text-primary); /* context */
 }
 .user-info {
     width: 100%;

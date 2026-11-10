@@ -6,10 +6,13 @@
     color: var(--text-primary);
     color-scheme: dark;
     --ui-black-transparent: rgba(255, 255, 255, 0.15);
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-background);
     --text-secondary: var(--text-dim-on-background);
+    --text-disabled: var(--text-off-on-background);
     --ui-accent-symbol: var(--accent-on-background);
+    --ui-tertiary: var(--hover-on-background);
+    --ui-selected: var(--selected-on-background);
     --paint-text-primary: var(--text-on-background);
 }
 

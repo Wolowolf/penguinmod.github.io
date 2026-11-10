@@ -13,21 +13,13 @@
     left: 0;
     right: 0;
     z-index: $z-index-stage-header;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-background);
     --text-secondary: var(--text-dim-on-background);
+    --text-disabled: var(--text-off-on-background);
     --ui-accent-symbol: var(--accent-on-background);
-    --paint-text-primary: var(--text-on-background);
-    color: var(--text-primary); /* context */
-}
-
-/* tw: support dark mode */
-[theme="dark"] .stage-header-wrapper-overlay {
-    background-color: $ui-primary;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-background);
-    --text-secondary: var(--text-dim-on-background);
-    --ui-accent-symbol: var(--accent-on-background);
+    --ui-tertiary: var(--hover-on-background);
+    --ui-selected: var(--selected-on-background);
     --paint-text-primary: var(--text-on-background);
     color: var(--text-primary); /* context */
 }
@@ -74,20 +66,14 @@
     padding: 0.375rem;
     user-select: none;
     cursor: pointer;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --text-disabled: var(--text-off-on-surface);
     --ui-accent-symbol: var(--accent-on-surface);
+    --ui-tertiary: var(--hover-on-surface);
+    --ui-selected: var(--selected-on-surface);
     --paint-text-primary: var(--text-on-surface);
-    color: var(--text-primary); /* context */
-}
-[theme="dark"] .stage-button {
-    background: $ui-secondary;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-panel);
-    --text-secondary: var(--text-dim-on-panel);
-    --ui-accent-symbol: var(--accent-on-panel);
-    --paint-text-primary: var(--text-on-panel);
     color: var(--text-primary); /* context */
 }
 

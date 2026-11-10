@@ -7,7 +7,7 @@
     cursor: pointer;
     font-size: 0.75rem;
     font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif);
-    color: $ui-accent-symbol;
+    color: $text-primary;
     border-radius: 0.5rem;
 }
 

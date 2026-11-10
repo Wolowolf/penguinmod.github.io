@@ -47,14 +47,16 @@
     /* Default modal resets */
     margin: 0;
     border-radius: 0;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-panel);
     --text-secondary: var(--text-dim-on-panel);
+    --text-disabled: var(--text-off-on-panel);
     --ui-accent-symbol: var(--accent-on-panel);
+    --ui-tertiary: var(--hover-on-panel);
+    --ui-selected: var(--selected-on-panel);
     --paint-text-primary: var(--text-on-panel);
     color: var(--text-primary); /* context */
 }
-
 
 /*
     Modal header has 3 items:
@@ -79,29 +81,14 @@ $sides: 20rem;
     font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif);
     font-size: 1rem;
     font-weight: normal;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-menu-bar);
-    --text-secondary: var(--text-dim-on-menu-bar);
-    --ui-accent-symbol: var(--accent-on-menu-bar);
-    --paint-text-primary: var(--text-on-menu-bar);
-    color: var(--text-primary); /* context */
-}
-[theme="dark"] .header {
-    background-color: $motion-primary-dark;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-menu-bar);
-    --text-secondary: var(--text-dim-on-menu-bar);
-    --ui-accent-symbol: var(--accent-on-menu-bar);
-    --paint-text-primary: var(--text-on-menu-bar);
-    color: var(--text-primary); /* context */
-}
-[theme="dark"] .full-screen .header {
-    background-color: $motion-primary;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-accent);
-    --text-secondary: var(--text-dim-on-accent);
-    --ui-accent-symbol: var(--accent-on-accent);
-    --paint-text-primary: var(--text-on-accent);
+    /* section 222: this background's ink, accent and tints */
+    --text-primary: var(--text-on-background);
+    --text-secondary: var(--text-dim-on-background);
+    --text-disabled: var(--text-off-on-background);
+    --ui-accent-symbol: var(--accent-on-background);
+    --ui-tertiary: var(--hover-on-background);
+    --ui-selected: var(--selected-on-background);
+    --paint-text-primary: var(--text-on-background);
     color: var(--text-primary); /* context */
 }
 

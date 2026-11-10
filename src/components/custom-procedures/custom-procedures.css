@@ -7,23 +7,17 @@
 }
 
 .body {
-    background: $ui-surface;
-    padding: 1.5rem 2.25rem;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-surface);
-    --text-secondary: var(--text-dim-on-surface);
-    --ui-accent-symbol: var(--accent-on-surface);
-    --paint-text-primary: var(--text-on-surface);
-    color: var(--text-primary); /* context */
-}
-[theme="dark"] .body {
-    color: $text-primary;
     background: $ui-secondary;
-    /* section 221: this background's text and symbol colours */
+    padding: 1.5rem 2.25rem;
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-panel);
     --text-secondary: var(--text-dim-on-panel);
+    --text-disabled: var(--text-off-on-panel);
     --ui-accent-symbol: var(--accent-on-panel);
+    --ui-tertiary: var(--hover-on-panel);
+    --ui-selected: var(--selected-on-panel);
     --paint-text-primary: var(--text-on-panel);
+    color: var(--text-primary); /* context */
 }
 
 .body input[type="checkbox"],
@@ -81,12 +75,6 @@
     border: 2px solid $ui-edge;
     overflow: none;
     padding: 0;
-}
-[theme="dark"] ::-webkit-color-swatch {
-    border-color: $text-primary;
-}
-[theme="dark"] ::-moz-color-swatch {
-    border-color: $text-primary;
 }
 
 ::-moz-focus-inner {
@@ -157,12 +145,15 @@
 }
 
 .workspace :global(.blocklySvg) {
-    background-color: $ui-primary;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-background);
-    --text-secondary: var(--text-dim-on-background);
-    --ui-accent-symbol: var(--accent-on-background);
-    --paint-text-primary: var(--text-on-background);
+    background-color: $ui-workspace;
+    /* section 222: this background's ink, accent and tints */
+    --text-primary: var(--text-on-workspace);
+    --text-secondary: var(--text-dim-on-workspace);
+    --text-disabled: var(--text-off-on-workspace);
+    --ui-accent-symbol: var(--accent-on-workspace);
+    --ui-tertiary: var(--hover-on-workspace);
+    --ui-selected: var(--selected-on-workspace);
+    --paint-text-primary: var(--text-on-workspace);
     color: var(--text-primary); /* context */
 }
 
@@ -182,10 +173,13 @@
     cursor: pointer;
     transition: all 0.2s;
     flex-basis: 100px;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --text-disabled: var(--text-off-on-surface);
     --ui-accent-symbol: var(--accent-on-surface);
+    --ui-tertiary: var(--hover-on-surface);
+    --ui-selected: var(--selected-on-surface);
     --paint-text-primary: var(--text-on-surface);
     color: var(--text-primary); /* context */
 }
@@ -226,10 +220,13 @@
     background: $ui-surface;
     font-weight: bold;
     font-size: 0.85rem;
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-surface);
     --text-secondary: var(--text-dim-on-surface);
+    --text-disabled: var(--text-off-on-surface);
     --ui-accent-symbol: var(--accent-on-surface);
+    --ui-tertiary: var(--hover-on-surface);
+    --ui-selected: var(--selected-on-surface);
     --paint-text-primary: var(--text-on-surface);
     color: var(--text-primary); /* context */
 }
@@ -238,10 +235,13 @@
     background: $motion-primary;
     border: $motion-primary;
     color: var(--text-primary);
-    /* section 221: this background's text and symbol colours */
+    /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-accent);
     --text-secondary: var(--text-dim-on-accent);
+    --text-disabled: var(--text-off-on-accent);
     --ui-accent-symbol: var(--accent-on-accent);
+    --ui-tertiary: var(--hover-on-accent);
+    --ui-selected: var(--selected-on-accent);
     --paint-text-primary: var(--text-on-accent);
 }
 

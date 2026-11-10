@@ -1,12 +1,13 @@
-// Desktop fork (sections 219, 221): picture icons in the theme's colours.
-// The editor's and costume editor's interface icons are SVG files drawn in the accent blue (#00c3ff,
-// older #4c97ff / #00a3ff) and the text grey (#575e75), or only in black or only in white. Such an icon
-// carries no meaning in its colour, so it is shown in the colours of the place it is in: the variables
-// --ui-accent-symbol and --text-primary there (pm-theme-colors.js; every background sets its own).
-//  - an icon of one colour ("mono") is drawn by CSS: its picture becomes a mask over a block of that
-//    colour (pm-theme-uses.css, img[data-pm-mono]), so it follows hover, selection and theme at once;
-//  - an icon of accent and grey together ("duo") is redrawn as a recoloured picture, and again when
-//    the theme, its colours, or the state of what it is in change.
+// Desktop fork (sections 219, 221, 222): picture icons in the theme's ink.
+// The editor's and costume editor's interface icons are SVG files drawn in the old accent blue
+// (#00c3ff, #4c97ff, #00a3ff) and text grey (#575e75), or only in black or only in white. Such an icon
+// carries no meaning in its colour: an icon is something you read, like text, so it is drawn in the ink
+// of the place it is in (--text-primary there; every background sets its own, pm-theme-colors.js).
+// The accent is for what is selected or switched on: styles give an icon that colour where it applies
+// (the selected tab), never the picture itself.
+// How: the <img> keeps its picture, which CSS uses as a mask over a block of colour (pm-theme-uses.css,
+// img[data-pm-mono]), so the icon follows hover, selection and theme at once. Details that were drawn
+// in a second colour inside a shape become part of the silhouette.
 // Icons with any other colour (categories, warnings, pictures) and pictures that are not the editor's
 // own files (costumes, library items) are left alone.
 
@@ -17,9 +18,8 @@ const WHITE = ['fff', 'ffffff'];
 const HEX = /#([0-9a-f]{8}|[0-9a-f]{6}|[0-9a-f]{3})\b/gi;
 const NAMED = /(?:fill|stroke|stop-color|[^-]color)\s*[:=]\s*["']?\s*([a-z]+)\b/gi;
 
-const sources = new Map(); // original src -> Promise<{mode, group, text} or null>
-const state = new WeakMap(); // img -> {original, info, applied, key}
-const duos = new Set(); // redrawn imgs
+const sources = new Map(); // src -> Promise<true (an interface icon) or false>
+const themed = new WeakMap(); // img -> the src it was marked for
 
 const isBundled = src => /(^|\/)static\/assets\/[^?#]*\.svg(\?|#|$)/i.test(src);
 const isSvgSource = src => /^data:image\/svg\+xml/i.test(src) || /\.svg(\?|#|$)/i.test(src);
@@ -34,17 +34,17 @@ const groupOf = hex => {
     return null;
 };
 
-// what kind of icon the picture is, or null for "leave alone"
+// whether the picture is an interface icon
 const loadSource = src => {
     if (!sources.has(src)) {
         sources.set(src, fetch(src)
             .then(response => (response.ok ? response.text() : null))
             .then(text => {
-                if (!text || /rgba?\(|hsla?\(|<image\b/i.test(text)) return null;
+                if (!text || /rgba?\(|hsla?\(|<image\b/i.test(text)) return false;
                 const groups = new Set();
                 for (const match of text.matchAll(HEX)) {
                     const group = groupOf(match[1]);
-                    if (!group) return null; // a colour of its own
+                    if (!group) return false; // a colour of its own
                     groups.add(group);
                 }
                 // colours written as words; a shape that names none is drawn black
@@ -53,51 +53,19 @@ const loadSource = src => {
                     if (/^(none|transparent|inherit|url)$/.test(name)) continue;
                     if (name === 'black' || name === 'currentcolor') groups.add('black');
                     else if (name === 'white') groups.add('white');
-                    else return null;
+                    else return false;
                 }
                 if (groups.size === 0) groups.add('black');
-                const themed = groups.has('accent') || groups.has('grey');
                 // only black or only white: an interface icon when it is one of the editor's own files
-                if (!themed && !(groups.size === 1 && isBundled(src))) return null;
-                if (groups.size === 1) return {mode: 'mono', group: groups.has('accent') ? 'accent' : 'text'};
-                return {mode: 'duo', text};
+                return groups.has('accent') || groups.has('grey') || (groups.size === 1 && isBundled(src));
             })
-            .catch(() => null));
+            .catch(() => false));
     }
     return sources.get(src);
 };
 
-// the colours where the icon is
-const colorsAt = img => {
-    const style = getComputedStyle(img);
-    const get = (name, fallback) => (style.getPropertyValue(name).trim() || fallback).replace('#', '');
-    return {
-        accent: get('--ui-accent-symbol', '#00c3ff'),
-        text: get('--text-primary', '#575e75')
-    };
-};
-
-const recolor = (text, colors) => text.replace(HEX, (all, hex) => {
-    const lower = hex.toLowerCase();
-    const alpha = lower.length === 8 ? lower.slice(6) : '';
-    const group = groupOf(lower);
-    if (group === 'accent') return `#${colors.accent}${alpha}`;
-    if (group === 'grey') return `#${colors.text}${alpha}`;
-    return all;
-});
-
-const draw = (img, known) => {
-    const colors = colorsAt(img);
-    const key = `${colors.accent} ${colors.text}`;
-    if (known.key === key) return;
-    known.key = key;
-    known.applied = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(recolor(known.info.text, colors))}`;
-    img.src = known.applied;
-};
-
 const forget = img => {
-    state.delete(img);
-    duos.delete(img);
+    themed.delete(img);
     img.removeAttribute('data-pm-themed');
     img.removeAttribute('data-pm-mono');
     img.style.removeProperty('--pm-icon');
@@ -105,48 +73,26 @@ const forget = img => {
 
 const handle = img => {
     const src = img.getAttribute('src');
-    if (!src) return;
-    const known = state.get(img);
-    if (known && (src === known.applied || (src === known.original && known.info.mode === 'mono'))) return;
+    if (!src || themed.get(img) === src) return;
     if (!isSvgSource(src)) {
-        if (known) forget(img);
+        if (themed.has(img)) forget(img);
         return;
     }
-    loadSource(src).then(info => {
+    loadSource(src).then(isIcon => {
         if (img.getAttribute('src') !== src) return; // changed meanwhile
-        if (known) forget(img);
-        if (!info) return;
-        const entry = {original: src, info, applied: null, key: null};
-        state.set(img, entry);
-        img.setAttribute('data-pm-themed', '');
-        img.style.setProperty('--pm-icon', `url("${src.replace(/"/g, '%22')}")`);
-        if (info.mode === 'mono') {
-            img.setAttribute('data-pm-mono', info.group);
-        } else {
-            duos.add(img);
-            draw(img, entry);
+        if (!isIcon) {
+            if (themed.has(img)) forget(img);
+            return;
         }
+        themed.set(img, src);
+        img.setAttribute('data-pm-themed', '');
+        img.setAttribute('data-pm-mono', 'text');
+        img.style.setProperty('--pm-icon', `url("${src.replace(/"/g, '%22')}")`);
     });
 };
 
-// redraws the two-colour icons (inside the element, or all of them) whose colours changed
-const refreshIcons = element => {
-    for (const img of Array.from(duos)) {
-        if (!img.isConnected) {
-            duos.delete(img);
-            continue;
-        }
-        if (element && !element.contains(img)) continue;
-        const known = state.get(img);
-        if (known) draw(img, known);
-    }
-};
-
-// {mode, group} of a themed icon, for the contrast guard
-const iconInfo = img => {
-    const known = state.get(img);
-    return known ? known.info : null;
-};
+// whether the contrast guard can judge this image (a themed icon is its background colour, masked)
+const isThemedIcon = img => themed.has(img);
 
 const scan = root => {
     if (root.tagName === 'IMG') handle(root);
@@ -157,31 +103,12 @@ let started = false;
 const startThemedIcons = () => {
     if (started || typeof document === 'undefined' || typeof MutationObserver === 'undefined') return;
     started = true;
-    // one redraw pass per frame, of the places that changed (or of everything when there are many)
-    const pending = new Set();
-    const later = element => {
-        if (!pending.size) {
-            requestAnimationFrame(() => {
-                const targets = Array.from(pending);
-                pending.clear();
-                if (targets.length > 4 || targets.includes(document.body)) refreshIcons(null);
-                else for (const target of targets) refreshIcons(target);
-            });
-        }
-        pending.add(element);
-    };
     const begin = () => {
         scan(document.body);
         new MutationObserver(records => {
             for (const record of records) {
-                const target = record.target;
                 if (record.type === 'attributes') {
-                    if (record.attributeName === 'src') {
-                        if (target.tagName === 'IMG') handle(target);
-                    } else if (!(target instanceof SVGElement) && duos.size) {
-                        // a state (selected, open…) or the theme changed: the colours inside may have too
-                        later(target);
-                    }
+                    if (record.target.tagName === 'IMG') handle(record.target);
                     continue;
                 }
                 for (const node of record.addedNodes) {
@@ -189,22 +116,7 @@ const startThemedIcons = () => {
                     if (node.nodeType === 1 && !(node instanceof SVGElement)) scan(node);
                 }
             }
-        }).observe(document.body, {
-            subtree: true,
-            childList: true,
-            attributes: true,
-            attributeFilter: ['src', 'theme', 'class']
-        });
-        document.addEventListener('pm-theme-colors-changed', () => later(document.body));
-        // hover changes colours without changing the page: look at what the pointer entered and left
-        const hover = event => {
-            if (!duos.size || !(event.target instanceof HTMLElement)) return;
-            const target = event.target;
-            later(target.closest('button, a, label, li, [role="button"]') ||
-                (target.parentElement && target.parentElement.parentElement) || target);
-        };
-        document.addEventListener('pointerover', hover, {passive: true});
-        document.addEventListener('pointerout', hover, {passive: true});
+        }).observe(document.body, {subtree: true, childList: true, attributes: true, attributeFilter: ['src']});
     };
     if (document.body) begin();
     else document.addEventListener('DOMContentLoaded', begin, {once: true});
@@ -212,6 +124,5 @@ const startThemedIcons = () => {
 
 export {
     startThemedIcons as default,
-    refreshIcons,
-    iconInfo
+    isThemedIcon
 };

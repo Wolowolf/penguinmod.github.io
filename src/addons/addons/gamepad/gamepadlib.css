@@ -27,26 +27,19 @@
   height: 25px;
   border-radius: 0;
   border: 1px solid var(--ui-edge);
-  background: var(--ui-surface);
+  background: var(--ui-workspace);
   color: var(--text-primary);
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  /* section 221: this background's text and symbol colours */
-  --text-primary: var(--text-on-surface);
-  --text-secondary: var(--text-dim-on-surface);
-  --ui-accent-symbol: var(--accent-on-surface);
-  --paint-text-primary: var(--text-on-surface);
-}
-[theme="dark"] .gamepadlib-keyinput {
-  background-color: var(--ui-surface);
-  border-color: var(--ui-edge, #c6cdd6);
-  color: var(--text-primary);
-  /* section 221: this background's text and symbol colours */
-  --text-primary: var(--text-on-surface);
-  --text-secondary: var(--text-dim-on-surface);
-  --ui-accent-symbol: var(--accent-on-surface);
-  --paint-text-primary: var(--text-on-surface);
+  /* section 222: this background's ink, accent and tints */
+  --text-primary: var(--text-on-workspace);
+  --text-secondary: var(--text-dim-on-workspace);
+  --text-disabled: var(--text-off-on-workspace);
+  --ui-accent-symbol: var(--accent-on-workspace);
+  --ui-tertiary: var(--hover-on-workspace);
+  --ui-selected: var(--selected-on-workspace);
+  --paint-text-primary: var(--text-on-workspace);
 }
 .gamepadlib-mapping[data-value="1"] .gamepadlib-keyinput {
   background: yellow;
@@ -75,9 +68,6 @@
   height: 150px;
   border: 1px solid var(--ui-edge);
   overflow: hidden;
-}
-[theme="dark"] .gamepadlib-axis-circle {
-  border-color: var(--ui-edge, #c6cdd6);
 }
 .gamepadlib-axis-dot {
   position: absolute;

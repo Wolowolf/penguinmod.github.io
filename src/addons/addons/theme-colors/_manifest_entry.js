@@ -4,7 +4,7 @@ const manifest = {
   "editorOnly": true,
   "noTranslations": true,
   "name": "Theme colors",
-  "description": "Changes the 7 colors the light and dark themes are made of, grouped by what each area is used for: the background, the panels you take things from, the workspace where you build, buttons and tiles, lines, text and the accent. Hover colors, dim text and the menu bar are made from them. Turn on a theme to show its colors.",
+  "description": "Changes the 7 colors the light and dark themes are made of, one for each kind of thing: the frame you navigate with, the panels you take things from, the workspace where you make things, the controls you press, lines, ink (text and icons) and the accent for what is selected or switched on. Text and icons are kept readable whatever you choose. Turn on a theme to show its colors.",
   "userscripts": [
     {
       "url": "userscript.js"
@@ -20,10 +20,10 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "Background",
+      "name": "Frame (menu bar, tab row, stage header, title bars)",
       "id": "light-background",
       "type": "color",
-      "default": "#e5f0ff",
+      "default": "#d9e3f0",
       "if": {
         "settings": {
           "light": true
@@ -32,10 +32,10 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "Panels (block palette, category menu, sprite, costume and sound lists)",
+      "name": "Panels (block palette, lists, toolbars, dialogs, menus)",
       "id": "light-panel",
       "type": "color",
-      "default": "#e9f1fc",
+      "default": "#edf2f8",
       "if": {
         "settings": {
           "light": true
@@ -44,10 +44,10 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "Workspace (code area, costume and sound editing)",
+      "name": "Workspace (code area, canvas, text fields)",
       "id": "light-workspace",
       "type": "color",
-      "default": "#f9f9f9",
+      "default": "#fbfcfe",
       "if": {
         "settings": {
           "light": true
@@ -56,7 +56,7 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "Buttons, inputs, tiles, menus and dialogs",
+      "name": "Controls (buttons, tabs, tiles, checkboxes)",
       "id": "light-surface",
       "type": "color",
       "default": "#ffffff",
@@ -68,10 +68,10 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "Borders, scrollbars and grid",
+      "name": "Lines (borders, separators, grid, scrollbars)",
       "id": "light-edge",
       "type": "color",
-      "default": "#c6cdd6",
+      "default": "#c3ccd8",
       "if": {
         "settings": {
           "light": true
@@ -80,10 +80,10 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "Text (dim text and inactive icons follow it)",
+      "name": "Ink (text and icons)",
       "id": "light-text",
       "type": "color",
-      "default": "#575e75",
+      "default": "#3f4860",
       "if": {
         "settings": {
           "light": true
@@ -92,10 +92,10 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "Accent and menu bar (selection, links, focus)",
+      "name": "Accent (selected, switched on, focus, links, main action)",
       "id": "light-accent",
       "type": "color",
-      "default": "#00c3ff",
+      "default": "#0096d6",
       "if": {
         "settings": {
           "light": true
@@ -111,10 +111,10 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "Background",
+      "name": "Frame (menu bar, tab row, stage header, title bars)",
       "id": "dark-background",
       "type": "color",
-      "default": "#111111",
+      "default": "#101012",
       "if": {
         "settings": {
           "dark": true
@@ -123,10 +123,10 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "Panels (block palette, category menu, sprite, costume and sound lists)",
+      "name": "Panels (block palette, lists, toolbars, dialogs, menus)",
       "id": "dark-panel",
       "type": "color",
-      "default": "#1e1e1e",
+      "default": "#1d1d20",
       "if": {
         "settings": {
           "dark": true
@@ -135,10 +135,10 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "Workspace (code area, costume and sound editing)",
+      "name": "Workspace (code area, canvas, text fields)",
       "id": "dark-workspace",
       "type": "color",
-      "default": "#181818",
+      "default": "#151517",
       "if": {
         "settings": {
           "dark": true
@@ -147,10 +147,10 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "Buttons, inputs, tiles, menus and dialogs",
+      "name": "Controls (buttons, tabs, tiles, checkboxes)",
       "id": "dark-surface",
       "type": "color",
-      "default": "#262626",
+      "default": "#2b2b2f",
       "if": {
         "settings": {
           "dark": true
@@ -159,10 +159,10 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "Borders, scrollbars and grid",
+      "name": "Lines (borders, separators, grid, scrollbars)",
       "id": "dark-edge",
       "type": "color",
-      "default": "#404040",
+      "default": "#3f3f45",
       "if": {
         "settings": {
           "dark": true
@@ -171,10 +171,10 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "Text (dim text and inactive icons follow it)",
+      "name": "Ink (text and icons)",
       "id": "dark-text",
       "type": "color",
-      "default": "#eeeeee",
+      "default": "#ececf0",
       "if": {
         "settings": {
           "dark": true
@@ -183,10 +183,10 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "Accent and menu bar (selection, links, focus)",
+      "name": "Accent (selected, switched on, focus, links, main action)",
       "id": "dark-accent",
       "type": "color",
-      "default": "#00c3ff",
+      "default": "#1fb6f5",
       "if": {
         "settings": {
           "dark": true

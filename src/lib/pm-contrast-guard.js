@@ -28,7 +28,7 @@ const SKIP = '[class*="monitor_monitor-container"], [class*="monitor-list_"], [c
 const FIELDS = 'input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="file"]), textarea, select';
 
 let tools = null; // {contrast, ensureContrast} of pm-theme-colors.js
-let icons = null; // {iconInfo, refreshIcons} of pm-themed-icons.js
+let icons = null; // {isThemedIcon} of pm-themed-icons.js
 let active = false;
 const corrected = new Map(); // element -> [[property, old value, old priority], …]
 const queue = new Set();
@@ -48,12 +48,6 @@ const parseColor = text => {
 const over = (top, bottom) => [0, 1, 2].map(i => (top[i] * top[3]) + (bottom[i] * (1 - top[3])));
 const toHex = rgb => `#${rgb.map(c => Math.round(Math.max(0, Math.min(255, c))).toString(16)
     .padStart(2, '0')).join('')}`;
-// a '#rrggbb' custom property of a computed style, as [r, g, b]
-const variable = (style, name) => {
-    const m = style.getPropertyValue(name).trim().match(/^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})/i);
-    return m ? [parseInt(m[1], 16), parseInt(m[2], 16), parseInt(m[3], 16)] : [0, 0, 0];
-};
-
 // the colour behind an element's content: its background over those of what it is in;
 // null when a gradient makes it unknowable
 const backdropOf = (element, cache) => {
@@ -134,23 +128,16 @@ const candidatesIn = root => {
 const examine = (element, cache) => {
     if (!element.isConnected || !visible(element)) return null;
     const style = getComputedStyle(element);
-    if (style.visibility === 'hidden') return null;
+    if (style.visibility === 'hidden' || style.getPropertyValue('--pm-disabled').trim() === '1') return null;
     let kind = 'text';
     let foreground;
-    let other = null; // a two-colour icon's second colour
     let behind = element;
     if (element.tagName === 'IMG') {
-        const info = icons && icons.iconInfo(element);
-        if (!info) return null;
-        kind = info.mode;
-        // a one-colour icon is its background colour seen through a mask: what is behind it is its parent's
+        if (!icons || !icons.isThemedIcon(element)) return null;
+        kind = 'mono';
+        // a themed icon is its background colour seen through a mask: what is behind it is its parent's
         behind = element.parentElement;
-        if (info.mode === 'mono') {
-            foreground = parseColor(style.backgroundColor);
-        } else {
-            foreground = variable(style, '--ui-accent-symbol').concat(1);
-            other = variable(style, '--text-primary');
-        }
+        foreground = parseColor(style.backgroundColor);
     } else if (element.tagName === 'svg') {
         // only a drawing that takes its colour from outside (a CSS fill, or currentColor) can be
         // judged and corrected; one that names its own colours is a picture
@@ -174,12 +161,8 @@ const examine = (element, cache) => {
     if (!foreground || foreground.some(Number.isNaN) || foreground[3] < 0.15) return null;
     const backdrop = backdropOf(behind, cache);
     if (!backdrop) return null;
-    let shown = foreground[3] < 1 ? over(foreground, backdrop) : foreground.slice(0, 3);
-    let ratio = tools.contrast(shown, backdrop);
-    if (other && tools.contrast(other, backdrop) < ratio) {
-        shown = other;
-        ratio = tools.contrast(other, backdrop);
-    }
+    const shown = foreground[3] < 1 ? over(foreground, backdrop) : foreground.slice(0, 3);
+    const ratio = tools.contrast(shown, backdrop);
     const minimum = minimumFor(shown, backdrop);
     if (ratio >= minimum) return null;
     return {element, kind, foreground: shown, backdrop, ratio, minimum, target: kind === 'text' ? TARGET_TEXT : TARGET_SYMBOL};
@@ -191,11 +174,7 @@ const fix = problem => {
     if (problem.kind === 'text') correct(element, {color});
     else if (problem.kind === 'drawing') correct(element, {fill: color});
     else if (problem.kind === 'drawing-color') correct(element, {color});
-    else if (problem.kind === 'mono') correct(element, {'background-color': color});
-    else {
-        correct(element, {'--text-primary': color, '--ui-accent-symbol': color});
-        icons.refreshIcons(element);
-    }
+    else correct(element, {'background-color': color}); // a themed icon
 };
 
 // looks at the elements (first as they would be without corrections) and returns what does not read
@@ -216,15 +195,12 @@ const thaw = () => {
 };
 
 const check = elements => {
-    const redraw = [];
     for (const element of elements) {
         if (corrected.has(element)) {
             freeze(element);
             restore(element);
-            if (element.tagName === 'IMG') redraw.push(element);
         }
     }
-    for (const element of redraw) icons.refreshIcons(element);
     const cache = new Map();
     const problems = [];
     for (const element of elements) {
@@ -284,7 +260,6 @@ const setActive = value => {
         lookAtEverything();
     } else {
         for (const element of Array.from(corrected.keys())) restore(element);
-        if (icons) icons.refreshIcons(null);
     }
 };
 

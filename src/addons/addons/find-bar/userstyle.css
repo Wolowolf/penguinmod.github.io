@@ -42,12 +42,15 @@
   position: absolute;
   width: 16em;
   box-shadow: 0px 0px 8px 1px var(--ui-black-transparent, rgba(0, 0, 0, 0.3));
-  background-color: var(--ui-primary, white);
-  /* section 221: this background's text and symbol colours */
-  --text-primary: var(--text-on-background);
-  --text-secondary: var(--text-dim-on-background);
-  --ui-accent-symbol: var(--accent-on-background);
-  --paint-text-primary: var(--text-on-background);
+  background-color: var(--ui-secondary);
+  /* section 222: this background's ink, accent and tints */
+  --text-primary: var(--text-on-panel);
+  --text-secondary: var(--text-dim-on-panel);
+  --text-disabled: var(--text-off-on-panel);
+  --ui-accent-symbol: var(--accent-on-panel);
+  --ui-tertiary: var(--hover-on-panel);
+  --ui-selected: var(--selected-on-panel);
+  --paint-text-primary: var(--text-on-panel);
   color: var(--text-primary); /* context */
 }
 

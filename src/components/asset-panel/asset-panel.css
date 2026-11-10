@@ -6,14 +6,17 @@
     flex-grow: 1;
     border: 1px solid $ui-edge;
     /* desktop (section 218): the costume / sound editor is where you build */
-    background: $ui-workspace;
+    background: $ui-secondary;
     font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif);
     font-size: 0.85rem;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-workspace);
-    --text-secondary: var(--text-dim-on-workspace);
-    --ui-accent-symbol: var(--accent-on-workspace);
-    --paint-text-primary: var(--text-on-workspace);
+    /* section 222: this background's ink, accent and tints */
+    --text-primary: var(--text-on-panel);
+    --text-secondary: var(--text-dim-on-panel);
+    --text-disabled: var(--text-off-on-panel);
+    --ui-accent-symbol: var(--accent-on-panel);
+    --ui-tertiary: var(--hover-on-panel);
+    --ui-selected: var(--selected-on-panel);
+    --paint-text-primary: var(--text-on-panel);
     color: var(--text-primary); /* context */
 }
 

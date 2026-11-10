@@ -1,6 +1,7 @@
 @import "../../css/colors.css";
 
 .code {
+    background: $ui-workspace;
     display: block;
     width: 100%;
     max-width: 100%;
@@ -13,13 +14,13 @@
     font-size: 0.875rem;
     font-family: var(--pm-font-mono, "Atkinson Hyperlegible Mono", monospace);
     margin: 0.5rem 0;
-}
-[theme="dark"] .code {
-    background: $ui-secondary;
-    color: $text-primary;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-panel);
-    --text-secondary: var(--text-dim-on-panel);
-    --ui-accent-symbol: var(--accent-on-panel);
-    --paint-text-primary: var(--text-on-panel);
+    /* section 222: this background's ink, accent and tints */
+    --text-primary: var(--text-on-workspace);
+    --text-secondary: var(--text-dim-on-workspace);
+    --text-disabled: var(--text-off-on-workspace);
+    --ui-accent-symbol: var(--accent-on-workspace);
+    --ui-tertiary: var(--hover-on-workspace);
+    --ui-selected: var(--selected-on-workspace);
+    --paint-text-primary: var(--text-on-workspace);
+    color: var(--text-primary); /* context */
 }

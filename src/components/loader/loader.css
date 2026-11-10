@@ -15,20 +15,14 @@
     font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif);
     text-align: center;
     color: var(--text-primary);
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-menu-bar);
-    --text-secondary: var(--text-dim-on-menu-bar);
-    --ui-accent-symbol: var(--accent-on-menu-bar);
-    --paint-text-primary: var(--text-on-menu-bar);
-}
-[theme="dark"] .background {
-    background-color: $motion-primary-dark;
-    /* section 221: this background's text and symbol colours */
-    --text-primary: var(--text-on-menu-bar);
-    --text-secondary: var(--text-dim-on-menu-bar);
-    --ui-accent-symbol: var(--accent-on-menu-bar);
-    --paint-text-primary: var(--text-on-menu-bar);
-    color: var(--text-primary); /* context */
+    /* section 222: this background's ink, accent and tints */
+    --text-primary: var(--text-on-background);
+    --text-secondary: var(--text-dim-on-background);
+    --text-disabled: var(--text-off-on-background);
+    --ui-accent-symbol: var(--accent-on-background);
+    --ui-tertiary: var(--hover-on-background);
+    --ui-selected: var(--selected-on-background);
+    --paint-text-primary: var(--text-on-background);
 }
 
 .fullscreen {

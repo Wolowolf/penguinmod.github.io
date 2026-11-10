@@ -5,24 +5,27 @@
 // sets the body's theme attribute (editor, addon settings, credits) gets them.
 
 import themeUsesCSS from '!raw-loader!./pm-theme-uses.css';
-import startThemedIcons, {refreshIcons, iconInfo} from './pm-themed-icons.js';
+import startThemedIcons, {isThemedIcon} from './pm-themed-icons.js';
 import startContrastGuard from './pm-contrast-guard.js';
 
-// Grouped by what each area is used for (Session 238):
-// background = the app's frame; panels = where you take things from (block palette, category menu,
-// sprite / costume / sound lists); workspace = where things come together and the focus is (code area,
-// costume editor around the drawing, sound editor waveform); raised = what sits on top (buttons, inputs,
-// tiles, menus, dialogs); lines = borders, scrollbars, grid; text; accent = selection, links, focus and
-// the menu bar. In dark mode the workspace is darker than the panels, in light mode lighter: both put
-// the most contrast with the text where the focus is.
+// Grouped by what each thing is used for (Session 242; the ids and variable names are older):
+//   frame     (background) navigating the app: menu bar, tab row, stage header, title bars, around the stage
+//   panels    (panel)      containers you take from or decide in: block palette, category menu, sprite /
+//                          costume / sound lists, editor toolbars, libraries, dialogs, menus, pop-ups
+//   workspace              where content is made or entered: code area, costume canvas surround, sound
+//                          waveform, variables table, every text field
+//   controls  (surface)    things you press or pick: buttons, tabs, tiles, checkboxes, switches
+//   lines     (edge)       quiet marks that organise space: borders, separators, grid, scrollbars
+//   ink       (text)       everything you read: text and icons (quiet and disabled strengths follow it)
+//   accent                 state and emphasis only: selected, on, focus, links, the main action
 const THEME_COLORS = [
-    {id: 'background', variable: '--ui-primary', name: 'Background', light: '#e5f0ff', dark: '#111111'},
-    {id: 'panel', variable: '--ui-secondary', name: 'Panels (block palette, category menu, sprite, costume and sound lists)', light: '#e9f1fc', dark: '#1e1e1e'},
-    {id: 'workspace', variable: '--ui-workspace', name: 'Workspace (code area, costume and sound editing)', light: '#f9f9f9', dark: '#181818'},
-    {id: 'surface', variable: '--ui-surface', name: 'Buttons, inputs, tiles, menus and dialogs', light: '#ffffff', dark: '#262626'},
-    {id: 'edge', variable: '--ui-edge', name: 'Borders, scrollbars and grid', light: '#c6cdd6', dark: '#404040'},
-    {id: 'text', variable: '--text-primary', name: 'Text (dim text and inactive icons follow it)', light: '#575e75', dark: '#eeeeee'},
-    {id: 'accent', variable: '--ui-accent', name: 'Accent and menu bar (selection, links, focus)', light: '#00c3ff', dark: '#00c3ff'}
+    {id: 'background', variable: '--ui-primary', name: 'Frame (menu bar, tab row, stage header, title bars)', light: '#d9e3f0', dark: '#101012'},
+    {id: 'panel', variable: '--ui-secondary', name: 'Panels (block palette, lists, toolbars, dialogs, menus)', light: '#edf2f8', dark: '#1d1d20'},
+    {id: 'workspace', variable: '--ui-workspace', name: 'Workspace (code area, canvas, text fields)', light: '#fbfcfe', dark: '#151517'},
+    {id: 'surface', variable: '--ui-surface', name: 'Controls (buttons, tabs, tiles, checkboxes)', light: '#ffffff', dark: '#2b2b2f'},
+    {id: 'edge', variable: '--ui-edge', name: 'Lines (borders, separators, grid, scrollbars)', light: '#c3ccd8', dark: '#3f3f45'},
+    {id: 'text', variable: '--text-primary', name: 'Ink (text and icons)', light: '#3f4860', dark: '#ececf0'},
+    {id: 'accent', variable: '--ui-accent', name: 'Accent (selected, switched on, focus, links, main action)', light: '#0096d6', dark: '#1fb6f5'}
 ];
 
 // colours worked out from the ones above in CSS (not chosen in the addon)
@@ -34,17 +37,19 @@ const DERIVED_BOTH = {
     '--paint-ui-pane-border': 'var(--ui-edge)',
     '--paint-form-border': 'var(--ui-edge)'
 };
+// the dimming behind a dialog is neutral in both themes
 const DERIVED_LIGHT = Object.assign({}, DERIVED_BOTH, {
-    '--ui-modal-overlay': 'hsl(from var(--ui-accent) h s calc(l + 15) / 0.9)'
+    '--ui-modal-overlay': 'rgba(20, 24, 32, 0.45)'
 });
 const DERIVED_DARK = Object.assign({}, DERIVED_BOTH, {
-    '--ui-modal-overlay': 'color-mix(in srgb, var(--ui-tertiary) 67%, transparent)'
+    '--ui-modal-overlay': 'rgba(0, 0, 0, 0.6)'
 });
 
 // ---- contrast (section 219): text and symbols stay readable whatever colours are chosen ----
 // WCAG contrast ratios; the default colours meet them, so only chosen colours get corrected.
 const MIN_TEXT = 4.5; // text against every surface it is drawn on
-const MIN_DIM_TEXT = 3; // dim text and inactive icons
+const MIN_DIM_TEXT = 3; // quiet ink (secondary text)
+const MIN_DISABLED = 1.6; // disabled ink: weak on purpose, still perceivable
 // accent-coloured text and icons (selected tab, links, icons): a colourful one reads at a lower
 // contrast than a grey one, so the minimum goes from 3 (grey) down to 1.7 (pure colour)
 const chroma = rgb => (Math.max(...rgb) - Math.min(...rgb)) / 255;
@@ -117,103 +122,82 @@ const ensureContrast = (color, backgrounds, minimum) => {
 const onColor = background => (contrast(WHITE, background) >= 3 - chroma(background) ||
     contrast(WHITE, background) >= contrast(BLACK, background) ? WHITE : BLACK);
 
-const toHsl = rgb => {
-    const [r, g, b] = rgb.map(c => c / 255);
-    const max = Math.max(r, g, b);
-    const min = Math.min(r, g, b);
-    const l = (max + min) / 2;
-    if (max === min) return [0, 0, l];
-    const d = max - min;
-    const s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-    let h;
-    if (max === r) h = ((g - b) / d) + (g < b ? 6 : 0);
-    else if (max === g) h = ((b - r) / d) + 2;
-    else h = ((r - g) / d) + 4;
-    return [h / 6, s, l];
-};
-const fromHsl = ([h, s, l]) => {
-    if (s === 0) return [l * 255, l * 255, l * 255];
-    const q = l < 0.5 ? l * (1 + s) : l + s - (l * s);
-    const p = (2 * l) - q;
-    const channel = t => {
-        if (t < 0) t += 1;
-        if (t > 1) t -= 1;
-        if (t < 1 / 6) return p + ((q - p) * 6 * t);
-        if (t < 1 / 2) return q;
-        if (t < 2 / 3) return p + ((q - p) * ((2 / 3) - t) * 6);
-        return p;
-    };
-    return [channel(h + (1 / 3)) * 255, channel(h) * 255, channel(h - (1 / 3)) * 255];
-};
-
-// Section 221: every kind of background something can be drawn on is a "context" with its own text,
-// dim text and accent-for-symbols colours, each corrected against that background alone. A style rule
-// that gives an element one of these backgrounds also sets --text-primary, --text-secondary,
-// --ui-accent-symbol and color to that context's (written into the rules by script: the four
-// surfaces, the hover tint, the selected tint, the accent and the menu bar), so nothing inside can
-// keep the colours of the area around it.
+// Sections 221, 222: every kind of background something can be drawn on is a "context" with its own
+// ink (text and icons), quiet ink, disabled ink, accent-for-symbols, hover tint and selected tint,
+// each worked out against that background alone. A style rule that gives an element one of these
+// backgrounds also sets --text-primary, --text-secondary, --text-disabled, --ui-accent-symbol,
+// --ui-tertiary (hover), --ui-selected and color to that context's (written into the rules by
+// bench\contexts.js), so nothing inside can keep the colours of the area around it.
 const SURFACES = ['background', 'panel', 'workspace', 'surface'];
-const CONTEXTS = SURFACES.concat(['hover', 'selected', 'accent', 'menu-bar']);
+// "inverse" is ink used as a background (tooltips): it stands out on anything
+const CONTEXTS = SURFACES.concat(['accent', 'inverse']);
 
 // every variable of one theme, from its 7 colours ({id: '#rrggbb'})
-const paletteVariables = (values, mode) => {
+const paletteVariables = values => {
     const c = {};
     for (const color of THEME_COLORS) c[color.id] = parse(values[color.id]);
     const result = {};
     for (const color of THEME_COLORS) result[color.variable] = toHex(c[color.id]);
     // the accent fills selections and buttons: it must stand out from every surface
     const accent = ensureContrast(c.accent, SURFACES.map(id => c[id]), MIN_ACCENT_FILL);
-    const hsl = toHsl(accent);
-    const menuBar = mode === 'dark' ? fromHsl([hsl[0], hsl[1], hsl[2] * 0.8]) : accent;
-    // Where the chosen text does not read, it is not just nudged to the minimum (dim grey on black):
-    // it becomes as strong there as the choice is on the surface it reads best on (black text chosen
-    // for white buttons turns white on black panels).
+    // Where the chosen ink does not read, it is not just nudged to the minimum (dim grey on black):
+    // it becomes as strong there as the choice is on the surface it reads best on (black ink chosen
+    // for white controls turns white on black panels).
     const strongest = color => Math.max(...SURFACES.map(id => contrast(color, c[id])));
-    const textWanted = Math.max(MIN_TEXT, strongest(c.text));
-    const textOn = background => (contrast(c.text, background) >= MIN_TEXT ? c.text :
-        ensureContrast(c.text, [background], textWanted));
+    const inkWanted = Math.max(MIN_TEXT, strongest(c.text));
+    const inkOn = backgrounds => (minContrast(c.text, backgrounds) >= MIN_TEXT ? c.text :
+        ensureContrast(c.text, backgrounds, inkWanted));
     const accentWanted = Math.min(7, strongest(accent));
     const accentOn = background => ensureContrast(accent, [background], color =>
         (contrast(accent, background) >= MIN_ACCENT_SYMBOL(accent) ? 0 : Math.max(MIN_ACCENT_SYMBOL(color), accentWanted)));
-    const backgrounds = {};
-    for (const id of SURFACES) backgrounds[id] = c[id];
-    // hover: a light tint of the buttons' text over the button colour
-    backgrounds.hover = mix(textOn(c.surface), c.surface, 0.1);
-    // selected (not hovered) rows: a tint of the accent over the button colour
-    backgrounds.selected = mix(accent, c.surface, 0.15);
-    for (const id of Object.keys(backgrounds)) {
-        const background = backgrounds[id];
-        const text = textOn(background);
-        // dim text: 75% text on this background, stronger when that is not readable enough
-        let amount = 0.75;
-        while (amount < 1 && contrast(mix(text, background, amount), background) < MIN_DIM_TEXT) amount += 0.05;
-        const dim = ensureContrast(mix(text, background, Math.min(1, amount)), [background], MIN_DIM_TEXT);
-        result[`--text-on-${id}`] = toHex(text);
-        result[`--text-dim-on-${id}`] = toHex(dim);
-        // the accent as the colour of text and symbols there
-        result[`--accent-on-${id}`] = toHex(accentOn(background));
-    }
-    // on the accent and the menu bar everything is black or white
-    for (const [id, background] of [['accent', accent], ['menu-bar', menuBar]]) {
-        const on = toHex(onColor(background));
-        result[`--text-on-${id}`] = on;
-        result[`--text-dim-on-${id}`] = on;
-        result[`--accent-on-${id}`] = on;
-    }
+    const context = (id, background, fixedInk) => {
+        // hover: a light tint of the ink over this background; selected: a tint of the accent
+        let ink = fixedInk || inkOn([background]);
+        let hover = mix(ink, background, 0.1);
+        let selected = mix(accent, background, 0.16);
+        if (!fixedInk) {
+            // the ink must also read on its own hover and selected tints
+            ink = inkOn([background, hover, selected]);
+            hover = mix(ink, background, 0.1);
+        }
+        // quiet ink (secondary text): 72% ink, stronger when that is not readable enough
+        let amount = 0.72;
+        while (amount < 1 && contrast(mix(ink, background, amount), background) < MIN_DIM_TEXT) amount += 0.04;
+        const quiet = fixedInk || ensureContrast(mix(ink, background, Math.min(1, amount)), [background], MIN_DIM_TEXT);
+        // disabled ink: clearly weaker than quiet, still perceivable
+        const disabled = ensureContrast(mix(ink, background, 0.38), [background], MIN_DISABLED);
+        result[`--text-on-${id}`] = toHex(ink);
+        result[`--text-dim-on-${id}`] = toHex(quiet);
+        result[`--text-off-on-${id}`] = toHex(disabled);
+        result[`--accent-on-${id}`] = toHex(fixedInk || accentOn(background));
+        result[`--hover-on-${id}`] = toHex(hover);
+        result[`--selected-on-${id}`] = toHex(selected);
+    };
+    for (const id of SURFACES) context(id, c[id]);
+    // on the accent everything is black or white
+    context('accent', accent, onColor(accent));
+    // tooltips: the panels' ink as background, the panel colour as ink
+    const inverse = inkOn([c.panel]);
+    context('inverse', inverse, ensureContrast(c.panel, [inverse], MIN_TEXT));
     const edge = ensureContrast(c.edge, [c.panel, c.workspace, c.surface], MIN_LINE);
     Object.assign(result, {
-        // the page itself is the background
+        // the page itself is the frame
         '--text-primary': result['--text-on-background'],
         '--text-secondary': result['--text-dim-on-background'],
+        '--text-disabled': result['--text-off-on-background'],
         '--ui-accent-symbol': result['--accent-on-background'],
+        '--ui-tertiary': result['--hover-on-background'],
+        '--ui-selected': result['--selected-on-background'],
         '--ui-accent': toHex(accent),
         '--ui-edge': toHex(edge),
-        '--ui-menu-bar': toHex(menuBar),
-        '--ui-tertiary': toHex(backgrounds.hover),
-        '--ui-selected': toHex(backgrounds.selected),
-        // turns a one-colour picture icon into the black or white of text on the accent / menu bar
+        '--ui-inverse': toHex(inverse),
+        // the menu bar is part of the frame (older rules name it)
+        '--ui-menu-bar': result['--ui-primary'],
+        '--text-on-menu-bar': result['--text-on-background'],
+        // turns a one-colour picture that is not redrawn into the ink of the accent / the frame
         '--pm-on-accent-filter': onColor(accent) === WHITE ? 'brightness(0) invert(1)' : 'brightness(0)',
-        '--pm-on-menu-bar-filter': onColor(menuBar) === WHITE ? 'brightness(0) invert(1)' : 'brightness(0)'
+        '--pm-on-menu-bar-filter': luminance(parse(result['--text-on-background'])) > 0.4 ?
+            'brightness(0) invert(1)' : 'brightness(0)'
     });
     return result;
 };
@@ -236,8 +220,8 @@ const block = (selector, values) => {
 };
 
 const defaultsCSS = () => {
-    const light = Object.assign(paletteVariables(defaultValues('light'), 'light'), DERIVED_LIGHT);
-    const dark = Object.assign(paletteVariables(defaultValues('dark'), 'dark'), DERIVED_DARK);
+    const light = Object.assign(paletteVariables(defaultValues('light')), DERIVED_LIGHT);
+    const dark = Object.assign(paletteVariables(defaultValues('dark')), DERIVED_DARK);
     return block(LIGHT_SELECTOR, light) + block(DARK_SELECTOR, dark);
 };
 
@@ -260,7 +244,7 @@ const installThemeColors = () => {
     // section 219: picture icons in the theme's colours
     startThemedIcons();
     // section 221: corrects what still does not read while a theme has chosen colours
-    startContrastGuard({contrast, ensureContrast}, {refreshIcons, iconInfo});
+    startContrastGuard({contrast, ensureContrast}, {isThemedIcon});
 };
 
 // puts the addon's colours (CSS from themeColorsCSS, '' for none) into its style element and tells
@@ -281,7 +265,7 @@ const customCSS = (lightValues, darkValues) => {
         for (const color of THEME_COLORS) {
             if (isColor(values[color.id])) merged[color.id] = values[color.id].slice(0, 7).toLowerCase();
         }
-        return paletteVariables(merged, mode);
+        return paletteVariables(merged);
     };
     return block(CUSTOM_LIGHT_SELECTOR, theme(lightValues, 'light')) +
         block(CUSTOM_DARK_SELECTOR, theme(darkValues, 'dark'));
