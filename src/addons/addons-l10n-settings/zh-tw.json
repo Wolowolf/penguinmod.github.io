@@ -1,8 +1,6 @@
 {
-    "middle-click-popup/@info-developer-tools": "此插件以前是“開發人員工具”插件的一部分，但已移至此處。",
     "middle-click-popup/@name": "編輯積木的名字",
     "jump-to-def/@description": "讓你能用滑鼠中鍵或是 Shift+左鍵來快速找到函式的定義。",
-    "jump-to-def/@info-developer-tools": "這個擴充功能之前是在「開發工具」裡，現在移至這兒了！",
     "jump-to-def/@name": "移至函式定義積木",
     "data-category-tweaks-v2/@description": "讓積木類別中的資料（變量、清單）有更好的分類。",
     "data-category-tweaks-v2/@name": "更好的資料分類",

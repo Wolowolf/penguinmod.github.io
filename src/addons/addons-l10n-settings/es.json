@@ -1,8 +1,6 @@
 {
-    "middle-click-popup/@info-developer-tools": "Este addon era parte de \"herramientas de desarrollador\", pero se ha mudado aquí.",
     "middle-click-popup/@name": "Insertar bloques por nombre",
     "jump-to-def/@description": "Le permite saltar a la definición de un bloque personalizado usando el botón del medio del ratón o presionando Shift+Click en el bloque.",
-    "jump-to-def/@info-developer-tools": "Este addon era parte de \"herramientas de desarrollador\", pero se ha mudado aquí.",
     "jump-to-def/@name": "Saltar a definición de bloque personalizado",
     "data-category-tweaks-v2/@description": "Proporciona retoques para la categoría de bloques \"datos\" (variables).",
     "data-category-tweaks-v2/@name": "Retoques en categoría \"datos\"",
@@ -198,7 +196,6 @@
     "editor-comment-previews/@settings-select-delay-none": "Ninguno",
     "editor-comment-previews/@settings-select-delay-short": "Corto",
     "number-pad/@description": "Mostrar el teclado numérico de Scratch cuando se editen campos numéricos en cualquier dispositivo, en vez de solo en los con pantalla táctil.",
-    "number-pad/@info-explanation": "Un teclado numérico se mostrará cuando se editen campos numéricos de ciertos bloques, como \"dar a x el valor\".",
     "number-pad/@name": "Siempre mostrar teclado numérico",
     "script-snap/@description": "Arrastre un script para automáticamente ajustar su posición a los puntos del área de código.",
     "script-snap/@name": "Ajustar scripts a cuadrícula",

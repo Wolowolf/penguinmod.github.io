@@ -8,8 +8,7 @@ const manifest = {
       "name": "griffpatch"
     },
     {
-      "name": "TheColaber",
-      "link": "https://scratch.mit.edu/users/TheColaber/"
+      "name": "TheColaber"
     },
     {
       "name": "JeremyGamer13"
@@ -72,10 +71,6 @@ const manifest = {
     }
   ],
   "info": [
-    {
-      "text": "This addon was previously part of the \"developer tools\" addon but has moved here.",
-      "id": "developer-tools"
-    },
     {
       "text": "Changing the \"Max Object Variants\" will limit the amount of results that just use a different costume, sprite, sound or menu option selected in the block.",
       "id": "maxObjectVariants"

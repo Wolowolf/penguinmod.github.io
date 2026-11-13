@@ -17,8 +17,7 @@ const manifest = {
     ],
     "credits": [
         {
-            "name": "Gandi-IDE",
-            "link": "https://github.com/Gandi-IDE/"
+            "name": "Gandi-IDE"
         }
     ]
 };

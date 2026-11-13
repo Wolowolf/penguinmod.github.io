@@ -1,9 +1,7 @@
 {
     "middle-click-popup/@description": "Kod alanına farenizin orta tuşuyla tıklayın, bir bloğun adını (veya parçalarını) yazabileceğiniz ve bloğu kod alanına sürükleyebileceğiniz kayan bir giriş kutusu getirmek için Ctrl+Boşluk veya Shift+Tıkla tuşlarını kullanın. Aynı anda birden çok blok eklerken kutuyu kapatmamak için sürüklerken Shift tuşunu basılı tutun.",
-    "middle-click-popup/@info-developer-tools": "Bu eklenti daha önce \"geliştirici araçları\" eklentisinin bir parçasıydı ancak buraya taşındı.",
     "middle-click-popup/@name": "İsmine göre blok ekleme",
     "jump-to-def/@description": "Orta fare düğmesiyle veya bloğa Shift+Tıklayarak özel bir bloğun tanımına gitmenize izin verir.",
-    "jump-to-def/@info-developer-tools": "Bu eklenti öncesinde \"geliştirici araçları\" eklentisinin bir parçasıydı ancak artık buraya taşındı.",
     "jump-to-def/@name": "Özel blok tanımına git",
     "data-category-tweaks-v2/@description": "Verideki (\"Değişkenler\") blok kategorisi için ince ayarlar sağlar.",
     "data-category-tweaks-v2/@name": "Veri kategorisi ince ayarları",
@@ -199,7 +197,6 @@
     "editor-comment-previews/@settings-select-delay-none": "Yok",
     "editor-comment-previews/@settings-select-delay-short": "Kısa",
     "number-pad/@description": "Yalnızca dokunmatik ekranlı cihazlar yerine tüm cihazlarda sayı alanlarını düzenlerken Scratch'in sayısal tuş takımı girişini görebilmenizi sağlar.",
-    "number-pad/@info-explanation": "\"x'i ... yap\" gibi belirli bloklardan gelen sayı girişlerini düzenlerken bir sayısal tuş takımı gösterilir.",
     "number-pad/@name": "Sayısal tuş takımını her zaman göster",
     "script-snap/@description": "Bloğu otomatik olarak kod alanı noktalarına hizalamak için bir kodu hareket ettirin.",
     "script-snap/@name": "Kodları ızgaraya hizala",

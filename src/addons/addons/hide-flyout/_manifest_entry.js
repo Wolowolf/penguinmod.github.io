@@ -6,12 +6,10 @@ const manifest = {
   "description": "Hides the block palette if not hovered. Click the lock icon to lock it in place temporarily. Alternatively, use \"category click\" mode.",
   "credits": [
     {
-      "name": "TheColaber",
-      "link": "https://scratch.mit.edu/users/TheColaber/"
+      "name": "TheColaber"
     },
     {
-      "name": "Maximouse",
-      "link": "https://scratch.mit.edu/users/Maximouse/"
+      "name": "Maximouse"
     }
   ],
   "info": [

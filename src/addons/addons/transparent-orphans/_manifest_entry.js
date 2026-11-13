@@ -8,8 +8,7 @@ const manifest = {
   "dynamicDisable": true,
   "credits": [
     {
-      "name": "ErrorGamer2000",
-      "link": "https://scratch.mit.edu/users/ErrorGamer2000/"
+      "name": "ErrorGamer2000"
     },
     {
       "name": "GarboMuffin"

@@ -4,8 +4,7 @@ const manifest = {
   "name": "Costume Gradient Editor",
   "credits": [
     {
-      "name": "SharkPool",
-      "link": "https://github.com/SharkPool-SP/"
+      "name": "SharkPool"
     }
   ],
   "userscripts": [

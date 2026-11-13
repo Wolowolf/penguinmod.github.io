@@ -15,8 +15,7 @@ const manifest = {
   ],
   "credits": [
     {
-      "name": "ErrorGamer2000",
-      "link": "https://scratch.mit.edu/users/ErrorGamer2000/"
+      "name": "ErrorGamer2000"
     },
     {
       "name": "GarboMuffin"
@@ -25,8 +24,7 @@ const manifest = {
       "name": "World_Languages"
     },
     {
-      "name": "SheepTester",
-      "link": "https://scratch.mit.edu/users/Sheep_maker/"
+      "name": "SheepTester"
     }
   ],
   "dynamicDisable": true,

@@ -1,9 +1,7 @@
 {
     "middle-click-popup/@description": "Középső egérgombbal kattintás a kódterületre, Ctrl+Szóköz vagy Shift+Kattintás használatakor felugrik egy lebegő bemeneti mező, ahova be lehet írni egy blokk nevét (vagy nevének részeit), majd azt ki is lehet a kódterületre húzni. Tartsd a Shiftet lenyomva egy blokk kihúzása közben, hogy nyitva maradjon a mező, s több blokk is hozzáadható lehessen egyszerre.",
-    "middle-click-popup/@info-developer-tools": "Ez a kiegészítő korábban a „fejlesztői eszközök” része volt, de most ide költözött.",
     "middle-click-popup/@name": "Blokkok beillesztése név alapján",
     "jump-to-def/@description": "Megengedi, hogy egy egyéni blokk definiálásához ugorj a középső egérgombbal, vagy Shift+Kattintással az adott blokkon.",
-    "jump-to-def/@info-developer-tools": "Ez a bővítmény korábban a \"Fejlesztői eszközök\" bővítmény része volt, de mostanra át lett helyezve ide.",
     "jump-to-def/@name": "Ugrás egyéni blokk definiálásához",
     "data-category-tweaks-v2/@description": "Igazításokat hajt végre az Adat (\"Változók\") blokk kategórián.",
     "data-category-tweaks-v2/@name": "Adat kategória igazítások",
@@ -198,7 +196,6 @@
     "editor-comment-previews/@settings-select-delay-none": "Nincs",
     "editor-comment-previews/@settings-select-delay-short": "Rövid",
     "number-pad/@description": "Mindig megjeleníti minden eszközön a Scratch számbillentyűzet-bemenetét szám-mezők szerkesztésénél, ahelyett, hogy csak érintőképernyőseknél tenné meg.",
-    "number-pad/@info-explanation": "Egy számbillentyűzet fog megjelenni számterületi bemenetek szerkesztésénél, mint amilyen az \"x legyen\" blokknál van.",
     "number-pad/@name": "Mindig mutass számbillentyűzetet",
     "script-snap/@description": "Mozgass egy kódot és automatikusan a kód mező pontjaihoz fog igazodni.",
     "script-snap/@name": "Kódok rácspontokhoz való igazítása",

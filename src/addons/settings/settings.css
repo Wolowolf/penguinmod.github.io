@@ -231,12 +231,6 @@ a:active, a:focus {
     align-items: center;
 }
 
-.extension-image {
-    height: 16px;
-    width: 16px;
-    margin-right: 8px;
-}
-
 .addon-title {
     cursor: pointer;
     display: flex;
@@ -264,12 +258,29 @@ a:active, a:focus {
 .addon-operations {
     margin-left: auto;
     padding-left: 4px;
+    min-width: 0;
     display: flex;
     align-items: center;
+}
+/* Desktop fork: credits sit right of the title, just before the reset arrow (or its empty place) */
+.credits {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--text-secondary);
+}
+.reset-slot {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: flex-end;
+    width: 20px;
+    margin-left: 4px;
 }
 
 .reset-button {
     display: flex;
+    padding: 2px;
     border-radius: 4px;
     cursor: pointer;
     border: none;
@@ -390,16 +401,6 @@ a:active, a:focus {
     padding: 0 20px;
     margin-bottom: 10px;
     color: var(--text-primary);
-}
-
-.credit-container {
-
-}
-.credit-title {
-    padding-right: 5px;
-}
-.credit {
-
 }
 
 .description {

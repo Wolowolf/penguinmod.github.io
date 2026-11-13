@@ -8,8 +8,7 @@ const manifest = {
       "name": "griffpatch"
     },
     {
-      "name": "TheColaber",
-      "link": "https://scratch.mit.edu/users/thecolaber/"
+      "name": "TheColaber"
     }
   ],
   "userscripts": [

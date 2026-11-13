@@ -8,12 +8,10 @@ const manifest = {
       "name": "Jeffalo"
     },
     {
-      "name": "OregSam",
-      "link": "https://scratch.mit.edu/users/simiagain/"
+      "name": "OregSam"
     },
     {
-      "name": "TheColaber",
-      "link": "https://scratch.mit.edu/users/TheColaber/"
+      "name": "TheColaber"
     }
   ],
   "dynamicDisable": true,

@@ -5,8 +5,7 @@ const manifest = {
   "name": "Rearrangeable custom block inputs",
   "credits": [
     {
-      "name": "Chrome_Cat",
-      "link": "https://scratch.mit.edu/users/Chrome_Cat/"
+      "name": "Chrome_Cat"
     }
   ],
   "userscripts": [

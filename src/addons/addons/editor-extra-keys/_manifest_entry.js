@@ -5,8 +5,7 @@ const manifest = {
   "name": "Extra key options",
   "credits": [
     {
-      "name": "Tacodiva",
-      "link": "https://scratch.mit.edu/users/Tacodiva7729/"
+      "name": "Tacodiva"
     }
   ],
   "userscripts": [

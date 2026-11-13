@@ -7,16 +7,13 @@ const manifest = {
   "tags": [],
   "credits": [
     {
-      "name": "CST1229",
-      "link": "https://scratch.mit.edu/users/CST1229/"
+      "name": "CST1229"
     },
     {
-      "name": "TheColaber",
-      "link": "https://scratch.mit.edu/users/TheColaber/"
+      "name": "TheColaber"
     },
     {
-      "name": "lisa_wolfgang",
-      "link": "https://scratch.mit.edu/users/lisa_wolfgang/"
+      "name": "lisa_wolfgang"
     }
   ],
   "userscripts": [

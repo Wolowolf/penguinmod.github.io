@@ -5,8 +5,7 @@ const manifest = {
   "name": "Search sprites by name",
   "credits": [
     {
-      "name": "BarelySmooth",
-      "link": "https://scratch.mit.edu/users/BarelySmooth/"
+      "name": "BarelySmooth"
     },
     {
       "name": "GarboMuffin"

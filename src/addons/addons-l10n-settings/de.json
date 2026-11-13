@@ -1,9 +1,7 @@
 {
     "middle-click-popup/@description": "Drücke Strg+Leertaste, Umschalt+Leertaste oder klicke mit der mittleren Maustaste auf den Codebereich, um ein schwebendes Eingabefeld hervorzubringen, in dem du den Namen eines Blocks (oder Teile davon) eingeben und in den Codebereich ziehen kannst. Halte die Umschalttaste während des Ziehens gedrückt, um das Popup beim Hinzufügen von mehreren Blöcken geöffnet zu halten.",
-    "middle-click-popup/@info-developer-tools": "Dieses Addon gehörte früher zum \"Entwicklertools\"-Addon, aber es wurde hierher verschoben.",
     "middle-click-popup/@name": "Blöcke mit Namen einfügen",
     "jump-to-def/@description": "Ermöglicht das Springen zur Definition eines benutzerdefinierten Blocks durch Klicken mit der mittleren oder rechten Maustaste mit gedrückter Umschalttaste.",
-    "jump-to-def/@info-developer-tools": "Dieses Addon gehörte früher zum \"Entwicklertools\"-Addon, aber es wurde hierher verschoben.",
     "jump-to-def/@name": "Zu Blockdefinition springen",
     "data-category-tweaks-v2/@description": "Bietet Optimierungen für die Kategorie Daten (\"Variablen\") im Editor.",
     "data-category-tweaks-v2/@name": "Optimierungen für die Datenkategorie",
@@ -201,7 +199,6 @@
     "editor-comment-previews/@settings-select-delay-none": "Keine",
     "editor-comment-previews/@settings-select-delay-short": "Kurz",
     "number-pad/@description": "Zeigt Scratchs Zahleneingabepad, das bei der Eingabe in Zahlenfeldern auf Touchscreen-Geräten geöffnet wird, auf allen Geräten an.",
-    "number-pad/@info-explanation": "Die Zifferntastatur wird beim Bearbeiten von Zahlenfeldern auf bestimmten Blöcken wie \"setze x auf\" angezeigt.",
     "number-pad/@name": "Zifferntastatur immer anzeigen",
     "script-snap/@description": "Richtet Skripte nach dem Ziehen automatisch an den Punkten des Codebereichs aus.",
     "script-snap/@name": "Skripte am Raster ausrichten",

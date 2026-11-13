@@ -9,12 +9,6 @@ const manifest = {
       "name": "GarboMuffin"
     }
   ],
-  "info": [
-    {
-      "text": "A number pad will show when editing number inputs from certain blocks, such as \"set x to\".",
-      "id": "explanation"
-    }
-  ],
   "tags": [],
   "userscripts": [
     {

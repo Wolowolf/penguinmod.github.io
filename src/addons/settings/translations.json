@@ -1,13 +1,11 @@
 {
     "ar": {
-        "credits": "الاعتمادات:",
         "reset": "إعادة تعيين",
         "resetAll": "إعادة ضبط الجميع"
     },
     "ca": {
         "addonFeedback": "Comentaris del addon",
         "confirmResetAll": "Segur que vols restablir tota la configuració del addon als valors predeterminats?",
-        "credits": "Crèdits:",
         "dirty": "Torna a carregar les pestanyes per aplicar la configuració.",
         "dirtyButton": "Recarrega ara",
         "enableDangerous": "Aquest addon és perillós i pot DESACTIVAR les funcions intencionadament. La majoria dels usuaris NO HAN d'activar aquest addon. Estas segur que voleu activar-lo?",
@@ -26,7 +24,6 @@
     "cs": {
         "addonFeedback": "Zpětná vazba doplňků",
         "confirmResetAll": "Jste si jisti, že chcete obnovit všechna nastavení doplňků na jejich výchozí hodnoty?",
-        "credits": "Příspěvky:",
         "dirty": "Pro uložení nastavení obnovte stránku.",
         "dirtyButton": "Obnovte nyní",
         "enableDangerous": "Tento doplněk je nebezpečný a může úmyslně ZAKÁZAT funkce. Mnoho uživatelů by NEMĚLO tento doplněk povolovat. Jste si jisti, že to chcete povolit?",
@@ -46,7 +43,6 @@
     "de": {
         "addonFeedback": "Feedback für Addons",
         "confirmResetAll": "Bist du sicher, dass du alle Addoneinstellungen auf ihre Standardwerte zurücksetzen willst?",
-        "credits": "Danksagungen:",
         "dirty": "Lade die Tabs neu, um die Einstellungen anzuwenden.",
         "dirtyButton": "Jetzt neu laden",
         "enableDangerous": "Dieses Addon ist gefährlich und könnte gezielt Funktionen DEAKTIVIEREN. Die meisten Nutzer SOLLTEN NICHT dieses Addon aktivieren. Bist du sicher, dass du es willst?",
@@ -66,7 +62,6 @@
     "es": {
         "addonFeedback": "Enviar comentarios sobre addons",
         "confirmResetAll": "¿Está seguro de que quiere reiniciar todos los addons a sus valores predeterminados?",
-        "credits": "Créditos:",
         "dirty": "Recargue las pestañas para aplicar la configuración.",
         "dirtyButton": "Recargar ahora",
         "enableDangerous": "Este addon es peligroso y podría intencionalmente DESACTIVAR funciones. La mayoría de los usuarios NO DEBERÍAN activar este addon. ¿Está seguro de que lo quiere activar?",
@@ -85,7 +80,6 @@
     "fi": {
         "addonFeedback": "Lisäosien Palaute",
         "confirmResetAll": "Oletko varma että haluat nollata kaikkien lisäosien asetukset oletukseen?",
-        "credits": "Krediitit",
         "dirtyButton": "Lataa Sivu Uudelleen Nyt",
         "enableDangerous": "Tämä Lisäosa on vaarallinen ja saattaa tarkoituksella poistaa joitain ominaisuuksia käytöstä. useimpien käyttäjien EI PITÄISI Ottaa tätä lisäosaa käyttöön.Oletko varma että haluat sen käyttöön?",
         "export": "Tallenna Asetukset",
@@ -105,7 +99,6 @@
     "fr": {
         "addonFeedback": "Commentaires sur les addons",
         "confirmResetAll": "Êtes-vous sûr de vouloir réinitialiser tous les paramètres des addons à leurs valeurs par défaut?",
-        "credits": "Crédits:",
         "dirty": "Rechargez les onglets pour appliquer les paramètres.",
         "dirtyButton": "Recharger maintenant",
         "enableDangerous": "Cet addon est dangereux et va intentionnellement DÉSACTIVER certaines fonctionnalitées. La plupart des utilisateurs NE DOIVENT PAS activer cet addon. Êtes-vous sûr de vouloir l'activer ?",
@@ -126,7 +119,6 @@
         "title": "socruithe addon"
     },
     "he": {
-        "credits": "נקודות זכות:",
         "reset": "אִתחוּל",
         "resetAll": "לאפס הכל",
         "tagBeta": "בטא"
@@ -143,7 +135,6 @@
     "it": {
         "addonFeedback": "Feedback sull'Addon",
         "confirmResetAll": "Sei sicuro di voler riportare tutte le impostazioni dell'addon al loro stato iniziale?",
-        "credits": "Autore/i:",
         "dirty": "Ricarica le schede del browser per applicare le nuove impostazioni.",
         "dirtyButton": "Ricarica ora",
         "enableDangerous": "Questo addon è pericoloso e può intenzionalmente DISABILITARE delle funzionalità. La maggior parte degli utenti NON DOVREBBE abilitare questo addon. Sei sicuro di volerlo abilitare?",
@@ -163,7 +154,6 @@
     "ja": {
         "addonFeedback": "アドオンのフィードバック",
         "confirmResetAll": "アドオンの設定を削除し、デフォルトに戻します。よろしいですか？",
-        "credits": "クレジット:",
         "dirty": "タブを再読み込みして設定を適用します",
         "dirtyButton": "すぐに再読み込みする",
         "enableDangerous": "このアドオンは危険で、意図的に機能を無効にする可能性があります。多くのユーザーは、このアドオンを有効にすべきではありません。本当に有効にしていいですか？",
@@ -184,7 +174,6 @@
     "ja-hira": {
         "addonFeedback": "アドオンのフィードバック",
         "confirmResetAll": "アドオンのせっていをさくじょして、もとにもどします。よろしいですか？",
-        "credits": "クレジット:",
         "dirty": "タブをもういちどよみこんでせっていをてきおうします",
         "dirtyButton": "すぐにもういちどよみこむ",
         "export": "せっていをほぞんする",
@@ -203,7 +192,6 @@
     "ko": {
         "addonFeedback": "애드온 피드백하기",
         "confirmResetAll": "정말로 애드온 설정을 기본값으로 초기화하시겠습니까?",
-        "credits": "도움을 준 사람들 :",
         "dirty": "설정을 적용하려면 탭을 새로고침해야 합니다.",
         "dirtyButton": "즉시 재시작",
         "enableDangerous": "이 애드온은 위험하며 의도적으로 몇몇 기능을 비활성화할 수도 있습니다. 대부분의 사용자들은 이 애드온을 활성화 해서는 안됩니다. 정말로 활성화 하시겠습니까?",
@@ -224,7 +212,6 @@
     "lt": {
         "addonFeedback": "Įskiepių atsiliepimas",
         "confirmResetAll": "Ar jūs tikras kad norite nustatyti visus įskiepių nustatymus į jų numatytąsias vertes?",
-        "credits": "Padėkos:",
         "dirty": "Perkrauk skirtukus nustatymų pritaikymui.",
         "dirtyButton": "Perkrauti dabar",
         "enableDangerous": "Šis įskiepis yra pavojingas ir gali tyčia IŠJUNGTI funkcijas. Dauguma naudotojų NETURĖTŲ įjungti šio priedo. Ar tikrai norite jį įjungti?",
@@ -244,7 +231,6 @@
     "nl": {
         "addonFeedback": "Addonfeedback",
         "confirmResetAll": "Weet je zeker dat je alle addonsinstellingen wilt resetten naar hun standaardinstellingen?",
-        "credits": "Dank aan:",
         "dirty": "Ververs tabbladen om instellingen toe te passen.",
         "dirtyButton": "Nu verversen",
         "enableDangerous": "Deze addon is gevaarlijk en kan opzettelijk functies UITSCHAKELEN. De meeste gebruikers moeten deze addon NIET gebruiken. Weet je zeker dat je het wilt inschakelen?",
@@ -265,7 +251,6 @@
     "pl": {
         "addonFeedback": "Opinia o dodatkach",
         "confirmResetAll": "Jesteś pewien, że chcesz zresetować wszystkie dodatki do ich domyślnych wartości?",
-        "credits": "Podziękowania:",
         "dirty": "Odśwież karty, aby załączyć ustawienia.",
         "dirtyButton": "Odśwież teraz",
         "enableDangerous": "Ten dodatek jest niebezpieczny i może intencjonalnie WYŁĄCZYĆ funkcje. Większość użytkowników NIE POWINNA włączać tego dodatku. Czy jesteś pewien, że chcesz go włączyć?",
@@ -285,7 +270,6 @@
     "pt": {
         "addonFeedback": "Dar Feedback sobre Addons",
         "confirmResetAll": "Tem certeza que quer restaurar todas as configurações de addons aos seus valores originais?",
-        "credits": "Créditos:",
         "dirtyButton": "Recarregar agora",
         "enableDangerous": "Este addon é perigoso e pode intencionalmente DESATIVAR funcionalidades. A maioria dos usuários NÃO DEVEM ativar este addon. Tem certeza que quer ativá-lo?",
         "export": "Exportar configurações",
@@ -304,7 +288,6 @@
     "pt-br": {
         "addonFeedback": "Dar Feedback sobre Addons",
         "confirmResetAll": "Tem certeza que quer restaurar todas as configurações de addons aos seus valores originais?",
-        "credits": "Créditos:",
         "dirty": "Recarregue a página para aplicar as opções.",
         "dirtyButton": "Recarregar agora",
         "enableDangerous": "Este addon é perigoso e pode intencionalmente DESATIVAR funcionalidades. A maioria dos usuários NÃO DEVEM ativar este addon. Tem certeza que quer ativá-lo?",
@@ -324,7 +307,6 @@
     "ro": {
         "addonFeedback": "Spune-ți Părerea despre Extensii",
         "confirmResetAll": "Ești sigur că vrei să resetezi toate setările extensiilor la valorile lor implicite?",
-        "credits": "Credite:",
         "dirtyButton": "Reîncarcă acum",
         "export": "Exportă setările",
         "import": "Importă setările",
@@ -339,7 +321,6 @@
     "ru": {
         "addonFeedback": "Отзывы о дополнениях",
         "confirmResetAll": "Вы уверены, что хотите сбросить настройки всех дополнений до значений по умолчанию?",
-        "credits": "Благодарности:",
         "dirty": "Перезагрузите вкладки, чтобы применить настройки.",
         "dirtyButton": "Перезагрузить сейчас",
         "enableDangerous": "Этот аддон опасен и может намеренно ОТКЛЮЧИТЬ функции. Большинству пользователей НЕ СЛЕДУЕТ включать этот аддон. Вы уверены, что хотите его включить?",
@@ -360,7 +341,6 @@
     "sl": {
         "addonFeedback": "Povratne informacije o dodatkih",
         "confirmResetAll": "Ste prepričani, da želite ponastaviti vse nastavitve dodatkov?",
-        "credits": "Hvala:",
         "dirty": "Znova naložite zavihke, da uporabite spremenjene nastavitve.",
         "dirtyButton": "Znova naloži zdaj",
         "enableDangerous": "Ta dodatek je nevaren in morda namenoma ODSTRANI funkcije. Večina uporabnikov tega dodatka NE POTREBUJE. Ste prepričani, da ga želite vključiti?",
@@ -380,7 +360,6 @@
     "sr": {
         "addonFeedback": "Повратне информације о додацима",
         "confirmResetAll": "Да ли сте сигурни да желите да ресетујете сва подешавања додатака?",
-        "credits": "Заслуге:",
         "dirtyButton": "Понов учитај",
         "enableDangerous": "Овај додатак је опасан и може намерно ОНЕМОГУЋИТИ функције. Већина корисника НЕ ТРЕБА користити овај додатак. Да ли сте сигурни да га желите укључити?",
         "export": "Извези подешавања",
@@ -400,7 +379,6 @@
     "sv": {
         "addonFeedback": "Tilläggsrespons",
         "confirmResetAll": "Är du säker på att du vill återställa alla tilläggsinställningar till standardvärdena?",
-        "credits": "kreditera:",
         "dirty": "Ladda om flikarna för att tillämpa ändringar",
         "dirtyButton": "Ladda om nu",
         "enableDangerous": "Detta tillägget är farligt och kommer att STÄNGA AV funktioner. De flesta användarna ska INTE aktivera detta tillägg. Är du säker att aktivera det?",
@@ -420,7 +398,6 @@
     "th": {
         "addonFeedback": "ความคิดเห็น Addon",
         "confirmResetAll": "คุณแน่ใจหรือไม่ว่าต้องการรีเซ็ตการตั้งค่า Addons กลับไปเป็นการตั้งค่าเริ่มต้น",
-        "credits": "เครดิต :",
         "dirtyButton": "แตะเพื่อรีโหลด",
         "export": "Export การตั้งค่า",
         "import": "Import การตั้งค่า",
@@ -436,7 +413,6 @@
     "tr": {
         "addonFeedback": "Eklenti geribildirim",
         "confirmResetAll": "Bütün eklenti ayarlarını varsayılan değerlerine sıfırlamak istediğinizden emin misiniz?",
-        "credits": "Krediler:",
         "dirty": "Ayarı uygulamak için sekmeleri yeniden yükleyin.",
         "dirtyButton": "Şimdi yeniden yükle",
         "enableDangerous": "Bu eklenti tehlikelidir ve bilerek özellikleri DEVRE DIŞI BIRAKABİLİR. Çoğu kullanıcı bu eklentiyi ETKİNLEŞTİRMEMELİDİR. Etkinleştirmek istediğinizden emin misiniz?",
@@ -456,7 +432,6 @@
     "uk": {
         "addonFeedback": "Відгук про доповнення",
         "confirmResetAll": "Ви впевнені, що хочете скинути усі налаштування доповненнь до їхніх значеннь за замовчуванням?",
-        "credits": "Подяка:",
         "dirty": "Перезавантажте вкладки щоб застосувати налаштування.",
         "dirtyButton": "Перезавантажити зараз",
         "enableDangerous": "Це доповнення небезпечне та може навмисно ВИМИКАТИ деякі функції. Деяким користувачам НЕ СЛІД вмикати цю функцію. Ви дійсно хочите увімкнути це?",
@@ -477,7 +452,6 @@
     "vi": {
         "addonFeedback": "Phản hồi",
         "confirmResetAll": "Bạn có chắc khi chỉnh lại tất cả các cài đặt addon về giá trị mặc định không?",
-        "credits": "Tác giả:",
         "dirtyButton": "Tải lại ngay bây giờ",
         "enableDangerous": "Addon này nguy hiểm và có thể cố ý VÔ HIỆU HOÁ các tính năng. Hầu hết người dùng KHÔNG NÊN bật addon này. Bạn có chắc khi bật addon này chứ?",
         "export": "Xuất cài đặt",
@@ -495,7 +469,6 @@
     "zh-cn": {
         "addonFeedback": "插件反馈",
         "confirmResetAll": "你确定要将所有插件设置重置为默认值吗？",
-        "credits": "鸣谢：",
         "dirty": "重新加载选项卡以应用设置。",
         "dirtyButton": "重新加载",
         "enableDangerous": "此插件存在潜在的风险，可能会禁用某些功能。大多数用户不应启用此加载项。您确定要启用它吗？",
@@ -516,7 +489,6 @@
     "zh-tw": {
         "addonFeedback": "附加元件回饋",
         "confirmResetAll": "你確定要重設所有附件設定？",
-        "credits": "感謝：",
         "dirtyButton": "重新載入",
         "export": "匯出設定",
         "groupNew": "全新（{number}）",

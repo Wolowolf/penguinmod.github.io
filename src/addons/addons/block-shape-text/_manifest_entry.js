@@ -9,23 +9,19 @@ const manifest = {
   ],
   "credits": [
     {
-      "name": "SheepTester",
-      "link": "https://scratch.mit.edu/users/Sheep_maker/"
+      "name": "SheepTester"
     },
     {
-      "name": "lisa_wolfgang",
-      "link": "https://scratch.mit.edu/users/lisa_wolfgang/"
+      "name": "lisa_wolfgang"
     },
     {
-      "name": "GarboMuffin",
-      "link": "https://scratch.mit.edu/users/GarboMuffin/"
+      "name": "GarboMuffin"
     },
     {
       "name": "Secret-chest"
     },
     {
-      "name": "_nix",
-      "link": "https://scratch.mit.edu/users/_nix"
+      "name": "_nix"
     }
   ],
   "enabledByDefault": false,

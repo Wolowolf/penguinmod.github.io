@@ -6,8 +6,7 @@ const manifest = {
   "description": "Change the default x/y position of new sprites.",
   "credits": [
     {
-      "name": "pufferfish101007",
-      "link": "https://scratch.mit.edu/users/pufferfish101007/"
+      "name": "pufferfish101007"
     }
   ],
   "dynamicDisable": true,

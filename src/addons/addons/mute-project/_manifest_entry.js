@@ -11,8 +11,7 @@ const manifest = {
   ],
   "credits": [
     {
-      "name": "TheColaber",
-      "link": "https://scratch.mit.edu/users/TheColaber/"
+      "name": "TheColaber"
     }
   ],
   "userscripts": [

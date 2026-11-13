@@ -1,9 +1,7 @@
 {
     "middle-click-popup/@description": "Cliccando con il tasto centrale nell'area degli script oppure usando Ctrl+Spazio o Shift+Click puoi far comparire una casella dove digitare il nome di un blocco (o parte del nome) e trascinare il blocco nell'area del codice. Se vuoi aggiungere più di un blocco e non non vuoi che la casella si chiuda mentre lo trascini, tieni premuto Shift mentre lo trascini.",
-    "middle-click-popup/@info-developer-tools": " Questo addon faceva parte in precedenza dell'addon \"strumenti per sviluppatori\" ma è stato spostato qui.",
     "middle-click-popup/@name": "Inserisci il nome dei blocchi ",
     "jump-to-def/@description": "Ti permette di andare alla definizione di un blocco personalizzato usando il pulsante centrale del mouse oppure cliccando il blocco mentre si preme Shift.",
-    "jump-to-def/@info-developer-tools": "Questo addon faceva parte in precedenza dell'addon  \"strumenti per sviluppatori\" ma è stato spostato qui.",
     "jump-to-def/@name": "Vai alla definizione del blocco personalizzato",
     "data-category-tweaks-v2/@description": "Modifica nell'editor la categoria \"Variabili\".",
     "data-category-tweaks-v2/@name": "Modifiche per la categoria Variabili",
@@ -199,7 +197,6 @@
     "editor-comment-previews/@settings-select-delay-none": "Nessuna",
     "editor-comment-previews/@settings-select-delay-short": "Breve",
     "number-pad/@description": "Mostra il tastierino numerico di Scratch su tutti i dispositivi quando si modificano gli argomenti numerici, non soltanto sui dispositivi touch.",
-    "number-pad/@info-explanation": "Comparirà un tastierino numerico quando si modificano gli argomenti numerici di un blocco, ad esempio il blocco \"vai dove x è\".",
     "number-pad/@name": "Mostra sempre tastierino numerico",
     "script-snap/@description": "Trascina uno script per allinearlo automaticamente ai puntini presenti nell'area del codice.",
     "script-snap/@name": "Aggancia gli script alla griglia",

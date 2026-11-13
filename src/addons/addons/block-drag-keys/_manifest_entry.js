@@ -3,21 +3,10 @@ const manifest = {
   "editorOnly": true,
   "noTranslations": true,
   "name": "Drag blocks with Ctrl and Alt",
-  "description": "Hold Ctrl while dragging to grab a single block out of the middle of a script instead of the whole stack below it. Hold Alt while dragging to duplicate a script; hold Ctrl as well to duplicate only that one block.",
-  "info": [
-    {
-      "text": "On macOS, use the Cmd key instead of Ctrl and the Option key instead of Alt.",
-      "id": "mac"
-    },
-    {
-      "text": "If \"flip controls\" is enabled, grabbing blocks individually will be the default behavior. Hold Ctrl to drag the entire stack.",
-      "id": "flipControls"
-    }
-  ],
+  "description": "Hold Ctrl/Cmd while dragging to grab a single block out of the middle of a script instead of the whole stack below it. Hold Alt/Option while dragging to duplicate a script; hold Ctrl/Cmd as well to duplicate only that one block.",
   "credits": [
     {
-      "name": "lisa_wolfgang",
-      "link": "https://scratch.mit.edu/users/lisa_wolfgang/"
+      "name": "lisa_wolfgang"
     },
     {
       "name": "GarboMuffin"
@@ -31,7 +20,7 @@ const manifest = {
   "settings": [
     {
       "dynamic": true,
-      "name": "Flip controls",
+      "name": "Make individual grab default",
       "id": "invertDrag",
       "type": "boolean",
       "default": false

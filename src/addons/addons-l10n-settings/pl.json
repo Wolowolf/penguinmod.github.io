@@ -1,5 +1,4 @@
 {
-    "middle-click-popup/@info-developer-tools": "Ten dodatek był wcześniej częścią dodatku „narzędzia developerskie”, ale został przeniesiony tutaj.",
     "middle-click-popup/@name": "Wstaw bloki według nazwy",
     "jump-to-def/@name": "Przejdź do definicji bloku",
     "data-category-tweaks-v2/@description": "Zapewnia poprawki dla kategorii bloków Dane („Zmienne”). ",
@@ -187,7 +186,6 @@
     "editor-comment-previews/@settings-select-delay-none": "Brak",
     "editor-comment-previews/@settings-select-delay-short": "Krótkie",
     "number-pad/@description": "Pokazuje klawiaturę numeryczną Scratcha podczas edycji pól liczbowych na wszystkich urządzeniach, a nie tylko na urządzeniach z ekranem dotykowym.",
-    "number-pad/@info-explanation": "Podczas edycji liczb w niektórych blokach, takich jak \"ustaw x na\", pojawi się klawiatura numeryczna.",
     "number-pad/@name": "Zawsze pokazuj klawiaturę numeryczną",
     "script-snap/@description": "Po przesunięciu kodu, zostanie on \"przyczepiony\" do kropek tła w edytorze.",
     "script-snap/@name": "Przyczep fragmenty kodu do wirtualnej siatki",

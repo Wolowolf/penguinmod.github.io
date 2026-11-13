@@ -7,8 +7,7 @@ const manifest = {
   "tags": [],
   "credits": [
     {
-      "name": "lisa_wolfgang",
-      "link": "https://scratch.mit.edu/users/lisa_wolfgang/"
+      "name": "lisa_wolfgang"
     }
   ],
   "userscripts": [

@@ -1,9 +1,7 @@
 {
     "middle-click-popup/@description": "Klik met de scrolwielknop op het codegebied of gebruik Ctrl+Spatie of Shift+Klik om een zwevend invoervak zichtbaar te maken, waar je de naam van een blok (of een deel ervan) kunt typen en het naar het codegebied kunt slepen. Houd Shift ingedrukt tijdens het slepen om het vak niet te sluiten.",
-    "middle-click-popup/@info-developer-tools": "Deze addon maakte voorheen deel uit van de \"ontwikkelaarstools\"-addon maar is nu hierheen verhuisd.",
     "middle-click-popup/@name": "Blokken invoegen op naam",
     "jump-to-def/@description": "Spring naar een definitie van een eigen blok met de scrolwielknop of Shift+Klik op het blok.",
-    "jump-to-def/@info-developer-tools": "Deze addon maakte voorheen deel uit van de \"ontwikkelaarstools\"-addon maar is nu hierheen verhuisd.",
     "jump-to-def/@name": "Springen naar definitie van eigen blok",
     "data-category-tweaks-v2/@description": "Maakt aanpassingen aan de Gegevens (\"Variabelen\")-blokcategorie.",
     "data-category-tweaks-v2/@name": "Gegevenscategorie-aanpassingen",
@@ -201,7 +199,6 @@
     "editor-comment-previews/@settings-select-delay-none": "Geen",
     "editor-comment-previews/@settings-select-delay-short": "Kort",
     "number-pad/@description": "Geef het getallenpaneel op alle apparaten weer tijdens het bewerken van een getalinvoer, in plaats van alleen op touchscreenapparaten.",
-    "number-pad/@info-explanation": "Een getallenpaneel komt tevoorschijn bij het bewerken van getalinvoeren van bepaalde blokken, zoals \"verander x met\".",
     "number-pad/@name": "Getallenpaneel altijd weergeven",
     "script-snap/@description": "Sleep een script om zijn positie automatisch uit te lijnen op de codegebied-stippen.",
     "script-snap/@name": "Scripts uitlijnen op raster",

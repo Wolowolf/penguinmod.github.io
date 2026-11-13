@@ -5,8 +5,7 @@ const manifest = {
   "description": "Pin your favourite Blocks to the top of the Toolbox.",
   "credits": [
     {
-      "name": "SharkPool",
-      "link": "https://github.com/SharkPool-SP/"
+      "name": "SharkPool"
     }
   ],
   "settings": [

@@ -1,6 +1,5 @@
 {
     "jump-to-def/@description": "마우스 중간 버튼 클릭이나 쉬프트+클릭으로 함수 블록의 정의하기 블록으로 이동합니다.",
-    "jump-to-def/@info-developer-tools": "이 기능은 본래 \"개발자 도구\"의 일부였으나 여기로 이동되었습니다.",
     "jump-to-def/@name": "함수 블록의 정의하기 블록으로 이동하기",
     "data-category-tweaks-v2/@description": "블록 카테고리에서 데이터(\"변수\") 카테고리를 개선합니다.",
     "data-category-tweaks-v2/@name": "데이터 카테고리 개선",

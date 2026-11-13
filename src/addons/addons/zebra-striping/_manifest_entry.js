@@ -6,15 +6,13 @@ const manifest = {
   "description": "Makes blocks of the same category alternate between lighter and darker shades when nested inside each other. This is also known as zebra striping.",
   "credits": [
     {
-      "name": "CST1229",
-      "link": "https://scratch.mit.edu/users/CST1229/"
+      "name": "CST1229"
     },
     {
       "name": "GarboMuffin"
     },
     {
-      "name": "TheColaber",
-      "link": "https://scratch.mit.edu/users/thecolaber"
+      "name": "TheColaber"
     }
   ],
   "tags": [],

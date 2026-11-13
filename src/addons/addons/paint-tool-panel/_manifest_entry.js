@@ -4,12 +4,10 @@ const manifest = {
     "description": "Adds a tool menu to the costume editor, to manually edit object transforms and properties.",
     "credits": [
         {
-            "name": "SharkPool",
-            "link": "https://github.com/SharkPool-SP/"
+            "name": "SharkPool"
         },
         {
-            "name": "DogeisCut",
-            "link": "https://github.com/DogeisCut/"
+            "name": "DogeisCut"
         }
     ],
     "userscripts": [

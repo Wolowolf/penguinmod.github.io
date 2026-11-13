@@ -8,12 +8,10 @@ const manifest = {
       "name": "GarboMuffin"
     },
     {
-      "name": "pufferfish101007",
-      "link": "https://scratch.mit.edu/users/pufferfish101007/"
+      "name": "pufferfish101007"
     },
     {
-      "name": "JeremyGamer13",
-      "link": "https://penguinmod.com/profile?user=JGamerTesting"
+      "name": "JeremyGamer13"
     }
   ],
   "dynamicDisable": true,

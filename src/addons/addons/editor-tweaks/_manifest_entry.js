@@ -5,8 +5,7 @@ const manifest = {
   "description": "Implements various tweaks to the PenguinMod Editor for better a experience.",
   "credits": [
     {
-      "name": "SharkPool",
-      "link": "https://github.com/SharkPool-SP/"
+      "name": "SharkPool"
     }
   ],
   "info": [],

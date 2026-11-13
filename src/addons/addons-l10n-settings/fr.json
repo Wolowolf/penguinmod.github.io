@@ -1,9 +1,7 @@
 {
     "middle-click-popup/@description": "Cliquez au milieu de la zone de code, utilisez Ctrl+Espace ou Shift+Clic pour faire apparaître une boîte de saisie flottante dans laquelle vous pouvez taper le nom d'un bloc (ou des parties de celui-ci) et faire glisser le bloc dans la zone de code. Maintenez la touche Maj tout en faisant glisser le bloc pour éviter de fermer la boîte lorsque vous ajoutez plusieurs blocs à la fois.",
-    "middle-click-popup/@info-developer-tools": "Cet addon faisait auparavant partie de l'addon \"developer tools\" mais a été déplacé ici.",
     "middle-click-popup/@name": "Insérer des blocs par nom",
     "jump-to-def/@description": "Permet d'accéder à la définition d'un bloc personnalisé à l'aide du bouton central de la souris ou de Maj + Clic sur le bloc.",
-    "jump-to-def/@info-developer-tools": "Cet addon faisait auparavant partie de l'addon \"outils de développement\" mais a été déplacé ici.",
     "jump-to-def/@name": "Accéder à la définition d'un bloc personnalisé",
     "data-category-tweaks-v2/@description": "Apporte des améliorations pour la catégorie des blocs de donnée (\"Variables\") dans l'éditeur.",
     "data-category-tweaks-v2/@name": "Améliorations pour la catégorie des blocs de donnée",
@@ -177,7 +175,6 @@
     "editor-comment-previews/@settings-select-delay-none": "Aucun",
     "editor-comment-previews/@settings-select-delay-short": "Court",
     "number-pad/@description": "Afficher l'entrée du pavé numérique de Scratch lors de l'édition des champs numériques sur tous les appareils, au lieu de seulement l'afficher sur les  appareils à écran tactile.",
-    "number-pad/@info-explanation": "Un pavé numérique s'affichera lors de l'édition des entrées numériques de certains blocs, comme \"set x to\".",
     "number-pad/@name": "Toujours afficher le pavé numérique",
     "script-snap/@description": "Les script vont automatiquement s'aligner sur les points de l'arrière-plan.",
     "script-snap/@name": "Aligner les scripts sur la grille",

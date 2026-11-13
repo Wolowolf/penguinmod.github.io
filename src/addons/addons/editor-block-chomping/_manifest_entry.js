@@ -4,8 +4,7 @@ const manifest = {
   "name": "Extend wrapped C blocks",
   "credits": [
     {
-      "name": "CST1229",
-      "link": "https://github.com/CST1229/"
+      "name": "CST1229"
     }
   ],
   "userscripts": [

@@ -29,8 +29,6 @@ import { getInitialDarkMode } from '../../lib/tw-theme-hoc.jsx';
 import { themeColorsCSS, applyThemeColors } from '../../lib/pm-theme-colors.js';
 import SettingsStore from '../settings-store-singleton';
 import Channels from '../channels';
-import extensionImage from './icons/extension.svg';
-import brushImage from './icons/brush.svg';
 import undoImage from './icons/undo.svg';
 import infoImage from './icons/info.svg';
 import styles from './settings.css';
@@ -148,39 +146,6 @@ const supportedAddons = Object.fromEntries(
         .filter(([, manifest]) => !manifest.builtIn && !manifest.unsupported)
         .sort(([a], [b]) => addonRank(a) - addonRank(b))
 );
-
-const CreditList = ({ credits }) => (
-    credits.map((author, index) => {
-        const isLast = index === credits.length - 1;
-        return (
-            <span
-                className={styles.credit}
-                key={index}
-            >
-                {author.link ? (
-                    <a
-                        href={author.link}
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        {author.name}
-                    </a>
-                ) : (
-                    <span>
-                        {author.name}
-                    </span>
-                )}
-                {isLast ? null : ', '}
-            </span>
-        );
-    })
-);
-CreditList.propTypes = {
-    credits: PropTypes.arrayOf(PropTypes.shape({
-        name: PropTypes.string,
-        link: PropTypes.string
-    }))
-};
 
 const Switch = ({ onChange, value, ...props }) => (
     <button
@@ -552,21 +517,6 @@ const Addon = ({
                         }}
                     />
                 </div>
-                {manifest.tags.includes('theme') ? (
-                    <img
-                        className={styles.extensionImage}
-                        src={brushImage}
-                        draggable={false}
-                        alt=""
-                    />
-                ) : (
-                    <img
-                        className={styles.extensionImage}
-                        src={extensionImage}
-                        draggable={false}
-                        alt=""
-                    />
-                )}
                 <div className={styles.addonTitleText}>
                     {addonTranslations[`${id}/@name`] || manifest.name}
                 </div>
@@ -583,20 +533,31 @@ const Addon = ({
                 </div>
             )}
             <div className={styles.addonOperations}>
-                {settings.enabled && manifest.settings && (
-                    <button
-                        className={styles.resetButton}
-                        onClick={() => SettingsStore.resetAddon(id)}
-                        title={settingsTranslations.reset}
+                {settings.enabled && manifest.credits && (
+                    <div
+                        className={styles.credits}
+                        title={manifest.credits.map(author => author.name).join(', ')}
                     >
-                        <img
-                            src={undoImage}
-                            className={styles.resetButtonImage}
-                            alt={settingsTranslations.reset}
-                            draggable={false}
-                        />
-                    </button>
+                        {manifest.credits.map(author => author.name).join(', ')}
+                    </div>
                 )}
+                {/* the reset arrow keeps its place when absent, so credits line up in every addon */}
+                <div className={styles.resetSlot}>
+                    {settings.enabled && manifest.settings && (
+                        <button
+                            className={styles.resetButton}
+                            onClick={() => SettingsStore.resetAddon(id)}
+                            title={settingsTranslations.reset}
+                        >
+                            <img
+                                src={undoImage}
+                                className={styles.resetButtonImage}
+                                alt={settingsTranslations.reset}
+                                draggable={false}
+                            />
+                        </button>
+                    )}
+                </div>
             </div>
         </div>
         {settings.enabled && (
@@ -604,14 +565,6 @@ const Addon = ({
                 <div className={styles.description}>
                     {addonTranslations[`${id}/@description`] || manifest.description}
                 </div>
-                {manifest.credits && (
-                    <div className={styles.creditContainer}>
-                        <span className={styles.creditTitle}>
-                            {settingsTranslations.credits}
-                        </span>
-                        <CreditList credits={manifest.credits} />
-                    </div>
-                )}
                 {manifest.info && (
                     manifest.info.map(info => (
                         <Notice

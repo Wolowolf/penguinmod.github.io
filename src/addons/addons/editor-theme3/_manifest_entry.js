@@ -9,8 +9,7 @@ const manifest = {
       "name": "NitroCipher/ZenithRogue"
     },
     {
-      "name": "TheColaber",
-      "link": "https://scratch.mit.edu/users/TheColaber/"
+      "name": "TheColaber"
     }
   ],
   "customCssVariables": [

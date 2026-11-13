@@ -1,7 +1,5 @@
 {
-    "middle-click-popup/@info-developer-tools": "Ta funkcija je bila prej del dodatka \"orodje za razvijalce\", vendar smo jo premaknili sem.",
     "jump-to-def/@description": "Omogoča, da se premaknete na definicijo \"mojega bloka\" s srednjim miškinim gumbom ali Shift+klikom.",
-    "jump-to-def/@info-developer-tools": "Ta funkcija je bila prej del dodatka \"orodje za razvijalce\", vendar smo jo premaknili sem.",
     "jump-to-def/@name": "Skoči na definicijo \"mojega bloka\"",
     "data-category-tweaks-v2/@description": "Izboljša kategorijo blokov Podatki (\"Spremenljivke\").",
     "data-category-tweaks-v2/@name": "Izboljšana kategorija spremenljivk",
