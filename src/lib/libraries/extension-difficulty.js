@@ -9,7 +9,6 @@ const difficultyByKey = {
     'pmMotionExpansion': 1,
     'Lily/LooksPlus.js': 2,
     'pmEventsExpansion': 2,
-    'Messages-Plus.js': 2,
     'pmControlsExpansion': 2,
     'Extra-Controls.js': 3,
     'pmSensingExpansion': 1,
@@ -23,7 +22,6 @@ const difficultyByKey = {
     'SharkPool/Tile-Grids.js': 2,
     // Costumes / Effects
     'Sprite-Effects-V2.js': 3,
-    'stretch.js': 1,
     'MubiLop/spritesheeter.js': 2,
     'SVG-Spritesheets.js': 3,
     'GIF-Manager.js': 2,
@@ -41,21 +39,18 @@ const difficultyByKey = {
     'Layer-Control.js': 2,
     'Pen-Papers.js': 2,
     'Color-Master.js': 2,
-    'jwColor': 3,
     'TheShovel/ColorPicker.js': 1,
     // Camera / Screen
     'pmCamera': 2,
     'DogeisCut/Resolution.js': 2,
     'CubesterYT/WindowControls.js': 1,
     // Physics / Collisions
-    'box2d.js': 3,
     'Lazy-Collisions.js': 2,
     'Rigidbodies.js': 3,
     'pooiod/Box2D.js': 4,
     // 3D
     'Xeltalliv/simple3D.js': 4,
     'ObviousAlexC/3DMath.js': 4,
-    'Div/divVecQuat.js': 4,
     // Input / Controls
     'KeysPlusV2.js': 2,
     'Gamepad-Expanded.js': 2,
@@ -79,7 +74,6 @@ const difficultyByKey = {
     'Lily/Video.js': 2,
     'videoSensing': 1,
     'Camera-Sensing-Plus.js': 2,
-    'lab/video-sprites.js': 2,
     'lab/face-sensing.js': 2,
     'pooiod/VideoSharing.js': 3,
     // Text Display / Popups
@@ -107,7 +101,6 @@ const difficultyByKey = {
     'iygPerlin': 2,
     'MubiLop/numutils.js': 1,
     'NOname-awa/graphics2d.js': 2,
-    'Skyhigh173/bigint.js': 2,
     'qxsck/big-decimal.js': 2,
     'true-fantom/base.js': 2,
     'bitwise.js': 3,
@@ -116,12 +109,11 @@ const difficultyByKey = {
     'XeroName/Deltatime.js': 2,
     'Time-Calculation.js': 2,
     // Text / Strings
-    'text.js': 1,
+    'text.js': 2,
     'Medericoder/textcase.js': 1,
     'Embin/embintranslation.js': 2,
     // Utility Collections
     'utilities.js': 1,
-    'Lily/lmsutils.js': 2,
     'TheShovel/ShovelUtils.js': 2,
     'Sharktilities.js': 3,
     'jgPrism': 2,
@@ -149,7 +141,6 @@ const difficultyByKey = {
     'QR-Codes.js': 1,
     'Clay/htmlEncode.js': 2,
     'gaimerI17/crypto.js': 3,
-    'MikeDev101/e2ee.js': 4,
     // Custom Blocks / Programming
     'My-Blocks-Plus.js': 3,
     'jwProto': 3

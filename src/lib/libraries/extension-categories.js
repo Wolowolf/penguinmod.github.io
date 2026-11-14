@@ -35,7 +35,6 @@ const keysByTag = {
         'pmMotionExpansion',
         'Lily/LooksPlus.js',
         'pmEventsExpansion',
-        'Messages-Plus.js',
         'pmControlsExpansion',
         'Extra-Controls.js',
         'pmSensingExpansion',
@@ -59,7 +58,6 @@ const keysByTag = {
     cat_effects: [
         'Sprite-Effects-V2.js',
         'Particle-Engine.js',
-        'stretch.js',
         'Turbo-Skins.js',
         'Gen1x/lighting.js',
         'TheShovel/CanvasEffects.js',
@@ -71,7 +69,6 @@ const keysByTag = {
         'Layer-Control.js',
         'Pen-Papers.js',
         'Color-Master.js',
-        'jwColor',
         'TheShovel/ColorPicker.js'
     ],
     // the game camera, the window, and the project's frame rate and stage size
@@ -82,7 +79,6 @@ const keysByTag = {
         'runtime-options.js'
     ],
     cat_physics: [
-        'box2d.js',
         'Lazy-Collisions.js',
         'Rigidbodies.js',
         'pooiod/Box2D.js'
@@ -141,7 +137,6 @@ const keysByTag = {
         'iygPerlin',
         'MubiLop/numutils.js',
         'NOname-awa/graphics2d.js',
-        'Skyhigh173/bigint.js',
         'qxsck/big-decimal.js',
         'true-fantom/base.js',
         'bitwise.js'
@@ -153,20 +148,17 @@ const keysByTag = {
     ],
     cat_threed: [
         'Xeltalliv/simple3D.js',
-        'ObviousAlexC/3DMath.js',
-        'Div/divVecQuat.js'
+        'ObviousAlexC/3DMath.js'
     ],
     cat_video: [
         'Lily/Video.js',
         'videoSensing',
         'Camera-Sensing-Plus.js',
-        'lab/video-sprites.js',
         'lab/face-sensing.js',
         'pooiod/VideoSharing.js'
     ],
     cat_utility: [
         'utilities.js',
-        'Lily/lmsutils.js',
         'TheShovel/ShovelUtils.js',
         'Sharktilities.js',
         'jgPrism'
@@ -197,8 +189,7 @@ const keysByTag = {
         'shovellzcompresss',
         'QR-Codes.js',
         'Clay/htmlEncode.js',
-        'gaimerI17/crypto.js',
-        'MikeDev101/e2ee.js'
+        'gaimerI17/crypto.js'
     ],
     cat_programming: [
         'My-Blocks-Plus.js',

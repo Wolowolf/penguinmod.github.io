@@ -25,9 +25,6 @@ import jgPrismExtensionIcon from './penguinmod/extensions/prism.png';
 
 import jwProtoExtensionIcon from './penguinmod/extensions/proto.svg';
 
-
-import jwColorExtensionThumb from './penguinmod/extensions/jwColor.svg';
-
 import iygPerlinNoiseExtensionIcon from './penguinmod/extensions/perlinnoisebanner.png';
 
 // thank yo godslayerakp for makin pmCamera :good:
@@ -37,10 +34,6 @@ import pmCameraExtensionIcon from './penguinmod/extensions/pmcamera_thumbnail.pn
 // import cloudlinkThumb from './penguinmod/extensions/cloudlinkThumb.png';
 
 // thx jeremey
-
-// griffpatch stuff that hopefully we can keep pls plsplspl !!S!
-import griffpatchPhysicsThumb from './penguinmod/extensions/griffpatch_physics.png';
-import griffpatchPhysicsIcon from './penguinmod/extensions/griffpatch_physicsIcon.svg';
 
 import clippingblending from './penguinmod/extensions/clippingblending.svg';
 
@@ -273,17 +266,6 @@ const menuItems = [
         featured: true
     },
     {
-        name: 'Physics',
-        extensionId: 'https://extensions.turbowarp.org/box2d.js',
-        tags: ['turbowarp'],
-        extDeveloper: 'griffpatch',
-        iconURL: griffpatchPhysicsThumb,
-        insetIconURL: griffpatchPhysicsIcon,
-        description: 'Box2D Physics extension created by Griffpatch.',
-        customInsetColor: '#D9F0FF',
-        featured: true
-    },
-    {
         name: 'Tweening',
         extensionId: 'jgTween',
         credits: 'Arrow, GarboMuffin',
@@ -469,15 +451,6 @@ const menuItems = [
         featured: true,
         internetConnectionRequired: false,
         twDeveloper: 'GarboMuffin'
-    },
-    {
-        name: 'Color',
-        extensionId: 'jwColor',
-        iconURL: jwColorExtensionThumb,
-        tags: ['penguinmod'],
-        description: 'Utilities for anything involving colors.',
-        extDeveloper: 'jwklong',
-        featured: true
     }
 ];
 

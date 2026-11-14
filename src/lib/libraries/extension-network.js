@@ -20,10 +20,8 @@ const networkByKey = {
     'NotHouse/DiscordAuth.js': 'required',
     'Ikelene/googleAuthExtension.js': 'required',
     // orange: partly needs the internet
-    'obviousAlexC/SensingPlus.js': 'partial', // speech recognition blocks
     'obviousAlexC/penPlus.js': 'partial', // custom shader editor is a web page
-    'utilities.js': 'partial', // fetch block
-    'true-fantom/network.js': 'partial', // web requests; browser and connection info work offline
+    'true-fantom/network.js': 'partial', // web requests; connection info works offline
     'jgPrism': 'partial', // data URL of an image at a web address goes through a web proxy
     'Geolocation.js': 'partial', // location and IP lookups; distance works offline
     'steamworks.js': 'partial', // opens web pages in the Steam overlay
