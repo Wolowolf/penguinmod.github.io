@@ -101,7 +101,7 @@ const textsByKey = {
     'iygPerlin': ['Noise', 'Smooth random noise.', 'Perlin, simplex and random noise in 3D with seeds and octaves, for terrain and clouds.'],
     'MubiLop/numutils.js': ['Number Format', 'Pretty-print numbers.', 'By language, decimals, significant figures, exponent, short (K, M, B), currency or percent; round to a multiple, finite check.'],
     'NOname-awa/graphics2d.js': ['Geometry', '2D shape math.', 'Distance and direction between points, perpendicular check, area and perimeter of triangles, quadrilaterals, polygons and circles.'],
-    'qxsck/big-decimal.js': ['Big Decimals', 'Precise and huge numbers.', 'Chosen precision: arithmetic, powers, remainder, comparisons, functions, rounding, random numbers; whole numbers of any size at full speed.'],
+    'qxsck/big-decimal.js': ['Big Decimals', 'Precise and huge numbers.', 'Chosen precision: arithmetic, powers, remainder, comparisons, functions, bitwise operations, rounding, random numbers; whole numbers of any size at full speed.'],
     'true-fantom/base.js': ['Number Bases', 'Binary, hex and other bases.', 'Convert numbers between bases and check them.'],
     'bitwise.js': ['Bitwise', 'Work with binary bits.', 'Shifts, rotations, and, or, xor, not.'],
     // Time / Timers
