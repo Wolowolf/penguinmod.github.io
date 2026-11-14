@@ -15,7 +15,7 @@ const textsByKey = {
     'pmSensingExpansion': ['More Sensing', 'Extra keyboard, mouse and device info.', 'Keys held and how long, last key, mouse buttons, scroll distance, color at a point, loudness, delta time, milliseconds, page address, language, battery, vibration, username, packaged and changed checks.'],
     'obviousAlexC/SensingPlus.js': ['Touch & Device Sensing', 'Multi-touch, motion sensors, speech.', 'Several touch fingers (position, speed, touching), touching originals or clones, other sprites\' lists, own effects, layer and visibility, clipboard, speech recognition, gyroscope and accelerometer.'],
     'Hyper-Sense-V2.js': ['Advanced Sensing', 'Detailed input, touching and ask boxes.', 'Scroll wheel, mouse buttons, real position and speed, key hold times and blocking, touching between any sprites or clones, neighbors in range, colors, dragging, ask boxes for passwords, numbers, colors or dropdowns, screen size.'],
-    'pmOperatorsExpansion': ['More Operators', 'Extra math, logic and text operators.', 'Bitwise operations, integer, prime, even, multiple and range checks, solve equations, ratios, π, e, ∞, truncate, atan2, reverse or shuffle text, text before or after, exact equals, text replacers, sound speed and pitch.'],
+    'pmOperatorsExpansion': ['More Operators', 'Extra math, logic and text operators.', 'Integer, prime, even, multiple and range checks, solve equations, ratios, π, e, ∞, truncate, atan2, reverse or shuffle text, text before or after, exact equals, text replacers, sound speed and pitch.'],
     // Sprites / Clones
     'Lily/ClonesPlus.js': ['More Clones', 'Tell clones apart by variable.', 'Create clones with a variable set, then find, count, stop or delete clones by variable, read and set variables of clones or the main sprite, touching clones or the main sprite.'],
     'Sprite-Parenting.js': ['Sprite Families', 'Sprites that follow a parent.', 'Group sprites under a parent; children follow its position, direction, size, effects or visibility; add, remove and list members.'],
@@ -102,7 +102,7 @@ const textsByKey = {
     'Lily/ListTools.js': ['List Tools', 'Sort, filter and loop lists.', 'Delete ranges or matching items, replace all, repeat, join, count, sort, reverse, shuffle, combine and copy lists, for-each loops, arrays.'],
     'Temporary-Variables.js': ['Temporary Variables', 'Short-lived variables.', 'Variables that exist only for a script, a sprite, the project run or a block of code.'],
     // Math / Numbers / Random
-    'true-fantom/math.js': ['More Math', 'Extra math operators.', 'Powers, roots, logarithms, ≥ ≤ ≠, ranges, approximate and exact comparisons, nand, nor, xor, xnor, sign, clamp, map range, truncate, multiple and number-type checks, π, e, ∞.'],
+    'true-fantom/math.js': ['More Math', 'Extra math operators.', 'Roots, logarithms, ranges, approximate and exact comparisons, sign, clamp, map range, truncate to digits, number-type checks.'],
     'Gen1x/random_utils.js': ['Random Tools', 'More kinds of randomness.', 'Seeded random numbers, random strings, colors and chances.'],
     'iygPerlin': ['Noise', 'Smooth random noise.', 'Perlin, simplex and random noise in 3D with seeds and octaves, for terrain and clouds.'],
     'MubiLop/numutils.js': ['Number Format', 'Pretty-print numbers.', 'By language, decimals, significant figures, exponent, short (K, M, B), currency or percent; round to a multiple, clamp, integer and finite checks.'],
@@ -120,9 +120,9 @@ const textsByKey = {
     'Medericoder/textcase.js': ['Letter Case', 'Upper, lower and other cases.', 'Convert and detect case (inverted, capitalized words or sentences...), exact or loose compare, glitch text.'],
     'Embin/embintranslation.js': ['Translations', 'Projects in several languages.', 'Translation keys per language with values and placeholders, user and current language, JSON import and export.'],
     // Utility Collections
-    'utilities.js': ['Utilities', 'Handy small blocks.', 'Exact compare, ≤ ≥, power, π, if-then-else value, parts of text, clamp, milliseconds, fetch a URL, JSON values, newline, regex replace.'],
-    'Lily/lmsutils.js': ['Lily\'s Toolbox', 'A big mixed toolbox.', 'Condition and key hats, inline if, logic, comparisons, text tools, math, effect and clone info, device and window info.'],
-    'TheShovel/ShovelUtils.js': ['Shovel Utilities', 'Import assets and edit the project.', 'Import images, sounds, sprites, projects or extensions from URLs; delete sprites or costumes; set a list from an array; restart; choose the edited sprite; color brightness; FPS.'],
+    'utilities.js': ['Utilities', 'Handy small blocks.', 'If-then-else value, parts of text, fetch a URL, JSON values, regex replace.'],
+    'Lily/lmsutils.js': ['Lily\'s Toolbox', 'A big mixed toolbox.', 'Condition and key hats, inline if, logic, text tools, math, effect info, device and window info.'],
+    'TheShovel/ShovelUtils.js': ['Shovel Utilities', 'Import assets and edit the project.', 'Import images, sounds, sprites, projects or extensions from URLs; delete sprites or costumes; set a list from an array; choose the edited sprite; color brightness; FPS.'],
     'Sharktilities.js': ['Sharktilities', 'Mixed sprite and text utilities.', 'What a sprite says, costume details, unclamped effects, changed-value hats, broadcast and repeat while waiting, smoothing, SVG shapes, text, rounding, random and multi-join tools, pen layer image.'],
     'jgPrism': ['Prism', 'Audio, images and encoding helpers.', 'Play audio from URLs (loop, speed, position, volume), stage screenshot, data URLs of costumes and images, mouse scroll, base64, character codes, compression, number encoding.'],
     // Multiplayer / Web Requests
