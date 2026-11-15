@@ -520,8 +520,6 @@ class LibraryComponent extends React.Component {
                                                 tabIndex={count === 0 ? -1 : 0}
                                                 onClick={() => this.handleJump(tagProps.tag)}
                                             >
-                                                <span className={styles.categoryJumpCount}>{count}</span>
-                                                <span className={styles.categoryJumpBar}>{' | '}</span>
                                                 <span>{tagProps.intlLabel}</span>
                                             </button>
                                         );

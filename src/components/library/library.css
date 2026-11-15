@@ -97,14 +97,6 @@
 .category-jump:hover {
     background: $motion-transparent;
 }
-.category-jump-count {
-    min-width: 2ch;
-    text-align: right;
-}
-.category-jump-bar {
-    white-space: pre;
-    opacity: 0.6;
-}
 .column-slider {
     display: flex;
     width: 100%;
