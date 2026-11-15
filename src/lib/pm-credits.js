@@ -250,9 +250,7 @@ const creditScripts = (endId, prefix) => {
     const math = op => (a, b) => ({op: `operator_${op}`, i: {NUM1: a, NUM2: b}});
     const [plus, minus, times, divide] = ['add', 'subtract', 'multiply', 'divide'].map(math);
     const costumeMenu = name => ({menu: true, op: 'looks_costume', f: {COSTUME: name}});
-    const height = costume => ({op: 'looks_getinputofcostume', i: {
-        INPUT: {menu: true, op: 'looks_getinput_menu', f: {INPUT: 'height'}}, COSTUME: costume
-    }});
+    const height = costume => ({op: 'looks_getinputofcostume', i: {COSTUME: costume}, f: {INPUT: 'height'}}); // Desktop fork (section 265): INPUT is a field
     const stageHeight = height(costumeMenu(SCREEN));
     const textHeight = minus(height(costumeName), MARGIN * 2); // this page's text, without the empty margins
     const yPosition = {op: 'motion_yposition'};

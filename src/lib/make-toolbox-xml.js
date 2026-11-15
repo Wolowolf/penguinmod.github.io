@@ -282,9 +282,6 @@ const looks = function (isInitialSetup, isStage, targetId, costumeName, backdrop
             </block>
             <block type="looks_nextbackdrop"/>
             <block type="looks_getinputofcostume">
-                <value name="INPUT">
-                    <shadow type="looks_getinput_menu"/>
-                </value>
                 <value name="COSTUME">
                     <shadow type="looks_backdrops">
                         <field name="BACKDROP">${backdropName}</field>
@@ -301,9 +298,6 @@ const looks = function (isInitialSetup, isStage, targetId, costumeName, backdrop
             </block>
             <block type="looks_nextcostume"/>
             <block type="looks_getinputofcostume">
-                <value name="INPUT">
-                    <shadow type="looks_getinput_menu"/>
-                </value>
                 <value name="COSTUME">
                     <shadow type="looks_costume">
                         <field name="COSTUME">${costumeName}</field>
@@ -913,11 +907,7 @@ const sensing = function (isInitialSetup, isStage, targetId) {
                 <shadow type="sensing_keyoptions"/>
             </value>
         </block>
-        <block type="sensing_mousescrolling">
-            <value name="SCROLL_OPTION">
-                <shadow type="sensing_scrolldirections"/>
-            </value>
-        </block>
+        <block type="sensing_mousescrolling"/>
         ${blockSeparator}
         <block type="sensing_mousedown"/>
         <block type="sensing_mouseclicked"/>
