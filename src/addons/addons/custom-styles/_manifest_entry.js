@@ -3,7 +3,7 @@ const manifest = {
   "editorOnly": true,
   "noTranslations": true,
   "name": "Custom styles",
-  "description": "Changes the colors, borders and roundness of variable and list monitors and of the ask prompt on the stage. Adapted from the Custom Styles extension by TheShovel (MIT).",
+  "description": "Changes the colors, borders, roundness and font of variable and list monitors and of the ask prompt on the stage. Adapted from the Custom Styles extension by TheShovel (MIT).",
   "credits": [
     {
       "name": "TheShovel"
@@ -133,6 +133,62 @@ const manifest = {
       "id": "slider",
       "type": "color",
       "default": "#ff8c1a",
+      "if": {
+        "settings": {
+          "monitors": true
+        }
+      }
+    },
+    {
+      "dynamic": true,
+      "name": "Monitor font",
+      "id": "monitor-font",
+      "type": "select",
+      "default": "editor",
+      "potentialValues": [
+        {
+          "name": "Editor font",
+          "id": "editor"
+        },
+        {
+          "name": "Sans Serif",
+          "id": "Sans Serif"
+        },
+        {
+          "name": "Serif",
+          "id": "Serif"
+        },
+        {
+          "name": "Handwriting",
+          "id": "Handwriting"
+        },
+        {
+          "name": "Marker",
+          "id": "Marker"
+        },
+        {
+          "name": "Curly",
+          "id": "Curly"
+        },
+        {
+          "name": "Pixel",
+          "id": "Pixel"
+        }
+      ],
+      "if": {
+        "settings": {
+          "monitors": true
+        }
+      }
+    },
+    {
+      "dynamic": true,
+      "name": "Monitor text size (%)",
+      "id": "monitor-text-size",
+      "type": "integer",
+      "min": 50,
+      "max": 300,
+      "default": 100,
       "if": {
         "settings": {
           "monitors": true

@@ -6,6 +6,7 @@ const monitorValue = 'div[class^="monitor_value_"]';
 const monitorValueLarge = 'div[class^="monitor_large-value_"]';
 const monitorListHeader = 'div[class^="monitor_list-header_"]';
 const monitorListFooter = 'div[class^="monitor_list-footer_"]';
+const monitorListInput = 'input[class^="monitor_list-input_"]';
 const monitorRowValueOuter = 'div[class^="monitor_list-value_"]';
 const monitorRowsInner = 'div[class^="monitor_list-body_"]';
 const monitorRowsScroller = 'div[class^="monitor_list-body_"] > .ReactVirtualized__List';
@@ -36,6 +37,14 @@ export default async function ({ addon }) {
       css += `${monitorRoot} { background: ${get("monitor-background")}; border-color: ${get("monitor-border")}; border-width: ${get("monitor-border-width")}px; border-radius: ${get("monitor-roundness")}px !important; accent-color: ${get("slider")} !important; }`;
       css += `${monitorValue}, ${monitorValueLarge} { background: ${get("value-background")} !important; color: ${get("value-text")} !important; }`;
       css += `${monitorValue} { border-radius: ${get("value-roundness")}px !important; }`;
+      // Font and text size without !important, so the Variables & Lists font blocks (inline styles) still win per monitor
+      const font = get("monitor-font");
+      if (font !== "editor") css += `${monitorRoot}, ${monitorListInput} { font-family: "${font}", sans-serif; }`;
+      const size = get("monitor-text-size") / 100;
+      if (size !== 1) {
+        css += `${monitorRoot}, ${monitorListHeader}, ${monitorListFooter}, ${monitorListInput} { font-size: calc(0.75rem * ${size}); }`;
+        css += `${monitorValueLarge} { font-size: calc(1rem * ${size}); }`;
+      }
     }
     if (get("lists")) {
       css += `${monitorListHeader} { background: ${get("list-header")}; }`;
