@@ -8,7 +8,7 @@ const textsByKey = {
     // Block Expansions
     'pmMotionExpansion': ['More Motion', 'Extra movement blocks.', 'Move steps toward or a percentage of the way to a point, home position, touching a point or rectangle, direction and distance to a point, rotation style, sprite and costume width and height, manual fencing.'],
     'Lily/LooksPlus.js': ['More Looks', 'Control any sprite\'s looks.', 'Layer and effects of other sprites, costume count and details (size, rotation center, SVG, data URI), replace or restore costume images, recolor SVGs.'],
-    'pmEventsExpansion': ['More Events', 'New hats and broadcasts.', 'Broadcasts with data, to one sprite, or waiting for an answer; hats for conditions, changed values, key hit or release, every N frames, clicks, dragging, clones, costume switches, fullscreen and saving; force-run a hat.'],
+    'pmEventsExpansion': ['More Events', 'New hats and broadcasts.', 'Broadcasts with data, to one sprite, or waiting for an answer; hats for conditions, changed values, key hit or release, every N frames, clicks, dragging, clones, costume switches, fullscreen and saving; sprite clicked check; force-run a hat.'],
     'pmControlsExpansion': ['More Control', 'Else-if and script restarts.', 'If / else if / else, run blocks as a separate script (with data), restart the script from the top.'],
     'Extra-Controls.js': ['Advanced Control', 'Powerful loops, threads and functions.', 'Wait until a value changes, loops with counts, time limits and conditions, loop index and timer, run blocks at once, in new threads or step by step, branches by ID, act as other sprites or clones, functions, force hats on or off, key rebinding.'],
     'pmSensingExpansion': ['More Sensing', 'Extra keyboard, mouse and device info.', 'Keys held and how long, last key, mouse buttons, color at a point, loudness, layer count, sprite name, milliseconds, page address and its parts, vibration, packaged, in-frame and changed checks, text checks, operating system and browser.'],
@@ -52,13 +52,11 @@ const textsByKey = {
     'Xeltalliv/simple3D.js': ['3D Graphics', 'Real 3D rendering.', 'On the graphics card: meshes with colors, textures (costume, text, URL, video), instances and bones, OBJ and OFF models, perspective and transforms, render to textures, fog, blending, culling.'],
     'ObviousAlexC/3DMath.js': ['3D Math', 'Build 3D from sprites.', '2D and 3D vectors and quaternions and their math, a 3D camera that projects points to the screen, 3D position and size for sprites, 3D triangles with Pen Plus.'],
     // Input / Controls
-    'KeysPlusV2.js': ['Keys Plus', 'Key combos and keybindings.', 'Key-combination presses, hits and hold times, details of the current key, mouse button hats, clicks and hold times, named actions bound to keys, key tags, save and load bindings.'],
+    'KeysPlusV2.js': ['Keys Plus', 'Key combos, keybindings and simulated input.', 'Key-combination presses, hits and hold times, details of the current key, mouse button hats, clicks and hold times, named actions bound to keys, key tags, save and load bindings; simulated key presses, mouse clicks and mouse moves.'],
     'Gamepad-Expanded.js': ['Gamepad', 'Game controller input.', 'Buttons, triggers and sticks (direction, strength, deadzones), press and move hats, rumble.'],
-    'cursor.js': ['Mouse Cursor', 'Change the mouse cursor.', 'Use a system cursor or the current costume, or hide it.'],
-    'pointerlock.js': ['Pointer Lock', 'Lock the mouse in the stage.', 'Mouse x and y then report movement, for mouse-look games.'],
+    'cursor.js': ['Mouse Cursor', 'Change or lock the mouse cursor.', 'Use a system cursor or the current costume, or hide it; lock the pointer in the stage so mouse x and y report movement, for mouse-look games.'],
     'veggiecan/mobilekeyboard.js': ['Mobile Keyboard', 'On-screen keyboard on phones.', 'Show it (text, number, email, web, search) without a popup; read and edit the typed text and selection. Android only.'],
     'gaimerI17/DeviceMotion.js': ['Device Motion', 'Phone and tablet movement.', 'Acceleration, rotation rate, direction, tilt, shaking, calibration.'],
-    'CubesterYT/KeySimulation.js': ['Simulate Input', 'Fake key presses and clicks.', 'Press keys, click mouse buttons at a point and move the mouse, as the project sees them.'],
     'electricfuzzball_pm/MIDI.js': ['MIDI Keyboard', 'Play with a MIDI keyboard.', 'Notes pressed and released with velocity and channel, drum pads, pitch bend, mod wheel, note sequences, devices.'],
     // Sound / Music / Speech
     'Lily/SoundExpanded.js': ['More Sound', 'Looping and sound control.', 'Loop sounds or parts of them, play from or between times, stop, pause and resume, length, channels, sample rate, data, effects of other sprites, project volume.'],
@@ -72,17 +70,14 @@ const textsByKey = {
     'pooiod/Dictation.js': ['Speech to Text', 'Type with your voice, offline.', 'Speech in 40 languages turned into text on this computer (Moonshine for English, Whisper for others): listen, live text, "When I hear" hat, language, high accuracy (Parakeet). Mic on only while listening; credits.'],
     // Video / Webcam
     'Lily/Video.js': ['Video Player', 'Play videos on sprites.', 'Load videos from URLs onto sprites or the stage: play, pause, loop, seek, volume, speed, time, size, screenshots.'],
-    'videoSensing': ['Video Sensing', 'Detect camera motion.', 'Motion and direction on sprites or the stage, motion hat, show the camera with transparency.'],
-    'Camera-Sensing-Plus.js': ['Camera Plus', 'Camera on sprites and photos.', 'Show the camera on sprites, take photos, front or back camera, resolution.'],
-    'lab/face-sensing.js': ['Face Sensing', 'Track a face with the camera.', 'Go to the nose, eyes, ears, mouth or head, face tilt and size, hats for tilting and touching parts.'],
+    'lab/face-sensing.js': ['Camera Sensing', 'Camera motion, faces and frames.', 'Turn the camera on, flipped or off, its transparency, show it on sprites; motion and direction on sprites or the stage, motion hat; go to the nose, eyes, ears, mouth or head, face tilt and size, hats for tilting and touching parts; video frames as images at any size.'],
     'pooiod/VideoSharing.js': ['Screen Share', 'Capture the screen or camera.', 'Get frames as PNG, JPEG, WEBP or hex at any resolution; show an image.'],
     // Text Display / Popups
     'Gen1x/iris-text.js': ['Rich Text', 'Styled, animated text on sprites.', 'Fonts, colors, gradients, shadows, borders, backgrounds and markup; typewriter effect; move, rotate, scale, color, animate and mask single characters; size limits and spacing.'],
     'SharkPool/Font-Manager.js': ['Fonts', 'Add custom fonts.', 'From URLs or the system; remove and list them, font details, hat when fonts change.'],
     'Speech-Bubbles.js': ['Speech Bubbles', 'Custom speech bubbles.', 'On any sprite, with font, size, alignment, width, colors, image, arrow, offset, glow and effects.'],
     'Popup-Phoenix.js': ['Popups', 'Custom popup windows.', 'Labels, text, number, slider and dropdown inputs and button rows; position, fonts, borders, shadows, effects; wait for and read answers.'],
-    'MubiLop/toastnotifs.js': ['Toasts', 'Small pop-up messages.', 'Title, image, position, custom style and sound.'],
-    'mdwalters/notifications.js': ['System Notifications', 'Desktop notifications.', 'Ask permission, then show or close operating-system notifications.'],
+    'MubiLop/toastnotifs.js': ['Notifications', 'Pop-up and system notifications.', 'Toasts with title, image, position, custom style and sound; operating-system notifications after asking permission.'],
     // Pause / Scenes / Runtime
     'Scenes.js': ['Scenes', 'Save and switch project states.', 'Save the whole project state as named scenes and switch between them; hat on switch.'],
     'runtime-options.js': ['Runtime Options', 'Change project settings.', 'Turbo mode, frame rate, stage size, username, hat when they change. Clone limit, fencing, limits, pen quality and interpolation are fixed in this app.'],
@@ -91,32 +86,26 @@ const textsByKey = {
     'Files-Expanded.js': ['Files', 'Open and save files.', 'Open files or folders as text, data URL, base64 or hex, download text or URLs as files, keep stored files, sizes and dates, styled file picker.'],
     'CST1229/zip.js': ['Zip Files', 'Make and edit zip files.', 'Create, open and edit archives (also .sb3): files, folders, renaming, copying, details, comments, compression.'],
     // Variables / Lists / Data
-    'Variables-Expanded.js': ['More Variables', 'Variable tools and monitor styles.', 'Create, delete, swap, show or hide variables by name; monitor position, type, slider range, display name, font, colors, effects and buttons.'],
-    'qxsck/var-and-list.js': ['Variables & Lists by Name', 'Use variables by their name.', 'Read and set variables and lists by name, item positions, copy lists, export variables or lists as JSON.'],
-    'Lily/ListTools.js': ['List Tools', 'Sort, filter and loop lists.', 'Delete ranges or matching items, replace all, repeat, join, count, sort, reverse, shuffle, combine and copy lists, for-each loops.'],
+    'Variables-Expanded.js': ['Variables & Lists', 'Variables, lists and their monitors.', 'Read, set, swap, create and delete variables by name; add, delete, replace, find, count, sort, join, copy and repeat list items; variables or lists as JSON; monitor visibility, position, type, slider range, buttons, display name, font and effects.'],
     'Temporary-Variables.js': ['Temporary Variables', 'Short-lived variables.', 'Variables that exist only for a script, a sprite, the project run or a block of code.'],
     // Math / Numbers / Random
     'true-fantom/math.js': ['More Math', 'Extra math operators.', 'Negative, approximate comparisons, exact contains, sign, map range, trigonometry in radians, safe number and fraction checks.'],
-    'Gen1x/random_utils.js': ['Random Tools', 'More kinds of randomness.', 'Seeded random numbers, random strings, colors and chances.'],
-    'iygPerlin': ['Noise', 'Smooth random noise.', 'Perlin, simplex and random noise in 3D with seeds and octaves, for terrain and clouds.'],
+    'Gen1x/random_utils.js': ['Random Tools', 'More kinds of randomness.', 'Seeded random numbers, random strings, colors and chances; Perlin and random noise with seeds and octaves, for terrain and clouds.'],
     'MubiLop/numutils.js': ['Number Format', 'Pretty-print numbers.', 'By language, decimals, significant figures, exponent, short (K, M, B), currency or percent; round to a multiple, finite check.'],
     'NOname-awa/graphics2d.js': ['Geometry', '2D shape math.', 'Distance and direction between points, perpendicular check, area and perimeter of triangles, quadrilaterals, polygons and circles.'],
     'qxsck/big-decimal.js': ['Big Decimals', 'Precise and huge numbers.', 'Chosen precision: arithmetic, powers, remainder, comparisons, functions, bitwise operations, rounding, random numbers; whole numbers of any size at full speed.'],
-    'true-fantom/base.js': ['Number Bases', 'Binary, hex and other bases.', 'Convert numbers between bases and check them.'],
     'bitwise.js': ['Bitwise', 'Work with binary bits.', 'Shifts, rotations, and, or, xor, not.'],
     // Time / Timers
     'steve0greatness/timers.js': ['Timers', 'Extra timers.', 'Start, pause, stop, restart and add time, in seconds, milliseconds or minutes; hat when one passes a time.'],
     'XeroName/Deltatime.js': ['Delta Time', 'Frame timing.', 'Time since the last frame and frames in the last second.'],
     'Time-Calculation.js': ['Time Math', 'Date and time calculations.', 'Differences between dates in any unit, countdowns, seconds to readable time, days in a month.'],
     // Text / Strings
-    'text.js': ['Text Tools', 'Edit and search text.', 'Split, repeat, reverse, trim, letter cases (capitalized, sentence, title, mixed, inverted and more), regular expressions: replace, find and count matches.'],
-    'Medericoder/textcase.js': ['Letter Case', 'Detect case, glitch text.', 'Which case a text is in (upper, lower, mixed...), glitch text by swapping the case of random letters.'],
+    'text.js': ['Text Tools', 'Edit and search text.', 'Split, repeat, reverse, trim, letter cases (find, check and convert: capitalized, sentence, title, mixed, inverted and more), glitch text, regular expressions: replace, find and count matches.'],
     'Embin/embintranslation.js': ['Translations', 'Projects in several languages.', 'Translation keys per language with values and placeholders, user and current language, JSON import and export.'],
     // Utility Collections
-    'utilities.js': ['Utilities', 'Handy small blocks.', 'JSON values, sprite clicked check.'],
     'TheShovel/ShovelUtils.js': ['Shovel Utilities', 'Import assets and edit the project.', 'Import images, sounds, sprites, projects or extensions from URLs; delete sprites or costumes; choose the edited sprite; color brightness.'],
     'Sharktilities.js': ['Sharktilities', 'Mixed sprite and text utilities.', 'What a sprite says, set another sprite\'s costume or effects, unclamped sound effects, broadcast and repeat while waiting, smoothing, SVG shapes, text, rounding, random and multi-join tools, pen layer image.'],
-    'jgPrism': ['Prism', 'Image data and compression helpers.', 'Stage screenshot, data URLs of costumes and images, data URL and array buffer conversion, deflate and inflate.'],
+    'jgPrism': ['Prism', 'Image data helpers.', 'Stage screenshot, data URLs of costumes and images, data URL and array buffer conversion.'],
     // Multiplayer / Web Requests
     'cloudlink.js': ['CloudLink', 'Online multiplayer.', 'Through your own CloudLink server: connect, usernames, rooms, global, private and direct messages and variables, listeners, packet queues.'],
     'godslayerakp/ws.js': ['WebSocket', 'Live server connections.', 'Connect to a WebSocket server, send and receive messages; hats and checks for connecting, errors and closing.'],
@@ -126,20 +115,15 @@ const textsByKey = {
     // Web Services / Accounts
     'steamworks.js': ['Steam', 'Steam features for games.', 'User name, level, country and ID, achievements, DLC check, Steam overlay.'],
     'itchio.js': ['itch.io', 'itch.io pages and game data.', 'Open pages; a game\'s details, price, sale, rewards and sub-products.'],
-    'NotHouse/DiscordAuth.js': ['Discord Login', 'Sign in with Discord through your own app.', 'Username, display name, ID, avatar; email if asked. Shows your privacy policy first.'],
-    'Ikelene/googleAuthExtension.js': ['Google Login', 'Sign in with Google through your own client ID.', 'Name, picture, ID; email if asked. Shows your privacy policy first.'],
+    'Ikelene/googleAuthExtension.js': ['Sign-in', 'Log in with Google or Discord.', 'Through your own Google client or Discord application: name, username, ID, picture; email if asked. Shows your privacy policy first.'],
     'Geolocation.js': ['Geolocation', 'Where the user is.', 'Device position (with permission) or location from an IP, watch for changes, country names, real-world distances.'],
     // Browser / Device
     'clipboard.js': ['Clipboard', 'Copy and paste events.', 'The last pasted text, empty the clipboard, copy and paste hats.'],
-    'DNin/wake-lock.js': ['Keep Awake', 'Keep the screen on.', 'Stop the screen from going to sleep.'],
     'sharkpoolPrinting': ['Printing', 'Print to paper.', 'Text, images, the stage or HTML with fonts, colors, positions and backgrounds.'],
-    'navigator.js': ['Device Info', 'Memory and user preferences.', 'Device memory, and dark mode, reduced motion and contrast preferences.'],
-    'battery.js': ['Battery', 'Battery status.', 'Level, charging and time left; hats when they change.'],
+    'navigator.js': ['Device Info', 'Device, screen and battery.', 'Device memory, dark mode, reduced motion and contrast preferences; keep the screen awake; battery level, charging and time left, hats when they change.'],
     // Encoding / Security
-    'encoding.js': ['Encoding', 'Convert text formats.', 'Encode and decode base64, URLs or numbers for cloud variables.'],
-    'shovellzcompresss': ['Text Compression', 'Make text shorter.', 'Compress and decompress text (lz-string).'],
+    'encoding.js': ['Encoding', 'Encode, compress and convert.', 'Encode and decode base64, URLs, HTML-safe text or numbers for cloud variables; compress text (lz-string) or byte lists (deflate); convert numbers between bases 2 to 36.'],
     'QR-Codes.js': ['QR Codes', 'Make and read QR codes.', 'Create them as images with size and colors; read them from images.'],
-    'Clay/htmlEncode.js': ['HTML Escape', 'Safe text for HTML.', 'Escape text so it can go inside HTML.'],
     'gaimerI17/crypto.js': ['Cryptography', 'Hashing, encryption and key exchange.', 'SHA and MD5 hashes, HMAC signing, AES encryption, RSA signatures, ECDH key exchange for a shared AES key, random UUIDs and values.'],
     // Custom Blocks / Programming
     'My-Blocks-Plus.js': ['Custom Blocks Plus', 'Better custom blocks.', 'Colors, menus, images and branches, reporters, global blocks for all sprites, settable parameters, stop the caller.'],

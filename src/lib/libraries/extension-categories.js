@@ -87,10 +87,8 @@ const keysByTag = {
         'KeysPlusV2.js',
         'Gamepad-Expanded.js',
         'cursor.js',
-        'pointerlock.js',
         'veggiecan/mobilekeyboard.js',
         'gaimerI17/DeviceMotion.js',
-        'CubesterYT/KeySimulation.js',
         'electricfuzzball_pm/MIDI.js'
     ],
     cat_sound: [
@@ -110,13 +108,11 @@ const keysByTag = {
         'Gen1x/iris-text.js',
         'SharkPool/Font-Manager.js',
         'Speech-Bubbles.js',
-        'Medericoder/textcase.js',
         'Embin/embintranslation.js'
     ],
     cat_ui: [
         'Popup-Phoenix.js',
-        'MubiLop/toastnotifs.js',
-        'mdwalters/notifications.js'
+        'MubiLop/toastnotifs.js'
     ],
     // saving progress, save states (scenes) and files
     cat_storage: [
@@ -127,18 +123,14 @@ const keysByTag = {
     ],
     cat_data: [
         'Variables-Expanded.js',
-        'qxsck/var-and-list.js',
-        'Lily/ListTools.js',
         'Temporary-Variables.js'
     ],
     cat_math: [
         'true-fantom/math.js',
         'Gen1x/random_utils.js',
-        'iygPerlin',
         'MubiLop/numutils.js',
         'NOname-awa/graphics2d.js',
         'qxsck/big-decimal.js',
-        'true-fantom/base.js',
         'bitwise.js'
     ],
     cat_time: [
@@ -152,13 +144,10 @@ const keysByTag = {
     ],
     cat_video: [
         'Lily/Video.js',
-        'videoSensing',
-        'Camera-Sensing-Plus.js',
         'lab/face-sensing.js',
         'pooiod/VideoSharing.js'
     ],
     cat_utility: [
-        'utilities.js',
         'TheShovel/ShovelUtils.js',
         'Sharktilities.js',
         'jgPrism'
@@ -173,22 +162,17 @@ const keysByTag = {
     cat_services: [
         'steamworks.js',
         'itchio.js',
-        'NotHouse/DiscordAuth.js',
         'Ikelene/googleAuthExtension.js',
         'Geolocation.js'
     ],
     cat_browser: [
         'clipboard.js',
-        'DNin/wake-lock.js',
         'sharkpoolPrinting',
-        'navigator.js',
-        'battery.js'
+        'navigator.js'
     ],
     cat_encoding: [
         'encoding.js',
-        'shovellzcompresss',
         'QR-Codes.js',
-        'Clay/htmlEncode.js',
         'gaimerI17/crypto.js'
     ],
     cat_programming: [

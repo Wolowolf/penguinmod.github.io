@@ -55,10 +55,8 @@ const difficultyByKey = {
     'KeysPlusV2.js': 2,
     'Gamepad-Expanded.js': 2,
     'cursor.js': 1,
-    'pointerlock.js': 1,
     'veggiecan/mobilekeyboard.js': 2,
     'gaimerI17/DeviceMotion.js': 2,
-    'CubesterYT/KeySimulation.js': 2,
     'electricfuzzball_pm/MIDI.js': 3,
     // Sound / Music / Speech
     'Lily/SoundExpanded.js': 1,
@@ -72,8 +70,6 @@ const difficultyByKey = {
     'pooiod/Dictation.js': 1,
     // Video / Webcam
     'Lily/Video.js': 2,
-    'videoSensing': 1,
-    'Camera-Sensing-Plus.js': 2,
     'lab/face-sensing.js': 2,
     'pooiod/VideoSharing.js': 3,
     // Text Display / Popups
@@ -82,7 +78,6 @@ const difficultyByKey = {
     'Speech-Bubbles.js': 2,
     'Popup-Phoenix.js': 3,
     'MubiLop/toastnotifs.js': 2,
-    'mdwalters/notifications.js': 1,
     // Pause / Scenes / Runtime
     'Scenes.js': 3,
     'runtime-options.js': 2,
@@ -91,18 +86,14 @@ const difficultyByKey = {
     'Files-Expanded.js': 2,
     'CST1229/zip.js': 3,
     // Variables / Lists / Data
-    'Variables-Expanded.js': 2,
-    'qxsck/var-and-list.js': 2,
-    'Lily/ListTools.js': 2,
+    'Variables-Expanded.js': 3,
     'Temporary-Variables.js': 2,
     // Math / Numbers / Random
     'true-fantom/math.js': 2,
-    'Gen1x/random_utils.js': 1,
-    'iygPerlin': 2,
+    'Gen1x/random_utils.js': 2,
     'MubiLop/numutils.js': 1,
     'NOname-awa/graphics2d.js': 2,
     'qxsck/big-decimal.js': 2,
-    'true-fantom/base.js': 2,
     'bitwise.js': 3,
     // Time / Timers
     'steve0greatness/timers.js': 1,
@@ -110,10 +101,8 @@ const difficultyByKey = {
     'Time-Calculation.js': 2,
     // Text / Strings
     'text.js': 2,
-    'Medericoder/textcase.js': 1,
     'Embin/embintranslation.js': 2,
     // Utility Collections
-    'utilities.js': 1,
     'TheShovel/ShovelUtils.js': 2,
     'Sharktilities.js': 3,
     'jgPrism': 2,
@@ -126,20 +115,15 @@ const difficultyByKey = {
     // Web Services / Accounts
     'steamworks.js': 3,
     'itchio.js': 3,
-    'NotHouse/DiscordAuth.js': 3,
     'Ikelene/googleAuthExtension.js': 3,
     'Geolocation.js': 2,
     // Browser / Device
     'clipboard.js': 1,
-    'DNin/wake-lock.js': 1,
     'sharkpoolPrinting': 2,
     'navigator.js': 1,
-    'battery.js': 1,
     // Encoding / Security
     'encoding.js': 2,
-    'shovellzcompresss': 2,
     'QR-Codes.js': 1,
-    'Clay/htmlEncode.js': 2,
     'gaimerI17/crypto.js': 3,
     // Custom Blocks / Programming
     'My-Blocks-Plus.js': 3,

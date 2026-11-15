@@ -17,7 +17,6 @@ const networkByKey = {
     'MikeDev101/webrtc.js': 'required',
     'MubiLop/penguinhook.js': 'required',
     'itchio.js': 'required',
-    'NotHouse/DiscordAuth.js': 'required',
     'Ikelene/googleAuthExtension.js': 'required',
     // orange: partly needs the internet
     'obviousAlexC/penPlus.js': 'partial', // custom shader editor is a web page

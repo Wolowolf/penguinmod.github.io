@@ -12,7 +12,6 @@ import penInsetIconURL from './pen/pen-small.svg';
 import videoSensingIconURL from './videoSensing/video-sensing.png';
 import videoSensingInsetIconURL from './videoSensing/video-sensing-small.svg';
 
-import faceSensingIconURL from './faceSensing/thumb.png';
 
 // turbowarp & gallery icons
 import turbowarpIcon from './penguinmod/extensions/turbowarp_icon.svg';
@@ -25,7 +24,6 @@ import jgPrismExtensionIcon from './penguinmod/extensions/prism.png';
 
 import jwProtoExtensionIcon from './penguinmod/extensions/proto.svg';
 
-import iygPerlinNoiseExtensionIcon from './penguinmod/extensions/perlinnoisebanner.png';
 
 // thank yo godslayerakp for makin pmCamera :good:
 import pmCameraExtensionIcon from './penguinmod/extensions/pmcamera_thumbnail.png';
@@ -37,7 +35,6 @@ import pmCameraExtensionIcon from './penguinmod/extensions/pmcamera_thumbnail.pn
 
 import clippingblending from './penguinmod/extensions/clippingblending.svg';
 
-import pointerlockThumb from './penguinmod/extensions/pointerlock.png';
 
 // LilyMakesThings 🙏
 
@@ -49,7 +46,6 @@ import pointerlockThumb from './penguinmod/extensions/pointerlock.png';
 
 // virtal realty
 
-import theshovelLzCompressIcon from './penguinmod/orgtw/lz-compress2.svg';
 
 // sharkpool
 import sharkpoolPrintingIcon from './penguinmod/extensions/printing.svg';
@@ -121,34 +117,16 @@ const menuItems = [
         ),
         featured: true
     },
+    // Desktop fork (extension merges): Video Sensing, Camera Sensing+ and Face Sensing as one extension (ID videoSensing),
+    // loaded by Face Sensing's gallery address
     {
-        name: (
-            <FormattedMessage
-                defaultMessage="Video Sensing"
-                description="Name for the 'Video Sensing' extension"
-                id="gui.extension.videosensing.name"
-            />
-        ),
-        extensionId: 'videoSensing',
+        name: 'Camera Sensing',
+        extensionId: 'https://extensions.turbowarp.org/lab/face-sensing.js',
         iconURL: videoSensingIconURL,
         insetIconURL: videoSensingInsetIconURL,
         customInsetColor: '#74BDDC',
         tags: ['scratch'],
-        description: (
-            <FormattedMessage
-                defaultMessage="Sense motion with the camera."
-                description="Description for the 'Video Sensing' extension"
-                id="gui.extension.videosensing.description"
-            />
-        ),
-        featured: true
-    },
-    {
-        name: 'Face Sensing',
-        extensionId: 'https://extensions.turbowarp.org/lab/face-sensing.js',
-        iconURL: faceSensingIconURL,
-        tags: ['scratch'],
-        description: 'Sense faces with the camera.',
+        description: 'Sense motion and faces with the camera, and use its frames as images.',
         featured: true
     },
     {
@@ -338,17 +316,8 @@ const menuItems = [
         extensionId: 'https://extensions.penguinmod.com/extensions/Gen1x/random_utils.js',
         iconURL: 'https://extensions.penguinmod.com/images/Gen1x/randomutils.avif',
         tags: ['penguinmod'],
-        description: 'Many blocks related to generating random values, including seed-based number generation, true number generation, UUID\'s, random strings, etc.',
+        description: 'Many blocks related to generating random values, including seed-based number generation, random strings, colors and Perlin noise.',
         extDeveloper: 'G1nX',
-        featured: true
-    },
-    {
-        name: 'LZ Compress',
-        extensionId: 'shovellzcompresss',
-        iconURL: theshovelLzCompressIcon,
-        tags: ['penguinmod'],
-        description: 'Compress and decompress text using lz-string.',
-        extDeveloper: 'TheShovel',
         featured: true
     },
     {
@@ -356,7 +325,7 @@ const menuItems = [
         extensionId: 'jgPrism',
         tags: ['penguinmod'],
         iconURL: jgPrismExtensionIcon,
-        description: 'Blocks for specific use-cases or major convenience.',
+        description: 'Stage screenshots, data URLs of costumes and images, and array buffer conversion.',
         featured: true
     },
     {
@@ -381,26 +350,6 @@ const menuItems = [
         featured: true
     },
     {
-        name: (
-            <FormattedMessage
-                defaultMessage="Perlin Noise"
-                description="Name of perlin noise extension"
-                id="iygPerlin.iygPerlinExtension.name"
-            />
-        ),
-        extensionId: 'iygPerlin',
-        tags: ['penguinmod'],
-        iconURL: iygPerlinNoiseExtensionIcon,
-        description: (
-            <FormattedMessage
-                defaultMessage="Blocks for generating and using Perlin noise. Good for generating terrain, clouds, and other things."
-                description="Description of perlin noise extension"
-                id="iygPerlin.iygPerlinExtension.description"
-            />
-        ),
-        featured: true
-    },
-    {
         name: 'Printing',
         tags: ['penguinmod'],
         extensionId: 'sharkpoolPrinting',
@@ -419,23 +368,6 @@ const menuItems = [
         twDeveloper: 'Vadik1'
     },
     {
-        name: 'Pointer Lock',
-        extensionId: 'https://extensions.turbowarp.org/pointerlock.js',
-        tags: ['turbowarp'],
-        insetIconURL: turbowarpIcon,
-        iconURL: pointerlockThumb,
-        description: (
-            <FormattedMessage
-                defaultMessage="A extension to lock the mouse cursor in the stage."
-                description="Scratch utilities"
-                id="gui.extension.pointerlock.description"
-            />
-        ),
-        featured: true,
-        internetConnectionRequired: false,
-        twDeveloper: 'GarboMuffin'
-    },
-    {
         name: 'Mouse Cursor',
         extensionId: 'https://extensions.turbowarp.org/cursor.js',
         tags: ['turbowarp'],
@@ -443,7 +375,7 @@ const menuItems = [
         iconURL: 'https://extensions.turbowarp.org/images/cursor.png',
         description: (
             <FormattedMessage
-                defaultMessage="A extension to change what the mouse cursor looks like on the stage."
+                defaultMessage="A extension to change what the mouse cursor looks like on the stage, or lock it in the stage."
                 description="Scratch utilities"
                 id="gui.extension.MouseCursor.description"
             />
