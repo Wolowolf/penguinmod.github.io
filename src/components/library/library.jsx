@@ -194,7 +194,8 @@ class LibraryComponent extends React.Component {
         }
     }
     handleSelect (id, event) {
-        if (event.shiftKey !== true) {
+        // The extension library stays open so several extensions can be added in a row.
+        if (event.shiftKey !== true && this.props.actor !== 'ExtensionLibrary') {
             this.handleClose();
         }
         this.props.onItemSelected(this.getFilteredData()[id]);

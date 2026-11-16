@@ -62,6 +62,7 @@ class ExtensionLibrary extends React.PureComponent {
             'wrapperEventHandler'
         ]);
         this.state = {galleryItems: []};
+        this.loading = new Set();
     }
 
     componentDidMount() {
@@ -175,10 +176,14 @@ class ExtensionLibrary extends React.PureComponent {
         if (!item.disabled) {
             if (this.props.vm.extensionManager.isExtensionLoaded(extensionId)) {
                 this.props.onCategorySelected(extensionId);
-            } else {
+            } else if (!this.loading.has(url)) {
+                // A second click while it loads does nothing; the tile's checkmark appears once it is added.
+                this.loading.add(url);
                 this.props.vm.extensionManager.loadExtensionURL(url)
+                    .finally(() => this.loading.delete(url))
                     .then(() => {
                         this.props.onCategorySelected(extensionId);
+                        if (!this.unmounted) this.forceUpdate();
                         // if (isCustomURL) {
                         //     let newUrl = location.pathname;
                         //     if (location.search) {
