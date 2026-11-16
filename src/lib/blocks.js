@@ -612,5 +612,20 @@ export default function (vm) {
         toolbox.position();
     });
 
+    // Desktop fork (section 275): "===" (same value of the same type; text is case-sensitive), shaped like "="
+    ScratchBlocks.Blocks.operator_strictEquals = {
+        init: function () {
+            this.jsonInit({
+                message0: '%1 === %2',
+                args0: [
+                    {type: 'input_value', name: 'OPERAND1'},
+                    {type: 'input_value', name: 'OPERAND2'}
+                ],
+                category: ScratchBlocks.Categories.operators,
+                extensions: ['colours_operators', 'output_boolean']
+            });
+        }
+    };
+
     return ScratchBlocks;
 }

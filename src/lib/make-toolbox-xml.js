@@ -1193,6 +1193,19 @@ const operators = function (isInitialSetup) {
                 </shadow>
             </value>
         </block>
+        <!-- Desktop fork (section 275) -->
+        <block type="operator_strictEquals">
+            <value name="OPERAND1">
+                <shadow type="text">
+                    <field name="TEXT"/>
+                </shadow>
+            </value>
+            <value name="OPERAND2">
+                <shadow type="text">
+                    <field name="TEXT">50</field>
+                </shadow>
+            </value>
+        </block>
         <block type="operator_expandableCompare">
         <mutation inputcount="2" menuvalues=""></mutation>
             <value name="INPUT1">
