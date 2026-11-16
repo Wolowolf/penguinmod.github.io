@@ -1222,6 +1222,39 @@ const operators = function (isInitialSetup) {
                 <shadow type="checkbox" />
             </value>
         </block>
+        <!-- Desktop fork (section 274): single versions of the modular block's nand / nor / xor / xnor -->
+        <block type="operator_nand">
+            <value name="OPERAND1">
+                <shadow type="checkbox" />
+            </value>
+            <value name="OPERAND2">
+                <shadow type="checkbox" />
+            </value>
+        </block>
+        <block type="operator_nor">
+            <value name="OPERAND1">
+                <shadow type="checkbox" />
+            </value>
+            <value name="OPERAND2">
+                <shadow type="checkbox" />
+            </value>
+        </block>
+        <block type="operator_xor">
+            <value name="OPERAND1">
+                <shadow type="checkbox" />
+            </value>
+            <value name="OPERAND2">
+                <shadow type="checkbox" />
+            </value>
+        </block>
+        <block type="operator_xnor">
+            <value name="OPERAND1">
+                <shadow type="checkbox" />
+            </value>
+            <value name="OPERAND2">
+                <shadow type="checkbox" />
+            </value>
+        </block>
         <block type="operator_not">
             <value name="OPERAND">
                 <shadow type="checkbox" />
