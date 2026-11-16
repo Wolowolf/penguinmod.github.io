@@ -1,15 +1,26 @@
-// Stage on second screen: a "clean feed" of the stage, like DaVinci Resolve's — a borderless full-screen
-// window on another display that shows only the stage, live, while the editor stays usable.
-// The window itself is placed by the desktop app (electron-main.js, "pm-stage-feed"); this script fills it:
-// after every frame the renderer really draws, that frame is copied into a canvas in the feed window.
-// While the feed is open the stage is drawn at the feed's resolution (the editor shows it scaled down, as in
-// full screen mode), so the feed is sharp; closing it gives the stage back the size the editor asked for.
+// Stage on second screen: moves the editor's stage (canvas, variable displays, ask box, extension layers)
+// into a borderless full-screen window on another display, where it looks and works as in the editor;
+// the button puts it back. The window itself is placed by the desktop app (electron-main.js, "pm-stage-feed").
+//
+// The moved elements stay the editor's own (same page, same renderer, same React components). Three things
+// make them work in the other window:
+// - the editor's style sheets and theme are copied into it and kept up to date;
+// - its mouse, touch, keyboard and form events are re-sent to the editor's page with their real target,
+//   because React and the project's keyboard/mouse handling listen on the editor's document;
+// - the stage is scaled to fill the screen, and the renderer draws at that screen's resolution.
 
 const FEED_NAME = "pm-stage-feed";
 
 const ICON =
   '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 3h16v11H2zm1.5 1.5v8h13v-8zM7 16h6v1.5H7z"/>' +
   '<path d="M8 6.5v4l3.5-2z"/></svg>';
+
+// Events handled by React (document listeners) or by the stage and keyboard code on the editor's page.
+const FORWARDED = [
+  "click", "dblclick", "mousedown", "mouseup", "mousemove", "mouseover", "mouseout", "contextmenu", "wheel",
+  "pointerdown", "pointerup", "pointermove", "touchstart", "touchmove", "touchend", "touchcancel",
+  "keydown", "keyup", "keypress", "input", "change", "focus", "blur", "dragstart", "drop", "dragover",
+];
 
 export default async function ({ addon }) {
   const desktop = window.PMDesktop;
@@ -21,112 +32,226 @@ export default async function ({ addon }) {
   if (!renderer) return;
 
   let displayCount = 1;
-  let feed = null; // the feed window while it is open
-  let feedCanvas = null;
-  let feedCtx = null;
-  let closedCheck = null;
-  let requested = null; // the stage size (CSS pixels) the editor last asked the renderer for
+  let feed = null; // the second-screen window while the stage is in it
+  let moved = null; // the stage element that was moved
+  let holder = null; // the box in the second window that scales the stage
+  let placeholder = null; // where the stage goes back in the editor
+  let removedByEditor = false; // the editor rebuilt its stage while it was away
+  let restoreParent = null;
+  let observers = [];
+  let checkTimer = null;
 
-  // ---- renderer: remember the editor's size, draw bigger while the feed is open, copy each drawn frame ----
+  // ---- renderer: while the stage is away, draw at the second screen's resolution ----
   const originalResize = renderer.resize;
-  const originalDraw = renderer.draw;
   renderer.resize = function (pixelsWide, pixelsTall) {
-    requested = [pixelsWide, pixelsTall];
-    if (feed && feedCanvas) {
+    if (feed && holder) {
+      const [w, h] = feedPixels();
       const dpr = window.devicePixelRatio || 1;
-      pixelsWide = Math.max(pixelsWide, feedCanvas.width / dpr);
-      pixelsTall = Math.max(pixelsTall, feedCanvas.height / dpr);
+      return originalResize.call(this, w / dpr, h / dpr);
     }
     return originalResize.call(this, pixelsWide, pixelsTall);
   };
-  renderer.draw = function () {
-    const wasDirty = this.dirty;
-    const result = originalDraw.call(this);
-    // Copied in the same task as the draw: a WebGL canvas can only be read before the frame is shown.
-    if (wasDirty && feedCtx && !this.dirty) copyFrame();
-    return result;
+
+  // The stage's size in the second screen's pixels (stage aspect ratio, as large as fits).
+  const feedPixels = () => {
+    const [nativeWidth, nativeHeight] = renderer.getNativeSize();
+    const dpr = feed.devicePixelRatio || 1;
+    const box = feed.document.body.getBoundingClientRect();
+    const scale = Math.min((box.width * dpr) / nativeWidth, (box.height * dpr) / nativeHeight);
+    return [Math.max(1, Math.round(nativeWidth * scale)), Math.max(1, Math.round(nativeHeight * scale))];
   };
 
-  const copyFrame = () => {
-    try {
-      feedCtx.drawImage(renderer.canvas, 0, 0, feedCanvas.width, feedCanvas.height);
-    } catch (e) {
-      // The feed window was closed between two frames.
+  // Scale the stage (still at its editor size) to fill the second screen, then let the editor re-measure it.
+  const layout = () => {
+    if (!feed || feed.closed || !moved) return;
+    const box = feed.document.body.getBoundingClientRect();
+    // Sized by the canvas: the stage's outer boxes can be a pixel larger than the picture.
+    const width = renderer.canvas.offsetWidth;
+    const height = renderer.canvas.offsetHeight;
+    if (!width || !height) return;
+    const scale = Math.min(box.width / width, box.height / height);
+    holder.style.transform = `scale(${scale})`;
+    holder.style.width = `${width}px`;
+    holder.style.height = `${height}px`;
+    // The stage code reads the canvas position on "resize"; mouse positions then map correctly.
+    window.dispatchEvent(new Event("resize"));
+    const dpr = window.devicePixelRatio || 1;
+    renderer.resize(renderer.canvas.width / dpr, renderer.canvas.height / dpr);
+    renderer.dirty = true;
+  };
+
+  // ---- copy the editor's styles and theme, and keep them up to date ----
+  const copyStyles = (doc) => {
+    doc.head.textContent = "";
+    for (const node of document.querySelectorAll("style, link[rel='stylesheet']")) {
+      doc.head.appendChild(node.cloneNode(true));
+    }
+    const base = doc.createElement("style");
+    base.textContent =
+      "html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000}" +
+      "body{display:flex;align-items:center;justify-content:center}" +
+      ".sa-stage-holder{flex:none;transform-origin:center center;overflow:hidden;position:relative}" +
+      // The editor's stage frame and minimum column width have no meaning here.
+      ".sa-stage-holder>*{min-width:0!important;margin:0!important}" +
+      // No border here, so also not the 1px shift the editor uses to line the stage up with it.
+      ".sa-stage-holder>*>*{border:0!important;border-radius:0!important;box-shadow:none!important;transform:none!important}";
+    doc.head.appendChild(base);
+  };
+  const copyRootAttributes = (doc) => {
+    for (const { name, value } of document.documentElement.attributes) doc.documentElement.setAttribute(name, value);
+    doc.body.className = document.body.className.replace("sa-stage-away", "");
+    doc.body.setAttribute("style", document.body.getAttribute("style") || "");
+    for (const font of document.fonts) {
+      try {
+        if (!doc.fonts.has(font)) doc.fonts.add(font);
+      } catch (e) {
+        // A font that belongs to the editor's page only.
+      }
     }
   };
 
-  const redraw = () => {
-    renderer.dirty = true;
-    renderer.draw();
+  // ---- send the second window's events to the editor's page, with their real target ----
+  const forward = (event) => {
+    if (!feed || event.pmForwarded) return;
+    const doc = feed.document;
+    let target = event.target;
+    // The window itself gaining or losing focus means nothing to the editor.
+    if ((event.type === "focus" || event.type === "blur") && target === feed) return;
+    // Keys pressed with nothing focused go to the project, as they do when the editor's page has them.
+    if (target === doc || target === doc.body || target === doc.documentElement || target === feed) {
+      target = event.type.startsWith("key") ? document.body : document;
+    }
+    let copy;
+    try {
+      copy = new event.constructor(event.type, event);
+    } catch (e) {
+      return;
+    }
+    const keep = { target, srcElement: target, pmForwarded: true };
+    if (event instanceof feed.KeyboardEvent) {
+      Object.assign(keep, { keyCode: event.keyCode, which: event.which, charCode: event.charCode });
+    }
+    for (const [name, value] of Object.entries(keep)) {
+      Object.defineProperty(copy, name, { value, configurable: true });
+    }
+    document.dispatchEvent(copy);
+    if (copy.defaultPrevented && event.cancelable) event.preventDefault();
   };
 
-  const applyEditorSize = () => {
-    const dpr = window.devicePixelRatio || 1;
-    const size = requested || [renderer.canvas.width / dpr, renderer.canvas.height / dpr];
-    renderer.resize(size[0], size[1]);
+  // ---- React: the editor may re-render or remove its stage while it is in the other window ----
+  const guardParent = (parent) => {
+    const { removeChild, insertBefore } = parent;
+    parent.removeChild = function (child) {
+      if (child === moved && child.parentNode !== this) {
+        removedByEditor = true;
+        if (placeholder && placeholder.parentNode === this) removeChild.call(this, placeholder);
+        child.remove();
+        return child;
+      }
+      return removeChild.call(this, child);
+    };
+    parent.insertBefore = function (child, before) {
+      if (before === moved && moved.parentNode !== this) before = placeholder;
+      if (child === moved && moved.parentNode !== this) return child; // stays in the second window
+      return insertBefore.call(this, child, before);
+    };
+    return () => {
+      parent.removeChild = removeChild;
+      parent.insertBefore = insertBefore;
+    };
   };
 
-  // The feed canvas fills the feed screen at the stage's aspect ratio (black bars on the other sides).
-  const layout = () => {
-    if (!feed || feed.closed || !feedCanvas) return;
-    const [nativeWidth, nativeHeight] = renderer.getNativeSize();
-    // Worked out in the screen's own pixels, so a 1920×1080 stage fills a 1920×1080 screen exactly.
-    const dpr = feed.devicePixelRatio || 1;
-    // (The body's box is measured to fractions of a pixel; innerWidth/innerHeight are rounded.)
-    const box = feed.document.body.getBoundingClientRect();
-    const width = Math.round(box.width * dpr);
-    const height = Math.round(box.height * dpr);
-    if (!width || !height || !nativeWidth || !nativeHeight) return;
-    const scale = Math.min(width / nativeWidth, height / nativeHeight);
-    feedCanvas.width = Math.max(1, Math.min(width, Math.round(nativeWidth * scale)));
-    feedCanvas.height = Math.max(1, Math.min(height, Math.round(nativeHeight * scale)));
-    feedCanvas.style.width = `${feedCanvas.width / dpr}px`;
-    feedCanvas.style.height = `${feedCanvas.height / dpr}px`;
-    feedCtx.imageSmoothingQuality = "high";
-    applyEditorSize();
-    redraw();
+  const findStage = () => {
+    const canvas = renderer.canvas;
+    const wrapper = canvas && canvas.closest("[class*='stage_stage-wrapper']");
+    return wrapper || null;
   };
 
-  const onNativeSize = () => layout();
-
-  const closeFeed = () => {
+  const bringBack = () => {
     const w = feed;
     if (!w) return;
     feed = null;
-    feedCanvas = null;
-    feedCtx = null;
-    clearInterval(closedCheck);
-    renderer.removeListener("NativeSizeChanged", onNativeSize);
+    document.body.classList.remove("sa-stage-away");
+    clearInterval(checkTimer);
+    for (const stop of observers) stop();
+    observers = [];
+    if (moved) {
+      if (!removedByEditor && placeholder && placeholder.parentNode) placeholder.replaceWith(moved);
+      else if (placeholder) placeholder.remove();
+    }
+    if (restoreParent) restoreParent();
+    restoreParent = null;
+    moved = null;
+    holder = null;
+    placeholder = null;
     if (!w.closed) w.close();
-    applyEditorSize();
-    redraw();
+    // Give the stage back the size the editor wants.
+    window.dispatchEvent(new Event("resize"));
+    const rect = renderer.canvas.getBoundingClientRect();
+    if (rect.width && rect.height) originalResize.call(renderer, rect.width, rect.height);
+    renderer.dirty = true;
     updateButton();
   };
 
-  const openFeed = () => {
+  const moveAway = () => {
     if (feed) return;
+    const stage = findStage();
+    if (!stage || !stage.parentNode) return;
     // Refused by the desktop app when the editor's screen is the only one.
     const w = window.open("", FEED_NAME);
     if (!w) return;
     feed = w;
+    removedByEditor = false;
     const doc = w.document;
     doc.title = "Stage";
-    doc.body.style.cssText =
-      "margin:0;height:100vh;overflow:hidden;background:#000;cursor:none;" +
-      "display:flex;align-items:center;justify-content:center";
-    feedCanvas = doc.createElement("canvas");
-    feedCanvas.style.display = "block";
-    doc.body.appendChild(feedCanvas);
-    feedCtx = feedCanvas.getContext("2d", { alpha: false });
+    copyStyles(doc);
+    copyRootAttributes(doc);
+
+    placeholder = document.createComment("stage on second screen");
+    stage.parentNode.insertBefore(placeholder, stage);
+    restoreParent = guardParent(stage.parentNode);
+    moved = stage;
+    holder = doc.createElement("div");
+    holder.className = "sa-stage-holder";
+    doc.body.appendChild(holder);
+    holder.appendChild(stage);
+
+    for (const type of FORWARDED) w.addEventListener(type, forward, { capture: type === "focus" || type === "blur", passive: false });
     w.addEventListener("resize", layout);
-    w.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeFeed();
+
+    let stylesQueued = false;
+    const headObserver = new MutationObserver(() => {
+      if (stylesQueued) return;
+      stylesQueued = true;
+      requestAnimationFrame(() => {
+        stylesQueued = false;
+        if (feed === w) copyStyles(doc);
+      });
     });
-    // Closed some other way (Alt+F4, its screen unplugged, the editor closing).
-    closedCheck = setInterval(() => {
-      if (feed && feed.closed) closeFeed();
+    headObserver.observe(document.head, { childList: true, subtree: true, characterData: true });
+    const rootObserver = new MutationObserver(() => copyRootAttributes(doc));
+    rootObserver.observe(document.documentElement, { attributes: true });
+    rootObserver.observe(document.body, { attributes: true });
+    // The editor resizes the stage (another stage size, a project with other dimensions): fit it again.
+    // (On the next frame and only on a real change: changing sizes inside the observer would loop.)
+    let lastSize = "";
+    const sizeObserver = new ResizeObserver(() => requestAnimationFrame(() => {
+      const size = `${renderer.canvas.offsetWidth}x${renderer.canvas.offsetHeight}`;
+      if (size !== lastSize) {
+        lastSize = size;
+        layout();
+      }
+    }));
+    sizeObserver.observe(stage);
+    observers = [() => headObserver.disconnect(), () => rootObserver.disconnect(), () => sizeObserver.disconnect()];
+
+    // The window was closed some other way (Alt+F4, its screen unplugged), or the editor rebuilt its stage.
+    checkTimer = setInterval(() => {
+      if (!feed) return;
+      if (feed.closed || removedByEditor || !moved.contains(renderer.canvas)) bringBack();
     }, 500);
-    renderer.on("NativeSizeChanged", onNativeSize);
+
+    document.body.classList.add("sa-stage-away");
     layout();
     updateButton();
   };
@@ -136,13 +261,13 @@ export default async function ({ addon }) {
   button.type = "button";
   button.className = `${addon.tab.scratchClass("stage-header_stage-button")} sa-stage-feed-button`;
   button.innerHTML = ICON;
-  button.addEventListener("click", () => (feed ? closeFeed() : openFeed()));
+  button.addEventListener("click", () => (feed ? bringBack() : moveAway()));
   const updateButton = () => {
-    const label = feed ? "Close the stage on the second screen" : "Show the stage on the second screen";
+    const label = feed ? "Bring the stage back from the second screen" : "Move the stage to the second screen";
     button.title = label;
     button.setAttribute("aria-label", label);
     button.setAttribute("aria-pressed", feed ? "true" : "false");
-    // Shown only while there is a second screen (or the feed is still open).
+    // Shown only while there is a second screen (or the stage is still on it).
     button.style.display = addon.self.disabled || (displayCount < 2 && !feed) ? "none" : "";
   };
 
@@ -152,10 +277,19 @@ export default async function ({ addon }) {
     updateButton();
   });
   addon.self.addEventListener("disabled", () => {
-    closeFeed();
+    bringBack();
     updateButton();
   });
   addon.self.addEventListener("reenabled", updateButton);
+  window.addEventListener("beforeunload", () => bringBack());
+  // Full screen and player mode are ways of showing the stage in the editor's window: the stage comes back.
+  addon.tab.redux.initialize();
+  addon.tab.redux.addEventListener("statechanged", ({ detail }) => {
+    const type = detail.action.type;
+    if (feed && (type === "scratch-gui/mode/SET_FULL_SCREEN" || type === "scratch-gui/mode/SET_PLAYER")) {
+      bringBack();
+    }
+  });
   updateButton();
 
   while (true) {

@@ -1,5 +1,5 @@
-/* The button sits among the stage header's buttons and takes their look; while the feed is open it gets
-   the same accent ring as the frame meter's switch. */
+/* The button sits among the stage header's buttons and takes their look; while the stage is on the second
+   screen it gets the same accent ring as the frame meter's switch. */
 .sa-stage-feed-button {
   display: flex;
   align-items: center;
@@ -16,4 +16,9 @@
 .sa-stage-feed-button:focus-visible {
   outline: 3px solid var(--ui-accent-symbol);
   outline-offset: 1px;
+}
+/* While the stage is on the second screen, the frame meter (normally laid over the stage's corner) takes
+   its own place at the top of the empty stage column instead of covering the sprite info. */
+body.sa-stage-away [class*="pm-profiler_meter_"] {
+  position: static !important;
 }

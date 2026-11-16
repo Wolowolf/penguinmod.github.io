@@ -3,7 +3,7 @@ const manifest = {
   "editorOnly": true,
   "noTranslations": true,
   "name": "Stage on second screen",
-  "description": "Adds a button above the stage (shown only while a second screen is connected) that shows the stage full screen on the other screen, without any editor parts around it, like a clean feed in video software. It keeps showing the stage while you edit, and the stage is drawn at that screen's full resolution. Press the button again (or Escape on that screen) to close it.",
+  "description": "Adds a button above the stage (shown only while a second screen is connected) that moves the stage full screen onto the other screen, with its variable displays, ask box and everything else, and you can play it there. The editor shows no stage until you press the button again.",
   "userscripts": [
     {
       "url": "userscript.js"
