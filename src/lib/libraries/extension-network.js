@@ -15,7 +15,6 @@ const networkByKey = {
     'cloudlink.js': 'required',
     'godslayerakp/ws.js': 'required',
     'MikeDev101/webrtc.js': 'required',
-    'MubiLop/penguinhook.js': 'required',
     'itchio.js': 'required',
     'Ikelene/googleAuthExtension.js': 'required',
     // orange: partly needs the internet

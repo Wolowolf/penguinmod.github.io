@@ -24,8 +24,12 @@ const penguinmod = () => fetchJSON(`${PM}/generated-extension-list.json`)
         featured: true
     })));
 
+// Desktop fork (section 270): extensions kept in the app but not offered until the packager can export for them
+// (Steam: no Steam export yet).
+const HIDDEN_UNTIL_EXPORT = new Set(['steamworks']);
+
 const turbowarp = () => fetchJSON(`${TW}/generated-metadata/extensions-v0.json`)
-    .then(data => data.extensions.map(ext => ({
+    .then(data => data.extensions.filter(ext => !HIDDEN_UNTIL_EXPORT.has(ext.slug)).map(ext => ({
         name: ext.name,
         description: ext.description,
         extensionId: `${TW}/${ext.slug}.js`,

@@ -23,7 +23,6 @@ const difficultyByKey = {
     // Costumes / Effects
     'Sprite-Effects-V2.js': 3,
     'MubiLop/spritesheeter.js': 2,
-    'SVG-Spritesheets.js': 3,
     'GIF-Manager.js': 2,
     'Turbo-Skins.js': 2,
     'TheShovel/CanvasEffects.js': 1,
@@ -111,7 +110,6 @@ const difficultyByKey = {
     'godslayerakp/ws.js': 4,
     'MikeDev101/webrtc.js': 4,
     'true-fantom/network.js': 3,
-    'MubiLop/penguinhook.js': 3,
     // Web Services / Accounts
     'steamworks.js': 3,
     'itchio.js': 3,

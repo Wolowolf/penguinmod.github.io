@@ -975,9 +975,6 @@ const sensing = function (isInitialSetup, isStage, targetId) {
                 <shadow id="sensing_fingeroptions" type="sensing_fingeroptions"/>
             </value>
         </block>
-        ${blockSeparator}
-        <block type="sensing_username"/>
-        <block type="sensing_loggedin"/>
         ${categorySeparator}
     </category>
     `;
@@ -1388,23 +1385,6 @@ const operators = function (isInitialSetup) {
                 <value name="res">
                     <shadow type="text">
                         <field name="TEXT">foo</field>
-                    </shadow>
-                </value>
-            </block>
-            <block type="operator_regexmatch">
-                <value name="text">
-                    <shadow type="text">
-                        <field name="TEXT">foo bar</field>
-                    </shadow>
-                </value>
-                <value name="reg">
-                    <shadow type="text">
-                        <field name="TEXT">foo</field>
-                    </shadow>
-                </value>
-                <value name="regrule">
-                    <shadow type="text">
-                        <field name="TEXT">g</field>
                     </shadow>
                 </value>
             </block>
