@@ -240,7 +240,7 @@ export default async function({ addon }) {
       this.overrideSep = 1;
       this.boxGroup_ = Blockly.utils.createSvgElement('g', {}, null);
       this.box_ = Blockly.utils.createSvgElement('rect', {
-          'x': 0,'y': 0, 'rx': 4, 'ry': 4,
+          'x': 0,'y': 0, 'rx': 0, 'ry': 0,
           'width': this.size_.width, 'height': this.size_.height,
           'fill': "#00000000", 'stroke': "#00000035", 'cursor': this.CURSOR
         },
@@ -267,7 +267,7 @@ export default async function({ addon }) {
       this.overrideSep = 1;
       this.boxGroup_ = Blockly.utils.createSvgElement('g', {}, null);
       this.box_ = Blockly.utils.createSvgElement('rect', {
-          'x': 0, 'y': 0, 'rx': 4, 'ry': 4,
+          'x': 0, 'y': 0, 'rx': 0, 'ry': 0,
           'width': this.size_.width, 'height': this.size_.height,
           'fill': "#00000000", 'stroke': "#00000035", 'cursor': this.CURSOR
         },

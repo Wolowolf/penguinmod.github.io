@@ -612,20 +612,10 @@ export default function (vm) {
         toolbox.position();
     });
 
-    // Desktop fork (section 275): "===" (same value of the same type; text is case-sensitive), shaped like "="
-    ScratchBlocks.Blocks.operator_strictEquals = {
-        init: function () {
-            this.jsonInit({
-                message0: '%1 === %2',
-                args0: [
-                    {type: 'input_value', name: 'OPERAND1'},
-                    {type: 'input_value', name: 'OPERAND2'}
-                ],
-                category: ScratchBlocks.Categories.operators,
-                extensions: ['colours_operators', 'output_boolean']
-            });
-        }
-    };
+    // Desktop fork (sections 275, 277): "===" (same value of the same type; text is case-sensitive), a single block
+    // of the modular compare block's "===" symbol, made by scratch-blocks' shared maker
+    ScratchBlocks.Blocks.operator_strictEquals = ScratchBlocks.scratchBlocksUtils.modularBlock(
+        ScratchBlocks.scratchBlocksUtils.modularBlock.sets.compare, 'E', 'OPERAND');
 
     return ScratchBlocks;
 }
