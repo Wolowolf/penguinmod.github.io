@@ -540,9 +540,13 @@ class Blocks extends React.Component {
             if (blockInfoArray && blockInfoArray.length > 0) {
                 const staticBlocksJson = [];
                 const dynamicBlocksInfo = [];
+                const modularBlocksJson = [];
                 blockInfoArray.forEach(blockInfo => {
                     if (blockInfo.info && blockInfo.info.isDynamic) {
                         dynamicBlocksInfo.push(blockInfo);
+                    } else if (blockInfo.json && blockInfo.json.modular) {
+                        // Desktop fork (section 278): made by the shared maker below
+                        modularBlocksJson.push(blockInfo.json);
                     } else if (blockInfo.json) {
                         staticBlocksJson.push(blockInfo.json);
                     } else if (blockInfo.info.blockType === 'button') {
@@ -552,6 +556,13 @@ class Blocks extends React.Component {
                 });
 
                 this.ScratchBlocks.defineBlocksWithJsonArray(staticBlocksJson, true);
+                // Desktop fork (section 278): an extension's modular blocks and their single blocks (blockInfo
+                // `modular`; the VM's runtime.js _convertBlockForScratchBlocks made the settings) come from the
+                // same maker as the operator ones (section 277).
+                modularBlocksJson.forEach(json => {
+                    this.ScratchBlocks.Blocks[json.type] =
+                        this.ScratchBlocks.scratchBlocksUtils.modularBlock(json.modular.settings, json.modular.lock);
+                });
                 dynamicBlocksInfo.forEach(blockInfo => {
                     // This is creating the block factory / constructor -- NOT a specific instance of the block.
                     // The factory should only know static info about the block: the category info and the opcode.
