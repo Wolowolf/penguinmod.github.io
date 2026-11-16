@@ -673,6 +673,14 @@ const control = function (isInitialSetup, isStage) {
                 </shadow>
             </value>
         </block>
+        <block type="control_expandableSwitch">
+            <mutation branches="2" ends-in-else="true" menuvalues="i"></mutation>
+            <value name="CASE1">
+                <shadow type="text">
+                    <field name="TEXT">ello</field>
+                </shadow>
+            </value>
+        </block>
         ${blockSeparator}
         <block type="control_expandableIf">
             <mutation branches="1" ends-in-else="false"></mutation>

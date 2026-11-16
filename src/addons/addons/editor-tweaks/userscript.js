@@ -295,6 +295,7 @@ export default async function({ addon }) {
       hiddenBtn.size_.height = (Blockly.BlockSvg.INPUT_SHAPE_HEIGHT + 16) * expandBtnSz;
       hiddenBtn.setVisible(false);
     }
+    Blockly.Blocks['control_expandableSwitch'].fixupButtons = Blockly.Blocks['control_expandableIf'].fixupButtons;
   }
 
   addon.self.addEventListener("reenabled", applyChanges);
