@@ -1,0 +1,19 @@
+/* The button sits among the stage header's buttons and takes their look; while the feed is open it gets
+   the same accent ring as the frame meter's switch. */
+.sa-stage-feed-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sa-stage-feed-button svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+.sa-stage-feed-button[aria-pressed="true"] {
+  box-shadow: inset 0 0 0 2px var(--ui-accent-symbol);
+}
+.sa-stage-feed-button:focus-visible {
+  outline: 3px solid var(--ui-accent-symbol);
+  outline-offset: 1px;
+}

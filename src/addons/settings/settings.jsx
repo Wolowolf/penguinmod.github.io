@@ -117,6 +117,7 @@ const addonOrder = [
     'editor-sounds',
     // Stage and running the project
     'mute-project',
+    'stage-second-screen',
     'editor-counters',
     'custom-styles',
     'disable-stage-drag-select',

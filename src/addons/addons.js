@@ -11,6 +11,7 @@ const addons = [
     'drag-drop',
     'pause',
     'mute-project',
+    'stage-second-screen',
     'editor-counters',
     'color-picker',
     'onion-skinning',

@@ -12,6 +12,7 @@ export default {
   "mediarecorder": () => import(/* webpackChunkName: "addon-entry-mediarecorder" */ "../addons/mediarecorder/_runtime_entry.js"),
   "drag-drop": () => require("../addons/drag-drop/_runtime_entry.js"),
   "mute-project": () => require("../addons/mute-project/_runtime_entry.js"),
+  "stage-second-screen": () => import(/* webpackChunkName: "addon-entry-stage-second-screen" */ "../addons/stage-second-screen/_runtime_entry.js"),
   "editor-counters": () => import(/* webpackChunkName: "addon-entry-editor-counters" */ "../addons/editor-counters/_runtime_entry.js"),
   "color-picker": () => import(/* webpackChunkName: "addon-default-entry" */ "../addons/color-picker/_runtime_entry.js"),
   "onion-skinning": () => import(/* webpackChunkName: "addon-default-entry" */ "../addons/onion-skinning/_runtime_entry.js"),

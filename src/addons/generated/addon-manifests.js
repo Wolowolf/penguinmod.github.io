@@ -11,6 +11,7 @@ import _hide_flyout from "../addons/hide-flyout/_manifest_entry.js";
 import _mediarecorder from "../addons/mediarecorder/_manifest_entry.js";
 import _drag_drop from "../addons/drag-drop/_manifest_entry.js";
 import _mute_project from "../addons/mute-project/_manifest_entry.js";
+import _stage_second_screen from "../addons/stage-second-screen/_manifest_entry.js";
 import _editor_counters from "../addons/editor-counters/_manifest_entry.js";
 import _color_picker from "../addons/color-picker/_manifest_entry.js";
 import _onion_skinning from "../addons/onion-skinning/_manifest_entry.js";
@@ -70,6 +71,7 @@ export default {
   "mediarecorder": _mediarecorder,
   "drag-drop": _drag_drop,
   "mute-project": _mute_project,
+  "stage-second-screen": _stage_second_screen,
   "editor-counters": _editor_counters,
   "color-picker": _color_picker,
   "onion-skinning": _onion_skinning,
