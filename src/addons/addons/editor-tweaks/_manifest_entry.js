@@ -31,15 +31,6 @@ const manifest = {
       "type": "boolean",
       "default": true
     },
-    {
-      "id": "expandableButtonSize",
-      "name": "Expandable Button Size (0-500%)",
-      "type": "integer",
-      "dynamic": true,
-      "min": 0,
-      "default": 100,
-      "max": 500
-    },
   ],
   "userscripts": [
     { "url": "userscript.js" }

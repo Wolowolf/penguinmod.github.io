@@ -6,8 +6,8 @@ export default async function({ addon }) {
   const vm = addon.tab.traps.vm;
 
   // addon settings
-  let oldCkbxEnabled = true, oldToolboxScrolls = true, oldBlocksGlow = true, oldExpandBtnSz = 1;
-  let ckbxEnabled = true, toolboxScrolls = true, blocksGlow = true, expandBtnSz = 1;
+  let oldCkbxEnabled = true, oldToolboxScrolls = true, oldBlocksGlow = true;
+  let ckbxEnabled = true, toolboxScrolls = true, blocksGlow = true;
   let workspaceRefreshCache = 0;
 
   // patch variables and functions
@@ -75,7 +75,6 @@ export default async function({ addon }) {
     ckbxEnabled = addon.settings.get("checkboxesEnabled");
     toolboxScrolls = addon.settings.get("toolboxScrolling");
     blocksGlow = addon.settings.get("blocksGlow");
-    expandBtnSz = addon.settings.get("expandableButtonSize") / 100;
     Blockly.Procedures.ADDON_SP_CHECKBOXES_DISABLED = !ckbxEnabled;
   }
 
@@ -84,7 +83,6 @@ export default async function({ addon }) {
     toggleCheckboxes();
     toggleToolBoxScroll();
     toggleBlockGlow();
-    setExpandableSize();
     if (workspaceRefreshCache > 0) updateAllBlocks(2 > workspaceRefreshCache);
     workspaceRefreshCache = 0;
   }
@@ -208,103 +206,10 @@ export default async function({ addon }) {
     };
   }
 
-  function setExpandableSize() {
-    if (oldExpandBtnSz === expandBtnSz) return;
-    oldExpandBtnSz = expandBtnSz;
-    workspaceRefreshCache = 2;
-
-    // override these, ripped from the Blocks Repo with minor changes
-    const addImg = Blockly.FieldExpandableAdd.prototype.BTN_IMG;
-    Blockly.FieldExpandableAdd.prototype.init = function() {
-      if (this.fieldGroup_) return;
-      Blockly.FieldExpandableAdd.superClass_.init.call(this);
-
-      if (expandBtnSz === 0 && this.sourceBlock_) {
-        const input = this.sourceBlock_.inputList.find(i => i.fieldRow.includes(this));
-        if (input) {
-            // we dont want to hide labels or other fields:
-            if (input.fieldRow.length > 2) {
-                for (const field of input.fieldRow) {
-                  if (
-                    field instanceof Blockly.FieldExpandableAdd ||
-                    field instanceof Blockly.FieldExpandableRemove
-                  ) field.setVisible(false);
-                }
-            } else { 
-              input.setVisible(false);
-            }
-        }
-      }
-
-      const ratio = (Blockly.BlockSvg.FIELD_HEIGHT / 32) * expandBtnSz;
-      this.size_.width = Blockly.BlockSvg.FIELD_HEIGHT * expandBtnSz;
-      this.size_.height *= expandBtnSz;
-      this.overrideSep = 1;
-      this.boxGroup_ = Blockly.utils.createSvgElement('g', {}, null);
-      this.box_ = Blockly.utils.createSvgElement('rect', {
-          'x': 0,'y': 0, 'rx': 0, 'ry': 0,
-          'width': this.size_.width, 'height': this.size_.height,
-          'fill': "#00000000", 'stroke': "#00000035", 'cursor': this.CURSOR
-        },
-        this.boxGroup_
-      );
-      this.icon_ = Blockly.utils.createSvgElement('image', {
-          'x': 5 * ratio, 'y': 5 * ratio,
-          'width': this.size_.width / 1.5, 'height': this.size_.height / 1.5,
-          'xlink:href': addImg, 'href': addImg,
-        },
-        this.boxGroup_
-      );
-      this.fieldGroup_.insertBefore(this.boxGroup_, this.textElement_);
-    };
-
-    const removeImg = Blockly.FieldExpandableRemove.prototype.BTN_IMG;
-    Blockly.FieldExpandableRemove.prototype.init = function() {
-      if (this.fieldGroup_) return;
-      Blockly.FieldExpandableRemove.superClass_.init.call(this);
-
-      const ratio = (Blockly.BlockSvg.FIELD_HEIGHT / 32) * expandBtnSz;
-      this.size_.width = Blockly.BlockSvg.FIELD_HEIGHT * expandBtnSz;
-      this.size_.height *= expandBtnSz;
-      this.overrideSep = 1;
-      this.boxGroup_ = Blockly.utils.createSvgElement('g', {}, null);
-      this.box_ = Blockly.utils.createSvgElement('rect', {
-          'x': 0, 'y': 0, 'rx': 0, 'ry': 0,
-          'width': this.size_.width, 'height': this.size_.height,
-          'fill': "#00000000", 'stroke': "#00000035", 'cursor': this.CURSOR
-        },
-        this.boxGroup_
-      );
-      this.icon_ = Blockly.utils.createSvgElement('image', {
-          'x': 5 * ratio, 'y': 5 * ratio,
-          'width': this.size_.width / 1.5, 'height': this.size_.height / 1.5,
-          'xlink:href': removeImg, 'href': removeImg,
-        },
-        this.boxGroup_
-      );
-      this.fieldGroup_.insertBefore(this.boxGroup_, this.textElement_);
-    };
-
-    // fix block chin height
-    Blockly.Blocks['control_expandableIf'].fixupButtons = function() {
-      const expandableInput = this.getInput("");
-      this.inputList.splice(this.inputList.indexOf(expandableInput), 1);
-      this.inputList.push(expandableInput);
-
-      expandableInput.setAlign(1);
-      const hiddenBtn = expandableInput.fieldRow[0];
-      hiddenBtn.size_.width = 0.5;
-      hiddenBtn.size_.height = (Blockly.BlockSvg.INPUT_SHAPE_HEIGHT + 16) * expandBtnSz;
-      hiddenBtn.setVisible(false);
-    }
-    Blockly.Blocks['control_expandableSwitch'].fixupButtons = Blockly.Blocks['control_expandableIf'].fixupButtons;
-  }
-
   addon.self.addEventListener("reenabled", applyChanges);
   addon.settings.addEventListener("change", applyChanges);
   addon.self.addEventListener("disabled", () => {
-    ckbxEnabled = true,
-    expandBtnSz = 1;
+    ckbxEnabled = true;
     applyChanges();
   });
 
