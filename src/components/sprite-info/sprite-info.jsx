@@ -8,7 +8,7 @@ import Input from '../forms/input.jsx';
 import BufferedInputHOC from '../forms/buffered-input-hoc.jsx';
 import DirectionPicker from '../../containers/direction-picker.jsx';
 
-import {injectIntl, intlShape, defineMessages, FormattedMessage} from 'react-intl';
+import {injectIntl, intlShape, FormattedMessage} from 'react-intl';
 
 import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants.js';
 import {isWideLocale} from '../../lib/locale-utils.js';
@@ -17,27 +17,16 @@ import styles from './sprite-info.css';
 
 import xIcon from './icon--x.svg';
 import yIcon from './icon--y.svg';
-import showIcon from './icon--show.svg';
-import hideIcon from './icon--hide.svg';
 
 const BufferedInput = BufferedInputHOC(Input);
 
-const messages = defineMessages({
-    spritePlaceholder: {
-        id: 'gui.SpriteInfo.spritePlaceholder',
-        defaultMessage: 'Name',
-        description: 'Placeholder text for sprite name'
-    }
-});
-
+// desktop: the name box and the show/hide eye sit on each sprite tile (sprite-selector-item.jsx)
 class SpriteInfo extends React.Component {
     shouldComponentUpdate (nextProps) {
         return (
             this.props.rotationStyle !== nextProps.rotationStyle ||
             this.props.disabled !== nextProps.disabled ||
-            this.props.name !== nextProps.name ||
             this.props.stageSize !== nextProps.stageSize ||
-            this.props.visible !== nextProps.visible ||
             // Only update these if rounded value has changed
             Math.round(this.props.direction) !== Math.round(nextProps.direction) ||
             Math.round(this.props.size) !== Math.round(nextProps.size) ||
@@ -50,20 +39,6 @@ class SpriteInfo extends React.Component {
             stageSize
         } = this.props;
 
-        const sprite = (
-            <FormattedMessage
-                defaultMessage="Sprite"
-                description="Sprite info label"
-                id="gui.SpriteInfo.sprite"
-            />
-        );
-        const showLabel = (
-            <FormattedMessage
-                defaultMessage="Show"
-                description="Sprite info show label"
-                id="gui.SpriteInfo.show"
-            />
-        );
         const sizeLabel = (
             <FormattedMessage
                 defaultMessage="Size"
@@ -73,23 +48,6 @@ class SpriteInfo extends React.Component {
         );
 
         const labelAbove = isWideLocale(this.props.intl.locale);
-
-        const spriteNameInput = (
-            <BufferedInput
-                className={classNames(
-                    styles.spriteInput,
-                    {
-                        [styles.columnInput]: labelAbove
-                    }
-                )}
-                disabled={this.props.disabled}
-                placeholder={this.props.intl.formatMessage(messages.spritePlaceholder)}
-                tabIndex="0"
-                type="text"
-                value={this.props.disabled ? '' : this.props.name}
-                onSubmit={this.props.onChangeName}
-            />
-        );
 
         const xPosition = (
             <div className={styles.group}>
@@ -126,12 +84,7 @@ class SpriteInfo extends React.Component {
         if (stageSize === STAGE_DISPLAY_SIZES.small) {
             return (
                 <Box className={styles.spriteInfo}>
-                    <div className={classNames(styles.row, styles.rowPrimary)}>
-                        <div className={styles.group}>
-                            {spriteNameInput}
-                        </div>
-                    </div>
-                    <div className={classNames(styles.row, styles.rowSecondary)}>
+                    <div className={styles.row}>
                         <div className={styles.pair}>
                             {xPosition}
                             {yPosition}
@@ -144,33 +97,6 @@ class SpriteInfo extends React.Component {
         return (
             <Box className={styles.spriteInfo}>
                 <div className={styles.row}>
-                    <div className={styles.pair}>
-                        <div
-                            className={classNames(
-                                styles.radio,
-                                styles.eyeToggle,
-                                {
-                                    [styles.isActive]: this.props.visible && !this.props.disabled,
-                                    [styles.isDisabled]: this.props.disabled
-                                }
-                            )}
-                            tabIndex="0"
-                            onClick={this.props.disabled ? null : (
-                                this.props.visible ? this.props.onClickNotVisible : this.props.onClickVisible
-                            )}
-                            onKeyPress={this.props.disabled ? null : (
-                                this.props.visible ? this.props.onPressNotVisible : this.props.onPressVisible
-                            )}
-                        >
-                            <img
-                                className={styles.icon}
-                                src={this.props.visible ? showIcon : hideIcon}
-                            />
-                        </div>
-                        <div className={styles.group}>
-                            {spriteNameInput}
-                        </div>
-                    </div>
                     <div className={styles.pair}>
                         {xPosition}
                         {yPosition}
@@ -217,24 +143,17 @@ SpriteInfo.propTypes = {
     ]),
     disabled: PropTypes.bool,
     intl: intlShape,
-    name: PropTypes.string,
     onChangeDirection: PropTypes.func,
-    onChangeName: PropTypes.func,
     onChangeRotationStyle: PropTypes.func,
     onChangeSize: PropTypes.func,
     onChangeX: PropTypes.func,
     onChangeY: PropTypes.func,
-    onClickNotVisible: PropTypes.func,
-    onClickVisible: PropTypes.func,
-    onPressNotVisible: PropTypes.func,
-    onPressVisible: PropTypes.func,
     rotationStyle: PropTypes.string,
     size: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number
     ]),
     stageSize: PropTypes.oneOf(Object.keys(STAGE_DISPLAY_SIZES)).isRequired,
-    visible: PropTypes.bool,
     x: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number

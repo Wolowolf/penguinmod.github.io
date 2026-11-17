@@ -24,46 +24,14 @@
     justify-content: space-between;
 }
 
-.row-primary {
-    margin-bottom: 0.5rem;
-}
-
 .group {
     display: inline-flex;
     flex-direction: row; /* makes columns, for each label/form group */
     align-items: center;
 }
 
-.icon {
-    width: 100%;
-    height: 100%;
-}
-
-/* @todo: refactor radio divs to input */
-
-.radio {
-    filter: saturate(0);
-    cursor: pointer;
-}
-.radio.is-active {
-    filter: none;
-}
-.radio.is-disabled {
-    cursor: default;
-}
-
-.icon {
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-}
-
 .larger-input input {
     width: 4rem;
-}
-
-.sprite-input {
-    width: 8rem;
 }
 
 /* PMDESKTOP_STAGE_PATCH: one wrapping row, boxes sized to their content, no rounded corners */
@@ -101,36 +69,15 @@
     width: auto;
 }
 
-.sprite-info input.sprite-input {
-    min-width: 3rem;
-    max-width: 9rem;
-    text-align: left;
-    text-overflow: ellipsis;
-}
-
-/* one button that toggles between shown (eye) and hidden (crossed-out eye) */
-.eye-toggle {
-    flex: 0 0 auto;
-    width: 1.5rem;
-    height: 1.5rem;
-    padding: 0.2rem;
-    box-sizing: border-box;
-    border: 1px solid $ui-edge;
-    border-radius: 0;
-}
-
-.eye-toggle:focus {
-    border-color: $motion-primary;
-}
-
 /* the size / direction symbols a bit bigger so they are readable */
 .sprite-info [class*="label_input-label-secondary"] {
     font-size: 0.875rem;
     line-height: 1;
 }
 
-/* section 288: three pairs that each stay on one line with no space inside them:
-   [show/hide][name], x [x][y] y, size [size][direction] direction; neighbours share one border line */
+/* section 288: pairs that each stay on one line with no space inside them:
+   x [x][y] y, size [size][direction] direction; neighbours share one border line
+   (section 289: [show/hide][name] moved onto each sprite tile) */
 .pair {
     display: inline-flex;
     flex: 0 0 auto;

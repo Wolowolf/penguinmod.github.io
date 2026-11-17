@@ -28,7 +28,9 @@ class SpriteSelectorItem extends React.PureComponent {
             'handleMouseDown',
             'handleDragEnd',
             'handleDrag',
-            'handleTouchEnd'
+            'handleTouchEnd',
+            'handleNameSubmit',
+            'handleToggleVisible'
         ]);
 
         this.dragRecognizer = new DragRecognizer({
@@ -106,6 +108,14 @@ class SpriteSelectorItem extends React.PureComponent {
         e.stopPropagation();
         this.props.onRenameButtonClick(this.props.id);
     }
+    handleNameSubmit (name) {
+        this.props.vm.renameSprite(this.props.id, name);
+    }
+    handleToggleVisible (e) {
+        e.stopPropagation(); // a click on the eye does not select the sprite
+        const target = this.props.vm.runtime.getTargetById(this.props.id);
+        if (target) target.setVisible(!target.visible);
+    }
     handleMouseLeave () {
         this.props.dispatchSetHoveredSprite(null);
     }
@@ -130,6 +140,7 @@ class SpriteSelectorItem extends React.PureComponent {
             dragPayload,
             receivedBlocks,
             costumeURL,
+            spriteControls,
             vm,
             /* eslint-enable no-unused-vars */
             ...props
@@ -147,6 +158,8 @@ class SpriteSelectorItem extends React.PureComponent {
                 onMouseDown={this.handleMouseDown}
                 onMouseEnter={this.handleMouseEnter}
                 onMouseLeave={this.handleMouseLeave}
+                onNameSubmit={spriteControls ? this.handleNameSubmit : null}
+                onToggleVisible={spriteControls ? this.handleToggleVisible : null}
                 {...props}
             />
         );
@@ -175,6 +188,7 @@ SpriteSelectorItem.propTypes = {
     onExportButtonClick: PropTypes.func,
     receivedBlocks: PropTypes.bool.isRequired,
     selected: PropTypes.bool,
+    spriteControls: PropTypes.bool,
     vm: PropTypes.instanceOf(VM).isRequired
 };
 

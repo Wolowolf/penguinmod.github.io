@@ -116,9 +116,15 @@
 .embed-buttons {
     display: flex;
 }
+/* section 289: the buttons touch, neighbours share one border line; the hovered one is drawn on top */
 [dir="ltr"] .embed-buttons > *:not(:last-child) {
-    margin-right: .2rem;
+    margin-right: -1px;
 }
 [dir="rtl"] .embed-buttons > *:not(:last-child) {
-    margin-left: .2rem;
+    margin-left: -1px;
+}
+.embed-buttons > *:hover,
+.embed-buttons > *:focus-visible {
+    position: relative;
+    z-index: 1;
 }

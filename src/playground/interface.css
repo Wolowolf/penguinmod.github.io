@@ -42,9 +42,9 @@ a {
     width: 100%;
 }
 
+/* section 289: no minimum size, so the editor always fits the window (a smaller window made the page
+   scroll, and its scrollbar left empty strips beside the stage column) */
 .editor {
-    min-width: 1024px;
-    min-height: 640px;
     height: 100%;
 }
 .editor .center {

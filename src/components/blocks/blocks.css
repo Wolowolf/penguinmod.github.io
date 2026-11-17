@@ -102,10 +102,10 @@
 
 /* PMDESKTOP_STAGE_PATCH: category menu = equal-width colour boxes with only the name */
 .blocks :global(.scratchCategoryMenu) {
-    /* box = "Pointerlock" (61 px of text) + 0.15rem padding on each side, + 2 px menu padding */
+    /* box = "Pointerlock" (61 px of text) + 0.15rem padding on each side; section 289: the boxes reach both sides (no padding left and right) */
     width: 4.5rem;
     box-sizing: border-box;
-    padding: 2px;
+    padding: 2px 0;
     /* room for the ADD box at the bottom, so a scrolled menu never hides a category behind it */
     padding-bottom: calc(1.2rem + 4px);
 }

@@ -46,10 +46,8 @@ const SpriteSelectorComponent = function (props) {
         hoveredTarget,
         intl,
         onChangeSpriteDirection,
-        onChangeSpriteName,
         onChangeSpriteRotationStyle,
         onChangeSpriteSize,
-        onChangeSpriteVisibility,
         onChangeSpriteX,
         onChangeSpriteY,
         onDrop,
@@ -84,18 +82,14 @@ const SpriteSelectorComponent = function (props) {
             <SpriteInfo
                 direction={selectedSprite.direction}
                 disabled={spriteInfoDisabled}
-                name={selectedSprite.name}
                 rotationStyle={selectedSprite.rotationStyle}
                 size={selectedSprite.size}
                 stageSize={stageSize}
-                visible={selectedSprite.visible}
                 x={selectedSprite.x}
                 y={selectedSprite.y}
                 onChangeDirection={onChangeSpriteDirection}
-                onChangeName={onChangeSpriteName}
                 onChangeRotationStyle={onChangeSpriteRotationStyle}
                 onChangeSize={onChangeSpriteSize}
-                onChangeVisibility={onChangeSpriteVisibility}
                 onChangeX={onChangeSpriteX}
                 onChangeY={onChangeSpriteY}
             />
@@ -154,10 +148,8 @@ SpriteSelectorComponent.propTypes = {
     }),
     intl: intlShape.isRequired,
     onChangeSpriteDirection: PropTypes.func,
-    onChangeSpriteName: PropTypes.func,
     onChangeSpriteRotationStyle: PropTypes.func,
     onChangeSpriteSize: PropTypes.func,
-    onChangeSpriteVisibility: PropTypes.func,
     onChangeSpriteX: PropTypes.func,
     onChangeSpriteY: PropTypes.func,
     onDeleteSprite: PropTypes.func,

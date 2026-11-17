@@ -1,6 +1,7 @@
 // Desktop fork (section 217): the code area's zoom buttons are drawn as shapes coloured by the theme
 // (ring: borders, face: buttons and tiles, symbol: dim text) instead of Blockly's fixed pictures.
-// Section 288: small squares stacked with no gap (they share their border), in the bottom right corner.
+// Section 288: small squares with no gap (they share their border), in the bottom right corner.
+// Section 289: side by side (+, −, =), each as high as the ADD box under the categories (1.2rem).
 // Each picture is moved into a group with the shapes and stays on top, invisible, so Blockly's own
 // click handlers keep working. Addons that move or scale the buttons work on `.blocklyZoom > *`,
 // which is now each group.
@@ -21,9 +22,16 @@ const SYMBOLS = {
         ['rect', {x: 13, y: 20, width: 10, height: 2, rx: 1, ry: 1}]
     ]
 };
-// button size in pixels and how much bigger the symbol is drawn than in the 36 x 36 pictures
-const SIZE = 24;
+// button size: the ADD box's height (gui.css .extension-button, 1.2rem), in pixels
+const remPixels = () => {
+    const size = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    return size > 0 ? size : 16;
+};
+const SIZE = 1.2 * remPixels();
+// how much bigger the symbol is drawn than in the 36 x 36 pictures
 const SYMBOL_ZOOM = 1.25;
+// the row is three squares that share their borders
+const ROW_WIDTH = (3 * SIZE) - 2;
 
 const POSITIONS = ['x', 'cx', 'x1', 'x2'];
 const LENGTHS = ['r', 'width', 'height', 'rx', 'ry'];
@@ -69,19 +77,35 @@ const patchZoomButtons = ScratchBlocks => {
     if (!ZoomControls || ZoomControls.prototype.pmThemed) return;
     ZoomControls.prototype.pmThemed = true;
     // small squares, touching (the -1 makes neighbours share one border line), in the corner: the
-    // code area has no visible scrollbars (pm-theme-uses.css), so their room is not kept free
+    // code area has no visible scrollbars (pm-theme-uses.css), so their room is not kept free.
+    // WIDTH_ is one button (Blockly sizes each picture with it); the row's width is added in position.
     ZoomControls.prototype.WIDTH_ = SIZE;
     ZoomControls.prototype.MARGIN_BETWEEN_ = -1;
-    ZoomControls.prototype.HEIGHT_ = (3 * SIZE) - 2;
-    ZoomControls.prototype.MARGIN_BOTTOM_ = 0;
-    ZoomControls.prototype.MARGIN_SIDE_ = -((ScratchBlocks.Scrollbar && ScratchBlocks.Scrollbar.scrollbarThickness) || 0);
+    ZoomControls.prototype.HEIGHT_ = SIZE;
+    const scrollbar = (ScratchBlocks.Scrollbar && ScratchBlocks.Scrollbar.scrollbarThickness) || 0;
+    // section 289: Blockly also keeps the scrollbar's room free under them (init adds it)
+    ZoomControls.prototype.MARGIN_BOTTOM_ = -scrollbar;
+    ZoomControls.prototype.MARGIN_SIDE_ = -scrollbar;
     const originalCreateDom = ZoomControls.prototype.createDom;
     ZoomControls.prototype.createDom = function () {
         const svgGroup = originalCreateDom.apply(this, arguments);
         if (svgGroup) {
-            for (const image of Array.from(svgGroup.querySelectorAll('image'))) drawButton(image);
+            for (const image of Array.from(svgGroup.querySelectorAll('image'))) {
+                // Blockly stacks them (y); lay them out in a row instead (x)
+                image.setAttribute('x', image.getAttribute('y') || 0);
+                image.setAttribute('y', 0);
+                drawButton(image);
+            }
         }
         return svgGroup;
+    };
+    // Blockly keeps one button's width free at the right edge; the row needs the rest too
+    const originalPosition = ZoomControls.prototype.position;
+    ZoomControls.prototype.position = function () {
+        originalPosition.apply(this, arguments);
+        if (!this.svgGroup_ || !this.workspace_ || this.workspace_.RTL || typeof this.left_ !== 'number') return;
+        this.left_ -= ROW_WIDTH - SIZE;
+        this.svgGroup_.setAttribute('transform', `translate(${this.left_},${this.top_})`);
     };
 };
 

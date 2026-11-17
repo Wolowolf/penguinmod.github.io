@@ -2,13 +2,14 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  width: 40px;
-  height: 90px;
+  /* section 289: the zoom buttons are a row along the bottom edge */
+  width: 90px;
+  height: 40px;
   pointer-events: none;
 }
 .blocklyZoom > * {
   transition: transform var(--sa-custom-zoom-speed, 0) ease-in-out;
 }
 .sa-custom-zoom-hidden > * {
-  transform: translateX(80px);
+  transform: translateY(40px);
 }

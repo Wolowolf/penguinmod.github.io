@@ -72,10 +72,13 @@ export default class ShowBroadcast {
       } else if (target.isOriginal) {
         // This is one of the most ridiculous code I've ever written.
         // This essentially compares sprite names to textContent so that we can add CSS.
-        const possibleElements = document.querySelectorAll('div[class*="sprite-selector-item_sprite-name"]');
+        // desktop: sprite tiles show their name in a box (input), other tiles as text
+        const possibleElements = document.querySelectorAll(
+          'div[class*="sprite-selector-item_sprite-name"], input[class*="sprite-selector-item_sprite-name-input"]'
+        );
         const spriteNameElem = Array.prototype.find.call(
           possibleElements,
-          (elem) => elem.textContent === target.getName()
+          (elem) => (elem.tagName === "INPUT" ? elem.value : elem.textContent) === target.getName()
         );
         if (!spriteNameElem) continue;
         elem = spriteNameElem.parentElement;

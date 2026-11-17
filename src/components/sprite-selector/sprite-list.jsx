@@ -90,6 +90,8 @@ const SpriteList = function (props) {
                                 key={sprite.id}
                                 name={sprite.name}
                                 selected={sprite.id === selectedId}
+                                spriteControls
+                                visible={sprite.visible !== false}
                                 onClick={onSelectSprite}
                                 noDeleteButton
                                 onDeleteButtonClick={onDeleteSprite}

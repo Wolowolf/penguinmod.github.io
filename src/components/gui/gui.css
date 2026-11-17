@@ -56,9 +56,12 @@
         much better ways to solve that (e.g. undo #2124, remove this flex-basis entirely). However, they run their own
         risks of breaking things, so let's just leave this as-is for the time being.
     */
-    flex-basis: calc(1024px - 408px - (($space + $stage-standard-border-width) * 2));
+    /* section 289: takes whatever the stage column leaves, so a narrow window never cuts the stage
+       column off (it was at least 600px wide, which pushed the stage column past the window edge) */
+    flex-basis: 0;
     flex-grow: 1;
-    flex-shrink: 0;
+    flex-shrink: 1;
+    min-width: 0;
     position: relative;
 
     display: flex;
@@ -285,13 +288,13 @@
 
 /* PMDESKTOP_ADD_BUTTON: the add extension button is an "ADD" box the size of an unselected
    category box (blocks.css), at the bottom of the category menu. The container has the menu's
-   transparent 1px edge and 2px padding, so the box lines up with the category boxes. */
+   transparent 1px edge and 2px padding under it, so the box lines up with the category boxes. */
 .extension-button-container {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 4.5rem;
-    padding: 0 2px 2px;
+    padding: 0 0 2px; /* section 289: as wide as the category boxes, no space left and right */
     border-left: 1px solid transparent;
     box-sizing: content-box !important;
     z-index: $z-index-extension-button;
@@ -308,7 +311,7 @@
 .extension-button {
     display: flex;
     align-items: center;
-    width: calc(4.5rem - 4px);
+    width: 4.5rem;
     height: 1.2rem;
     box-sizing: border-box;
     margin: 0;

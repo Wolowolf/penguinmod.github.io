@@ -7,6 +7,13 @@ import styles from './sprite-selector-item.css';
 import {ContextMenuTrigger} from 'react-contextmenu';
 import {DangerousMenuItem, ContextMenu, MenuItem} from '../context-menu/context-menu.jsx';
 import {FormattedMessage} from 'react-intl';
+import Input from '../forms/input.jsx';
+import BufferedInputHOC from '../forms/buffered-input-hoc.jsx';
+
+const BufferedInput = BufferedInputHOC(Input);
+
+// the name box and the eye are clicked or typed in, not dragged like the tile
+const stopEvent = e => e.stopPropagation();
 
 // react-contextmenu requires unique id to match trigger and context menu
 let contextMenuId = 0;
@@ -41,12 +48,35 @@ const SpriteSelectorItem = props => (
                 </div>
             </div>
         ) : null}
-        <div className={styles.spriteInfo}>
+        {props.onNameSubmit ? (
+            /* desktop: a sprite tile's bar is [show/hide][name box] */
+            <div className={classNames(styles.spriteInfo, styles.spriteControls)}>
+                <button
+                    className={styles.eyeToggle}
+                    title={props.visible ? 'Hide' : 'Show'}
+                    type="button"
+                    onClick={props.onToggleVisible}
+                    onMouseDown={stopEvent}
+                    onTouchStart={stopEvent}
+                >
+                    <span className={classNames(styles.eyeIcon, props.visible ? styles.eyeShow : styles.eyeHide)} />
+                </button>
+                <BufferedInput
+                    className={styles.spriteNameInput}
+                    tabIndex="0"
+                    type="text"
+                    value={props.name}
+                    onMouseDown={stopEvent}
+                    onSubmit={props.onNameSubmit}
+                    onTouchStart={stopEvent}
+                />
+            </div>
+        ) : <div className={styles.spriteInfo}>
             <div className={styles.spriteName}>{props.name}</div>
             {props.details ? (
                 <div className={styles.spriteDetails}>{props.details}</div>
             ) : null}
-        </div>
+        </div>}
         {(props.selected && props.onDeleteButtonClick && !props.noDeleteButton) ? (
             <DeleteButton
                 className={styles.deleteButton}
@@ -113,8 +143,11 @@ SpriteSelectorItem.propTypes = {
     onMouseDown: PropTypes.func,
     onMouseEnter: PropTypes.func,
     onMouseLeave: PropTypes.func,
+    onNameSubmit: PropTypes.func,
+    onToggleVisible: PropTypes.func,
     preventContextMenu: PropTypes.bool,
-    selected: PropTypes.bool.isRequired
+    selected: PropTypes.bool.isRequired,
+    visible: PropTypes.bool
 };
 
 export default SpriteSelectorItem;
