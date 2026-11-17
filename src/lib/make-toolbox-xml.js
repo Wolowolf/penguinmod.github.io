@@ -709,6 +709,22 @@ const control = function (isInitialSetup, isStage) {
                 </shadow>
             </value>
         </block>
+        <block type="control_expandableIfReturn">
+            <mutation branches="2"></mutation>
+            <value name="BOOL1">
+                <shadow type="checkbox" />
+            </value>
+            <value name="TEXT1">
+                <shadow type="text">
+                    <field name="TEXT">foo</field>
+                </shadow>
+            </value>
+            <value name="ELSE">
+                <shadow type="text">
+                    <field name="TEXT">bar</field>
+                </shadow>
+            </value>
+        </block>
         ${blockSeparator}
         <block id="wait_until" type="control_wait_until">
             <value name="CONDITION">

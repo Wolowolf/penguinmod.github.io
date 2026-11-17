@@ -104,6 +104,8 @@ export default async function({ addon }) {
 
     Blockly.Blocks["control_expandableIf"].fillInBlock = Blockly.scratchBlocksUtils.generateMutatorShadow;
     Blockly.Blocks["operator_expandableBool"].fillInBlock = Blockly.scratchBlocksUtils.generateMutatorShadow;
+    // Desktop fork (section 281): the modular "if then else" reporter's new "else if" slots
+    Blockly.Blocks["control_expandableIfReturn"].fillInBlock = Blockly.scratchBlocksUtils.generateMutatorShadow;
   }
 
   function toggleToolBoxScroll() {
