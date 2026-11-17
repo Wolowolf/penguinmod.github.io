@@ -132,8 +132,10 @@ class SpriteInfo extends React.Component {
                         </div>
                     </div>
                     <div className={classNames(styles.row, styles.rowSecondary)}>
-                        {xPosition}
-                        {yPosition}
+                        <div className={styles.pair}>
+                            {xPosition}
+                            {yPosition}
+                        </div>
                     </div>
                 </Box>
             );
@@ -142,59 +144,65 @@ class SpriteInfo extends React.Component {
         return (
             <Box className={styles.spriteInfo}>
                 <div className={styles.row}>
-                    <div
-                        className={classNames(
-                            styles.radio,
-                            styles.eyeToggle,
-                            {
-                                [styles.isActive]: this.props.visible && !this.props.disabled,
-                                [styles.isDisabled]: this.props.disabled
-                            }
-                        )}
-                        tabIndex="0"
-                        onClick={this.props.disabled ? null : (
-                            this.props.visible ? this.props.onClickNotVisible : this.props.onClickVisible
-                        )}
-                        onKeyPress={this.props.disabled ? null : (
-                            this.props.visible ? this.props.onPressNotVisible : this.props.onPressVisible
-                        )}
-                    >
-                        <img
-                            className={styles.icon}
-                            src={this.props.visible ? showIcon : hideIcon}
-                        />
-                    </div>
-                    <div className={styles.group}>
-                        {spriteNameInput}
-                    </div>
-                    {xPosition}
-                    {yPosition}
-                    <div className={classNames(styles.group, styles.largerInput)}>
-                        <Label
-                            secondary
-                            above={labelAbove}
-                            text="⇪"
+                    <div className={styles.pair}>
+                        <div
+                            className={classNames(
+                                styles.radio,
+                                styles.eyeToggle,
+                                {
+                                    [styles.isActive]: this.props.visible && !this.props.disabled,
+                                    [styles.isDisabled]: this.props.disabled
+                                }
+                            )}
+                            tabIndex="0"
+                            onClick={this.props.disabled ? null : (
+                                this.props.visible ? this.props.onClickNotVisible : this.props.onClickVisible
+                            )}
+                            onKeyPress={this.props.disabled ? null : (
+                                this.props.visible ? this.props.onPressNotVisible : this.props.onPressVisible
+                            )}
                         >
-                            <BufferedInput
-                                small
-                                disabled={this.props.disabled}
-                                label={sizeLabel}
-                                tabIndex="0"
-                                type="text"
-                                value={this.props.disabled ? '' : Math.round(this.props.size)}
-                                onSubmit={this.props.onChangeSize}
+                            <img
+                                className={styles.icon}
+                                src={this.props.visible ? showIcon : hideIcon}
                             />
-                        </Label>
+                        </div>
+                        <div className={styles.group}>
+                            {spriteNameInput}
+                        </div>
                     </div>
-                    <div className={classNames(styles.group, styles.largerInput)}>
-                        <DirectionPicker
-                            direction={Math.round(this.props.direction)}
-                            disabled={this.props.disabled}
-                            labelAbove={labelAbove}
-                            rotationStyle={this.props.rotationStyle}
-                            onChangeDirection={this.props.onChangeDirection}
-                            onChangeRotationStyle={this.props.onChangeRotationStyle}
-                        />
+                    <div className={styles.pair}>
+                        {xPosition}
+                        {yPosition}
+                    </div>
+                    <div className={styles.pair}>
+                        <div className={classNames(styles.group, styles.largerInput)}>
+                            <Label
+                                secondary
+                                above={labelAbove}
+                                text="⇪"
+                            >
+                                <BufferedInput
+                                    small
+                                    disabled={this.props.disabled}
+                                    label={sizeLabel}
+                                    tabIndex="0"
+                                    type="text"
+                                    value={this.props.disabled ? '' : Math.round(this.props.size)}
+                                    onSubmit={this.props.onChangeSize}
+                                />
+                            </Label>
+                        </div>
+                        <div className={classNames(styles.group, styles.largerInput)}>
+                            <DirectionPicker
+                                direction={Math.round(this.props.direction)}
+                                disabled={this.props.disabled}
+                                labelAbove={labelAbove}
+                                rotationStyle={this.props.rotationStyle}
+                                onChangeDirection={this.props.onChangeDirection}
+                                onChangeRotationStyle={this.props.onChangeRotationStyle}
+                            />
+                        </div>
                     </div>
                 </div>
             </Box>

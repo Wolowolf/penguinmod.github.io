@@ -13,6 +13,9 @@
   /* never wider than the code area, so it can't reach the tabs or the stage buttons */
   width: min(16em, calc(100% - 4.5rem - 250px - 8px));
   height: 100%;
+  /* section 288: the transform above makes the bar its own layer; without this the code area, which
+     comes later in the page, is drawn over its result list */
+  z-index: 10;
 }
 .sa-find-bar[hidden] {
   /* !important to override displayNoneWhileDisabled */

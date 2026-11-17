@@ -11,7 +11,8 @@
   font-size: 0.6rem;
   font-weight: bold;
   font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif);
-  color: #5cb1d6;
+  /* section 288: the frame's ink (the stage header is part of the frame) */
+  color: var(--text-primary);
   white-space: nowrap;
 }
 

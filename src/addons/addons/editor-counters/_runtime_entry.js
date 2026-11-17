@@ -7,8 +7,7 @@ import _css2 from "!css-loader!./clones.css";
 import _css3 from "!css-loader!./hide-mouse-pos.css";
 import _css4 from "!css-loader!./hide-clones.css";
 import _css5 from "!css-loader!./hide-block-count.css";
-import _asset from "!url-loader!./300cats.svg";
-import _asset2 from "!url-loader!./cat.svg";
+import _asset from "!url-loader!./cat.svg";
 export const resources = {
   "mouse-pos.js": _js,
   "clones.js": _js2,
@@ -18,6 +17,5 @@ export const resources = {
   "hide-mouse-pos.css": _css3,
   "hide-clones.css": _css4,
   "hide-block-count.css": _css5,
-  "300cats.svg": _asset,
-  "cat.svg": _asset2,
+  "cat.svg": _asset,
 };

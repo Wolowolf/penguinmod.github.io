@@ -12,6 +12,12 @@
 .blocklyScrollbarHandle {
     fill: var(--ui-edge) !important;
 }
+/* section 288: no scrollbars on the code area or the block palette (scrolled with the wheel or by
+   dragging); Blockly still uses them inside to move the view, so they are only hidden */
+.injectionDiv > .blocklyScrollbarHorizontal,
+.injectionDiv > .blocklyScrollbarVertical {
+    display: none !important;
+}
 
 /* block palette and category menu */
 .blocklyFlyoutBackground {

@@ -129,10 +129,30 @@
     line-height: 1;
 }
 
-[dir="ltr"] .sprite-info [class*="label_input-label"] {
-    margin-right: 0.25rem;
+/* section 288: three pairs that each stay on one line with no space inside them:
+   [show/hide][name], x [x][y] y, size [size][direction] direction; neighbours share one border line */
+.pair {
+    display: inline-flex;
+    flex: 0 0 auto;
+    flex-wrap: nowrap;
+    align-items: center;
+    max-width: 100%;
 }
 
-[dir="rtl"] .sprite-info [class*="label_input-label"] {
-    margin-left: 0.25rem;
+.pair > * + * {
+    margin-inline-start: -1px;
+}
+
+/* the second box of a pair has its label after it */
+.pair > .group + .group [class*="label_input-group_"] {
+    flex-direction: row-reverse;
+}
+
+.sprite-info [class*="label_input-label"] {
+    margin-inline-end: 0.25rem;
+}
+
+.pair > .group + .group [class*="label_input-label"] {
+    margin-inline-end: 0;
+    margin-inline-start: 0.25rem;
 }

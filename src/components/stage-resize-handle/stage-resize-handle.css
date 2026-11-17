@@ -24,7 +24,8 @@
 .handle::before {
     content: "";
     position: absolute;
-    top: 0;
+    /* section 288: not beside the stage header, so the line under the tab row and the header is one line */
+    top: $stage-menu-height;
     bottom: 0;
     left: 2.5px;
     width: 1px;

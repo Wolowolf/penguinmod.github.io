@@ -1,5 +1,6 @@
 // Desktop fork (section 217): the code area's zoom buttons are drawn as shapes coloured by the theme
 // (ring: borders, face: buttons and tiles, symbol: dim text) instead of Blockly's fixed pictures.
+// Section 288: small squares stacked with no gap (they share their border), in the bottom right corner.
 // Each picture is moved into a group with the shapes and stays on top, invisible, so Blockly's own
 // click handlers keep working. Addons that move or scale the buttons work on `.blocklyZoom > *`,
 // which is now each group.
@@ -20,6 +21,10 @@ const SYMBOLS = {
         ['rect', {x: 13, y: 20, width: 10, height: 2, rx: 1, ry: 1}]
     ]
 };
+// button size in pixels and how much bigger the symbol is drawn than in the 36 x 36 pictures
+const SIZE = 24;
+const SYMBOL_ZOOM = 1.25;
+
 const POSITIONS = ['x', 'cx', 'x1', 'x2'];
 const LENGTHS = ['r', 'width', 'height', 'rx', 'ry'];
 
@@ -41,13 +46,17 @@ const drawButton = image => {
     if (!name || !image.parentNode) return;
     const left = Number(image.getAttribute('x')) || 0;
     const top = Number(image.getAttribute('y')) || 0;
-    const scale = (Number(image.getAttribute('width')) || 36) / 36;
+    const size = Number(image.getAttribute('width')) || SIZE;
     const group = document.createElementNS(SVG_NS, 'g');
     group.setAttribute('class', 'pm-zoom-button');
-    group.appendChild(shape('circle', {cx: 18, cy: 18, r: 18}, 'pm-zoom-ring', left, top, scale));
-    group.appendChild(shape('circle', {cx: 18, cy: 18, r: 16}, 'pm-zoom-face', left, top, scale));
+    // a 1 px border (ring) around the face, whatever the size
+    group.appendChild(shape('rect', {x: 0, y: 0, width: size, height: size}, 'pm-zoom-ring', left, top, 1));
+    group.appendChild(shape('rect', {x: 1, y: 1, width: size - 2, height: size - 2}, 'pm-zoom-face', left, top, 1));
+    // the symbol, centred
+    const scale = (size / 36) * SYMBOL_ZOOM;
+    const offset = (size / 2) - (18 * scale);
     for (const [tag, attributes] of SYMBOLS[name]) {
-        group.appendChild(shape(tag, attributes, 'pm-zoom-glyph', left, top, scale));
+        group.appendChild(shape(tag, attributes, 'pm-zoom-glyph', left + offset, top + offset, scale));
     }
     for (const child of group.childNodes) child.style.pointerEvents = 'none';
     image.parentNode.insertBefore(group, image);
@@ -59,6 +68,13 @@ const patchZoomButtons = ScratchBlocks => {
     const ZoomControls = ScratchBlocks && ScratchBlocks.ZoomControls;
     if (!ZoomControls || ZoomControls.prototype.pmThemed) return;
     ZoomControls.prototype.pmThemed = true;
+    // small squares, touching (the -1 makes neighbours share one border line), in the corner: the
+    // code area has no visible scrollbars (pm-theme-uses.css), so their room is not kept free
+    ZoomControls.prototype.WIDTH_ = SIZE;
+    ZoomControls.prototype.MARGIN_BETWEEN_ = -1;
+    ZoomControls.prototype.HEIGHT_ = (3 * SIZE) - 2;
+    ZoomControls.prototype.MARGIN_BOTTOM_ = 0;
+    ZoomControls.prototype.MARGIN_SIDE_ = -((ScratchBlocks.Scrollbar && ScratchBlocks.Scrollbar.scrollbarThickness) || 0);
     const originalCreateDom = ZoomControls.prototype.createDom;
     ZoomControls.prototype.createDom = function () {
         const svgGroup = originalCreateDom.apply(this, arguments);
