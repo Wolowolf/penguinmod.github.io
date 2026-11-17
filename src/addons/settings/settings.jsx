@@ -104,6 +104,7 @@ const addonOrder = [
     'block-pins',
     'toolbox-full-blocks-on-hover',
     'hide-flyout',
+    'single-modular-blocks',
     // Block appearance
     'editor-theme3',
     'block-shape-text',

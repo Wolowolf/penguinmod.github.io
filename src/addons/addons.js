@@ -12,6 +12,7 @@ const addons = [
     'pause',
     'mute-project',
     'stage-second-screen',
+    'single-modular-blocks',
     'editor-counters',
     'color-picker',
     'onion-skinning',
