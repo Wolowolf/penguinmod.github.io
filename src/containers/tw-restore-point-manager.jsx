@@ -9,7 +9,7 @@ import {LoadingStates, getIsShowingProject, onLoadedProject, requestProjectUploa
 import {setFileHandle} from '../reducers/tw';
 import TWRestorePointModal from '../components/tw-restore-point-modal/restore-point-modal.jsx';
 import RestorePointAPI from '../lib/tw-restore-point-api';
-import downloadBlob from '../lib/download-blob';
+import downloadBlob from 'scratch-vm/src/web-shared/download-blob';
 import log from '../lib/log';
 
 /* eslint-disable no-alert */

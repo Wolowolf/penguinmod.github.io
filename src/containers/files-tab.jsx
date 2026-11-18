@@ -24,7 +24,7 @@ import nordTheMan from '../components/asset-panel/nord.png';
 import { handleFileUpload, externalFileUpload } from '../lib/file-uploader.js';
 import errorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 // import DragConstants from '../lib/drag-constants';
-import downloadBlob from '../lib/download-blob';
+import downloadBlob from 'scratch-vm/src/web-shared/download-blob';
 
 import { connect } from 'react-redux';
 

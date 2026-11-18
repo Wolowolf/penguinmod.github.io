@@ -16,7 +16,7 @@
 
 import addons from './generated/addon-manifests';
 import upstreamMeta from './generated/upstream-meta.json';
-import EventTargetShim from './event-target';
+import EventTargetShim from 'scratch-vm/src/web-shared/event-target';
 
 const SETTINGS_KEY = 'tw:addons';
 const VERSION = 4;

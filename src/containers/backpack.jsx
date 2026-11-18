@@ -19,7 +19,7 @@ import DropAreaHOC from '../lib/drop-area-hoc.jsx';
 
 import {connect} from 'react-redux';
 import storage from '../lib/storage';
-import downloadBlob from '../lib/download-blob';
+import downloadBlob from 'scratch-vm/src/web-shared/download-blob';
 import VM from 'scratch-vm';
 
 const dragTypes = [DragConstants.COSTUME, DragConstants.SOUND, DragConstants.SPRITE];

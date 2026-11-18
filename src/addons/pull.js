@@ -128,7 +128,7 @@ const includeImportedLibraries = contents => {
 
 const includePolyfills = contents => {
     if (contents.includes('EventTarget')) {
-        contents = `import EventTarget from "../../event-target.js"; /* inserted by pull.js */\n\n${contents}`;
+        contents = `import EventTarget from "scratch-vm/src/web-shared/event-target.js"; /* inserted by pull.js */\n\n${contents}`;
     }
     return contents;
 };

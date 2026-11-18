@@ -12,7 +12,7 @@ import errorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import DragConstants from '../lib/drag-constants';
 import { emptyCostume } from '../lib/empty-assets';
 import sharedMessages from '../lib/shared-messages';
-import downloadBlob from '../lib/download-blob';
+import downloadBlob from 'scratch-vm/src/web-shared/download-blob';
 
 import {
     openCostumeLibrary,

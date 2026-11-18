@@ -1,4 +1,4 @@
-import downloadBlob from "../../libraries/common/cs/download-blob.js";
+import downloadBlob from "scratch-vm/src/web-shared/download-blob.js";
 
 export default async ({ addon, console, msg }) => {
     let recordElem;

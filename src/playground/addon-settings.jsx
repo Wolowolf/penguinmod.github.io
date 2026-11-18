@@ -16,7 +16,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import downloadBlob from '../lib/download-blob.js';
+import downloadBlob from 'scratch-vm/src/web-shared/download-blob';
 import Settings from '../addons/settings/settings.jsx';
 import appTarget from './app-target';
 

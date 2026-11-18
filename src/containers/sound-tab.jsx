@@ -23,7 +23,7 @@ import {addRandomOfflineAsset} from '../lib/pm-asset-sources.js';
 import { handleFileUpload, soundUpload } from '../lib/file-uploader.js';
 import errorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import DragConstants from '../lib/drag-constants';
-import downloadBlob from '../lib/download-blob';
+import downloadBlob from 'scratch-vm/src/web-shared/download-blob';
 import SharedAudioContext from '../lib/audio/shared-audio-context.js';
 
 import { connect } from 'react-redux';
