@@ -1,7 +1,7 @@
 import {defineMessages, FormattedMessage, intlShape, injectIntl} from 'react-intl';
 import PropTypes from 'prop-types';
 import React from 'react';
-import Box from '../box/box.jsx';
+import Box from 'scratch-paint/src/components/box/box.jsx';
 import Modal from '../../containers/modal.jsx';
 import SecurityModals from '../../lib/tw-security-manager-constants';
 import FetchModal from './fetch.jsx';

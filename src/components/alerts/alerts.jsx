@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Box from '../box/box.jsx';
+import Box from 'scratch-paint/src/components/box/box.jsx';
 import Alert from '../../containers/alert.jsx';
 
 import styles from './alerts.css';

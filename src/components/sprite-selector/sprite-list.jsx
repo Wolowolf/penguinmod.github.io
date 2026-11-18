@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import DragConstants from '../../lib/drag-constants';
 
-import Box from '../box/box.jsx';
+import Box from 'scratch-paint/src/components/box/box.jsx';
 import SpriteSelectorItem from '../../containers/sprite-selector-item.jsx';
 import SortableHOC from '../../lib/sortable-hoc.jsx';
 import SortableAsset from '../asset-panel/sortable-asset.jsx';

@@ -6,7 +6,7 @@ import {injectIntl, intlShape, defineMessages, FormattedMessage} from 'react-int
 
 import Label from '../forms/label.jsx';
 import Input from '../forms/input.jsx';
-import BufferedInputHOC from '../forms/buffered-input-hoc.jsx';
+import BufferedInputHOC from 'scratch-paint/src/components/forms/buffered-input-hoc.jsx';
 import Dial from './dial.jsx';
 
 import styles from './direction-picker.css';

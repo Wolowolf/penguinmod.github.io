@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import bindAll from 'lodash.bindall';
-import Box from '../box/box.jsx';
+import Box from 'scratch-paint/src/components/box/box.jsx';
 import Modal from '../../containers/modal.jsx';
 import FancyCheckbox from '../tw-fancy-checkbox/checkbox.jsx';
 import Input from '../forms/input.jsx';
-import BufferedInputHOC from '../forms/buffered-input-hoc.jsx';
+import BufferedInputHOC from 'scratch-paint/src/components/forms/buffered-input-hoc.jsx';
 import DocumentationLink from '../tw-documentation-link/documentation-link.jsx';
 import styles from './settings-modal.css';
 import {FramerateSetting, StageSizeSetting} from './pm-settings-parts.jsx'; // PMDESKTOP_STAGE_PATCH (section 21)

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import {defineMessages, injectIntl, intlShape} from 'react-intl';
-import Box from '../box/box.jsx';
+import Box from 'scratch-paint/src/components/box/box.jsx';
 import Meter from '../meter/meter.jsx';
 import Waveform from '../waveform/waveform.jsx';
 

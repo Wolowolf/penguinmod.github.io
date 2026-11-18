@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {defineMessages, intlShape, injectIntl, FormattedMessage} from 'react-intl';
 
-import Box from '../box/box.jsx';
+import Box from 'scratch-paint/src/components/box/box.jsx';
 import ActionMenu from '../action-menu/action-menu.jsx';
 import styles from './stage-selector.css';
 import {isRtl} from '@turbowarp/scratch-l10n';

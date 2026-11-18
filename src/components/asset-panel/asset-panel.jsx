@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Box from '../box/box.jsx';
+import Box from 'scratch-paint/src/components/box/box.jsx';
 import Selector from './selector.jsx';
 import styles from './asset-panel.css';
 

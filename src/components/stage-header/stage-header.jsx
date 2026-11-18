@@ -5,7 +5,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import VM from 'scratch-vm';
 
-import Box from '../box/box.jsx';
+import Box from 'scratch-paint/src/components/box/box.jsx';
 import Button from '../button/button.jsx';
 import Controls from '../../containers/controls.jsx';
 import {getStageDimensions} from '../../lib/screen-utils';

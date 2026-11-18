@@ -7,7 +7,7 @@ import Waveform from '../waveform/pm-sound-wave.jsx'; // PMDESKTOP_STAGE_PATCH: 
 import Label from '../forms/label.jsx';
 import Input from '../forms/input.jsx';
 
-import BufferedInputHOC from '../forms/buffered-input-hoc.jsx';
+import BufferedInputHOC from 'scratch-paint/src/components/forms/buffered-input-hoc.jsx';
 import AudioSelector from '../../containers/audio-selector.jsx';
 import IconButton from '../icon-button/icon-button.jsx';
 // PMDESKTOP_STAGE_PATCH: no upload-size warning on sounds (section 19)

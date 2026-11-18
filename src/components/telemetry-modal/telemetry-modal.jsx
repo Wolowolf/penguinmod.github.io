@@ -4,7 +4,7 @@ import React from 'react';
 import {defineMessages, injectIntl, intlShape, FormattedMessage} from 'react-intl';
 import ReactModal from 'react-modal';
 
-import Box from '../box/box.jsx';
+import Box from 'scratch-paint/src/components/box/box.jsx';
 
 import styles from './telemetry-modal.css';
 

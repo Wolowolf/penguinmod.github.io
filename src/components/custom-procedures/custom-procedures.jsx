@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Modal from '../../containers/modal.jsx';
-import Box from '../box/box.jsx';
+import Box from 'scratch-paint/src/components/box/box.jsx';
 import { defineMessages, injectIntl, intlShape, FormattedMessage } from 'react-intl';
 
 import dropperIcon from './icon--dropper.svg';

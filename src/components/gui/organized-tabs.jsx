@@ -4,7 +4,7 @@ import { FormattedMessage, injectIntl } from "react-intl";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import PropTypes from "prop-types";
 import React from "react";
-import Box from "../box/box.jsx";
+import Box from 'scratch-paint/src/components/box/box.jsx';
 import bindAll from "lodash.bindall";
 
 import styles from "./gui.css";

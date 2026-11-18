@@ -6,7 +6,7 @@ import React from 'react';
 import bindAll from 'lodash.bindall';
 
 import Input from '../forms/input.jsx';
-import Box from '../box/box.jsx';
+import Box from 'scratch-paint/src/components/box/box.jsx';
 import styles from './variables-tab.css';
 
 class VariablesTab extends React.Component {

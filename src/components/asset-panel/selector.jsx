@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import SpriteSelectorItem from '../../containers/sprite-selector-item.jsx';
-import Box from '../box/box.jsx';
+import Box from 'scratch-paint/src/components/box/box.jsx';
 import ActionMenu from '../action-menu/action-menu.jsx';
 import SortableAsset from './sortable-asset.jsx';
 import SortableHOC from '../../lib/sortable-hoc.jsx';

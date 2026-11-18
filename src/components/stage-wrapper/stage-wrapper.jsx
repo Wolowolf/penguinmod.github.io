@@ -3,7 +3,7 @@ import React from 'react';
 import classNames from 'classnames';
 import VM from 'scratch-vm';
 
-import Box from '../box/box.jsx';
+import Box from 'scratch-paint/src/components/box/box.jsx';
 import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants.js';
 import StageHeader from '../../containers/stage-header.jsx';
 import Stage from '../../containers/stage.jsx';

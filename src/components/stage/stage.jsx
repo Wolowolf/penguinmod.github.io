@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
-import Box from '../box/box.jsx';
+import Box from 'scratch-paint/src/components/box/box.jsx';
 import DOMElementRenderer from '../../containers/dom-element-renderer.jsx';
 import Loupe from '../loupe/loupe.jsx';
 import MonitorList from '../../containers/monitor-list.jsx';

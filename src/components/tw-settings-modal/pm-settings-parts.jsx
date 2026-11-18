@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import {FormattedMessage} from 'react-intl';
 import Input from '../forms/input.jsx';
 import FancyCheckbox from '../tw-fancy-checkbox/checkbox.jsx';
-import BufferedInputHOC from '../forms/buffered-input-hoc.jsx';
+import BufferedInputHOC from 'scratch-paint/src/components/forms/buffered-input-hoc.jsx';
 import styles from './settings-modal.css';
 
 const BufferedInput = BufferedInputHOC(Input);

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import bindAll from 'lodash.bindall';
 
-import Box from '../box/box.jsx';
+import Box from 'scratch-paint/src/components/box/box.jsx';
 import styles from './loupe.css';
 
 const zoomScale = 3;

@@ -5,7 +5,7 @@ import React from 'react';
 import {defineMessages, intlShape, injectIntl} from 'react-intl';
 import {setProjectTitle} from '../../reducers/project-title';
 
-import BufferedInputHOC from '../forms/buffered-input-hoc.jsx';
+import BufferedInputHOC from 'scratch-paint/src/components/forms/buffered-input-hoc.jsx';
 import Input from '../forms/input.jsx';
 const BufferedInput = BufferedInputHOC(Input);
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {FormattedMessage} from 'react-intl';
 
-import Box from '../box/box.jsx';
+import Box from 'scratch-paint/src/components/box/box.jsx';
 import CloseButton from '../close-button/close-button.jsx';
 import Spinner from '../spinner/spinner.jsx';
 import {AlertLevels} from '../../lib/alerts/index.jsx';

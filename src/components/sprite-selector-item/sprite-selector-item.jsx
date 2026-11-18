@@ -8,7 +8,7 @@ import {ContextMenuTrigger} from 'react-contextmenu';
 import {DangerousMenuItem, ContextMenu, MenuItem} from '../context-menu/context-menu.jsx';
 import {FormattedMessage} from 'react-intl';
 import Input from '../forms/input.jsx';
-import BufferedInputHOC from '../forms/buffered-input-hoc.jsx';
+import BufferedInputHOC from 'scratch-paint/src/components/forms/buffered-input-hoc.jsx';
 
 const BufferedInput = BufferedInputHOC(Input);
 

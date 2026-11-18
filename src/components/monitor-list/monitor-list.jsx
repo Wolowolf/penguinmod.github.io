@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import Box from '../box/box.jsx';
+import Box from 'scratch-paint/src/components/box/box.jsx';
 import Monitor from '../../containers/monitor.jsx';
 import PropTypes from 'prop-types';
 import {OrderedMap} from 'immutable';

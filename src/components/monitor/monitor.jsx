@@ -5,7 +5,7 @@ import Draggable from 'react-draggable';
 import {FormattedMessage} from 'react-intl';
 import {ContextMenuTrigger} from 'react-contextmenu';
 import {BorderedMenuItem, ContextMenu, MenuItem} from '../context-menu/context-menu.jsx';
-import Box from '../box/box.jsx';
+import Box from 'scratch-paint/src/components/box/box.jsx';
 import DefaultMonitor from './default-monitor.jsx';
 import LargeMonitor from './large-monitor.jsx';
 import SliderMonitor from '../../containers/slider-monitor.jsx';

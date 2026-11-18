@@ -2,10 +2,10 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Box from '../box/box.jsx';
+import Box from 'scratch-paint/src/components/box/box.jsx';
 import Label from '../forms/label.jsx';
 import Input from '../forms/input.jsx';
-import BufferedInputHOC from '../forms/buffered-input-hoc.jsx';
+import BufferedInputHOC from 'scratch-paint/src/components/forms/buffered-input-hoc.jsx';
 import DirectionPicker from '../../containers/direction-picker.jsx';
 
 import {injectIntl, intlShape, FormattedMessage} from 'react-intl';

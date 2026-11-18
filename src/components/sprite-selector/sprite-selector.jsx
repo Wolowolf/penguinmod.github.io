@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {defineMessages, injectIntl, intlShape} from 'react-intl';
 
-import Box from '../box/box.jsx';
+import Box from 'scratch-paint/src/components/box/box.jsx';
 import SpriteInfo from '../../containers/sprite-info.jsx';
 import SpriteList from './sprite-list.jsx';
 import ActionMenu from '../action-menu/action-menu.jsx';

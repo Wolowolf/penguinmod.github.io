@@ -9,7 +9,7 @@ import React from 'react';
 
 import VM from 'scratch-vm';
 
-import Box from '../box/box.jsx';
+import Box from 'scratch-paint/src/components/box/box.jsx';
 import Button from '../button/button.jsx';
 import { ComingSoonTooltip } from '../coming-soon/coming-soon.jsx';
 import Divider from '../divider/divider.jsx';

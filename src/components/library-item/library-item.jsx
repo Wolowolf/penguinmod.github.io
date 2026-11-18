@@ -2,7 +2,7 @@ import {FormattedMessage, intlShape, defineMessages} from 'react-intl';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Box from '../box/box.jsx';
+import Box from 'scratch-paint/src/components/box/box.jsx';
 import PlayButton from '../../containers/play-button.jsx';
 import styles from './library-item.css';
 import classNames from 'classnames';

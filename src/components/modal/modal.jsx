@@ -4,7 +4,7 @@ import React from 'react';
 import ReactModal from 'react-modal';
 import {FormattedMessage} from 'react-intl';
 
-import Box from '../box/box.jsx';
+import Box from 'scratch-paint/src/components/box/box.jsx';
 import Button from '../button/button.jsx';
 import CloseButton from '../close-button/close-button.jsx';
 

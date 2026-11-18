@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import Box from '../box/box.jsx';
+import Box from 'scratch-paint/src/components/box/box.jsx';
 import {defineMessages, injectIntl, intlShape} from 'react-intl';
 import RecordingStep from '../../containers/recording-step.jsx';
 import PlaybackStep from '../../containers/playback-step.jsx';
