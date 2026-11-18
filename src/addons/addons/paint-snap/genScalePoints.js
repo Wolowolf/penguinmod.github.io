@@ -1,9 +1,7 @@
 import { snapFrom, snapTo } from "./state.js";
+import { CENTER, ART_BOARD_BOUNDS } from "scratch-paint/src/helper/view.js";
 
-export default function createScalePoints(paper, lib, objects, sx, sy) {
-  const {
-    view: { CENTER, ART_BOARD_BOUNDS },
-  } = lib;
+export default function createScalePoints(paper, objects, sx, sy) {
 
   const toPoints = {
     ...(snapTo.pageAxes

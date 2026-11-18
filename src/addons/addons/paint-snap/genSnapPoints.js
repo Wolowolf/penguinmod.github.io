@@ -1,9 +1,7 @@
 import { snapFrom, snapTo } from "./state.js";
+import { CENTER, ART_BOARD_BOUNDS } from "scratch-paint/src/helper/view.js";
 
-export default function createSnapPoints(paper, selectionBounds, lib, objects) {
-  const {
-    view: { CENTER, ART_BOARD_BOUNDS },
-  } = lib;
+export default function createSnapPoints(paper, selectionBounds, objects) {
   const fromPoints = {
     ...(snapFrom.boxCenter
       ? {

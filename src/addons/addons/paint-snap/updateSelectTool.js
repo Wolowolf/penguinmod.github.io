@@ -1,5 +1,9 @@
 import createSnapPoints from "./genSnapPoints.js";
-import { loadModules, Modes, BitmapModes } from "./helpers.js";
+import Modes, { BitmapModes } from "scratch-paint/src/lib/modes.js";
+import { checkPointsClose, snapDeltaToAngle } from "scratch-paint/src/helper/math.js";
+import { getActionBounds, CENTER } from "scratch-paint/src/helper/view.js";
+import { getDragCrosshairLayer, CROSSHAIR_FULL_OPACITY, getLayer } from "scratch-paint/src/helper/layer.js";
+import { hoverBounds } from "scratch-paint/src/helper/guides.js";
 
 import { snapOn, threshold, guideColor } from "./state.js";
 
@@ -8,13 +12,6 @@ const getMoveTool = (tool) => {
 };
 
 export const updateSelectTool = (paper, tool) => {
-  const lib = loadModules(paper);
-  const {
-    math: { checkPointsClose, snapDeltaToAngle },
-    view: { getActionBounds, CENTER },
-    layer: { getDragCrosshairLayer, CROSSHAIR_FULL_OPACITY, getLayer },
-    guide: { hoverBounds },
-  } = lib;
 
   const moveTool = getMoveTool(tool);
 
@@ -133,7 +130,7 @@ export const updateSelectTool = (paper, tool) => {
     if (!event.modifiers.shift && this.mode !== Modes.RESHAPE) {
       const paintLayer = getLayer("isPaintingLayer");
 
-      const snapPoints = createSnapPoints(paper, selectionBounds, lib, paintLayer.children);
+      const snapPoints = createSnapPoints(paper, selectionBounds, paintLayer.children);
       const fromPoints = snapPoints.from;
       const toPoints = snapPoints.to;
 
