@@ -124,7 +124,7 @@
   /* .blocklyToolboxDiv (z-index: 40) */
   /* .gui_extension-button-container_b4rCs (z-index: 42) */
   z-index: 43;
-  padding-inline: 0.5rem;
+  /* section 290: no padding-inline, so the stage column touches the code area and the window edge */
   background-color: var(--ui-primary, hsl(215, 100%, 95%));
   /* section 222: this background's ink, accent and tints */
   --text-primary: var(--text-on-background);
