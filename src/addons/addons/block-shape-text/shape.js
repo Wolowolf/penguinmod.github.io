@@ -171,14 +171,6 @@ export default async function ({ addon, console }) {
         " z";
 
       BlockSvg.INPUT_SHAPE_SQUARE_WIDTH = 12 * GRID_UNIT * multiplier;
-      BlockSvg.INPUT_SHAPE_SQUARE =
-        'm 0,4A 4,4 0 0,1 4,0'+
-        ' h ' + (12 * GRID_UNIT * multiplier - 2 * 4) +
-        'a 4,4 0 0,1 4,4' +
-        ' v ' + (8 * GRID_UNIT * multiplier - 2 * 4) +
-        ' a 4,4 0 0,1 -4,4' +
-        ' h ' + (-12 * GRID_UNIT * multiplier + 2 * 4) +
-        'a 4,4 0 0,1 -4,-4 z';
 
       BlockSvg.INPUT_SHAPE_HEIGHT = 8 * GRID_UNIT * multiplier;
       BlockSvg.FIELD_HEIGHT = 8 * GRID_UNIT * multiplier; // NOTE: Determines string input heights
@@ -214,6 +206,9 @@ export default async function ({ addon, console }) {
       BlockSvg.TOP_RIGHT_CORNER_DEFINE_HAT =
         (r ? arc(1, d, d, d) : `h ${d} v ${d}`) + " v " + (1 * GRID_UNIT - r);
 
+      // Empty text/mixed slot: same corners as the blocks (sharp at 0)
+      BlockSvg.INPUT_SHAPE_SQUARE = squareSlotPath(r);
+
       BlockSvg.STATEMENT_INPUT_INNER_SPACE = 2.8 * GRID_UNIT - 0.9 * GRID_UNIT * cornerSize;
 
       BlocklyInstance.FieldImage.prototype.init = function (...args) {
@@ -223,6 +218,14 @@ export default async function ({ addon, console }) {
         this.size_.height *= iconSize;
         ogFieldImageInit.call(this, ...args);
       }
+    }
+
+    function squareSlotPath(radius) {
+      const w = BlockSvg.INPUT_SHAPE_SQUARE_WIDTH, h = BlockSvg.INPUT_SHAPE_HEIGHT;
+      const c = Math.min(radius, w / 2, h / 2);
+      if (!c) return `m 0,0 h ${w} v ${h} h ${-w} z`;
+      const a = (dx, dy) => `a ${c},${c} 0 0,1 ${dx},${dy}`;
+      return `m 0,${c} ${a(c, -c)} h ${w - 2 * c} ${a(c, c)} v ${h - 2 * c} ${a(-c, c)} h ${-w + 2 * c} ${a(-c, -c)} z`;
     }
 
     function applyAndUpdate(...args) {
@@ -243,6 +246,7 @@ export default async function ({ addon, console }) {
       BlockSvg.INNER_TOP_LEFT_CORNER = ` h -${r} v ${r}`;
       BlockSvg.INNER_BOTTOM_LEFT_CORNER = `v ${r} h ${r}`;
       BlockSvg.TOP_RIGHT_CORNER_DEFINE_HAT = `h ${d} v ${d}`;
+      BlockSvg.INPUT_SHAPE_SQUARE = squareSlotPath(0);
       updateAllBlocks();
     });
 
