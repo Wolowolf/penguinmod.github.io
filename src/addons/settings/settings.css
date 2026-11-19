@@ -62,7 +62,7 @@ a:active, a:focus {
     position: relative;
     padding: 8px 20px;
     background-color: var(--ui-primary);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid var(--ui-edge);
     /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-background);
     --text-secondary: var(--text-dim-on-background);
@@ -202,7 +202,6 @@ a:active, a:focus {
 
 .addon {
     background: var(--ui-secondary);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border: 1px solid var(--ui-edge);
     border-radius: 5px;
     margin: 10px 0 10px 0;
@@ -644,7 +643,6 @@ a:active, a:focus {
 .dirty-inner {
     padding: 8px;
     background: color-mix(in srgb, #ff8c1a 15%, var(--ui-surface));
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border: 1px solid var(--ui-edge);
     border-radius: 4px;
     pointer-events: auto;

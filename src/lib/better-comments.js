@@ -136,7 +136,7 @@ const createInput = (id, type, value, includePad, optStyles) => {
     input.setAttribute('type', type);
     input.setAttribute('id', id);
     input.setAttribute('name', id);
-    input.setAttribute('style', 'background: radial-gradient(#fff 50%, #b3b3b3); border: 2px solid white; ' +
+    input.setAttribute('style', 'background: #fff; border: 2px solid white; ' +
         `width: 150px; text-align: center; border-radius: 8px; color: #000;${optStyles || ''}`);
     if (!includePad) input.style.padding = '2px';
     input[type === 'checkbox' ? 'checked' : 'value'] = value;
@@ -147,7 +147,7 @@ const createSelect = (id, options, value) => {
     const select = document.createElement('select');
     select.setAttribute('id', id);
     select.setAttribute('name', id);
-    select.setAttribute('style', 'background: radial-gradient(#fff 50%, #b3b3b3); border: 2px solid white; ' +
+    select.setAttribute('style', 'background: #fff; border: 2px solid white; ' +
         'padding: 2px; width: 150px; text-align: center; border-radius: 8px; color: #000;');
     options.forEach(optionText => {
         const option = document.createElement('option');

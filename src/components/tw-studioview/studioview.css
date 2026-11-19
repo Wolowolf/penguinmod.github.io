@@ -8,16 +8,6 @@ With changes to make it work properly in the scratch-gui environment.
 Further modifications made for PenguinMod (like featured projects)
 */
 
-@keyframes gradient {
-  0% {
-    background-position: 0% 0%;
-  }
-
-  100% {
-    background-position: 100% 100%;
-  }
-}
-
 /* we wrap it in a <div> */
 .wrapper {
   height: 100%;
@@ -49,16 +39,6 @@ Further modifications made for PenguinMod (like featured projects)
 }
 .featured-studioview-project {
   background-color: #ffc400;
-  background: linear-gradient(
-      145deg,
-      rgba(255, 196, 0, 1) 0%,
-      rgba(255, 196, 0, 1) 45%,
-      rgba(255, 255, 255, 1) 50%,
-      rgba(255, 196, 0, 1) 54%,
-      rgba(255, 196, 0, 1) 100%
-  );
-  background-size: 300% 300%;
-  animation: gradient 3s ease infinite;
 }
 [theme="dark"] .featured-studioview-project > div {
   color: black;

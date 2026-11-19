@@ -4,7 +4,6 @@ $border-radius: 4px;
 $trim-handle-width: 30px;
 $trim-handle-height: 30px;
 $trim-handle-border: 3px;
-$stripe-size: 10px;
 
 .absolute {
     position: absolute;
@@ -30,13 +29,7 @@ $stripe-size: 10px;
     border: 1px solid $red-tertiary;
     opacity: 0.5;
 
-    background: repeating-linear-gradient(
-        45deg,
-        $red-primary,
-        $red-primary $stripe-size,
-        $red-tertiary $stripe-size,
-        $red-tertiary calc(2 * $stripe-size)
-    );
+    background: $red-primary;
 }
 
 .selection-background {

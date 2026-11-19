@@ -37,22 +37,6 @@
     pointer-events: none;
 }
 
-$fade-out-distance: 100px;
-
-.new-buttons:before {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right:0;
-    background: linear-gradient(transparent, $ui-secondary);
-    height: $fade-out-distance;
-    width: 100%;
-    pointer-events: none;
-}
-[theme="dark"] .new-buttons:before {
-    background: linear-gradient(transparent, $ui-secondary);
-}
 
 .new-buttons > button + button {
     margin-top: 0.75rem;

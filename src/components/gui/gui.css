@@ -222,6 +222,11 @@
     display: none;
 }
 
+/* section 329: no blurred focus glow from react-tabs */
+.tab:not(.is-selected):focus {
+    box-shadow: none;
+}
+
 .tab.is-selected:focus {
     outline: none;
     box-shadow: none;
@@ -327,8 +332,8 @@
     line-height: 1.1;
     color: var(--text-primary);
     /* the same outlined letters as the category names */
-    text-shadow: -0.7px 0 0.6px #000000, 0.7px 0 0.6px #000000, 0 -0.7px 0.6px #000000,
-        0 0.7px 0.6px #000000, 0 0 1px #000000;
+    text-shadow: -0.7px 0 0 #000000, 0.7px 0 0 #000000, 0 -0.7px 0 #000000,
+        0 0.7px 0 #000000;
     /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-accent);
     --text-secondary: var(--text-dim-on-accent);

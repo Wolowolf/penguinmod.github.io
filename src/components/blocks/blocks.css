@@ -159,10 +159,9 @@
     line-height: 1.1;
     text-align: left;
     color: #ffffff !important;
-    /* thin black outline around the white letters: small blurred shadows on four sides
-       plus a soft halo are anti-aliased and look smoother than -webkit-text-stroke */
-    text-shadow: -0.7px 0 0.6px #000000, 0.7px 0 0.6px #000000, 0 -0.7px 0.6px #000000,
-        0 0.7px 0.6px #000000, 0 0 1px #000000;
+    /* thin black outline around the white letters: four unblurred shadows (section 329) */
+    text-shadow: -0.7px 0 0 #000000, 0.7px 0 0 #000000, 0 -0.7px 0 #000000,
+        0 0.7px 0 #000000;
     /* one line, cut when too long (no "...": the dot below marks a cut name) */
     white-space: nowrap;
     overflow: hidden;
@@ -190,6 +189,6 @@
     height: 2px;
     background: #ffffff;
     /* the same outline as the letters (see .scratchCategoryMenuItemLabel) */
-    box-shadow: -0.7px 0 0.6px #000000, 0.7px 0 0.6px #000000, 0 -0.7px 0.6px #000000,
-        0 0.7px 0.6px #000000, 0 0 1px #000000;
+    box-shadow: -0.7px 0 0 #000000, 0.7px 0 0 #000000, 0 -0.7px 0 #000000,
+        0 0.7px 0 #000000;
 }

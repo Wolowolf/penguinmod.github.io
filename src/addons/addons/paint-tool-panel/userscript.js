@@ -624,13 +624,11 @@ export default async function () {
                 const newTop = moveEvent.clientY - offsetY;
                 modal.style.left = `${newLeft}px`;
                 modal.style.top = `${newTop}px`;
-                modal.style.boxShadow = "black 5px 5px 15px";
             };
 
             const onMouseUp = () => {
                 document.removeEventListener("mousemove", onMouseMove);
                 document.removeEventListener("mouseup", onMouseUp);
-                modal.style.boxShadow = "";
             };
 
             document.addEventListener("mousemove", onMouseMove);

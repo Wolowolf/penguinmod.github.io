@@ -173,7 +173,6 @@ button::-moz-focus-inner {
     background-color: $ui-inverse !important;
     opacity: 1 !important;
     border: 1px solid $ui-edge !important;
-    box-shadow: 0 0 .5rem hsla(0, 0%, 0%, .25) !important;
     font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif) !important;
     /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-inverse);
@@ -210,7 +209,6 @@ button::-moz-focus-inner {
 .tooltip {
     border: 1px solid $ui-edge !important;
     border-radius: $form-radius !important;
-    box-shadow: 0 0 .5rem hsla(0, 0%, 0%, .25) !important;
     font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif) !important;
     z-index: $z-index-tooltip !important;
 }

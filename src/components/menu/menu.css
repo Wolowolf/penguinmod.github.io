@@ -12,7 +12,6 @@
     /* max-width: 260px; */
     overflow: visible;
     color: var(--text-primary);
-    box-shadow: 0 8px 8px 0 $ui-black-transparent-default;
     /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-panel);
     --text-secondary: var(--text-dim-on-panel);

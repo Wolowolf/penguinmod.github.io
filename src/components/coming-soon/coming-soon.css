@@ -12,7 +12,6 @@
     background-color: $data-primary !important;
     border: 1px solid $ui-edge !important;
     border-radius: $form-radius !important;
-    box-shadow: 0 0 .5rem $ui-black-transparent-default !important;
     padding: .75rem 1rem !important;
     font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif) !important;
     font-size: 1rem !important;

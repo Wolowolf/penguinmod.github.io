@@ -10,7 +10,6 @@
     border-radius: calc($space / 2);
     font-family: var(--pm-font, "Atkinson Hyperlegible Next", sans-serif);
     font-size: 0.75rem;
-    transition: box-shadow 0.2s;
     pointer-events: all;
     overflow: hidden;
     color: #575e75; /* tw: explicitly set color to match Scratch */
@@ -22,7 +21,6 @@
 
 .dragging {
     z-index: $z-index-monitor-dragging;
-    box-shadow: 3px 3px 5px #888888;
 }
 
 .default-monitor {

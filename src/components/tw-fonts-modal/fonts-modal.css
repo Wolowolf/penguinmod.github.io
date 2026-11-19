@@ -94,7 +94,6 @@
     max-height: 300px;
     border: 1px solid $ui-edge;
     box-sizing: border-box;
-    box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, .3);
     /* section 222: this background's ink, accent and tints */
     --text-primary: var(--text-on-panel);
     --text-secondary: var(--text-dim-on-panel);
