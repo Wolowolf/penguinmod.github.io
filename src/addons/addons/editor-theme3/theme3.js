@@ -195,17 +195,12 @@ export default async function ({ addon, console }) {
     return oldBlockSetColour.call(this, colour, colourSecondary, colourTertiary);
   };
 
-  const oldBlockUpdateColour = Blockly.BlockSvg.prototype.updateColour;
-  Blockly.BlockSvg.prototype.updateColour = function () {
-    oldBlockUpdateColour.call(this);
-    // Boolean inputs
-    if (isColoredTextMode()) {
-      for (const input of this.inputList) {
-        if (input.outlinePath) {
-          input.outlinePath.setAttribute("fill", fieldBackground(this));
-        }
-      }
-    }
+  // Empty inputs (Boolean ones and inputs without a field); an input drawn behind a reporter keeps its field
+  // colour. Blocks' updateColour and renderInputShape_ both take the fill from here (section 315).
+  const oldInputOutlineFill = Blockly.BlockSvg.prototype.inputOutlineFill_;
+  Blockly.BlockSvg.prototype.inputOutlineFill_ = function (input) {
+    if (isColoredTextMode() && !(input.connection && input.connection.targetBlock())) return fieldBackground(this);
+    return oldInputOutlineFill.call(this, input);
   };
 
   const oldBlockShowContextMenu = Blockly.BlockSvg.prototype.showContextMenu_;
