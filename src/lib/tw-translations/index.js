@@ -7,9 +7,6 @@ const addAdditionalTranslations = editorMessages => {
             Object.assign(editorMessages[locale], toMixIn);
         }
     }
-
-    // We reuse our `es` translations for `es-419` instead of maintaining separate translations.
-    Object.assign(editorMessages['es-419'], twTranslations.es);
 };
 
 export default addAdditionalTranslations;

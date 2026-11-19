@@ -7,7 +7,7 @@ const editor = Object.assign(
     JSON.parse(fs.readFileSync(require.resolve('@turbowarp/scratch-l10n/locales/editor-msgs'), 'utf8').slice(34, -2)),
     require('./generated-translations.json')
 );
-const pmTranslators = ["en", "es", "es-419", "pt-br", "cs", "hr", "vi", "ro", "ru", "ja", "fr", "fr-ca", "de", "da", "pl", "no", "it", "tr", "sv", "sk", "uk", "he", "fa"]
+const pmTranslators = ["en", "es", "pt-br", "cs", "vi", "ro", "ru", "ja", "fr", "fr-ca", "de", "pl", "no", "it", "tr", "sv", "uk", "he", "fa"]
 
 const allTexts = [];
 for (const file of fs.readdirSync('../../../translations', { recursive: true })) {

@@ -8,7 +8,15 @@
 
 // Rapa Nui, Aragonese, Abkhaz, Asturian, Occitan, Scottish Gaelic, Frisian, Esperanto,
 // Japanese Hiragana, Northern Sotho
-const REMOVED = ['rap', 'an', 'ab', 'ast', 'oc', 'gd', 'fy', 'eo', 'ja-Hira', 'nso'];
+// Welsh, Irish, Maori, Norwegian Nynorsk, Galician, Catalan, Basque, Quechua, Belarusian, Afrikaans,
+// Icelandic, Tswana, Filipino
+// Slovak, Croatian, Estonian, Latvian, Lithuanian, Xhosa, Azerbaijani, Uzbek, Kazakh, Mongolian,
+// Danish, Latin American Spanish
+const REMOVED = [
+    'rap', 'an', 'ab', 'ast', 'oc', 'gd', 'fy', 'eo', 'ja-Hira', 'nso',
+    'cy', 'ga', 'mi', 'nn', 'gl', 'ca', 'eu', 'qu', 'be', 'af', 'is', 'tn', 'fil',
+    'sk', 'hr', 'et', 'lv', 'lt', 'xh', 'az', 'uz', 'kk', 'mn', 'da', 'es-419'
+];
 
 const escape = code => code.replace(/[.*+?^${}()|[\]\\-]/g, '\\$&');
 
@@ -31,6 +39,7 @@ module.exports = function (source) {
             const c = escape(code);
             source = source
                 .replace(new RegExp(`^[ \\t]*'${c}': \\{name: [^\\n]*\\},?[ \\t]*\\n`, 'm'), '')
+                .replace(new RegExp(`^[ \\t]*'${c}': '[^'\\n]*',?[ \\t]*\\n`, 'm'), '')
                 .replace(
                     new RegExp(`(?:^[ \\t]*//[^\\n]*\\n)?^[ \\t]*'${c}': \\{\\n[^}]*\\},?[ \\t]*\\n`, 'm'), '');
         }

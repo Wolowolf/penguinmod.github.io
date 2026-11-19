@@ -4,7 +4,6 @@
  */
 
 const wideLocales = [
-    'ca',
     'de',
     'el',
     'it',
