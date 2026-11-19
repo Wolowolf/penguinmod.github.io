@@ -16,8 +16,6 @@ export default async function({ addon }) {
   const ogSetShadowDom = ScratchBlocks.RenderedConnection.prototype.setShadowDom;
   const ogStartScrollAnim = Blockly.Flyout.prototype.startScrollAnimation;
   const ogGlowFuncs = {
-    run: Blockly.BlockSvg.prototype.setGlowStack,
-    error: Blockly.BlockSvg.prototype.setErrorStack,
     replace1: Blockly.BlockSvg.prototype.highlightForReplacement,
     replace2: Blockly.BlockSvg.prototype.highlightShapeForInput
   };
@@ -130,52 +128,11 @@ export default async function({ addon }) {
     }
 
     // these are shared across workspaces, remove to save RAM
-    workspace.options.stackGlowBlur.parentNode.remove();
-    workspace.options.stackGlowBlurError.parentNode.remove();
     workspace.options.stackReplaceGlow.remove();
 
-    const applyToOuterStack = (topBlock, func) => {
-        func(topBlock);
-        let nextBlock = topBlock.getNextBlock();
-        while (nextBlock !== null) {
-            func(nextBlock);
-            nextBlock = nextBlock.getNextBlock();
-        }
-    };
-
     // patch glow functions to not... glow. Instead give a lighter indicator
+    // (the run and error glows are already a plain bar beside the script)
     const BlockSvgProto = Blockly.BlockSvg.prototype;
-    BlockSvgProto.setGlowStack = blocksGlow ? ogGlowFuncs.run : function(isGlowingStack) {
-      this.isGlowingStack_ = isGlowingStack;
-      this.getSvgRoot().removeAttribute("filter"); //remove old glow
-
-      if (isGlowingStack) applyToOuterStack(this, (block) => {
-        block.svgPath_.classList.remove("blocklyPath");
-        block.svgPath_.setAttribute("stroke", "#fff200");
-        block.svgPath_.setAttribute("stroke-width", "5");
-      });
-      else applyToOuterStack(this, (block) => {
-        block.svgPath_.classList.add("blocklyPath");
-        block.svgPath_.setAttribute("stroke", block.colourTertiary_);
-        block.svgPath_.removeAttribute("stroke-width");
-      });
-    };
-    BlockSvgProto.setErrorStack = blocksGlow ? ogGlowFuncs.error : function(isGlowingStack) {
-      this.isGlowingStack_ = isGlowingStack;
-      this.getSvgRoot().removeAttribute("filter"); //remove old glow
-
-      if (isGlowingStack) applyToOuterStack(this, (block) => {
-        block.svgPath_.classList.remove("blocklyPath");
-        block.svgPath_.setAttribute("stroke", "#ff0000");
-        block.svgPath_.setAttribute("stroke-width", "5");
-      });
-      else applyToOuterStack(this, (block) => {
-        block.svgPath_.classList.add("blocklyPath");
-        block.svgPath_.setAttribute("stroke", block.colourTertiary_);
-        block.svgPath_.removeAttribute("stroke-width");
-      });
-    };
-
     BlockSvgProto.highlightForReplacement = blocksGlow ? ogGlowFuncs.replace1 : function(adding) {
       this.getSvgRoot().removeAttribute("filter"); //remove old glow
       if (adding) {

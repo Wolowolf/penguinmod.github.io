@@ -101,23 +101,13 @@ export default async function ({ addon, console }) {
       BlockSvg.NOTCH_START_PADDING = 3 * GRID_UNIT; //* multiplier
       BlockSvg.ICON_SEPARATOR_HEIGHT = 10 * GRID_UNIT * multiplier * iconSize;
 
-      BlockSvg.NOTCH_PATH_LEFT =
-        `c 2 0 3 ${1 * notchSize} 4 ${2 * notchSize} ` +
-        `l ${4 * multiplier * notchSize} ${4 * multiplier * notchSize} ` +
-        `c 1 ${1 * notchSize} 2 ${2 * notchSize} 4 ${2 * notchSize} ` +
-        `h ${24 * (multiplier - 0.5)} ` +
-        `c 2 0 3 ${-1 * notchSize} 4 ${-2 * notchSize} ` +
-        `l ${4 * multiplier * notchSize} ${-4 * multiplier * notchSize} ` +
-        `c 1 ${-1 * notchSize} 2 ${-2 * notchSize} 4 ${-2 * notchSize} `
+      // Triangle notches, as wide and deep as the curved ones they replaced
+      const notchHalf = (16 + 8 * multiplier * notchSize + 24 * (multiplier - 0.5)) / 2;
+      const notchDepth = 4 * notchSize + 4 * multiplier * notchSize;
+      BlockSvg.NOTCH_PATH_LEFT = `l ${notchHalf} ${notchDepth} l ${notchHalf} ${-notchDepth} `;
       BlockSvg.NOTCH_PATH_RIGHT =
         `h ${(-4 * (cornerSize - 1) - 5 * (1 - notchSize))} ` +
-        `c -2 0 -3 ${1 * notchSize} -4 ${2 * notchSize} ` +
-        `l ${-4 * multiplier * notchSize} ${4 * multiplier * notchSize} ` +
-        `c -1 ${1 * notchSize} -2 ${2 * notchSize} -4 ${2 * notchSize} ` +
-        `h ${-24 * (multiplier - 0.5)} ` +
-        `c -2 0 -3 ${-1 * notchSize} -4 ${-2 * notchSize} ` +
-        `l ${-4 * multiplier * notchSize} ${-4 * multiplier * notchSize} ` +
-        `c -1 ${-1 * notchSize} -2 ${-2 * notchSize} -4 ${-2 * notchSize} `
+        `l ${-notchHalf} ${notchDepth} l ${-notchHalf} ${-notchDepth} `;
 
       /* Custom Notch API Support */
       const adjustedNotchSize = (multiplier > 1 ? multiplier - 0.05 :
@@ -261,75 +251,19 @@ export default async function ({ addon, console }) {
         return originalDropdownObject.call(this, x);
       };
 
-      // Corner setting
-      BlockSvg.CORNER_RADIUS = (1 * GRID_UNIT * cornerSize * 100) / 100;
-
-      BlockSvg.TOP_LEFT_CORNER_START = "m 0," + BlockSvg.CORNER_RADIUS;
-
-      BlockSvg.TOP_LEFT_CORNER =
-        "A " + BlockSvg.CORNER_RADIUS + "," + BlockSvg.CORNER_RADIUS + " 0 0,1 " + BlockSvg.CORNER_RADIUS + ",0";
-
-      BlockSvg.TOP_RIGHT_CORNER =
-        "a " +
-        BlockSvg.CORNER_RADIUS +
-        "," +
-        BlockSvg.CORNER_RADIUS +
-        " 0 0,1 " +
-        BlockSvg.CORNER_RADIUS +
-        "," +
-        BlockSvg.CORNER_RADIUS;
-
-      BlockSvg.BOTTOM_RIGHT_CORNER =
-        " a " +
-        BlockSvg.CORNER_RADIUS +
-        "," +
-        BlockSvg.CORNER_RADIUS +
-        " 0 0,1 -" +
-        BlockSvg.CORNER_RADIUS +
-        "," +
-        BlockSvg.CORNER_RADIUS;
-
-      BlockSvg.BOTTOM_LEFT_CORNER =
-        "a " +
-        BlockSvg.CORNER_RADIUS +
-        "," +
-        BlockSvg.CORNER_RADIUS +
-        " 0 0,1 -" +
-        BlockSvg.CORNER_RADIUS +
-        ",-" +
-        BlockSvg.CORNER_RADIUS;
-
-      BlockSvg.INNER_TOP_LEFT_CORNER =
-        " a " +
-        BlockSvg.CORNER_RADIUS +
-        "," +
-        BlockSvg.CORNER_RADIUS +
-        " 0 0,0 -" +
-        BlockSvg.CORNER_RADIUS +
-        "," +
-        BlockSvg.CORNER_RADIUS;
-
-      BlockSvg.INNER_BOTTOM_LEFT_CORNER =
-        "a " +
-        BlockSvg.CORNER_RADIUS +
-        "," +
-        BlockSvg.CORNER_RADIUS +
-        " 0 0,0 " +
-        BlockSvg.CORNER_RADIUS +
-        "," +
-        BlockSvg.CORNER_RADIUS;
-
+      // Corner setting: 0 draws square corners (no arcs), anything else rounds them
+      const r = (BlockSvg.CORNER_RADIUS = (1 * GRID_UNIT * cornerSize * 100) / 100);
+      const d = BlockSvg.DEFINE_HAT_CORNER_RADIUS;
+      const arc = (sweep, dx, dy, rad = r) => `a ${rad},${rad} 0 0,${sweep} ${dx},${dy}`;
+      BlockSvg.TOP_LEFT_CORNER_START = "m 0," + r;
+      BlockSvg.TOP_LEFT_CORNER = r ? `A ${r},${r} 0 0,1 ${r},0` : "";
+      BlockSvg.TOP_RIGHT_CORNER = r ? arc(1, r, r) : "";
+      BlockSvg.BOTTOM_RIGHT_CORNER = r ? " " + arc(1, -r, r) : "";
+      BlockSvg.BOTTOM_LEFT_CORNER = r ? arc(1, -r, -r) : "";
+      BlockSvg.INNER_TOP_LEFT_CORNER = r ? " " + arc(0, -r, r) : "";
+      BlockSvg.INNER_BOTTOM_LEFT_CORNER = r ? arc(0, r, r) : "";
       BlockSvg.TOP_RIGHT_CORNER_DEFINE_HAT =
-        "a " +
-        BlockSvg.DEFINE_HAT_CORNER_RADIUS +
-        "," +
-        BlockSvg.DEFINE_HAT_CORNER_RADIUS +
-        " 0 0,1 " +
-        BlockSvg.DEFINE_HAT_CORNER_RADIUS +
-        "," +
-        BlockSvg.DEFINE_HAT_CORNER_RADIUS +
-        " v " +
-        (1 * GRID_UNIT - BlockSvg.CORNER_RADIUS);
+        (r ? arc(1, d, d, d) : `h ${d} v ${d}`) + " v " + (1 * GRID_UNIT - r);
 
       BlockSvg.STATEMENT_INPUT_INNER_SPACE = 2.8 * GRID_UNIT - 0.9 * GRID_UNIT * cornerSize;
 
@@ -350,8 +284,17 @@ export default async function ({ addon, console }) {
     addon.settings.addEventListener("change", () => applyAndUpdate());
 
     addon.self.addEventListener("disabled", () => {
-      // Scratch 3.0 blocks
-      applyAndUpdate(100, 100, 100, 100);
+      // The editor's own look: Scratch 3.0 sizes with square corners
+      applyChanges(100, 100, 100, 100);
+      const r = BlockSvg.CORNER_RADIUS, d = BlockSvg.DEFINE_HAT_CORNER_RADIUS;
+      BlockSvg.TOP_LEFT_CORNER = "V 0 H " + r;
+      BlockSvg.TOP_RIGHT_CORNER = `h ${r} v ${r}`;
+      BlockSvg.BOTTOM_RIGHT_CORNER = ` v ${r} h -${r}`;
+      BlockSvg.BOTTOM_LEFT_CORNER = `h -${r} v -${r}`;
+      BlockSvg.INNER_TOP_LEFT_CORNER = ` h -${r} v ${r}`;
+      BlockSvg.INNER_BOTTOM_LEFT_CORNER = `v ${r} h ${r}`;
+      BlockSvg.TOP_RIGHT_CORNER_DEFINE_HAT = `h ${d} v ${d}`;
+      updateAllBlocks();
     });
 
     addon.self.addEventListener("reenabled", () => applyAndUpdate());

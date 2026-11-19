@@ -39,6 +39,3 @@ em .emoji {
 strong .emoji {
     filter: contrast(2);
 }
-del .emoji {
-    filter: blur(2px);
-}

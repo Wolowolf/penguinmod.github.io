@@ -52,8 +52,6 @@ export default async function ({ addon, msg, console }) {
   const popupPreviewScrollbarHandle = popupPreviewScrollbarSVG.appendChild(
     document.createElementNS("http://www.w3.org/2000/svg", "rect")
   );
-  popupPreviewScrollbarHandle.setAttribute("rx", "3");
-  popupPreviewScrollbarHandle.setAttribute("ry", "3");
   popupPreviewScrollbarHandle.setAttribute("width", "6");
   popupPreviewScrollbarHandle.setAttribute("x", "2.5");
   popupPreviewScrollbarHandle.classList.add("blocklyScrollbarHandle");

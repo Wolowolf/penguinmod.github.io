@@ -925,7 +925,7 @@ Blocks.defaultOptions = {
         scrollbar: '#CECDCE',
         scrollbarHover: '#CECDCE',
         insertionMarker: '#000000',
-        insertionMarkerOpacity: 0.2,
+        insertionMarkerOpacity: 1,
         fieldShadow: 'rgba(255, 255, 255, 0.3)',
         dragShadowOpacity: 0.6
     },

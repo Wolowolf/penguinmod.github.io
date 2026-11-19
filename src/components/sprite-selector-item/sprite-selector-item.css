@@ -50,10 +50,6 @@
     color: var(--text-primary); /* context */
 }
 
-.sprite-selector-item:hover .sprite-image, .is-selected .sprite-image {
-    filter: drop-shadow(0px 0px 2px  $ui-black-transparent);
-}
-
 /* Outer/Inner chicanery is to prevent layouts when sprite image changes */
 .sprite-image-outer {
     position: relative;

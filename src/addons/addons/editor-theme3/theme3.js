@@ -3,7 +3,6 @@ import {
   multiply,
   brighten,
   alphaBlend,
-  recolorFilter,
 } from "../../libraries/common/cs/text-color.esm.js";
 
 const dataUriRegex = new RegExp("^data:image/svg\\+xml;base64,([A-Za-z0-9+/=]*)$");
@@ -236,7 +235,7 @@ export default async function ({ addon, console }) {
     // Dropdowns
     oldFieldDropdownInit.call(this);
     this.textElement_.style.setProperty("fill", textColor(this), "important");
-    if (textColor(this) !== "#ffffff") this.arrow_.style.filter = recolorFilter(textColor(this));
+    if (textColor(this) !== "#ffffff") this.arrow_.style.setProperty("fill", textColor(this), "important");
   };
 
   const oldFieldDropdownShowEditor = Blockly.FieldDropdown.prototype.showEditor_;

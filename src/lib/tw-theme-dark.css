@@ -29,9 +29,6 @@
 .scratchCommentText {
     color: black;
 }
-.blocklyInsertionMarker > .blocklyPath {
-    fill: var(--text-secondary);
-}
 
 /* Other / Multipurpose */
 .Popover {
