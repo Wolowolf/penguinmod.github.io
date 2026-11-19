@@ -54,18 +54,27 @@ const base = {
         symlinks: false,
         alias: {
             'text-encoding$': path.resolve(__dirname, 'src/lib/tw-text-encoder'),
-            'scratch-render-fonts$': path.resolve(__dirname, 'src/lib/tw-scratch-render-fonts')
+            'scratch-render-fonts$': path.resolve(__dirname, 'src/lib/tw-scratch-render-fonts'),
+            // tw: use the package's source (not its prebuilt dist) so tw-l10n-trim-loader can leave languages out
+            '@turbowarp/scratch-l10n$': path.resolve(__dirname, 'node_modules/@turbowarp/scratch-l10n/src/index.js')
         }
     },
     node: { fs: 'empty' },
     module: {
         rules: [
             {
+                // tw: leave some interface languages out of the build
+                test: /node_modules[\\/]@turbowarp[\\/]scratch-l10n[\\/](src|locales)[\\/][^\\/]+\.js$/,
+                enforce: 'pre',
+                loader: path.resolve(__dirname, 'src/lib/tw-l10n-trim-loader.js')
+            },
+            {
                 test: /\.jsx?$/,
                 include: [
                     path.resolve(__dirname, 'src'),
                     /node_modules[\\/]scratch-[^\\/]+[\\/]src/,
                     /node_modules[\\/]pify/,
+                    /node_modules[\\/]@turbowarp[\\/]scratch-l10n[\\/]src/,
                     /node_modules[\\/]@vernier[\\/]godirect/
                 ],
                 use: [

@@ -3,7 +3,6 @@
  * Utility function to look up whether a translated video exists for a locale.
  */
 
-// TODO: ja-Hira are copies of ja, replace with real ja-Hira when available.
 const videos = {
     // tw: we don't use the videos, remove them
 };
