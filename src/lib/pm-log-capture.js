@@ -179,12 +179,12 @@ const downloadLogs = async () => {
     /* actually, this is a bad idea
     // if we can, include the project
     if (vm) {
-        filename = 'pm-error-download.pmp';
+        filename = 'pm-error-download.2DC';
         const archive = vm._saveProjectZip();
         archive.file('logs.json', blob);
         blob = await archive.generateAsync({
             type: 'blob',
-            mimeType: 'application/x.scratch.sb3',
+            mimeType: 'application/x-2dc',
             compression: 'DEFLATE'
         });
     }

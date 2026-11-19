@@ -14,9 +14,8 @@ import log from '../lib/log';
 // from sb-file-uploader-hoc.jsx
 const getProjectTitleFromFilename = fileInputFilename => {
     if (!fileInputFilename) return '';
-    // only parse title with valid scratch project extensions
-    // (.sb3, .pm and .pmp; Scratch 1.4 and 2.0 files are not supported)
-    const matches = fileInputFilename.match(/^(.*)(\.sb3|\.pm|\.pmp)$/);
+    // only .2DC project files (any letter case)
+    const matches = fileInputFilename.match(/^(.*)\.2dc$/i);
     if (!matches) return '';
     return matches[1].substring(0, 100); // truncate project title to max 100 chars
 };
@@ -307,7 +306,7 @@ const getProjectFilename = (curTitle, defaultTitle) => {
     if (!filenameTitle || filenameTitle.length === 0) {
         filenameTitle = defaultTitle;
     }
-    return `${filenameTitle.substring(0, 100)}.pmp`;
+    return `${filenameTitle.substring(0, 100)}.2DC`;
 };
 
 SB3Downloader.propTypes = {

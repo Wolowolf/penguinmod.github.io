@@ -55,7 +55,7 @@ const PackagerIntegrationHOC = function (WrappedComponent) {
 
             this.props.vm.saveProjectSb3('arraybuffer')
                 .then(buffer => {
-                    const name = `${this.props.reduxProjectTitle}.pmp`;
+                    const name = `${this.props.reduxProjectTitle}.2DC`;
                     e.source.postMessage({
                         p4: {
                             type: 'finish-import',

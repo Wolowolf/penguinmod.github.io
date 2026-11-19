@@ -207,8 +207,8 @@ class TWRestorePointManager extends React.Component {
                     exporting: false
                 });
 
-                const blob = new Blob([arrayBuffer], { type: "application/x.scratch.sb3" });
-                downloadBlob("restore-point.pmp", blob);
+                const blob = new Blob([arrayBuffer], { type: "application/x-2dc" });
+                downloadBlob("restore-point.2DC", blob);
             })
             .catch(error => {
                 log.error(error);

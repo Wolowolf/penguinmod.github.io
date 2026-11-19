@@ -111,7 +111,7 @@ const SBFileUploaderHOC = function (WrappedComponent) {
                 
                 // pm: Some bad browsers block any file type (Safari) so we need to only add .accept for those which can handle it properly
                 if (isTypeFilterAvailable()) {
-                    this.inputElement.accept = '.sb3,.pm,.pmp';
+                    this.inputElement.accept = '.2DC';
                 }
 
                 this.inputElement.style = 'display: none;';
@@ -216,6 +216,20 @@ const SBFileUploaderHOC = function (WrappedComponent) {
             const thisFileInput = e.target;
             if (thisFileInput.files) { // Don't attempt to load if no file was selected
                 this.fileToUpload = thisFileInput.files[0];
+                // Desktop fork: only .2DC project files open (any letter case); other files, also
+                // dropped ones (drag-drop addon), are refused before anything is replaced.
+                if (!this.fileToUpload || !/\.2dc$/i.test(this.fileToUpload.name)) {
+                    if (this.fileToUpload) {
+                        alert(intl.formatMessage({ // eslint-disable-line no-alert
+                            id: 'pm.fileUploader.only2DC',
+                            defaultMessage: 'Only .2DC project files can be opened.',
+                            description: 'Shown when a file that is not a .2DC project is opened'
+                        }));
+                    }
+                    this.removeFileObjects();
+                    this.props.closeFileMenu();
+                    return;
+                }
 
                 // If user owns the project, or user has changed the project,
                 // we must confirm with the user that they really intend to
@@ -231,11 +245,7 @@ const SBFileUploaderHOC = function (WrappedComponent) {
                     // Don't update file handle until after confirming replace.
                     const handle = thisFileInput.handle;
                     if (handle) {
-                        if (this.fileToUpload.name.endsWith('.pm') || this.fileToUpload.name.endsWith('.pmp')) {
-                            this.props.onSetFileHandle(handle);
-                        } else {
-                            this.props.onSetFileHandle(null);
-                        }
+                        this.props.onSetFileHandle(handle);
                     }
 
                     // cues step 4
@@ -266,9 +276,8 @@ const SBFileUploaderHOC = function (WrappedComponent) {
         // used in step 6 below
         getProjectTitleFromFilename (fileInputFilename) {
             if (!fileInputFilename) return '';
-            // only parse title with valid scratch project extensions
-            // (.sb3, .pm and .pmp; Scratch 1.4 and 2.0 files are not supported)
-            const matches = fileInputFilename.match(/^(.*)(\.sb3|\.pm|\.pmp)$/);
+            // only .2DC project files (any letter case)
+            const matches = fileInputFilename.match(/^(.*)\.2dc$/i);
             if (!matches) return '';
             return matches[1].substring(0, 100); // truncate project title to max 100 chars
         }

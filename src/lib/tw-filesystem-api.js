@@ -8,9 +8,9 @@ const showSaveFilePicker = fileName => window.showSaveFilePicker({
     ...(!isTypeFilterAvailable() ? {} : {
         types: [
             {
-                description: 'PenguinMod Project',
+                description: '2DC Project',
                 accept: {
-                    'application/x.scratch.sb3': '.pmp'
+                    'application/x-2dc': '.2DC'
                 }
             }
         ],
@@ -24,21 +24,9 @@ const showOpenFilePicker = async () => {
         ...(!isTypeFilterAvailable() ? {} : {
             types: [
                 {
-                    description: 'Supported Files',
+                    description: '2DC Project',
                     accept: {
-                        'application/x.scratch.sb3': ['.pmp', '.pm', '.sb3']
-                    }
-                },
-                {
-                    description: 'PenguinMod Project',
-                    accept: {
-                        'application/x.scratch.sb3': ['.pmp', '.pm']
-                    }
-                },
-                {
-                    description: 'Scratch Project',
-                    accept: {
-                        'application/x.scratch.sb3': ['.sb3']
+                        'application/x-2dc': ['.2DC']
                     }
                 }
             ]
