@@ -1,17 +1,3 @@
-/**
- * Since PenguinMod has custom monitor displays,
- * we have to handle that too when sanitizing.
- */
-const isCustomMonitor = value => {
-    if (
-        typeof (value.toListItem || value.toMonitorContent || value.toReporterContent) === 'function'
-    ) {
-        return true;
-    }
-    return false;
-    
-};
-
 const circularReplacer = () => {
     const seen = new WeakSet();
     return (_, value) => {
@@ -28,7 +14,6 @@ const circularReplacer = () => {
 const sanitize = input => {
     if (
         typeof input === 'object' && input !== null
-    && !isCustomMonitor(input)
     ) {
         return JSON.stringify(input, circularReplacer());
     }

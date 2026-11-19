@@ -6,7 +6,6 @@ import {FormattedMessage} from 'react-intl';
 
 import styles from './monitor.css';
 import {List} from 'react-virtualized';
-import DOMElementRenderer from '../../containers/dom-element-renderer.jsx';
 
 class ListMonitorScroller extends React.Component {
     constructor (props) {
@@ -33,16 +32,7 @@ class ListMonitorScroller extends React.Component {
     }
     rowRenderer ({index, key, style}) {
         const item = this.props.values[index];
-        const renderedValue = (item === null || item === undefined) ? "null" : item.toListItem
-            ? item.toListItem()
-            : item.toMonitorContent
-                ? item.toMonitorContent()
-                : item.toReporterContent
-                    ? item.toReporterContent()
-                    : item;
-        const value = (item === null || item === undefined ? false : item.isHTML)
-            ? (<DOMElementRenderer domElement={renderedValue} />)
-            : String(item);
+        const value = String(item);
         return (
             <div
                 className={styles.listRow}

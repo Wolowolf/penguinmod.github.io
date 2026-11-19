@@ -55,24 +55,8 @@ export default function ({id, spriteName, opcode, params, value, vm}) {
             if (typeof item === 'boolean') {
                 value[i] = item.toString();
             }
-            if (typeof item === 'object' && item !== null) {
-                // check if this is a pure object or custom display
-                if (typeof (item.toListItem || value.toMonitorContent || item.toReporterContent) === 'function') {
-                    value[i].isHTML = true;
-                }
-            }
         }
     }
 
-    let isHTML = false;
-    if (typeof value === 'object' && value !== null) {
-        // check if this is a pure object or custom display
-        if (typeof (value.toMonitorContent || value.toReporterContent) === 'function') {
-            value = value.toMonitorContent
-              ? value.toMonitorContent() : value.toReporterContent();
-            isHTML = true;
-        }
-    }
-
-    return {id, label, category, value, isHTML};
+    return {id, label, category, value};
 }

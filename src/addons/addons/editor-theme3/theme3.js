@@ -273,24 +273,6 @@ export default async function ({ addon, console }) {
     this.textElement_.style.fill = textColor(this);
   };
 
-  const oldFieldMatrixUpdateMatrix = Blockly.FieldMatrix.prototype.updateMatrix_;
-  Blockly.FieldMatrix.prototype.updateMatrix_ = function () {
-    // Matrix inputs
-    oldFieldMatrixUpdateMatrix.call(this);
-    for (let i = 0; i < this.matrix_.length; i++) {
-      if (this.matrix_[i] !== "0") {
-        this.fillMatrixNode_(this.ledButtons_, i, uncoloredTextColor());
-        this.fillMatrixNode_(this.ledThumbNodes_, i, uncoloredTextColor());
-      }
-    }
-  };
-
-  const oldFieldMatrixCreateButton = Blockly.FieldMatrix.prototype.createButton_;
-  Blockly.FieldMatrix.prototype.createButton_ = function (fill) {
-    if (fill === "#FFFFFF") fill = uncoloredTextColor();
-    return oldFieldMatrixCreateButton.call(this, fill);
-  };
-
   const oldFieldVerticalSeparatorInit = Blockly.FieldVerticalSeparator.prototype.init;
   Blockly.FieldVerticalSeparator.prototype.init = function () {
     // Vertical line between extension icon and block label
