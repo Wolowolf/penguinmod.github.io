@@ -35,6 +35,9 @@
     flex-grow: 1;
     flex-shrink: 1;
     overflow: visible;
+    /* section 330: the paint / sound editor is sized by the panel and draws only inside it (colour
+       pickers, "More" menus, font menu and dialogs live in <body>), so its redraws stay inside it */
+    contain: strict;
 }
 
 [dir="ltr"] .detail-area {

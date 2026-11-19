@@ -258,6 +258,10 @@
 .blocks-wrapper {
     flex-grow: 1;
     position: relative;
+    /* section 330: the code area is sized by its column and draws only inside itself (its own
+       Blockly svg is clipped by .injectionDiv; Blockly menus, dropdowns and tooltips live in <body>),
+       so changes inside it never make the browser lay out or repaint the rest of the editor */
+    contain: strict;
 }
 
 .stage-and-target-wrapper {
