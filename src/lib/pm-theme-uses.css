@@ -61,12 +61,11 @@
     stroke: var(--text-on-accent);
 }
 
-/* zoom buttons: shapes drawn by src/lib/pm-zoom-buttons.js over Blockly's pictures */
-.pm-zoom-ring {
-    fill: var(--ui-edge);
-}
+/* zoom buttons: shapes drawn by src/lib/pm-zoom-buttons.js over Blockly's hit rects */
 .pm-zoom-face {
     fill: var(--ui-surface);
+    stroke: var(--ui-edge);
+    stroke-width: 1px;
 }
 .pm-zoom-glyph {
     fill: none;

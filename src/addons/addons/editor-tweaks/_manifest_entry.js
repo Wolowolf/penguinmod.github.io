@@ -24,13 +24,6 @@ const manifest = {
       "type": "boolean",
       "default": true
     },
-    {
-      "dynamic": false,
-      "name": "Toggle Block Glow & Shadows in the Editor",
-      "id": "blocksGlow",
-      "type": "boolean",
-      "default": true
-    },
   ],
   "userscripts": [
     { "url": "userscript.js" }

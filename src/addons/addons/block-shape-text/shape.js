@@ -77,12 +77,12 @@ export default async function ({ addon, console }) {
 
     function applyChanges(
       paddingSize = addon.settings.get("paddingSize"),
-      cornerSize = addon.settings.get("cornerSize"),
       notchSize = addon.settings.get("notchSize"),
-      iconSize = addon.settings.get("iconSize")
+      iconSize = addon.settings.get("iconSize"),
+      // corners are always square: 0 = no corner at all (addon on), 1 = the editor's own layout (addon off)
+      cornerSize = 0
     ) {
       let multiplier = paddingSize / 100;
-      cornerSize = cornerSize / 100;
       notchSize = notchSize / 100;
       iconSize = iconSize / 100;
 
@@ -192,22 +192,20 @@ export default async function ({ addon, console }) {
         return originalDropdownObject.call(this, x);
       };
 
-      // Corner setting: 0 draws square corners (no arcs), anything else rounds them
-      const r = (BlockSvg.CORNER_RADIUS = (1 * GRID_UNIT * cornerSize * 100) / 100);
+      // Square corners with no corner commands (the "disabled" handler draws the editor's own)
+      const r = (BlockSvg.CORNER_RADIUS = GRID_UNIT * cornerSize);
       const d = BlockSvg.DEFINE_HAT_CORNER_RADIUS;
-      const arc = (sweep, dx, dy, rad = r) => `a ${rad},${rad} 0 0,${sweep} ${dx},${dy}`;
       BlockSvg.TOP_LEFT_CORNER_START = "m 0," + r;
-      BlockSvg.TOP_LEFT_CORNER = r ? `A ${r},${r} 0 0,1 ${r},0` : "";
-      BlockSvg.TOP_RIGHT_CORNER = r ? arc(1, r, r) : "";
-      BlockSvg.BOTTOM_RIGHT_CORNER = r ? " " + arc(1, -r, r) : "";
-      BlockSvg.BOTTOM_LEFT_CORNER = r ? arc(1, -r, -r) : "";
-      BlockSvg.INNER_TOP_LEFT_CORNER = r ? " " + arc(0, -r, r) : "";
-      BlockSvg.INNER_BOTTOM_LEFT_CORNER = r ? arc(0, r, r) : "";
-      BlockSvg.TOP_RIGHT_CORNER_DEFINE_HAT =
-        (r ? arc(1, d, d, d) : `h ${d} v ${d}`) + " v " + (1 * GRID_UNIT - r);
+      BlockSvg.TOP_LEFT_CORNER = "";
+      BlockSvg.TOP_RIGHT_CORNER = "";
+      BlockSvg.BOTTOM_RIGHT_CORNER = "";
+      BlockSvg.BOTTOM_LEFT_CORNER = "";
+      BlockSvg.INNER_TOP_LEFT_CORNER = "";
+      BlockSvg.INNER_BOTTOM_LEFT_CORNER = "";
+      BlockSvg.TOP_RIGHT_CORNER_DEFINE_HAT = `h ${d} v ${d} v ${GRID_UNIT - r}`;
 
-      // Empty text/mixed slot: same corners as the blocks (sharp at 0)
-      BlockSvg.INPUT_SHAPE_SQUARE = squareSlotPath(r);
+      // Empty text/mixed slot: a plain square
+      BlockSvg.INPUT_SHAPE_SQUARE = squareSlotPath();
 
       BlockSvg.STATEMENT_INPUT_INNER_SPACE = 2.8 * GRID_UNIT - 0.9 * GRID_UNIT * cornerSize;
 
@@ -220,12 +218,9 @@ export default async function ({ addon, console }) {
       }
     }
 
-    function squareSlotPath(radius) {
+    function squareSlotPath() {
       const w = BlockSvg.INPUT_SHAPE_SQUARE_WIDTH, h = BlockSvg.INPUT_SHAPE_HEIGHT;
-      const c = Math.min(radius, w / 2, h / 2);
-      if (!c) return `m 0,0 h ${w} v ${h} h ${-w} z`;
-      const a = (dx, dy) => `a ${c},${c} 0 0,1 ${dx},${dy}`;
-      return `m 0,${c} ${a(c, -c)} h ${w - 2 * c} ${a(c, c)} v ${h - 2 * c} ${a(-c, c)} h ${-w + 2 * c} ${a(-c, -c)} z`;
+      return `m 0,0 h ${w} v ${h} h ${-w} z`;
     }
 
     function applyAndUpdate(...args) {
@@ -237,7 +232,7 @@ export default async function ({ addon, console }) {
 
     addon.self.addEventListener("disabled", () => {
       // The editor's own look: Scratch 3.0 sizes with square corners
-      applyChanges(100, 100, 100, 100);
+      applyChanges(100, 100, 100, 1);
       const r = BlockSvg.CORNER_RADIUS, d = BlockSvg.DEFINE_HAT_CORNER_RADIUS;
       BlockSvg.TOP_LEFT_CORNER = "V 0 H " + r;
       BlockSvg.TOP_RIGHT_CORNER = `h ${r} v ${r}`;
@@ -246,7 +241,6 @@ export default async function ({ addon, console }) {
       BlockSvg.INNER_TOP_LEFT_CORNER = ` h -${r} v ${r}`;
       BlockSvg.INNER_BOTTOM_LEFT_CORNER = `v ${r} h ${r}`;
       BlockSvg.TOP_RIGHT_CORNER_DEFINE_HAT = `h ${d} v ${d}`;
-      BlockSvg.INPUT_SHAPE_SQUARE = squareSlotPath(0);
       updateAllBlocks();
     });
 

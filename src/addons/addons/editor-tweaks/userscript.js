@@ -6,8 +6,8 @@ export default async function({ addon }) {
   const vm = addon.tab.traps.vm;
 
   // addon settings
-  let oldCkbxEnabled = true, oldToolboxScrolls = true, oldBlocksGlow = true;
-  let ckbxEnabled = true, toolboxScrolls = true, blocksGlow = true;
+  let oldCkbxEnabled = true, oldToolboxScrolls = true;
+  let ckbxEnabled = true, toolboxScrolls = true;
   let workspaceRefreshCache = 0;
 
   // patch variables and functions
@@ -15,10 +15,6 @@ export default async function({ addon }) {
   const ogMutatorBuilder = Blockly.scratchBlocksUtils.generateMutatorShadow;
   const ogSetShadowDom = ScratchBlocks.RenderedConnection.prototype.setShadowDom;
   const ogStartScrollAnim = Blockly.Flyout.prototype.startScrollAnimation;
-  const ogGlowFuncs = {
-    replace1: Blockly.BlockSvg.prototype.highlightForReplacement,
-    replace2: Blockly.BlockSvg.prototype.highlightShapeForInput
-  };
 
   const fixedWorkspace2Dom = function(...args) {
     const dom = ogWS2Dom.call(this, ...args);
@@ -72,7 +68,6 @@ export default async function({ addon }) {
   function requestAddonState() {
     ckbxEnabled = addon.settings.get("checkboxesEnabled");
     toolboxScrolls = addon.settings.get("toolboxScrolling");
-    blocksGlow = addon.settings.get("blocksGlow");
     Blockly.Procedures.ADDON_SP_CHECKBOXES_DISABLED = !ckbxEnabled;
   }
 
@@ -80,7 +75,6 @@ export default async function({ addon }) {
     requestAddonState();
     toggleCheckboxes();
     toggleToolBoxScroll();
-    toggleBlockGlow();
     if (workspaceRefreshCache > 0) updateAllBlocks(2 > workspaceRefreshCache);
     workspaceRefreshCache = 0;
   }
@@ -112,54 +106,6 @@ export default async function({ addon }) {
       this.scrollTime = -1;
       this.scrollStart = this.scrollTarget;
       this.stepScrollAnimation(performance.now());
-    };
-  }
-
-  function toggleBlockGlow() {
-    if (oldBlocksGlow === blocksGlow) return;
-    oldBlocksGlow = blocksGlow;
-    if (blocksGlow) return;
-
-    const workspace = Blockly.getMainWorkspace();
-    if (!workspace) {
-        console.warn("Editor Tweaks: Error -- Could not remove glow from workspace");
-        oldBlocksGlow = undefined;
-        return;
-    }
-
-    // these are shared across workspaces, remove to save RAM
-    workspace.options.stackReplaceGlow.remove();
-
-    // patch glow functions to not... glow. Instead give a lighter indicator
-    // (the run and error glows are already a plain bar beside the script)
-    const BlockSvgProto = Blockly.BlockSvg.prototype;
-    BlockSvgProto.highlightForReplacement = blocksGlow ? ogGlowFuncs.replace1 : function(adding) {
-      this.getSvgRoot().removeAttribute("filter"); //remove old glow
-      if (adding) {
-        this.svgPath_.classList.remove("blocklyPath");
-        this.svgPath_.setAttribute("stroke", "#fff");
-        this.svgPath_.setAttribute("stroke-width", "6");
-      } else {
-        this.svgPath_.classList.add("blocklyPath");
-        this.svgPath_.setAttribute("stroke", this.colourTertiary_);
-        this.svgPath_.removeAttribute("stroke-width");
-      }
-    };
-    BlockSvgProto.highlightShapeForInput = blocksGlow ? ogGlowFuncs.replace2 : function(connection, adding) {
-      const input = this.getInputWithConnection(connection);
-      if (!input) throw 'No input found for the connection';
-      if (!input.outlinePath) return;
-
-      input.outlinePath.removeAttribute("filter"); //remove old glow
-      if (adding) {
-        input.outlinePath.classList.remove("blocklyPath");
-        input.outlinePath.setAttribute("stroke", "#fff");
-        input.outlinePath.setAttribute("stroke-width", "5");
-      } else {
-        input.outlinePath.classList.add("blocklyPath");
-        input.outlinePath.setAttribute("stroke", this.colourTertiary_);
-        input.outlinePath.removeAttribute("stroke-width");
-      }
     };
   }
 

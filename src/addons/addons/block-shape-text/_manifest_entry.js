@@ -3,7 +3,7 @@ const manifest = {
   "editorOnly": true,
   "noTranslations": true,
   "name": "Block shape and text",
-  "description": "Adjust the padding, corner radius, notch height and icon size of blocks, and make the text on blocks bold or give it a shadow.",
+  "description": "Adjust the padding, notch height and icon size of blocks, and make the text on blocks bold or give it a shadow.",
   "tags": [
     "theme"
   ],
@@ -68,15 +68,6 @@ const manifest = {
     },
     {
       "dynamic": true,
-      "name": "Corner size (0-300%)",
-      "id": "cornerSize",
-      "type": "integer",
-      "min": 0,
-      "default": 0,
-      "max": 300
-    },
-    {
-      "dynamic": true,
       "name": "Notch height (0-150%)",
       "id": "notchSize",
       "type": "integer",
@@ -115,7 +106,6 @@ const manifest = {
       "description": "The regular appearance of Scratch 3.0 blocks",
       "values": {
         "paddingSize": 100,
-        "cornerSize": 100,
         "notchSize": 100
       }
     },
@@ -125,27 +115,24 @@ const manifest = {
       "description": "An appearance similar to Scratch 2.0 blocks",
       "values": {
         "paddingSize": 70,
-        "cornerSize": 150,
         "notchSize": 75
       }
     },
     {
       "name": "3.0 Flat",
       "id": "flat3",
-      "description": "Scratch 3.0 blocks with notches and corners removed",
+      "description": "Scratch 3.0 blocks with notches removed",
       "values": {
         "paddingSize": 100,
-        "cornerSize": 0,
         "notchSize": 0
       }
     },
     {
       "name": "2.0 Flat",
       "id": "flat2",
-      "description": "Scratch 2.0 blocks with notches and corners removed",
+      "description": "Scratch 2.0 blocks with notches removed",
       "values": {
         "paddingSize": 70,
-        "cornerSize": 0,
         "notchSize": 0
       }
     }

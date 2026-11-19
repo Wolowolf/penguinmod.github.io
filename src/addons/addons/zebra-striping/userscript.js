@@ -47,19 +47,4 @@ export default async function ({ addon, msg, console }) {
   if (vm.editingTarget) {
     vm.emitWorkspaceUpdate();
   }
-
-  // The replacement glow filter's ID is randomly generated and changes
-  // when the workspace is reloaded (which includes loading the page and
-  // seeing the project page then seeing inside).
-  // As we need to stack the filter with the striping filter in the
-  // userstyle, we need to use the userscript to get the filter's ID
-  // and set a CSS variable on the document's root.
-  while (true) {
-    const replacementGlowEl = await addon.tab.waitForElement('filter[id*="blocklyReplacementGlowFilter"]', {
-      markAsSeen: true,
-      reduxEvents: ["scratch-gui/mode/SET_PLAYER", "fontsLoaded/SET_FONTS_LOADED", "scratch-gui/locales/SELECT_LOCALE"],
-      reduxCondition: (state) => !state.scratchGui.mode.isPlayerOnly,
-    });
-    document.documentElement.style.setProperty("--zebraStriping-replacementGlow", `url(#${replacementGlowEl.id})`);
-  }
 }
