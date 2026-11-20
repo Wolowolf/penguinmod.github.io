@@ -45,6 +45,9 @@ class CustomProcedures extends React.Component {
     componentWillUnmount () {
         if (this.workspace) {
             this.workspace.dispose();
+            // Desktop fork (section 331): inject made this editor's workspace the main one; give the code
+            // area back, or getMainWorkspace() (17 addons, the backpack, the variables tab) gets a disposed one
+            if (ScratchBlocks.mainWorkspace === this.workspace) ScratchBlocks.mainWorkspace = this.mainWorkspace;
         }
     }
     setBlocks (blocksRef) {
@@ -60,6 +63,7 @@ class CustomProcedures extends React.Component {
         ScratchBlocks = LazyScratchBlocks.get();
         const oldDefaultToolbox = ScratchBlocks.Blocks.defaultToolbox;
         ScratchBlocks.Blocks.defaultToolbox = null;
+        this.mainWorkspace = ScratchBlocks.mainWorkspace;
         this.workspace = ScratchBlocks.inject(this.blocks, workspaceConfig);
         ScratchBlocks.Blocks.defaultToolbox = oldDefaultToolbox;
 

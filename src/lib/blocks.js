@@ -1,6 +1,8 @@
 import LazyScratchBlocks from './tw-lazy-scratch-blocks';
 import patchZoomButtons from './pm-zoom-buttons.js';
 import patchBlockCulling from './pm-block-culling.js';
+import patchFieldTyping from './pm-field-typing.js';
+import patchTextWidths from './pm-text-widths.js';
 
 /**
  * Connect scratch blocks with the vm
@@ -14,6 +16,10 @@ export default function (vm) {
     patchZoomButtons(ScratchBlocks);
     // Desktop fork (section 312): hide the off-screen parts of scripts that are partly visible
     patchBlockCulling(ScratchBlocks);
+    // Desktop fork (section 331): typing in a field draws its block at most once per frame
+    patchFieldTyping(ScratchBlocks);
+    // Desktop fork (section 331): remembered text widths are measured again when fonts load or styles change
+    patchTextWidths(ScratchBlocks);
 
     // PMDESKTOP_STAGE_PATCH: give every category menu entry its colour as a CSS variable
     const pmCategory = ScratchBlocks.Toolbox && ScratchBlocks.Toolbox.Category;

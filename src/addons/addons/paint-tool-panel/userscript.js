@@ -640,6 +640,9 @@ export default async function () {
         ReduxStore.subscribe((e,t) => {
             const paint = ReduxStore.getState().scratchPaint;
             if (!paint) return;
+            // Desktop fork (section 331): the paint editor only exists on the Costumes tab; searching the
+            // page on every change elsewhere (each code-area scroll step) cost about 2 ms
+            if (ReduxStore.getState().scratchGui.editorTab.activeTabIndex !== 1) return;
 
             // add panel button
             const editorRow = document.querySelector(`div[class^="paint-editor_row_"] div[class^="fixed-tools_row_"]`);
