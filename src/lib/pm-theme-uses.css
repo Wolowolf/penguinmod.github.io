@@ -67,6 +67,9 @@
     stroke: var(--ui-edge);
     stroke-width: 1px;
 }
+.pm-zoom-face, rect.pm-zoom-glyph {
+    shape-rendering: crispEdges;
+}
 .pm-zoom-glyph {
     fill: none;
     stroke: var(--text-secondary);
