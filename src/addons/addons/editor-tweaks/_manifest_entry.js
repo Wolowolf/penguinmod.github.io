@@ -17,13 +17,6 @@ const manifest = {
       "type": "boolean",
       "default": true
     },
-    {
-      "dynamic": true,
-      "name": "Toggle scrolling animation in the Toolbox",
-      "id": "toolboxScrolling",
-      "type": "boolean",
-      "default": true
-    },
   ],
   "userscripts": [
     { "url": "userscript.js" }

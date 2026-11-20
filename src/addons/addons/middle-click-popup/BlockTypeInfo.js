@@ -361,7 +361,10 @@ export class BlockTypeInfo {
    * @returns {BlockTypeInfo[]}
    */
   static getBlocks(Blockly, vm, workspace, locale) {
-    const flyoutWorkspace = workspace.getToolbox()?.flyout_.getWorkspace();
+    const flyout = workspace.getToolbox()?.flyout_;
+    // Desktop fork (section 332): the palette builds its categories lazily; the search needs every block
+    if (flyout && flyout.pmBuildAll) flyout.pmBuildAll();
+    const flyoutWorkspace = flyout?.getWorkspace();
     if (!flyoutWorkspace) return [];
 
     const blocks = [];

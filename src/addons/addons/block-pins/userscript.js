@@ -119,7 +119,10 @@ export default async function({ addon }) {
     category.innerHTML = ""; // flush out blocks
 
     if (pins.length) {
-      const flyoutWS = Blockly.mainWorkspace.getFlyout().workspace_;
+      const flyout = Blockly.mainWorkspace.getFlyout();
+      // Desktop fork (section 332): the palette builds its categories lazily; pins copy blocks from any of them
+      if (flyout.pmBuildAll) flyout.pmBuildAll();
+      const flyoutWS = flyout.workspace_;
       const blocksXML = [];
       let successes = 0;
       for (const type of pins) {
@@ -167,7 +170,9 @@ export default async function({ addon }) {
           break;
         case "category": {
           const toolbox = Blockly.mainWorkspace.getToolbox();
-          const flyoutWS = Blockly.mainWorkspace.getFlyout().workspace_;
+          const flyout = Blockly.mainWorkspace.getFlyout();
+          if (flyout.pmBuildAll) flyout.pmBuildAll(); // Desktop fork (section 332): every category built
+          const flyoutWS = flyout.workspace_;
           const categories = toolbox.categoryMenu_.categories_.map(c => c.id_);
 
           const getCategoryInd = (id) => {

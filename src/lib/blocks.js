@@ -3,6 +3,7 @@ import patchZoomButtons from './pm-zoom-buttons.js';
 import patchBlockCulling from './pm-block-culling.js';
 import patchFieldTyping from './pm-field-typing.js';
 import patchTextWidths from './pm-text-widths.js';
+import patchLazyPalette from './pm-lazy-palette.js';
 
 /**
  * Connect scratch blocks with the vm
@@ -20,6 +21,8 @@ export default function (vm) {
     patchFieldTyping(ScratchBlocks);
     // Desktop fork (section 331): remembered text widths are measured again when fonts load or styles change
     patchTextWidths(ScratchBlocks);
+    // Desktop fork (section 332): the palette builds the categories near its visible part, keeps unchanged ones
+    patchLazyPalette(ScratchBlocks, vm);
 
     // PMDESKTOP_STAGE_PATCH: give every category menu entry its colour as a CSS variable
     const pmCategory = ScratchBlocks.Toolbox && ScratchBlocks.Toolbox.Category;
@@ -62,8 +65,11 @@ export default function (vm) {
         const toolboxProto = ScratchBlocks.Toolbox.prototype;
         const originalGetWidth = toolboxProto.getWidth;
         toolboxProto.getWidth = function () {
+            // the menu's box, with its scroll bar when many categories do not fit (section 332)
+            const box = this.HtmlDiv;
             const table = this.categoryMenu_ && this.categoryMenu_.table;
-            if (table && table.offsetWidth) this.pmMenuWidth = table.offsetWidth;
+            const width = (box && box.offsetWidth) || (table && table.offsetWidth);
+            if (width) this.pmMenuWidth = width;
             return originalGetWidth.apply(this, arguments) + Math.max(0, (this.pmMenuWidth || 60) - 60);
         };
     }

@@ -6,15 +6,14 @@ export default async function({ addon }) {
   const vm = addon.tab.traps.vm;
 
   // addon settings
-  let oldCkbxEnabled = true, oldToolboxScrolls = true;
-  let ckbxEnabled = true, toolboxScrolls = true;
+  let oldCkbxEnabled = true;
+  let ckbxEnabled = true;
   let workspaceRefreshCache = 0;
 
   // patch variables and functions
   const ogWS2Dom = Blockly.Xml.workspaceToDom;
   const ogMutatorBuilder = Blockly.scratchBlocksUtils.generateMutatorShadow;
   const ogSetShadowDom = ScratchBlocks.RenderedConnection.prototype.setShadowDom;
-  const ogStartScrollAnim = Blockly.Flyout.prototype.startScrollAnimation;
 
   const fixedWorkspace2Dom = function(...args) {
     const dom = ogWS2Dom.call(this, ...args);
@@ -67,14 +66,12 @@ export default async function({ addon }) {
 
   function requestAddonState() {
     ckbxEnabled = addon.settings.get("checkboxesEnabled");
-    toolboxScrolls = addon.settings.get("toolboxScrolling");
     Blockly.Procedures.ADDON_SP_CHECKBOXES_DISABLED = !ckbxEnabled;
   }
 
   function applyChanges() {
     requestAddonState();
     toggleCheckboxes();
-    toggleToolBoxScroll();
     if (workspaceRefreshCache > 0) updateAllBlocks(2 > workspaceRefreshCache);
     workspaceRefreshCache = 0;
   }
@@ -96,17 +93,6 @@ export default async function({ addon }) {
     Blockly.Blocks["operator_expandableBool"].fillInBlock = Blockly.scratchBlocksUtils.generateMutatorShadow;
     // Desktop fork (section 281): the modular "if then else" reporter's new "else if" slots
     Blockly.Blocks["control_expandableIfReturn"].fillInBlock = Blockly.scratchBlocksUtils.generateMutatorShadow;
-  }
-
-  function toggleToolBoxScroll() {
-    if (oldToolboxScrolls === toolboxScrolls) return;
-    oldToolboxScrolls = toolboxScrolls;
-
-    Blockly.Flyout.prototype.startScrollAnimation = toolboxScrolls ? ogStartScrollAnim : function() {
-      this.scrollTime = -1;
-      this.scrollStart = this.scrollTarget;
-      this.stepScrollAnimation(performance.now());
-    };
   }
 
   addon.self.addEventListener("reenabled", applyChanges);

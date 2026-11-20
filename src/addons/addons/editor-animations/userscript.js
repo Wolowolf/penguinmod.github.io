@@ -428,9 +428,16 @@ export default async function({ addon }) {
 
       /* this isnt a modal, but we still want to patch it for animations */
       const ogInitButton = ScratchBlocks.FlyoutButton.prototype.show;
+      // Desktop fork (section 332): one page scan after all the palette buttons shown at once, not one per button
+      let classesQueued = false;
       ScratchBlocks.FlyoutButton.prototype.show = function(...args) {
         ogInitButton.call(this, ...args);
-        queueMicrotask(() => compileClasses());
+        if (classesQueued) return;
+        classesQueued = true;
+        queueMicrotask(() => {
+          classesQueued = false;
+          compileClasses();
+        });
       }
 
       /* addon modal API */
