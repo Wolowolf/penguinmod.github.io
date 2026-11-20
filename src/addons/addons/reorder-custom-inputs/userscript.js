@@ -175,8 +175,9 @@ export default async function ({ addon, console }) {
       polluteProcedureDeclaration(getExistingProceduresDeclarationBlock(), false);
     }
 
-    Blockly.FieldTextInputRemovable.prototype.showEditor_ = function () {
-      originalShowEditor.call(this);
+    Blockly.FieldTextInput.prototype.showEditor_ = function (...args) {
+      originalShowEditor.apply(this, args);
+      if (!this.removable_) return;
       createArrow("left", () => shiftFieldCallback(this.sourceBlock_, this, "left"));
       createArrow("right", () => shiftFieldCallback(this.sourceBlock_, this, "right"));
       selectedField = this;
@@ -188,7 +189,7 @@ export default async function ({ addon, console }) {
   const originalCreateAllInputs = Blockly.Blocks["procedures_declaration"].createAllInputs_;
   const originalUpdateDeclarationProcCode = Blockly.Blocks["procedures_declaration"].onChangeFn;
   const originalRemoveFieldCallback = Blockly.Blocks["procedures_declaration"].removeFieldCallback;
-  const originalShowEditor = Blockly.FieldTextInputRemovable.prototype.showEditor_;
+  const originalShowEditor = Blockly.FieldTextInput.prototype.showEditor_;
   let originalAddFns = {};
   let selectedField = null;
 

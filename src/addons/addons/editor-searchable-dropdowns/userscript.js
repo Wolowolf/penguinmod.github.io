@@ -136,9 +136,10 @@ export default async function ({ addon, console, msg }) {
     return options;
   };
 
-  const oldFieldTextDropdownGetOptions = Blockly.FieldTextDropdown.prototype.getOptions;
-  Blockly.FieldTextDropdown.prototype.getOptions = function () {
+  const oldFieldTextDropdownGetOptions = Blockly.FieldTextInput.prototype.getOptions;
+  Blockly.FieldTextInput.prototype.getOptions = function () {
     const options = oldFieldTextDropdownGetOptions.call(this);
+    if (!this.menuGenerator_) return options;
     const block = this.sourceBlock_;
     const isStage = vm.editingTarget && vm.editingTarget.isStage;
     if (block) {
